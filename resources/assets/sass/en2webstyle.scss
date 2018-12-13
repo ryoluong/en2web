@@ -784,27 +784,28 @@ header {
             padding-bottom: 10px;
         }
         .flag {
+            font-size: 18px;
             margin-left: 5px;
             @include pc {
-                font-size: 18px;
+                font-size: 24px;
                 margin-left: 20px;
             }
             .icon {
-                //text-decoration: none;
+                text-decoration: none;
                 &::before {
                     display: inline-block;
                     content: '';
-                    width: 15px;
-                    height: 15px;
-                    margin: 2px 3px;
+                    width: 17px;
+                    height: 17px;
+                    margin: 1px 3px;
                     vertical-align: middle;
                     margin-bottom: 5px;
                     padding: 0;
                     background-size: cover;
                     @include pc {
-                        width: 18px;
-                        height: 18px;
-                        margin-right: 5px;
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 8px;
                     }
                 }
             }
@@ -828,6 +829,14 @@ header {
                     background-image: url('/img/title_author.png');
                 }
             }
+            .details_link {
+                margin-left: 7.5px;
+                color: #00aaca;
+                font-size: 15px;
+                @include pc {
+                    font-size: 17px;
+                }
+            }
         }
         .note_view {
             display: flex;
@@ -844,7 +853,7 @@ header {
                     margin: 10px auto;
                 }
                 @include pc_wide {
-                    flex: 0 0 30%;
+                    flex: 0 0 31%;
                     margin: 10px auto;
                 }
                 .note {
@@ -857,6 +866,9 @@ header {
                         border-top-left-radius: 1%;
                         border-top-right-radius: 1%;
                         position: relative;
+                        @include pc {
+                            height: 230px;
+                        }
                         &::before{
                             background-color: rgba(0,0,0,0.5);
                             position: absolute;
@@ -882,6 +894,11 @@ header {
                                 margin: 0;
                                 padding: 6px 0 3px 7.5px;
                                 border-bottom: 1px solid white;
+                                @include pc {
+                                    padding: 6px 0 6px 8px;
+                                    width: 70%;
+                                    font-size: 17px;
+                                }
                                 &::before {
                                     background-image: url('/img/note_category.png');
                                     background-size: cover;
@@ -893,6 +910,10 @@ header {
                                     margin-right: 5px;
                                     margin-top: 4px;
                                     content: '';
+                                    @include pc {
+                                        height: 17px;
+                                        width: 17px;
+                                    }
                                 }
                                 &:hover {
                                     color: #fff;
@@ -901,24 +922,34 @@ header {
                                 
                             }
                             .note_title {
-                                padding: 7px 0 1px 7.5px;
+                                padding: 7px 5px 1px 7.5px;
                                 font-size: 20px;
+                                @include pc {
+                                    font-size: 21px;
+                                }
                             }
                             object .note_country {
                                 display: inline;
                                 padding: 0 0 0 7.5px;
+                                @include pc {
+                                    font-size: 18px;
+                                }
                                 &:hover {
                                     text-decoration: underline;
                                 }
                             }
                             object .note_author {
                                 position: absolute;
-                                margin: 0 10px 27.5px 0; 
+                                margin: 0 10px 30px 0; 
                                 bottom: 0;
                                 right: 0;
-                                font-size: 18px;
+                                font-size: 20px;
                                 text-align: center;
                                 padding: 0;
+                                @include pc {
+                                    margin: 0 10px 32px 0;
+                                    font-size: 21px;
+                                }
                                 &:hover {
                                     color: #fff;
                                     text-decoration: underline;
@@ -929,6 +960,11 @@ header {
                                 position: absolute;
                                 bottom: 0;
                                 right: 0;
+                                font-size: 16px;
+                                @include pc {
+                                    padding: 0 10px 7.5px 0;
+                                    font-size: 17px;
+                                }
                             }
                             .bestnote_icon {
                                 img {
@@ -937,6 +973,9 @@ header {
                                     bottom: 0;
                                     left: 0;
                                     width: 48px;
+                                    @include pc {
+                                        width: 56px;
+                                    }
                                 }
                             }
                         }
@@ -945,6 +984,9 @@ header {
                         width: 100%;
                         position: relative;
                         height: 115px;
+                        @include pc {
+                            height: 155px;
+                        }
                         .note_content {
                             width: 95%;
                             margin: 5px auto;
@@ -958,6 +1000,10 @@ header {
                                     text-decoration: underline;
                                     color: #00aaff;
                                 }
+                            }
+                            @include pc {
+                                width: 93%;
+                                font-size: 14px;
                             }
                         }
                     }

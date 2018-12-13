@@ -35,10 +35,10 @@
                 <div class="textbox">
                     <h2>{{ $note->title }}</h2>
                     @foreach($note->countries as $country)
-                    <a class="note_country" href="/countries/{{ $country->id }}">{{ '＠'.$country->name }}</a>
+                    <a class="note_country" href="/countries/{{ $country->id }}/notes">{{ '＠'.$country->name }}</a>
                     @endforeach
                 </div>
-                <a class="note_author" href="/users/{{ $note->user->id }}">{{ $note->user->name }}</a>
+                <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
                 <h5>{{ $note->date }}</h5>
                 @if($note->isBest === 1)
                 <img src="/img/best_note.png" alt="">

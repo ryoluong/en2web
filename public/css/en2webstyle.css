@@ -1042,22 +1042,27 @@ header .menu .splitter div {
 }
 
 .no_border_card .content .flag {
+  font-size: 18px;
   margin-left: 5px;
 }
 
 @media (min-width: 768px) {
   .no_border_card .content .flag {
-    font-size: 18px;
+    font-size: 24px;
     margin-left: 20px;
   }
+}
+
+.no_border_card .content .flag .icon {
+  text-decoration: none;
 }
 
 .no_border_card .content .flag .icon::before {
   display: inline-block;
   content: '';
-  width: 15px;
-  height: 15px;
-  margin: 2px 3px;
+  width: 17px;
+  height: 17px;
+  margin: 1px 3px;
   vertical-align: middle;
   margin-bottom: 5px;
   padding: 0;
@@ -1066,9 +1071,9 @@ header .menu .splitter div {
 
 @media (min-width: 768px) {
   .no_border_card .content .flag .icon::before {
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
   }
 }
 
@@ -1086,6 +1091,18 @@ header .menu .splitter div {
 
 .no_border_card .content .flag .author::before {
   background-image: url("/img/title_author.png");
+}
+
+.no_border_card .content .flag .details_link {
+  margin-left: 7.5px;
+  color: #00aaca;
+  font-size: 15px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .flag .details_link {
+    font-size: 17px;
+  }
 }
 
 .no_border_card .content .note_view {
@@ -1121,8 +1138,8 @@ header .menu .splitter div {
 @media (min-width: 1024px) {
   .no_border_card .content .note_view a {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 30%;
-            flex: 0 0 30%;
+        -ms-flex: 0 0 31%;
+            flex: 0 0 31%;
     margin: 10px auto;
   }
 }
@@ -1140,6 +1157,12 @@ header .menu .splitter div {
   border-top-left-radius: 1%;
   border-top-right-radius: 1%;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder {
+    height: 230px;
+  }
 }
 
 .no_border_card .content .note_view a .note .image_holder::before {
@@ -1175,6 +1198,14 @@ header .menu .splitter div {
   border-bottom: 1px solid white;
 }
 
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox object .note_category {
+    padding: 6px 0 6px 8px;
+    width: 70%;
+    font-size: 17px;
+  }
+}
+
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_category::before {
   background-image: url("/img/note_category.png");
   background-size: cover;
@@ -1188,19 +1219,38 @@ header .menu .splitter div {
   content: '';
 }
 
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox object .note_category::before {
+    height: 17px;
+    width: 17px;
+  }
+}
+
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_category:hover {
   color: #fff;
   text-decoration: underline;
 }
 
 .no_border_card .content .note_view a .note .image_holder .textbox .note_title {
-  padding: 7px 0 1px 7.5px;
+  padding: 7px 5px 1px 7.5px;
   font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox .note_title {
+    font-size: 21px;
+  }
 }
 
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_country {
   display: inline;
   padding: 0 0 0 7.5px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox object .note_country {
+    font-size: 18px;
+  }
 }
 
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_country:hover {
@@ -1209,12 +1259,19 @@ header .menu .splitter div {
 
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_author {
   position: absolute;
-  margin: 0 10px 27.5px 0;
+  margin: 0 10px 30px 0;
   bottom: 0;
   right: 0;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   padding: 0;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox object .note_author {
+    margin: 0 10px 32px 0;
+    font-size: 21px;
+  }
 }
 
 .no_border_card .content .note_view a .note .image_holder .textbox object .note_author:hover {
@@ -1227,6 +1284,14 @@ header .menu .splitter div {
   position: absolute;
   bottom: 0;
   right: 0;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox .note_date {
+    padding: 0 10px 7.5px 0;
+    font-size: 17px;
+  }
 }
 
 .no_border_card .content .note_view a .note .image_holder .textbox .bestnote_icon img {
@@ -1237,10 +1302,22 @@ header .menu .splitter div {
   width: 48px;
 }
 
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .image_holder .textbox .bestnote_icon img {
+    width: 56px;
+  }
+}
+
 .no_border_card .content .note_view a .note .description {
   width: 100%;
   position: relative;
   height: 115px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .description {
+    height: 155px;
+  }
 }
 
 .no_border_card .content .note_view a .note .description .note_content {
@@ -1260,6 +1337,13 @@ header .menu .splitter div {
 .no_border_card .content .note_view a .note .description .note_content object a:hover {
   text-decoration: underline;
   color: #00aaff;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .note_view a .note .description .note_content {
+    width: 93%;
+    font-size: 14px;
+  }
 }
 
 .no_border_card .content .note_view a:hover .image_holder::before {
