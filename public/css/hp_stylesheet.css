@@ -1,0 +1,410 @@
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+html {
+  overflow-y: scroll; /*ページが短くても常にスクロールバーを表示*/
+}
+body {
+  font-family: sans-serif;
+  max-width: 1260px; /*表示の最大幅の設定*/
+  margin: 0 auto;
+  /*　marginの省略記法について
+  margin: a b;
+    a: topとbottomの値
+    b: rightとleftの値
+  margin: top right bottom border-left
+    上記のように個別にまとめて設定もできる　*/
+  background-color: #fff;
+}
+/*ヘッダー*/
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  line-height: 80px;
+  padding: 0 20px;
+  background-color: #fefefe;
+}
+.headerTop .blank {
+  width: 150px;
+}
+.headerTop .logo {
+  padding-top: 9px;
+}　
+.headerTop .btn {
+  width: 150px;
+}
+.headerTop .btn a {
+  width: 150px;
+  text-align: center;
+  color: #111;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #eee;
+  border-left: 9px solid #00aaca;
+  padding: 10px;
+  transition: 0.3s; /*こっちにもtransitionを記述すると、戻りもゆっくりになる*/
+}
+.headerTop .btn a:hover { /*hoverはカーソルが載ったときの設定*/
+  transition: 0.3s;
+  text-decoration: none;
+  background-color: #ddd;
+  /* color: #333; */
+  border-color: #007799;
+}
+/*-----------------------------------------------
+メニュー
+----------------------------------------------------*/
+.menu {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  padding: 0px;
+}
+.menu li {
+  padding: 2px 0;
+  display: table-cell;
+  text-align: center;
+  list-style: none;
+  background-color: #00aaca;
+  border-bottom: 4px solid #007799;
+  transition: 0.4s;
+}
+.menu li a {
+  display: block;
+  width: 100%;
+  font-size: 17px;
+  line-height: 25px;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+.menu li:hover a {
+  color: #ccc;
+  transition: 0.3s;
+  /* color: #ddd; */
+}
+.menu .splitter {
+  width: 1px;
+  vertical-align: middle;
+}
+.menu .splitter div {
+  margin-top: 2px;
+  display: block;
+  background-color: #f0f0f0;
+  width: 1px;
+  height: 19px;
+  /* background-color: #ddd; */
+}
+/*-------------------------------------
+ランディングページ（画像が切り替わるところ）
+----------------------------------------*/
+.landing {
+  background-size: cover;
+  background-position: center center;
+  background-color: gray;
+  display: flex;
+  width: 100%;
+  height: 590px;
+}
+.landing h1 {
+  text-align: left;
+  font-family: 'Yu Mincho', "游明朝", YuMincho, "游明朝体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+  font-weight: 100;
+  line-height: 1.1;
+  color: white;
+  font-size: 115px;
+  padding: 300px 0px 0px 40px;
+  display: none;
+}
+/*-----------------------------
+index.html
+----------------------------------*/
+.main {
+  display: table;
+  width: 100%;
+  padding-top: 60px;
+  background-color: #fefefe;
+}
+.main .about_us,.achievements,.activities,.andmore {
+  width: 33.3%;
+  display: table-cell;
+  background-color: #00aaca;
+  color: #fff;
+  font-size: 22px;
+  vertical-align: top;
+  box-shadow: 2.5px 2.5px 2px -2px gray;
+  letter-spacing: 0.075em;
+  }
+.main .about_us {
+  background-image: url("../img/about_us.jpg");
+  background-position: bottom center;
+}
+.main .achievements {
+  background-image: url("../img/achievements.jpg");
+  background-position: bottom center;
+}
+.main .activities {
+  background-image: url("../img/activities.jpg");
+  background-position: bottom center;
+}
+.main .andmore {
+  background-image: url("../img/and_more.jpg");
+  background-position: bottom right;
+}
+.main h1 {
+  padding-left: 30px;
+  line-height: 72px;
+}
+.main h1 span {
+  font-size: 85px;
+}
+.description {
+  width: 66.7%;
+  color: #484848;
+  text-align: center;
+  display: table-cell;
+  vertical-align: top;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+.description h2 {
+  font-size: 30px;
+  letter-spacing: 0.075em;
+}
+.description h2::after {
+  /*この::afterは少し難しい。追加要素と呼ばれる機能。
+  これを使ってグラデーションをつけた罫線を擬似的に再現している。*/
+  content: "";
+  display: block;
+  height: 3px;
+  width: 100%;
+  /*ここから下３つは全てグラデーションの記述。
+  ブラウザごと（chrome, firefox, safariなど）
+  に仕様が違うので複数書いておく必要がある*/
+  background: -moz-linear-gradient(left, #00aaca, #ddd);
+  background: -webkit-linear-gradient(left, #00aaca, #ddd);
+  background: linear-gradient(to right, #00aaca, #ddd);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.description h2 span {
+  color: #0090b0
+}
+.description p {
+  font-size: 23px;
+  line-height: 1.3;
+  margin-top: 10px;
+}
+.countries {
+  text-align: left;
+}
+.description table {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.description .countries {
+  text-align: center;
+  padding:  0px 20px;
+}
+.description .countries .name {
+  font-size: 20px;
+  height: 40px;
+}
+.button {
+  background-color: #eee;
+  width: 200px;
+  height: 50px;
+  border: none;
+  color: #555;
+  box-shadow: 1px 1px 4px -2px gray;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.description ul {
+  margin-top: 10px;
+  list-style: none;
+  vertical-align: center;
+}
+.description ul li {
+  display: inline-block;
+  width: 300px;
+  height: 230px;
+  margin: 10px 30px;
+  box-shadow: 2px 2px 4px -2px gray;
+  background: #fafafa;
+  border-radius: 5px;
+}
+.description ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.4s;
+  border-radius: 5px;
+}
+.description ul li a:hover {
+  filter: brightness(80%);
+  background-color: #f2f2f2;
+  transition: 0.3s;
+}
+.description ul li a h3 {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+.description ul li a p {
+  font-size: 16px;
+  text-align: center;
+}
+.description .link1 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 300px;
+  width: 300px;
+  height: 185px;
+  box-shadow: none;
+  color: white;
+  border-bottom: none;
+  background-image: url("../img/info.jpg");
+  border-radius: 5px 5px 0px 0px;
+}
+.description .link2 {
+  font-size: 30px;
+  text-align: center;
+  line-height: 300px;
+  font-weight: 100;
+  width: 300px;
+  height: 185px;
+  box-shadow: none;
+  color: white;
+  border-bottom: none;
+  background-image: url("../img/join.jpg");
+  border-radius: 5px 5px 0px 0px;
+}
+
+/*index.html以外のページ*/
+.title {
+  width:100%;
+  background-color: gray;
+  background-size: cover;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.title_about {
+  background-image: url("../img/title_about_us.jpg");
+  background-position: center center;
+}
+.title_achievements {
+  background-image: url("../img/");
+  background-position: center bottom;
+}
+.title_studyabroad {
+  background-image: url("../img/title_study_abroad.jpg");
+  background-position: center center;
+}
+.title_activities {
+  background-image: url("../img/");
+  background-position: center center;
+}
+.title_join {
+  background-image: url("../img/");
+  background-position: center center;
+}
+.title h1 {
+  padding-left: 75px;
+  font-size: 48px;
+  color: white;
+  float: left;
+}
+.title h2 {
+  padding-left: 50px;
+  font-size: 20px;
+  color: white;
+}
+.wrapper {
+  width: 100%;
+  background-color: #fefefe;
+}
+.container {
+  width: 90%;
+  background-color: #fefefe;
+  margin: 0 auto;
+}
+.container_about {
+  display: table;
+}
+.about_logo {
+  display: table-cell;
+  width: 30%;
+  color: #484848;
+  text-align: center;
+  padding-top: 20px;
+  margin-left: 100px;
+}
+
+
+.container .description {
+  margin: 0 50px;
+}
+.container .description h2 {
+  text-align: left;
+  margin-top: 15px;
+}
+.container .description p {
+  margin: 0 auto;
+  width: 90%;
+  text-align: left;
+  font-size: 18px;
+  line-height: inherit;
+}
+
+/*フッター*/
+footer {
+  height: 100px;
+  width: 100%;
+  position: relative;
+  background-color: #101525;
+  margin-top: 60px;
+}
+.footer-menu {
+  display: table;
+  margin: 0 auto;
+  padding-top: 5px;
+  text-align: center;
+  border-spacing: 15px 0;
+}
+.footer-menu li {
+  display: table-cell;
+  list-style: none;
+}
+.footer-menu li a {
+  font-size: 11px;
+  text-align: center;
+  color: #ddd;
+  text-decoration: none;
+  transition: 0.3;
+}
+.footer-menu li a:hover {
+  color: #aaa;
+  text-decoration: underline;
+  transition: 0.2s;
+}
+footer p {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
+  color: #ddd;
+  font-size: 10px;
+}
