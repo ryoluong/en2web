@@ -809,6 +809,11 @@ header {
                     }
                 }
             }
+            .bestnote {
+                &::before {
+                    background-image: url('/img/title_bestnote.png')
+                }
+            }
             .tag {
                 &::before {
                     background-image: url('/img/title_tag.png');
@@ -830,11 +835,12 @@ header {
                 }
             }
             .details_link {
-                margin-left: 7.5px;
+                margin-left: 10px;
                 color: #00aaca;
                 font-size: 15px;
                 @include pc {
-                    font-size: 17px;
+                    margin-left: 12px;
+                    font-size: 18px;
                 }
             }
         }

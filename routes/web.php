@@ -18,26 +18,29 @@ Route::get('/', function () { return view('auth.login'); });//return view('hp.in
 // Route::get('/achievements', function () { return view('hp.achievements'); });
 // Route::get('/join_contact', function () { return view('hp.join_contact'); });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', 'UserController@showHome');
+    Route::get('/mypage', 'UserController@showMyPage');
+    Route::get('/mypage/edit', 'UserController@editMyPage');
+    Route::patch('/mypage/update', 'UserController@updateMyPage');
+
+    Route::resource('users', 'UsersController');
+
+    Route::resource('countries', 'CountriesController');
+
+    Route::resource('notes', 'NotesController');
+    Route::post('/notes/create', 'NotesController@Confirm');
+    Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
+    Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
+    Route::get('/bestnotes', 'NotesController@showBest');
+
+    Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
+    Route::get('/tags/{tag}/notes', 'NotesController@showByTag');
+    Route::get('/users/{user}/notes', 'NotesController@showByAuthor');
+    Route::get('/countries/{country}/notes', 'NotesController@showByCountry');
+});
 
 
-Route::get('/home', 'UserController@showHome')->middleware('auth');
-Route::get('/mypage', 'UserController@showMyPage')->middleware('auth');
-Route::get('/mypage/edit', 'UserController@editMyPage')->middleware('auth');
-Route::patch('/mypage/update', 'UserController@updateMyPage')->middleware('auth');
-
-Route::resource('users', 'UsersController')->middleware('auth');
-
-Route::resource('countries', 'CountriesController')->middleware('auth');
-
-Route::resource('notes', 'NotesController')->middleware('auth');
-Route::post('/notes/create', 'NotesController@Confirm')->middleware('auth');
-Route::post('/notes/{note}/edit', 'NotesController@editConfirm')->middleware('auth');
-Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm')->middleware('auth');
-
-Route::get('/categories/{category}/notes', 'NotesController@showByCategory')->middleware('auth');
-Route::get('/tags/{tag}/notes', 'NotesController@showByTag')->middleware('auth');
-Route::get('/users/{user}/notes', 'NotesController@showByAuthor')->middleware('auth');
-Route::get('/countries/{country}/notes', 'NotesController@showByCountry')->middleware('auth');
 // Route::get('/users', 'UsersController@index');
 // Route::get('/users/create', 'UsersController@create');
 // Route::get('/users/{user}', 'UsersController@show');
@@ -48,7 +51,7 @@ Route::get('/countries/{country}/notes', 'NotesController@showByCountry')->middl
 
 
 
-/*Register*/
+/*Auth and Register*/
 Auth::routes();
 Route::post('register/confirm', 'Auth\RegisterController@confirm')->name('register.confirm');
 Route::post('register/confirm/existinguser', 'Auth\RegisterController@registerExistingUser')->name('register.existing.user');

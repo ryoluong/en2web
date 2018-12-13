@@ -1077,6 +1077,10 @@ header .menu .splitter div {
   }
 }
 
+.no_border_card .content .flag .bestnote::before {
+  background-image: url("/img/title_bestnote.png");
+}
+
 .no_border_card .content .flag .tag::before {
   background-image: url("/img/title_tag.png");
 }
@@ -1094,14 +1098,15 @@ header .menu .splitter div {
 }
 
 .no_border_card .content .flag .details_link {
-  margin-left: 7.5px;
+  margin-left: 10px;
   color: #00aaca;
   font-size: 15px;
 }
 
 @media (min-width: 768px) {
   .no_border_card .content .flag .details_link {
-    font-size: 17px;
+    margin-left: 12px;
+    font-size: 18px;
   }
 }
 

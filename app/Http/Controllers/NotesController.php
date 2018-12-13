@@ -27,7 +27,7 @@ class NotesController extends Controller
         return view('web.notes.index', compact(['notes', 'flag']));
     }
 
-    public function showByIsBest()
+    public function showBest()
     {
         $notes= Note::where('isBest', true)->orderBy('date', 'desc')->paginate(9);
         $flag = 'isBest';

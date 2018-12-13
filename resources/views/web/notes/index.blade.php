@@ -33,7 +33,7 @@
                         <p class="flag">
                             @if($flag == 'index')
                             @elseif($flag == 'isBest')
-                            <a class="bestnote icon" href="/notes/best">{{ 'Best Notes' }}</a>
+                            <a class="bestnote icon" href="/bestnotes">{{ 'Best Notes' }}</a>
                             @elseif($flag == 'category')
                             <a class="category icon" href="/categories/{{ $category->id }}/notes">{{ $category->name }}</a>
                             @elseif($flag == 'tag')
