@@ -82,7 +82,7 @@ class NotesController extends Controller
             'country' => ['nullable', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
             'tag_ids.*' => ['exists:tags,id'],
-            'files.*.photo' => ['file', 'image', 'mimes:jpeg,png', 'max:4096'],
+            'files.*.photo' => ['file', 'image', 'mimes:jpeg,png',],
             'content' => ['required'],
         ]);
     }

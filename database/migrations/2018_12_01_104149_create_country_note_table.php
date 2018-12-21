@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserCountryTable extends Migration
+class CreateCountryNoteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserCountryTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_country', function (Blueprint $table) {
+        Schema::create('country_note', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('note_id');
             $table->unsignedInteger('country_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('note_id')->references('id')->on('notes')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateUserCountryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_country');
+        Schema::dropIfExists('country_note');
     }
 }

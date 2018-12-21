@@ -16,9 +16,9 @@ En2::Web開発チーム (Ryo Kobayashi)<br>
 ◇お問い合わせ◇<br>
 kobayasi-ryo-ck@ynu.jp<br>
 ◇En2公式サイト◇<br>
-https://en2ynu.jp<br>
+https://en2ynu.com<br>
 ◇En2::Webログインページ◇<br>
-https://en2ynu.jp/login<br>
+https://en2ynu.com/login<br>
 <br>
 *:.｡..｡.:+・ﾟ・*:.｡..｡.:+・ﾟ・*:.｡..｡.:+・ﾟ・*:.｡..｡.:+・ﾟ<br>
 <br>

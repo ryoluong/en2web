@@ -58,7 +58,7 @@ class CountriesTableSeeder extends Seeder
             'hungary',
             'germany',
             'netherlands',
-            'finlnad',
+            'finland',
             'switzerland',
             'france',
             'japan',

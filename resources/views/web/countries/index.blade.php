@@ -18,7 +18,7 @@
                     <div class="flex_container">
                         @foreach($ids as $id)
                         <div class="flex_view">
-                            <a class="country_flag" href="/countries/{{ $countries->where('id', $id->country_id)->first()->id }}"><img src="/img/flags/{{ $countries->where('id', $id->country_id)->first()->id }}.png" alt=""></a>
+                            <a class="country_flag" href="/countries/{{ $countries->where('id', $id->country_id)->first()->id }}"><img src="/img/flags/{{ $countries->where('id', $id->country_id)->first()->english_name }}.png" alt=""></a>
                             <a class="country_name" href="/countries/{{ $countries->where('id', $id->country_id)->first()->id }}">{{ $countries->where('id', $id->country_id)->first()->name }}</a>
                         </div>
                         @endforeach

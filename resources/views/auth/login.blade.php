@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang=jp">
+<html lang=jp>
     <head>
         @include('layouts.web.head')
     </head>

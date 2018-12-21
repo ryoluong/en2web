@@ -335,9 +335,13 @@ header {
  *                  *
  ********************/
 #home,#login {
+    margin: 50px auto; 
     .top_logo {
-        margin: 50px 0px 10px 0px;
         text-align: center;
+        margin: 25px auto;
+        @include pc {
+            margin: 0 auto;
+        }
         img {
             width: 80%;
             @include pc {
@@ -466,7 +470,6 @@ header {
     .login_table {
         height: 230px;
         width: 100%;
-        margin: 30px auto 0 auto;
         @include pc {
             height: 320px;
             margin: 30px auto 0 auto;
@@ -863,7 +866,7 @@ header {
                     margin: 10px auto;
                 }
                 .note {
-                    box-shadow: 2px 2px 5px 1px #aaa;
+                    box-shadow: 2px 2px 5px 1px #ccc;
                     border-radius: 1%;
                     .image_holder {
                         background-size: cover;
@@ -1277,8 +1280,8 @@ header {
 
 *****************************/
 .border_card {
-    border: 1px solid #7777bb;
-    border-radius: 0.5%;
+    border-radius: 1%;
+    box-shadow: 2px 2px 5px 1px #ccc;
     width: 95%;
     margin: 15px auto;
     @include pc {
@@ -1290,7 +1293,8 @@ header {
         width: 100%;
         border: none;
         background-color: #7777bb;
-        border-radius: 0.1%;
+        border-top-right-radius: 1%;
+        border-top-left-radius: 1%;
         .table_view {
             display: table;
             table-layout: fixed;

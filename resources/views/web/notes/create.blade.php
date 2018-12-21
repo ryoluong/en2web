@@ -115,9 +115,9 @@
                             <div class="help-box">
                                 <p>*複数可, 4MBまでのjpegもしくはpng, 自動で圧縮されます。</p>
                             </div>
-                            @if ($errors->has('file'))
+                            @if ($errors->has('files'))
                             <div class="help-box">
-                                <strong>{{ $errors->first('file') }}</strong>
+                                <strong>{{ $errors->first('files') }}</strong>
                             </div>
                             @endif
                         </div>

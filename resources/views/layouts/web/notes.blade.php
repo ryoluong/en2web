@@ -2,7 +2,13 @@
 @foreach($notes as $note)
     <a href="/notes/{{ $note->id }}">
         <div class="note {{ $note->isBest == 1 ? 'bestnote' : '' }}">
-            <div class="image_holder"style="background-image:url({{ $note->photos->count() ? $note->photos->first()->path : '/storage/img/note/no_image.jpg' }});">
+            <div class="image_holder" style="background-image:url(
+                @if($note->photos->count())
+                {{ $note->photos->first()->path }}
+                @else
+                {{ '/img/note/'.$note->category_id.'.jpg' }}
+                @endif
+            );">
                 <div class="textbox">
                     <object><a class="note_category" href="/categories/{{ $note->category_id }}/notes">{{ $note->category->name }}</a></object>
                     <p class="note_title">{{ $note->title }}</p>         

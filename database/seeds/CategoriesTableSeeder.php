@@ -16,7 +16,7 @@ class CategoriesTableSeeder extends Seeder
             '語学学習・試験',
             '奨学金・留学申請',
             '就活・仕事',
-            '本・ネット記事',
+            '本・映画・記事',
             '思考の共有・その他',
         ];
         // foreach ($tags as $tag) {

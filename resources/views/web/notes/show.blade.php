@@ -30,7 +30,13 @@
                     </div>
                 </div>
             </div>    
-            <div class="top_photo" style="background-image:url({{ $note->photos->count() ? $note->photos->first()->path : '/storage/img/note/no_image.jpg' }})">
+            <div class="top_photo" style="background-image:url(
+                @if($note->photos->count())
+                {{ $note->photos->first()->path }}
+                @else
+                {{ '/img/note/'.$note->category_id.'.jpg' }}
+                @endif
+            );">
                 <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
                 <div class="textbox">
                     <h2>{{ $note->title }}</h2>

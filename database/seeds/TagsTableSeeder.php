@@ -23,12 +23,13 @@ class TagsTableSeeder extends Seeder
             '理系',
             'トビタテ！',
             'その他奨学金',
-            'OB, OG投稿',
+            'OB・OG投稿',
             '就活・インターン',
+            '仕事・キャリア',
             '思考の共有',
             'IT',
             'Tips',
-            '雑記',
+            '本・映画・記事',
         ];
         // foreach ($tags as $tag) {
         //     DB::table('tags')->insert('tag');

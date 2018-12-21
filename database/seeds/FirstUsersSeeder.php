@@ -34,7 +34,7 @@ class FirstUsersSeeder extends Seeder
         $now = \Carbon\Carbon::now();
         
         for ($i = 0; $i < count($users); $i++) {
-            if($user[$i] == 'Ryo Kobayashi')
+            if($users[$i] == 'Ryo Kobayashi')
             {
                 $user = [
                     'name' => $users[$i],

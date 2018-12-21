@@ -70,7 +70,7 @@
                             <div class="value">
                             @foreach ($categories as $category)
                                 <div class="radio_wrapper">
-                                    <label for="{{ 'category'.$category->id }}"><input id="{{ 'category'.$category->id }}" class="radio_button" type="radio" name="category_id" value="{{ $note->category->id }}" {{ old('category_id') !== null ? old('category_id') == $category->id ? 'checked' : '' : $note->category_id == $category->id ? 'checked' : '' }}>{{ $category->name }}</label>
+                                    <label for="{{ 'category'.$category->id }}"><input id="{{ 'category'.$category->id }}" class="radio_button" type="radio" name="category_id" value="{{ $category->id }}" {{ old('category_id') !== null ? old('category_id') == $category->id ? 'checked' : '' : $note->category_id == $category->id ? 'checked' : '' }}>{{ $category->name }}</label>
                                 </div>
                             @endforeach
                             </div>

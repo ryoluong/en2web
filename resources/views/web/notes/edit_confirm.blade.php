@@ -55,10 +55,12 @@
                         <div class="form_view">
                             <div class="property"><p>Tags</p></div>
                             <div class="value">
+                            @if(isset($tag_ids))
                             @foreach ($tag_ids as $tag_id)
                                 <p>{{ $tags->where('id', $tag_id)->first()->name."　" }} </p>
                                 <input type="hidden" class="input_text" name="tag_ids[]" value="{{ $tag_id }}">
                             @endforeach
+                            @endif
                             </div>
                         </div>
                         <div class="form_view">
