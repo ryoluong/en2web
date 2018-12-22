@@ -38,7 +38,7 @@ class UsersController extends Controller
         if(User::whereIn('status', [1,3])->where('id', '<', $user->id)->exists()) {
             $id_previous = User::whereIn('status', [1,3])->where('id', '<', $user->id)->max('id');
         }
-        $notes = $user->notes->take(6);
+        $notes = $user->notes->take(3);
         return view('web.users.show', compact(['user', 'id_next','id_previous', 'notes']));
     }
 

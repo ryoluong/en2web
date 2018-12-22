@@ -9,10 +9,14 @@
                 <div class="no_border_card">
                     <div class="title">
                         <div class="table_view">
-                            <div class="icon">
-                                <img src="img/top_world.png" alt="">
+                            <a class="icon" href="/countries">
+                                <img src="/img/top_world.png" alt="note">
+                            </a>
+                            <div class="text">
+                                <a href="/countries">
+                                {{ 'Countries' }}
+                                </a>
                             </div>
-                            <div class="text"><p>Countries</p></div>
                         </div>
                     </div>
                     <div class="flex_container">

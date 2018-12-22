@@ -33,7 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
     Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
     Route::get('/bestnotes', 'NotesController@showBest');
-
     Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
     Route::get('/tags/{tag}/notes', 'NotesController@showByTag');
     Route::get('/users/{user}/notes', 'NotesController@showByAuthor');

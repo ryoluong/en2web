@@ -358,6 +358,7 @@ header {
                     padding: 7px 0;
             }
         }
+        
     }
         
     .icon_table {
@@ -676,7 +677,7 @@ header {
             display: table;
             table-layout: fixed;
             width: 100%;
-            height: 47px;
+            height: 40px;
             @include pc {
                 padding: 0;
                 height: 60px;
@@ -684,7 +685,7 @@ header {
             .icon {
                 display:table-cell;
                 width: 50px;
-                height: 47px;
+                height: 40px;
                 margin: auto;
                 padding: 0;
                 position: relative;
@@ -711,7 +712,7 @@ header {
             .text {
                 width: 75%;
                 display: table-cell;
-                height: 47px;
+                height: 40px;
                 padding: 5px 0;
                 margin: 0;
                 a,p {
@@ -720,7 +721,7 @@ header {
                     color: #333;
                     text-align: left;
                     font-size: 19px;
-                    line-height: 47px;
+                    line-height: 40px;
                     @include pc {
                         padding-top: 0;
                         font-size: 24px;
@@ -733,10 +734,39 @@ header {
                 .user_name {
                     margin-left: 15px;
                 }
+                .user_country {
+                    margin-left: 9px;
+                    @include pc {
+                        margin-left: 15px;
+                    }
+                    img {
+                        vertical-align: middle;
+                        margin-bottom: 5px;
+                        width: 30px;
+                        @include pc {
+                            width: 50px;
+                        }
+                    }
+                }
+                .country_flag {
+                    width: 55px;
+                    margin: 5px 15px 5px 20px;
+                    @include pc {
+                        width: 70px;
+                    }
+                    float: left;
+                }
+                .country_name {
+                    font-size: 21px;
+                    line-height: 50px;
+                    @include pc {
+                        line-height: 58px;
+                        font-size: 24px;
+                    }
+                }
             }
-            
             .link {
-                width: 42px;
+                width: 40px;
                 position: relative;
                 display: table-cell;
                 @include pc {
@@ -772,12 +802,19 @@ header {
                         }
                     }
                     .arrow {
-                        height: 18px;
-                        width: 18px;
+                        height: 16px;
+                        width: 16px;
+                        @include pc {
+                            width: 20px;
+                            height: 20px;
+                        }
                     }
                 }
             }
         }
+    }
+    .border_none {
+        border-bottom: none;
     }
     .content {
         padding-top: 8px;
@@ -790,7 +827,7 @@ header {
             font-size: 18px;
             margin-left: 5px;
             @include pc {
-                font-size: 24px;
+                font-size: 20px;
                 margin-left: 20px;
             }
             .icon {
@@ -852,22 +889,30 @@ header {
             flex-wrap: wrap;
             padding: 5px 10px;
             align-items: center;
-            a {
+            max-width: 980px;   
+            margin: auto;
+            background-color: #fff;
+            box-shadow: none;
+            .note_item {
+                box-shadow: 2px 2px 5px 1px #ccc;
                 display: block;
-                text-decoration: none;
-                flex: 0 0 95%;
-                margin: 10px auto;
+                flex: 0 0 95%; 
+                margin: 10px;
                 @include pc {
+                    height: 377px;
+                    display: block;
                     flex: 0 0 40%;
-                    margin: 10px auto;
+                    margin: 15px auto;
                 }
                 @include pc_wide {
+                    display: block;
                     flex: 0 0 31%;
-                    margin: 10px auto;
+                    margin: 15px auto;
+                }
+                a {
+                    text-decoration: none;
                 }
                 .note {
-                    box-shadow: 2px 2px 5px 1px #ccc;
-                    border-radius: 1%;
                     .image_holder {
                         background-size: cover;
                         background-position: center center;
@@ -876,7 +921,7 @@ header {
                         border-top-right-radius: 1%;
                         position: relative;
                         @include pc {
-                            height: 230px;
+                            height: 220px;
                         }
                         &::before{
                             background-color: rgba(0,0,0,0.5);
@@ -933,6 +978,7 @@ header {
                             .note_title {
                                 padding: 7px 5px 1px 7.5px;
                                 font-size: 20px;
+                                white-space: normal;
                                 @include pc {
                                     font-size: 21px;
                                 }
@@ -956,7 +1002,7 @@ header {
                                 text-align: center;
                                 padding: 0;
                                 @include pc {
-                                    margin: 0 10px 32px 0;
+                                    margin: 0 10px 34px 0;
                                     font-size: 21px;
                                 }
                                 &:hover {
@@ -971,7 +1017,7 @@ header {
                                 right: 0;
                                 font-size: 16px;
                                 @include pc {
-                                    padding: 0 10px 7.5px 0;
+                                    padding: 0 10px 8px 0;
                                     font-size: 17px;
                                 }
                             }
@@ -997,8 +1043,11 @@ header {
                             height: 155px;
                         }
                         .note_content {
+                            white-space: normal;
                             width: 95%;
-                            margin: 5px auto;
+                            margin-right: auto;
+                            margin-left: auto;
+                            padding-top: 5px;
                             font-size: 12px;
                             object a {
                                 display: inline;
@@ -1016,15 +1065,18 @@ header {
                             }
                         }
                     }
+                    &:hover {
+                        .image_holder::before {
+                            background-color: rgba(0,0,0,0.1);
+                            transition: 0.3s;
+                        }
+                    }  
                 }
-                &:hover {
-                    .image_holder::before {
-                        background-color: rgba(0,0,0,0.1);
-                        transition: 0.3s;
-                    }
-                }
-                .bestnote {
-                    border: 5px solid #9999cc;
+            }
+            .bestnote {
+                border: 5px solid #9999cc;
+                .note {
+                    border-radius: 0%;
                     .image_holder {
                         border-radius: 0%;
                         &::before {
@@ -1034,12 +1086,6 @@ header {
                             border-radius: 0%;
                         }
                     }
-                    
-                }
-            }
-            .no_note {
-                @include pc {
-                    font-size: 17px;
                 }
             }
         }
@@ -1098,7 +1144,7 @@ header {
                 padding: 0px;
             }
             .property {
-                padding: 2px;
+                padding-bottom: 3px;
                 display: flex;
                 flex: 0 0 100%;
                 p {
@@ -1116,7 +1162,7 @@ header {
                 }
             }
             .value {
-                padding: 2px;
+                
                 margin-left: 18px;
                 display: flex;
                 flex: 0 0 100%;
@@ -1164,6 +1210,44 @@ header {
                 }
             }
         }
+        .users {
+            .form_view {
+                .property {
+                    a {
+                        display: inline;
+                        font-size: 20px;
+                        text-decoration: none;
+                        color: #333;
+                        @include pc {
+                            margin-bottom: 0;
+                            margin-left: 30%;
+                            font-size: 22px;
+                            margin-top: 2px;
+                        }
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .value {
+                    font-size: 15px;
+                    @include pc {
+                        font-size: 18px;
+                    }
+                }
+                @include pc {
+                    margin: 7px auto 7px auto;
+                }
+            }
+            .icon {
+                height: 24px;
+            }
+            .members {
+                display: inline;
+                font-size: 20px;
+            }
+        }
+
     }
     .flex_container {
         display: flex;
@@ -1203,16 +1287,16 @@ header {
             }
             .user_name {
                 text-decoration: none;
+                line-height: 26px;
+                margin-left: 10px;
+                @include pc {
+                    margin: 4px 0px 4px 30px;
+                    line-height: 38px;
+                }
                 &:hover {
                     color: #aaa;
                     text-decoration: underline;
                     transition: 0.3s;
-                }
-                p {
-                    margin: 2px 0px;
-                    @include pc {
-                        margin: 4px 0px 4px 30px;
-                    }
                 }
             }
             .country_flag {
@@ -1239,16 +1323,14 @@ header {
                 text-decoration: none;
                 margin: 5px auto;
                 @include pc {
-                    margin: 10px auto;
+                    margin: 10px auto 20px auto;
                 }
                 &:hover {
                     color: #aaa;
                     text-decoration: underline;
                     transition: 0.3s;
                 }
-            }
-            
-            
+            }            
         }
     }
     .button_wrapper {
@@ -1270,6 +1352,8 @@ header {
 #showCountries {
     .no_border_card {
         .flex_container {
+            padding-right: 5px;
+            padding-left: 5px;
             text-align: center;
         }
     }
@@ -1537,7 +1621,9 @@ header {
         }
         .title {
             border: none;
+            margin-bottom: 2px;
             @include pc {
+                margin-bottom: 0;
                 border-bottom: 1px solid #9999aa;
             }
         }
@@ -1710,6 +1796,7 @@ header {
         }
     }
     .content {
+        color: #444;
         max-width: 768px;
         width: 95%;
         font-size: 16px;
@@ -1717,6 +1804,319 @@ header {
         word-wrap: break-word;
         @include pc {
             font-size: 18px;
+        }
+    }
+}
+/********************************
+ *                              *
+ *      Note Index              *
+ *                              *
+ *******************************/
+.note_wrapper {
+    background-color: #f0f0f0;
+    padding: 0;
+    padding-top: 15px;
+    margin: 30px 0 ; 
+    box-shadow: 0 0 9px 1px #ccc;
+    @include pc {
+        background-color: #fff;
+        width: 95%;
+        max-width: 980px;
+        margin: 30px auto;
+        padding-bottom: 12px;
+    }
+    .category_wrapper {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 20px;
+        height: 30px;
+        @include pc {
+            height: 45px;
+            margin-bottom: 5px;
+        }
+        .category_icon {
+            margin-left: 10px;
+            margin-right: 5px;
+            height: 30px;
+            float:left;
+            @include pc {
+                height: 45px;
+                margin-left: 20px;
+                margin-right: 10px;
+            }
+        }
+        .category_name {
+            font-weight: bold;
+            color: #444;
+            margin-left: 5px;
+            display: inline;
+            line-height: 33px;
+            @include pc {
+                line-height: 47px;
+                font-size: 24px;
+            }
+        }
+    }
+    .note_list {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+        background-color: #f0f0f0;
+        width: 100vw;
+        padding: 0;
+        margin-top: 17px;
+        padding-bottom: 10px;
+        @include pc {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px 10px;
+            align-items: center;
+            overflow-x: unset;
+            white-space: normal;
+            width: 95%;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: none;
+        }
+        .note_item {
+            display: inline-block;
+            width: 280px;
+            height: 310px;
+            vertical-align: middle;
+            box-shadow: 2px 2px 5px 1px #ccc;
+            border-radius: 1%;
+            margin-right: 10px;
+            margin-left: 10px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+            &:first-child {
+                margin-left: 20px;
+            }
+            &:last-child {
+                margin-right: 20px;
+            }
+            @include pc {
+                height: 377px;
+                display: block;
+                flex: 0 0 40%;
+                margin: 15px auto;
+                &:first-child {
+                    margin-left: auto;
+                }
+                &:last-child {
+                    margin-right: auto;
+                }
+            }
+            @include pc_wide {
+                display: block;
+                flex: 0 0 31%;
+                margin: 15px auto;
+            }
+            a {
+                text-decoration: none;
+            }
+            .note {
+                .image_holder {
+                    background-size: cover;
+                    background-position: center center;
+                    height:190px;
+                    border-top-left-radius: 1%;
+                    border-top-right-radius: 1%;
+                    position: relative;
+                    @include pc {
+                        height: 220px;
+                    }
+                    &::before{
+                        background-color: rgba(0,0,0,0.5);
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        content: '';
+                        border-top-left-radius: 1%;
+                        border-top-right-radius: 1%;
+                        transition: 0.3s;
+                    }
+                    .textbox {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        p,a {
+                            color: #fff;
+                        }
+                        object .note_category {
+                            display: block;
+                            width: 60%;
+                            margin: 0;
+                            padding: 6px 0 3px 7.5px;
+                            border-bottom: 1px solid white;
+                            @include pc {
+                                padding: 6px 0 6px 8px;
+                                width: 70%;
+                                font-size: 17px;
+                            }
+                            &::before {
+                                background-image: url('/img/note_category.png');
+                                background-size: cover;
+                                display: inline-block;
+                                vertical-align: top;
+                                height:15px;
+                                width:15px;
+                                margin: 2px;
+                                margin-right: 5px;
+                                margin-top: 4px;
+                                content: '';
+                                @include pc {
+                                    height: 17px;
+                                    width: 17px;
+                                }
+                            }
+                            &:hover {
+                                color: #fff;
+                                text-decoration: underline;
+                            }
+                            
+                        }
+                        .note_title {
+                            padding: 7px 5px 1px 7.5px;
+                            font-size: 20px;
+                            white-space: normal;
+                            @include pc {
+                                font-size: 21px;
+                            }
+                        }
+                        object .note_country {
+                            display: inline;
+                            padding: 0 0 0 7.5px;
+                            @include pc {
+                                font-size: 18px;
+                            }
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                        object .note_author {
+                            position: absolute;
+                            margin: 0 10px 30px 0; 
+                            bottom: 0;
+                            right: 0;
+                            font-size: 20px;
+                            text-align: center;
+                            padding: 0;
+                            @include pc {
+                                margin: 0 10px 34px 0;
+                                font-size: 21px;
+                            }
+                            &:hover {
+                                color: #fff;
+                                text-decoration: underline;
+                            }
+                        }
+                        .note_date {
+                            padding: 0 10px 5px 0;
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            font-size: 16px;
+                            @include pc {
+                                padding: 0 10px 8px 0;
+                                font-size: 17px;
+                            }
+                        }
+                        .bestnote_icon {
+                            img {
+                                padding: 0 0 12px 12px;
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                width: 48px;
+                                @include pc {
+                                    width: 56px;
+                                }
+                            }
+                        }
+                    }
+                }    
+                .description {
+                    width: 100%;
+                    position: relative;
+                    height: 120px;
+                    @include pc {
+                        height: 160px;
+                    }
+                    .note_content {
+                        white-space: normal;
+                        width: 95%;
+                        margin-right: auto;
+                        margin-left: auto;
+                        padding-top: 5px;
+                        font-size: 12px;
+                        object a {
+                            display: inline;
+                            span {
+                                color: #00aaff;
+                            }
+                            &:hover {
+                                text-decoration: underline;
+                                color: #00aaff;
+                            }
+                        }
+                        @include pc {
+                            width: 93%;
+                            font-size: 14px;
+                        }
+                    }
+                }
+                &:hover {
+                    .image_holder::before {
+                        background-color: rgba(0,0,0,0.1);
+                        transition: 0.3s;
+                    }
+                }  
+            }
+            .see_more {
+                position: absolute;
+                display: block;
+                margin:auto;
+                top:0;right:0;bottom:0;left:0;
+                text-align: center;
+                p {
+                    font-size: 20px;
+                    line-height: 50px;
+                    color:#fff;
+                    @include pc {
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+        .small {
+            background-color: #7777bb;
+            height: 50px;
+            width: 150px;
+        }
+        .bestnote {
+            border: 5px solid #9999cc;
+            .note {
+                border-radius: 0%;
+                .image_holder {
+                    border-radius: 0%;
+                    &::before {
+                        border-radius: 0%;
+                    }
+                    .textbox {
+                        border-radius: 0%;
+                    }
+                }
+            }
+        }
+    }
+    .no_note {
+        padding: 20px;
+        @include pc {
+            font-size: 17px;
         }
     }
 }

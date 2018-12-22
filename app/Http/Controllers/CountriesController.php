@@ -50,7 +50,8 @@ class CountriesController extends Controller
      */
     public function show(Country $country)
     {
-        //
+        $notes = $country->notes->take(6);
+        return view('web.countries.show', compact(['country', 'notes']));
     }
 
     /**

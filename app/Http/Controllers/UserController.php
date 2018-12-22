@@ -28,7 +28,7 @@ class UserController extends Controller
     public function showMyPage() {
         $countries = Country::all();
         $user = auth()->user();
-        $notes = auth()->user()->notes->take(6);
+        $notes = auth()->user()->notes->take(3);
         return view('web.mypage', compact(['user', 'countries', 'notes']));
     }
 
@@ -57,7 +57,16 @@ class UserController extends Controller
         $user->department = request('department');
         $user->major = request('major');
         $user->generation = request('generation');
-        $user->university = request('university');
+
+        $uni_temp = mb_convert_kana(request()->university, 's');
+        $unis = preg_split('/[\s,]+/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
+        $university = '';
+        foreach($unis as $u)
+        {
+            $university .= $u.' ';
+        }
+        $user->university = $university;
+
         $user->isOB = $isOB;
         $user->job = request('job');
         $user->profile = request('profile');

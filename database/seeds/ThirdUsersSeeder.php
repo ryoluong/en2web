@@ -24,7 +24,7 @@ class ThirdUsersSeeder extends Seeder
             'Kento Tawada',
             'Wataru Nakamura',
             'Yuzuki Kitayama',
-            'Mana Kodaka',
+            'Mana Odaka',
             'Kotaro Ariki',
             'Takahiro Matsumoto',
             'Yuki Yamamoto',

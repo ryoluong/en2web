@@ -23,7 +23,7 @@ class TagsTableSeeder extends Seeder
             '理系',
             'トビタテ！',
             'その他奨学金',
-            'OB・OG投稿',
+            'OBOG投稿',
             '就活・インターン',
             '仕事・キャリア',
             '思考の共有',

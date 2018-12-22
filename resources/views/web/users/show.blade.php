@@ -9,7 +9,14 @@
         <div class="no_border_card">
                 <div class="title">
                     <div class="table_view">
-                        <div class="text"><p class="user_name">{{ $user->name }}</p></div>
+                        <div class="text">
+                            <p class="user_name">{{ $user->name }}</p>
+                            @if($user->countries->count())
+                            @foreach($user->countries as $country)
+                            <a class="user_country" href="/countries/{{ $country->id }}"><img src="/img/flags/{{ $country->english_name }}.png" alt=""></a>
+                            @endforeach
+                            @endif
+                        </div>
                         <div class="link">
                             @if($id_previous !== -1)
                             <a href="/users/{{ $id_previous }}"><img class="arrow" src="/img/back.png" alt="back"></a>
@@ -47,7 +54,7 @@
                                 <p>{{ "" }}</p>
                                 @else
                                 @foreach($user->countries()->get() as $country)
-                                <p>{{ $country->name."　" }}</p>
+                                <p>{{ $country->name }}&ensp;</p>
                                 @endforeach
                                 @endif
                             </p>
@@ -102,28 +109,31 @@
                         </div>
                     </div>
                 </div>
-            </div>      
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <div class="text">
-                            <p class="user_name">
-                                <?php
-                                    $name = preg_split('/\s/', $user->name, -1, PREG_SPLIT_NO_EMPTY);
-                                    echo htmlspecialchars($name[0], ENT_QUOTES, 'UTF-8')."'s Notes";
-                                ?>
-                            </p>
-                        </div>
-                        <div class="link"></div>
-                    </div>
+            </div>
+            <div class="note_wrapper">
+                <div class="category_wrapper">
+                    <img class="category_icon" src="/img/top_note.png" alt="">
+                    <p class="category_name">
+                        <?php
+                            $name = preg_split('/\s/', $user->name, -1, PREG_SPLIT_NO_EMPTY);
+                            echo htmlspecialchars($name[0], ENT_QUOTES, 'UTF-8')."'s Notes";
+                        ?>
+                    </p>
                 </div>
-                <div class="content">
-                    @if($user->notes->count())
-                        @include('layouts.web.notes')
-                    @else
-                    <p class="no_note">まだノートがありません。</p>
+                @if($user->notes->count())
+                <ul class="note_list">
+                    @foreach($notes as $note)
+                    @include('layouts.web.notes')
+                    @endforeach
+                    @if($user->notes->count() > 6)
+                    <li class="note_item small">
+                        <a class="see_more" href="users/{{ $user->id }}/notes"><p>See more</p></a>
+                    </li>
                     @endif
-                </div>
+                </ul>
+                @else
+                <p class="no_note">ノートがまだありません。</p>
+                @endif
             </div>
         </div>
     </body>

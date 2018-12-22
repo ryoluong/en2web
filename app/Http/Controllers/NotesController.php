@@ -22,44 +22,45 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $notes = Note::orderBy('date', 'desc')->paginate(9);
+        $notes = Note::all();
         $flag = 'index';
-        return view('web.notes.index', compact(['notes', 'flag']));
+        $categories = Category::all();
+        return view('web.notes.index', compact(['notes', 'categories', 'flag']));
     }
 
     public function showBest()
     {
         $notes= Note::where('isBest', true)->orderBy('date', 'desc')->paginate(9);
         $flag = 'isBest';
-        return view('web.notes.index', compact(['notes', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'flag']));
     }
 
     public function showByTag(Tag $tag)
     {
         $notes = $tag->notes()->orderBy('date', 'desc')->paginate(9);
         $flag = 'tag';
-        return view('web.notes.index', compact(['notes', 'tag', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'tag', 'flag']));
     }
 
     public function showByCategory(Category $category)
     {
         $notes = Note::where('category_id', $category->id)->orderBy('date', 'desc')->paginate(9);
         $flag = 'category';
-        return view('web.notes.index', compact(['notes', 'category', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'category', 'flag']));
     }
 
     public function showByAuthor(User $user)
     {
         $notes = $user->notes()->orderBy('date', 'desc')->paginate(9);
         $flag = 'author';
-        return view('web.notes.index', compact(['notes', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'flag']));
     }
 
     public function showByCountry(Country $country)
     {
         $notes = $country->notes()->orderBy('date', 'desc')->paginate(9);
         $flag = 'country';
-        return view('web.notes.index', compact(['notes', 'country', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'country', 'flag']));
     }
 
 
@@ -109,7 +110,7 @@ class NotesController extends Controller
             $filename = uniqid('photo_').'.'.$e['photo']->guessExtension();
             $path = \Image::make(file_get_contents($e['photo']->getRealPath()));
             $path
-                ->resize(900, null, function($constraint)
+                ->resize(800, null, function($constraint)
                     {
                         $constraint->aspectRatio();
                     })
@@ -233,7 +234,7 @@ class NotesController extends Controller
             $filename = uniqid('photo_').'.'.$e['photo']->guessExtension();
             $path = \Image::make(file_get_contents($e['photo']->getRealPath()));
             $path
-                ->resize(900, null, function($constraint)
+                ->resize(800, null, function($constraint)
                     {
                         $constraint->aspectRatio();
                     })
@@ -321,8 +322,10 @@ class NotesController extends Controller
 
     public function deleteConfirm(Note $note) 
     {
-        //dd('hello!');
-        return view('web.notes.delete_confirm', compact(['note']));    
+        $note_id = $note->id;
+        $notes = []; 
+        $notes[] = $note;
+        return view('web.notes.delete_confirm', compact(['notes', 'note_id']));    
     }
     /**
      * Remove the specified resource from storage.

@@ -116,7 +116,7 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
-                                <p>留学先大学</p>
+                                <p>留学先大学・機関等</p>
                             </div>
                             <div class="value">
                                 <input type="text" class="input_text" name="university" value="{{ old('university') }}" placeholder="Ex) シドニー工科大学">
@@ -131,7 +131,7 @@
                             <div class="property"><p>OB, OG</p></div>
                             <div class="value">
                                 <div class="cp_ipcheck">
-                                    <input name="isOB" type="checkbox" class="checkbox_simple" value="1"><label for="isOB">OB, OGの方はチェックを入れてください。</label>
+                                    <input id="isOB" name="isOB" type="checkbox" class="checkbox_simple" value="1"><label for="isOB">OB, OGの方はチェックを入れてください。</label>
                                 </div>
                             </div>
                         </div>

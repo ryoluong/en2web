@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
+                    <!-- <div class="content">
                         <p class="flag">
                             @if($flag == 'index')
                             @elseif($flag == 'isBest')
@@ -45,11 +45,39 @@
                             @else
                             @endif
                         </p>
-                        <!-- <div class="sp">{{ $notes->links() }}</div> -->
-                        @include('layouts.web.notes')
-                        <div>{{ $notes->links() }}</div>
-                    </div>
+                    </div> -->
                 </div>
+                <div class="note_wrapper">
+                    <a class="category_wrapper" href="/bestnotes">
+                        <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
+                        <p class="category_name">Best Notes</p>
+                    </a>
+                    <ul class="note_list">
+                        @foreach($notes->where('isBest', true)->take(6) as $note)
+                        @include('layouts.web.notes')
+                        @endforeach
+                        <li class="note_item small">
+                            <a class="see_more" href="/bestnotes"><p>See more</p></a>
+                        </li>
+                    </ul>
+                </div>
+                
+                @foreach($categories as $category)
+                <div class="note_wrapper">
+                    <a class="category_wrapper" href="/categories/{{ $category->id }}/notes">
+                        <img class="category_icon" src="/img/categories/category{{ $category->id }}.png" alt="">
+                        <p class="category_name">{{ $category->name }}</p>
+                    </a>
+                    <ul class="note_list">
+                        @foreach($notes->where('category_id', $category->id)->take(6) as $note)
+                        @include('layouts.web.notes')
+                        @endforeach
+                        <li class="note_item small">
+                            <a class="see_more" href="categories/{{ $category->id }}/notes"><p>See more</p></a>
+                        </li>
+                    </ul>
+                </div>
+                @endforeach
         </div>
     </body>
 </html>

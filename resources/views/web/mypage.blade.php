@@ -12,7 +12,14 @@
                         <div class="icon">
                             <img src="img/top_mypage.png" alt="">
                         </div>
-                        <div class="text"><p>{{ $user->name }}</p></div>
+                        <div class="text">
+                            <p>{{ $user->name }}</p>
+                            @if($user->countries->count())
+                            @foreach($user->countries as $country)
+                            <a href="/countries/{{ $country->id }}" class="user_country"><img src="/img/flags/{{ $country->english_name }}.png" alt=""></a>
+                            @endforeach
+                            @endif
+                        </div>
                         <div class="link">
                             <a href="/mypage/edit">
                                 <img src="/img/mypage_edit.png" alt="edit">
@@ -44,7 +51,7 @@
                                 <p>{{ "(入力されていません)" }}</p>
                                 @else
                                 @foreach($user->countries()->get() as $country)
-                                <p>{{ $country->name."　" }}</p>
+                                <p>{{ $country->name }}&ensp;</p>
                                 @endforeach
                                 @endif
                             </p>
@@ -92,25 +99,24 @@
                     </div>
                 </div>
             </div>      
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <div class="icon">
-                            <img src="img/top_note.png" alt="">
-                        </div>
-                        <div class="text"><p>My Notes</p></div>
-                        <div class="link"></div>
-                    </div>
+            @if($user->notes->count())
+            <div class="note_wrapper">
+                <div class="category_wrapper">
+                    <img class="category_icon" src="/img/top_note.png" alt="">
+                    <p class="category_name">My Notes</p>
                 </div>
-                <div class="content">
-                    @if($user->notes->count())
-                        @include('layouts.web.notes')
-                    @else
-                    <p class="no_note">まだノートがありません。</p>
+                <ul class="note_list">
+                    @foreach($notes as $note)
+                    @include('layouts.web.notes')
+                    @endforeach
+                    @if($user->notes->count() > 6)
+                    <li class="note_item small">
+                        <a class="see_more" href="users/{{ $user->id }}/notes"><p>See more</p></a>
+                    </li>
                     @endif
-                    </div>
-                </div>
+                </ul>
             </div>
+            @endif
         </div>
     </body>
 </html>

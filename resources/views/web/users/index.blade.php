@@ -32,7 +32,7 @@
                     </div>
                     @foreach($users->where('generation', $i) as $user)
                     <div class="flex_view">
-                        <a class="user_name" href="users/{{ $user->id }}"><p class="user_name">{{ $user->name }}</p></a>
+                        <a class="user_name" href="users/{{ $user->id }}">{{ $user->name }}</a>
                     </div>
                     @endforeach
                 </div>
