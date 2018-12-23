@@ -31,7 +31,7 @@ class FourthUsersSeeder extends Seeder
                     'name' => $users[$i],
                     'identification_code' => str_random(12),
                     'status' => 3,
-                    'generation' => 1,
+                    'generation' => 4,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ];
