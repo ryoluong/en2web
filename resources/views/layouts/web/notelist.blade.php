@@ -3,7 +3,11 @@
         <div class="note {{ $note->isBest == 1 ? 'bestnote' : '' }}">
             <div class="image_holder" style="background-image:url(
                 @if($note->photos->count())
+                @if(app()->isLocal())
+                {{ '/storage'.$note->photos->first()->path }}
+                @else
                 {{ $note->photos->first()->path }}
+                @endif
                 @else
                 {{ '/img/note/'.$note->category_id.'.jpg' }}
                 @endif

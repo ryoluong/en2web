@@ -71,7 +71,12 @@
                         </div>
                         <div class="form_view jcenter">
                             @foreach($paths as $path)
+
+                            @if(app()->isLocal())
+                            <div class="image_wrapper" style="background-image:url({{ asset("/storage{$path}") }});">
+                            @else
                             <div class="image_wrapper" style="background-image:url({{ asset("{$path}") }});">
+                            @endif
                                 <input type="hidden" class="input_text" name="paths[]" value="{{ $path }}">
                             </div>
                             @endforeach
