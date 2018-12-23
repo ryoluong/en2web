@@ -29,23 +29,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="content">
-                        <p class="flag">
-                            @if($flag == 'index')
-                            @elseif($flag == 'isBest')
-                            <a class="bestnote icon" href="/bestnotes">{{ 'Best Notes' }}</a>
-                            @elseif($flag == 'category')
-                            <a class="category icon" href="/categories/{{ $category->id }}/notes">{{ $category->name }}</a>
-                            @elseif($flag == 'tag')
-                            <a class="tag icon" href="/tags/{{ $tag->id }}/notes">{{ $tag->name }}</a>
-                            @elseif($flag == 'author')
-                            <a class="author icon" href="/users/{{ $notes->first()->user->id }}/notes">{{$notes->first()->user->name }}</a><a class="details_link" href="/users/{{ $notes->first()->user->id }}">See Profile</a>
-                            @elseif($flag == 'country')
-                            <a class="country icon" href="/countries/{{ $country->id }}/notes">{{ $country->name }}</a><a class="details_link" href="/countries/{{ $country->id }}">See Country</a>
-                            @else
-                            @endif
-                        </p>
-                    </div> -->
                 </div>
                 <div class="note_wrapper">
                     <a class="category_wrapper" href="/bestnotes">

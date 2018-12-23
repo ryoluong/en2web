@@ -43,14 +43,27 @@ class ThirdUsersSeeder extends Seeder
         $now = \Carbon\Carbon::now();
         
         for ($i = 0; $i < count($users); $i++) {
-            $user = [
-                'name' => $users[$i],
-                'identification_code' => str_random(12),
-                'status' => 3,
-                'generation' => 3,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ];
+            if($users[$i] == 'Ryota Onuma' || 'Haruki Sasaki' || 'Kotaro Ariki' || 'Keishun Sakamoto')
+            {
+                $user = [
+                    'name' => $users[$i],
+                    'identification_code' => str_random(12),
+                    'status' => 3,
+                    'generation' => 1,
+                    'isAdmin' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            } else {
+                $user = [
+                    'name' => $users[$i],
+                    'identification_code' => str_random(12),
+                    'status' => 3,
+                    'generation' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            }
             DB::table('users')->insert($user);
         }
     }

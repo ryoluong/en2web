@@ -19,6 +19,7 @@ class FourthUsersSeeder extends Seeder
             'Seiho Shindo',
             'Erimo Taniguchi',
             'Kiyoka Ebina',
+            'Toshie Go'
         ];
         // foreach ($tags as $tag) {
         //     DB::table('tags')->insert('tag');
@@ -26,14 +27,27 @@ class FourthUsersSeeder extends Seeder
         $now = \Carbon\Carbon::now();
         
         for ($i = 0; $i < count($users); $i++) {
-            $user = [
-                'name' => $users[$i],
-                'identification_code' => str_random(12),
-                'status' => 3,
-                'generation' => 4,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ];
+            if($users[$i] == 'Kiyoka Ebina' || 'Toshie Go')
+            {
+                $user = [
+                    'name' => $users[$i],
+                    'identification_code' => str_random(12),
+                    'status' => 3,
+                    'generation' => 1,
+                    'isAdmin' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            } else {
+                $user = [
+                    'name' => $users[$i],
+                    'identification_code' => str_random(12),
+                    'status' => 3,
+                    'generation' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            }
             DB::table('users')->insert($user);
         }
     }

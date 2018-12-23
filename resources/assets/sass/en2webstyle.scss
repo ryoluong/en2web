@@ -823,81 +823,30 @@ header {
             padding-top: 10px;
             padding-bottom: 10px;
         }
-        .flag {
-            font-size: 18px;
-            margin-left: 5px;
+        .details_link {
+            margin-left: 10px;
+            color: #00aaca;
+            font-size: 15px;
             @include pc {
-                font-size: 20px;
-                margin-left: 20px;
-            }
-            .icon {
-                text-decoration: none;
-                &::before {
-                    display: inline-block;
-                    content: '';
-                    width: 17px;
-                    height: 17px;
-                    margin: 1px 3px;
-                    vertical-align: middle;
-                    margin-bottom: 5px;
-                    padding: 0;
-                    background-size: cover;
-                    @include pc {
-                        width: 24px;
-                        height: 24px;
-                        margin-right: 8px;
-                    }
-                }
-            }
-            .bestnote {
-                &::before {
-                    background-image: url('/img/title_bestnote.png')
-                }
-            }
-            .tag {
-                &::before {
-                    background-image: url('/img/title_tag.png');
-                }
-            }
-            .category {
-                &::before {
-                    background-image: url('/img/title_category.png');
-                }
-            }
-            .country {
-                &::before {
-                    background-image: url('/img/title_country.png');
-                }
-            }
-            .author {
-                &::before {
-                    background-image: url('/img/title_author.png');
-                }
-            }
-            .details_link {
-                margin-left: 10px;
-                color: #00aaca;
-                font-size: 15px;
-                @include pc {
-                    margin-left: 12px;
-                    font-size: 18px;
-                }
+                margin-left: 12px;
+                font-size: 18px;
             }
         }
+        
         .note_view {
             display: flex;
             flex-wrap: wrap;
-            padding: 5px 10px;
+            padding: 0;
             align-items: center;
             max-width: 980px;   
-            margin: auto;
+            margin: 0 auto;
             background-color: #fff;
             box-shadow: none;
             .note_item {
                 box-shadow: 2px 2px 5px 1px #ccc;
                 display: block;
-                flex: 0 0 95%; 
-                margin: 10px;
+                flex: 0 0 85%; 
+                margin: 10px auto;
                 @include pc {
                     height: 377px;
                     display: block;
@@ -1038,7 +987,7 @@ header {
                     .description {
                         width: 100%;
                         position: relative;
-                        height: 115px;
+                        height: 120px;
                         @include pc {
                             height: 155px;
                         }
@@ -1095,7 +1044,7 @@ header {
             flex-wrap: wrap;
             padding: 0;
             width: 85%;
-            margin: 0 auto;
+            margin: 5px auto;
             justify-content: center;
             li {
                 width: 30px;
@@ -1608,6 +1557,41 @@ header {
     }
 }
 
+.category_wrapper {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 20px;
+    height: 30px;
+    padding: 5px;
+    margin: 0px 10px 5px 10px;
+    @include pc {
+        height: 45px;
+        margin: 5px 10px 0px 10px;
+    }
+    .category_icon {
+        height: 30px;
+        float:left;
+        @include pc {
+            height: 45px;
+            margin-left: 20px;
+            margin-right: 5px;
+        }
+    }
+    .category_name {
+        font-weight: bold;
+        color: #444;
+        margin-left: 10px;
+        display: inline-block;
+        padding-top: 2px;
+        height: 30px;
+        vertical-align: middle;
+        @include pc {
+            height: 45px;
+            padding-top: 8px;
+            font-size: 24px;
+        }
+    }
+}
 /**************************
  *                        *
  *       Show Note        *
@@ -1813,10 +1797,9 @@ header {
  *                              *
  *******************************/
 .note_wrapper {
-    background-color: #f0f0f0;
-    padding: 0;
-    padding-top: 15px;
-    margin: 30px 0 ; 
+    background-color: #f5f5f5;
+    padding-top: 10px;
+    margin: 30px 0;
     box-shadow: 0 0 9px 1px #ccc;
     @include pc {
         background-color: #fff;
@@ -1825,47 +1808,14 @@ header {
         margin: 30px auto;
         padding-bottom: 12px;
     }
-    .category_wrapper {
-        display: inline-block;
-        text-decoration: none;
-        font-size: 20px;
-        height: 30px;
-        @include pc {
-            height: 45px;
-            margin-bottom: 5px;
-        }
-        .category_icon {
-            margin-left: 10px;
-            margin-right: 5px;
-            height: 30px;
-            float:left;
-            @include pc {
-                height: 45px;
-                margin-left: 20px;
-                margin-right: 10px;
-            }
-        }
-        .category_name {
-            font-weight: bold;
-            color: #444;
-            margin-left: 5px;
-            display: inline;
-            line-height: 33px;
-            @include pc {
-                line-height: 47px;
-                font-size: 24px;
-            }
-        }
-    }
+
     .note_list {
         overflow-x: auto;
         white-space: nowrap;
-        padding: 0;
-        background-color: #f0f0f0;
+        background-color: #f5f5f5;
         width: 100vw;
-        padding: 0;
-        margin-top: 17px;
-        padding-bottom: 10px;
+        padding: 7px 0 25px 0;
+        margin: 0;
         @include pc {
             display: flex;
             flex-wrap: wrap;
@@ -1888,7 +1838,6 @@ header {
             margin-right: 10px;
             margin-left: 10px;
             background-color: #fff;
-            margin-bottom: 20px;
             position: relative;
             &:first-child {
                 margin-left: 20px;
