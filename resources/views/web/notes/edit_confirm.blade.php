@@ -79,7 +79,7 @@
                         @if($paths != null)
                         <div class="form_view jcenter">
                             @foreach($paths as $path)
-                            <div class="image_wrapper" style="background-image:url({{ asset("storage/{$path}") }});">
+                            <div class="image_wrapper" style="background-image:url({{ asset("{$path}") }});">
                                 <input type="hidden" class="input_text" name="paths[]" value="{{ $path }}">
                             </div>
                             @endforeach

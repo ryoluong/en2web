@@ -115,7 +115,7 @@ class NotesController extends Controller
                         $constraint->aspectRatio();
                     })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
-            $paths[] = 'img/tmp/'.$filename;
+            $paths[] = '/img/tmp/'.$filename;
             }
         }
         return view('web.notes.create_confirm', compact(['categories', 'tags', 'paths']))->with($bridge_request);
@@ -171,8 +171,8 @@ class NotesController extends Controller
                 foreach ($request->paths as $index => $path) 
                 {
                     $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-                    Storage::disk('public')->move($path, 'img/note/'.$filename);
-                    $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+                    Storage::disk('public')->move($path, '/img/note/'.$filename);
+                    $note->photos()->create(['path' => '/img/note/'.$filename]);
                 }
             }
             return redirect('/notes');
@@ -239,7 +239,7 @@ class NotesController extends Controller
                         $constraint->aspectRatio();
                     })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
-            $paths[] = 'img/tmp/'.$filename;
+            $paths[] = '/img/tmp/'.$filename;
             }
         }
         return view('web.notes.edit_confirm', compact(['note', 'categories', 'tags', 'paths']))->with($bridge_request);
@@ -297,8 +297,8 @@ class NotesController extends Controller
                 {
                     $newindex = $index + $current_index;
                     $filename = 'photo_'.$note->id.'_'.$newindex.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-                    Storage::disk('public')->move($path, 'img/note/'.$filename);
-                    $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+                    Storage::disk('public')->move($path, '/img/note/'.$filename);
+                    $note->photos()->create(['path' => '/img/note/'.$filename]);
                 }
             }
             if($request->delete_paths !== null)
@@ -306,7 +306,7 @@ class NotesController extends Controller
                 foreach ($request->delete_paths as $path)
                 {
                     Photo::where('path', $path)->first()->delete();
-                    unlink(public_path().$path);
+                    unlink(public_path('storage').$path);
                 }
             }
             return redirect('/notes');
@@ -337,7 +337,7 @@ class NotesController extends Controller
     {
         foreach($note->photos as $photo)
         {
-            unlink(public_path().$photo->path);
+            unlink(public_path('storage').$photo->path);
         }
         $note->delete();
 
