@@ -1801,9 +1801,8 @@ header .menu .splitter div {
 *****************************/
 
 .border_card {
-  border-radius: 1%;
-  -webkit-box-shadow: 2px 2px 5px 1px #ccc;
-          box-shadow: 2px 2px 5px 1px #ccc;
+  -webkit-box-shadow: 1px 1px 5px 2px #ccc;
+          box-shadow: 1px 1px 5px 2px #ccc;
   width: 95%;
   margin: 15px auto;
 }

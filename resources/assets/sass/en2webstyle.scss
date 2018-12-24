@@ -1313,8 +1313,8 @@ header {
 
 *****************************/
 .border_card {
-    border-radius: 1%;
-    box-shadow: 2px 2px 5px 1px #ccc;
+    //border-radius: 1%;
+    box-shadow: 1px 1px 5px 2px #ccc;
     width: 95%;
     margin: 15px auto;
     @include pc {

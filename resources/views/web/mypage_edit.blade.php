@@ -20,7 +20,12 @@
                         <div class="form_view">
                             <div class="property"><p>入学年度</p></div>
                             <div class="value">
-                                <input name="year" type="text" class="input_text" value="{{ old('year') !== null ? old('year') : $user->year }}" placeholder="西暦4ケタで入力してください">
+                                <select name="year" id="year" class="input_select">
+                                    <?php use Carbon\Carbon; $year = Carbon::now()->year; ?>
+                                    @for($i = 2012; $i <= $year; $i++)
+                                    <option value="{{ $i }}" {{ $i == $year ? 'selected' : ''}}>{{ $i }}</option>    
+                                    @endfor
+                                </select>
                             </div>
                             @if ($errors->has('year'))
                             <div class="help-box">

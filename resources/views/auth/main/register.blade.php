@@ -34,6 +34,24 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
+                                <p>入学年度（必須）</p>
+                            </div>
+                            <div class="value">
+                                <select name="year" id="year" class="input_select">
+                                    <?php use Carbon\Carbon; $year = Carbon::now()->year; ?>
+                                    @for($i = 2012; $i <= $year; $i++)
+                                    <option value="{{ $i }}" {{ $i == $year ? 'selected' : ''}}>{{ $i }}</option>    
+                                    @endfor
+                                </select>
+                            </div>
+                            @if ($errors->has('year'))
+                            <div class="help-box">
+                                    <strong>{{ $errors->first('year') }}</strong>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="form_view">
+                            <div class="property">
                                 <p>学部（必須）</p>
                             </div>
                             <div class="value">

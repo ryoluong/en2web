@@ -29,7 +29,8 @@ class TagsTableSeeder extends Seeder
             '思考の共有',
             'IT',
             'Tips',
-            '本・映画・記事',
+            '本・映画',
+            'ネット記事',
         ];
         // foreach ($tags as $tag) {
         //     DB::table('tags')->insert('tag');

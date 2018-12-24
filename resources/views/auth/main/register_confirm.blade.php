@@ -24,6 +24,15 @@
                             <input type="hidden" class="input_text" name="name" value="{{ $user->name }}" required>
                         </div>
                         <div class="form_view">
+                            <div class="property">
+                                <p class="prof_head">入学年度：</p>
+                            </div>
+                            <div class="value">
+                                <p>{{ $user->year }}</p>
+                            </div>
+                            <input type="hidden" class="input_text" name="year" value="{{ $user->year}}" required>
+                        </div>
+                        <div class="form_view">
                             <div class="property"><p class="prof_head">学部：</p></div>
                             <div class="value"><p>{{ $user->department }}</p></div>
                             <input type="hidden" class="input_text" name="department" value="{{ $user->department }}" required>

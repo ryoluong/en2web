@@ -157,6 +157,7 @@ class RegisterController extends Controller
         
         $request->validate([
             'name' => ['required', 'max:255', new AlphaName],
+            'year' => ['required', 'digits:4'],
             'department' => ['required', Rule::in(['経済学部','経営学部','教育学部','都市科学部','理工学部'])],
             'major' => ['required', Rule::in(['経済学科','経営学科','教育学科','都市社会共生学科','環境リスク共生学科','建築学科','都市基盤学科','数物・電子情報系学科','化学・生命系学科','機械・材料・海洋系学科'])],
             'generation' => ['required', new GenerationVali],
@@ -171,6 +172,7 @@ class RegisterController extends Controller
 
         $user = new User;
         $user->name = $request->name;
+        $user->year = $request->year;
         $user->department = $request->department;
         $user->major = $request->major;
         $user->generation = $request->generation;
@@ -188,6 +190,7 @@ class RegisterController extends Controller
         $user->status = 1;
         $user->name = $request->name;
         $user->identification_code = null;
+        $user->year = $request->year;
         $user->department = $request->department;
         $user->major = $request->major;
         $user->generation = $request->generation;

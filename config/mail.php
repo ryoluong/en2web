@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@en2ynu.jp'),
-        'name' => env('MAIL_FROM_NAME', 'En2WebDeveloper'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@en2ynu.com'),
+        'name' => env('MAIL_FROM_NAME', 'En2::Web'),
     ],
 
     /*
