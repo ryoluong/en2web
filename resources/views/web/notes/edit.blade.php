@@ -127,7 +127,11 @@
                         </div>
                         <div class="form_view jcenter">
                             @foreach($note->photos as $photo)
+                            @if(app()->isLocal())
+                            <div class="image_wrapper" style="background-image:url({{ '/storage'.$photo->path }});">
+                            @else
                             <div class="image_wrapper" style="background-image:url({{ $photo->path }});">
+                            @endif
                                 <div class="image_delete">
                                     <div class="cp_ipcheck">
                                         <input type="checkbox" class="checkbox_simple" name="delete_paths[]" value="{{ $photo->path }}" {{ old('delete_paths') !== null && in_array($photo->path, old('delete_paths')) ? 'checked' : '' }}>
