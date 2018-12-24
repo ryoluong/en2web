@@ -360,7 +360,6 @@ header {
         }
         
     }
-        
     .icon_table {
         width: 100%;
         height: 70vw;
@@ -370,7 +369,7 @@ header {
         }
         .icon_tr {
             width: 70%;
-            height: 70vw;
+            height: 65vw;
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
@@ -427,8 +426,10 @@ header {
                     }
                     img {
                         width: 48px;
+                        margin-top: 7.5px;
                         @include pc {
                             width: 90px;
+                            margin-top: 0;
                         }
                     }
                 }
@@ -453,14 +454,17 @@ header {
                 font-size: 13px;
                 font-weight: bold;
                 color: #7777bb;
+                padding-bottom: 2px;
                 @include pc {
                     font-size: 18px;
                     padding: 5px 0;
                 }
             }
             img {
+                margin-top: 4px;
                 height: 32px;
                 @include pc {
+                    margin-top: 0;
                     height: 66px;
                 }
             }
@@ -1313,7 +1317,6 @@ header {
 
 *****************************/
 .border_card {
-    //border-radius: 1%;
     box-shadow: 1px 1px 5px 2px #ccc;
     width: 95%;
     margin: 15px auto;
@@ -1768,16 +1771,6 @@ header {
                 font-size: 17px;
             }
         }
-        &::before {
-            display: inline-block;
-            background-image: url('/img/title_tag.png');
-            background-size: cover;
-            display:block;
-            height:18px;
-            width:18px;
-            margin: 2px;
-            content: '';
-        }
     }
     .content {
         color: #444;
@@ -1808,7 +1801,6 @@ header {
         margin: 30px auto;
         padding-bottom: 12px;
     }
-
     .note_list {
         overflow-x: auto;
         white-space: nowrap;
@@ -1831,7 +1823,6 @@ header {
         .note_item {
             display: inline-block;
             width: 280px;
-            height: 310px;
             vertical-align: middle;
             box-shadow: 2px 2px 5px 1px #ccc;
             border-radius: 1%;
@@ -1869,7 +1860,7 @@ header {
                 .image_holder {
                     background-size: cover;
                     background-position: center center;
-                    height:190px;
+                    height:200px;
                     border-top-left-radius: 1%;
                     border-top-right-radius: 1%;
                     position: relative;
@@ -1976,11 +1967,12 @@ header {
                         }
                         .bestnote_icon {
                             img {
-                                padding: 0 0 12px 12px;
+                                padding: 0 0 8px 5px;
                                 position: absolute;
                                 bottom: 0;
                                 left: 0;
-                                width: 48px;
+                                width: 55px;
+                                height: 55px;
                                 @include pc {
                                     width: 56px;
                                 }
@@ -1991,7 +1983,7 @@ header {
                 .description {
                     width: 100%;
                     position: relative;
-                    height: 120px;
+                    height: 115px;
                     @include pc {
                         height: 160px;
                     }
@@ -2041,6 +2033,66 @@ header {
                 }
             }
         }
+        .category_item {
+            width: 220px;
+            height: 210px;
+            border-radius: 1%;
+            .link_wrapper {
+                width: 220px;
+                height: 210px;
+                &:hover .image_wrapper::before {
+                    background-color: rgba(0,0,0,0.1);
+                    transition: 0.3s;
+                }
+                .image_wrapper {
+                    border-top-left-radius: 1%;
+                    border-top-right-radius: 1%;
+                    height: 150px;
+                    width: 100%;
+                    background-size: cover;
+                    background-position: center center;
+                    position: relative;
+                    &::before{
+                        background-color: rgba(0,0,0,0.6);
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        content: '';
+                        border-top-left-radius: 1%;
+                        border-top-right-radius: 1%;
+                        transition: 0.3s;
+                    }
+                    .category_name {
+                        line-height: 150px;
+                        width: 100%;
+                        color: #fff;
+                        text-align: center;
+                        font-size: 22px;
+                        position: absolute;
+                        @include pc {
+                            font-size: 24px;
+                        }
+                    }
+                }
+                .category_detail {
+                    width: 96%;
+                    margin: auto;
+                    line-height: 20px;
+                    text-align: center;
+                    vertical-align: middle;
+                    padding: 10px 0; 
+                    font-size: 13px;
+                    white-space: normal;
+                    @include pc {
+                        font-size: 15px;
+                        line-height: 22px;
+                        padding: 8px;
+                    }
+                }
+            }
+        }
         .small {
             background-color: #7777bb;
             height: 50px;
@@ -2058,6 +2110,59 @@ header {
                     .textbox {
                         border-radius: 0%;
                     }
+                }
+            }
+        }
+    }
+    .tag_list_wrapper {
+        overflow-x: scroll;
+        padding: 0 15px;
+        @include pc {
+            overflow-x: unset;
+        }
+        .tag_list {
+            padding-top: 0px;
+            padding-bottom: 20px;
+            width: 170%;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            white-space: nowrap;
+            @include pc {
+                padding-top: 10px;
+                width: 95%;
+            }
+            .tag_item {
+                display: block;
+                text-decoration: none;
+                background-color: #aaaacc;
+                margin: 5px; 
+                height: 29px;
+                box-shadow: 2px 2px 5px 1px #ccc;
+                border-radius: 1%;
+                @include pc {
+                    margin: 10px 7.5px;
+                    display: inline-block;
+                    height: 40px;
+                }
+                a {
+                    display: block;
+                    text-decoration: none;
+                    line-height: 25px;
+                    color: #fff;
+                    font-size: 12px;
+                    padding: 2px 9px;
+                    @include pc {
+                        padding: 5px 10px;
+                        line-height: 30px;
+                        font-size: 18px;
+                    }
+                }
+                &:first-child {
+                    margin-left: 5px;
+                }
+                &:last-child {
+                    margin-right: 5px;
                 }
             }
         }

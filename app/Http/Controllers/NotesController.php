@@ -25,7 +25,8 @@ class NotesController extends Controller
         $notes = Note::all();
         $flag = 'index';
         $categories = Category::all();
-        return view('web.notes.index', compact(['notes', 'categories', 'flag']));
+        $tags = Tag::all();
+        return view('web.notes.index', compact(['notes', 'categories', 'tags', 'flag']));
     }
 
     public function showBest()

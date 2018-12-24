@@ -37,13 +37,13 @@
                     </a>    
                     @elseif($flag == 'category')
                     <div class="category_wrapper" href="/bestnotes">
-                        <img class="category_icon" src="/img/categories/category{{ $category->id }}.png" alt="category">
+                        <img class="category_icon" src="/img/categories/category.png" alt="category">
                         <p class="category_name">{{ $category->name }}</p>      
                     </div>
                     @elseif($flag == 'tag')
                     <div class="category_wrapper" href="/bestnotes">
-                        <img class="category_icon" src="/img/categories/category{{ $category->id }}.png" alt="category">
-                        <p class="category_name">{{ $category->name }}</p>      
+                        <img class="category_icon" src="/img/categories/tag.png" alt="category">
+                        <p class="category_name">{{ $tag->name }}</p>      
                     </div>
                     @endif
                     <div class="sp">{{ $notes->links() }}</div>
