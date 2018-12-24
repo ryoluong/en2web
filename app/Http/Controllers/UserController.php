@@ -57,16 +57,20 @@ class UserController extends Controller
         $user->department = request('department');
         $user->major = request('major');
         $user->generation = request('generation');
-
-        $uni_temp = mb_convert_kana(request()->university, 's');
-        $unis = preg_split('/[\s,]+/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
-        $university = '';
-        foreach($unis as $u)
+        
+        if(request('university') !== null)
         {
-            $university .= $u.' ';
+            $uni_temp = mb_convert_kana(request()->university, 's');
+            $unis = preg_split('/[\s,]+/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
+            $university = '';
+            foreach($unis as $u)
+            {
+                $university .= $u.' ';
+            }
+            $user->university = $university;
+        } else {
+            $user->university = request('university');
         }
-        $user->university = $university;
-
         $user->isOB = $isOB;
         $user->job = request('job');
         $user->profile = request('profile');
