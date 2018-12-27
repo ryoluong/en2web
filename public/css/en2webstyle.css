@@ -1137,7 +1137,6 @@ header .menu .splitter div {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  max-width: 980px;
   margin: 0 auto;
   background-color: #fff;
   -webkit-box-shadow: none;
@@ -1644,6 +1643,18 @@ header .menu .splitter div {
   font-size: 20px;
 }
 
+.no_border_card .content .numOfNotes {
+  margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .numOfNotes {
+    margin-top: 5px;
+    margin-left: 35px;
+    font-size: 18px;
+  }
+}
+
 .no_border_card .flex_container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1730,19 +1741,16 @@ header .menu .splitter div {
   display: block;
   margin: auto;
   width: 42px;
-  height: 28px;
 }
 
 @media (min-width: 768px) {
   .no_border_card .flex_container .flex_view .country_flag {
     width: 70px;
-    height: 47px;
   }
 }
 
 .no_border_card .flex_container .flex_view .country_flag img {
   width: 42px;
-  height: 28px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -1750,7 +1758,6 @@ header .menu .splitter div {
 @media (min-width: 768px) {
   .no_border_card .flex_container .flex_view .country_flag img {
     width: 70px;
-    height: 47px;
   }
 }
 
@@ -2207,8 +2214,9 @@ header .menu .splitter div {
 
 @media (min-width: 768px) {
   .category_wrapper .category_name {
+    line-height: 45px;
     height: 45px;
-    padding-top: 8px;
+    padding-top: 0;
     font-size: 24px;
   }
 }
@@ -2483,8 +2491,10 @@ header .menu .splitter div {
     background-color: #fff;
     width: 95%;
     max-width: 980px;
-    margin: 30px auto;
+    margin: 15px auto;
     padding-bottom: 12px;
+    -webkit-box-shadow: none;
+            box-shadow: none;
   }
 }
 

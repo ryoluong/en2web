@@ -37,7 +37,7 @@
                                 <p>Password</p>
                             </div>
                             <div class="value">
-                                <input type="password" class="input_text" name="password" value="">
+                                <input type="password" class="input_text" name="password" value="" required>
                             </div>
                             <div class="help-box">
                                 @if ($errors->has('password'))
@@ -50,7 +50,7 @@
                                 <p>Confirm Password</p>
                             </div>
                             <div class="value">
-                                <input type="password" class="input_text" name="password_confirmation">
+                                <input type="password" class="input_text" name="password_confirmation" required>
                             </div>
                             <div class="help-box">
                             </div>
@@ -60,7 +60,7 @@
                                 <p>Registration Code</p>
                             </div>
                             <div class="value">
-                                <input type="text" class="input_text" name="code" value="{{ old('code') }}">
+                                <input type="text" class="input_text" name="code" value="{{ old('code') }}" required>
                             </div>
 
                             <div class="help-box">

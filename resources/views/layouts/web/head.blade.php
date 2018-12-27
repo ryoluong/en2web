@@ -7,6 +7,7 @@
 
 <meta name="msapplication-TileColor" content="/img/favicons/#2d88ef">
 <meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
+<meta property="og:image" content="/img/favicons/icon-512x512.png">
 
 <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/img/favicons/favicon.ico">
 <link rel="icon" type="image/vnd.microsoft.icon" href="/img/favicons/favicon.ico">

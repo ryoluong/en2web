@@ -54,7 +54,7 @@ class NotesController extends Controller
     {
         $notes = $user->notes()->orderBy('date', 'desc')->paginate(9);
         $flag = 'author';
-        return view('web.notes.paginate', compact(['notes', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'user', 'flag']));
     }
 
     public function showByCountry(Country $country)

@@ -19,11 +19,9 @@ class FourthUsersSeeder extends Seeder
             'Seiho Shindo',
             'Erimo Taniguchi',
             'Kiyoka Ebina',
-            'Toshie Go'
+            'Toshie Go',
+            'Koyo Yoshino'
         ];
-        // foreach ($tags as $tag) {
-        //     DB::table('tags')->insert('tag');
-        // }
         $now = \Carbon\Carbon::now();
         
         for ($i = 0; $i < count($users); $i++) {

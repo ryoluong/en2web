@@ -111,7 +111,7 @@
                         </div>
                         <div class="form_view">
                             <div class="property"><p>Add Images</p></div>
-                            <div class="value"><input type="file" class="input_file" name="files[][photo]" multiple></div>
+                            <div class="value"><input type="file" class="input_file" name="files[][photo]" accept="image/png,image/jpeg,image/gif" multiple></div>
                             @if ($errors->has('file'))
                             <div class="help-box">
                                 <strong>{{ $errors->first('file') }}</strong>

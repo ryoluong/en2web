@@ -111,7 +111,7 @@
                         </div>
                         <div class="form_view">
                             <div class="property"><p>Images</p></div>
-                            <div class="value"><input type="file" class="input_file" name="files[][photo]" multiple></div>
+                            <div class="value"><input type="file" class="input_file" name="files[][photo]" accept="image/png,image/jpeg,image/gif" multiple></div>
                             <div class="help-box">
                                 <p>*複数可, 4MBまでのjpegもしくはpng, 自動で圧縮されます。</p>
                             </div>
