@@ -1263,18 +1263,14 @@ header {
                 display: block;
                 margin: auto;
                 width: 42px;
-                //height: 28px;
                 @include pc {
                     width: 70px;
-                    //height: 47px;
                 }
                 img {
                     width: 42px;
-                    //height: 28px;
                     transition: 0.3s;
                     @include pc {
                         width: 70px;
-                        //height: 47px;
                     }
                 }
             }
