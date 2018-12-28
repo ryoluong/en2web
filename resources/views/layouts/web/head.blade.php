@@ -48,3 +48,13 @@
 <link rel="icon" type="image/png" sizes="24x24" href="/img/favicons/img/favicons/icon-24x24.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/img/favicons/icon-32x32.png">
 <link rel="manifest" href="/img/favicons/manifest.json">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131467484-1');
+</script>

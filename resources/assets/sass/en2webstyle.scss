@@ -714,12 +714,11 @@ header {
                 }
             }
             .text {
-                width: 75%;
                 display: table-cell;
                 height: 40px;
                 padding: 5px 0;
                 margin: 0;
-                a,p {
+                p,a {
                     display: inline;
                     text-decoration: none;
                     color: #333;
@@ -739,16 +738,19 @@ header {
                     margin-left: 15px;
                 }
                 .user_country {
-                    margin-left: 9px;
+                    display: inline-block;
+                    width: 25px;
+                    margin-left: 5px;
                     @include pc {
-                        margin-left: 15px;
+                        margin-left: 10px;
+                        width: 40px;
                     }
                     img {
                         vertical-align: middle;
                         margin-bottom: 5px;
-                        width: 30px;
+                        width: 25px;
                         @include pc {
-                            width: 50px;
+                            width: 40px;
                         }
                     }
                 }
@@ -770,7 +772,7 @@ header {
                 }
             }
             .link {
-                width: 40px;
+                width: 35px;
                 position: relative;
                 display: table-cell;
                 @include pc {
@@ -1103,10 +1105,11 @@ header {
                     color: #333;
                 }
                 @include pc {
-                    margin-right: 0px;
+                    padding: 10px;
+                    margin-right: 0;
                     flex: 0 0 30%;
                     p {
-                        line-height: 44px;
+                        line-height: 1.5em;
                         font-size: 18px;
                         width: 100%;
                         text-align: right;
@@ -1114,7 +1117,6 @@ header {
                 }
             }
             .value {
-                
                 margin-left: 18px;
                 display: flex;
                 flex: 0 0 100%;
@@ -1212,6 +1214,7 @@ header {
     .flex_container {
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
         padding: 8px 15px;
         @include pc {
             padding: 15px 30px;
@@ -1219,15 +1222,11 @@ header {
         }
         .subtitle {
             flex: 0 0 100%;
-            @include pc {
-                margin-left: 30px;
-            }
             p {
                 text-align: center;
                 width: 70px;
                 margin: 5px 0px;
                 font-size: 17px;
-                //padding: 8px 0px;
                 border-bottom: 2px solid #7777bb;
                 color: #444;
                 @include pc {
@@ -1241,16 +1240,16 @@ header {
             position: relative;
             flex: 0 0 50%;
             max-width: 50%;
-            margin: 7.5px 0;
+            margin: 10px 0;
             @include pc {
-                flex: 0 0 33%;
+                flex: 0 0 33.3%;
+                max-width: 33.3%;
+                margin: 20px 0;
             }
             .user_name {
                 text-decoration: none;
                 line-height: 26px;
-                margin-left: 10px;
                 @include pc {
-                    margin: 4px 0px 4px 30px;
                     line-height: 38px;
                 }
                 &:hover {
@@ -1261,25 +1260,30 @@ header {
             }
             .country_flag {
                 display: block;
-                margin: auto;
+                margin: 0 auto;
                 width: 42px;
+                height: 42px;
+                padding: 3px;
                 @include pc {
                     width: 70px;
+                    height: 70px;
+                    padding: 7.5px;
                 }
                 img {
                     width: 42px;
-                    transition: 0.3s;
+                    height: 42px;
                     @include pc {
                         width: 70px;
+                        height: 70px;
                     }
                 }
             }
             .country_name {
                 display: inline-block;
                 text-decoration: none;
-                margin: 5px auto;
+                margin: auto;
                 @include pc {
-                    margin: 10px auto 20px auto;
+                
                 }
                 &:hover {
                     color: #aaa;
@@ -1305,6 +1309,13 @@ header {
         }
     }
 }
+#showMembers {
+    @include pc {
+        .flex_view {
+            margin: 10px 0;
+        }
+    }
+}
 #showCountries {
     .no_border_card {
         .flex_container {
@@ -1326,7 +1337,7 @@ header {
     @include pc {
         margin: 30px auto;
         width: 95%;
-        max-width: 950px;
+        max-width: 1000px;
     }
     .title {
         width: 100%;
@@ -1434,7 +1445,7 @@ header {
                 .input_text {
                     border: 1px solid #ccc;
                     width: 80%;
-                    height: 60%;
+                    height: 20px;
                     padding: 5px 9px;
                     @include pc {
                         padding: 2px 12px;
@@ -1487,12 +1498,10 @@ header {
                 }
             }
             .help-box {
-                padding: 0 5px;
+                padding: 5px;
                 display: flex;
                 flex: 0 0 90%;
-                @include pc {
-                    margin-left: 35%;
-                }
+                height: 20px;
                 p {
                     margin-left: 6px;
                     font-size: 12px;
@@ -1629,33 +1638,46 @@ header {
     }
     .top_photo {
         width: 100%;
-        height: 210px;
+        height: 230px;
         background-size: cover;
         background-position: center center;
         position: relative;
         max-width: 768px;
         margin: auto;
-        &::before{
-            background-color: rgba(0,0,0,0.5);
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            content: '';
-            @include pc {
-                border-radius: 1%;
-                background-color: rgba(0,0,0,0.6);
-                width: 60%;
-                height: 60%;
-                margin: auto;
-            }
-        }
         @include pc {
             height: 340px;
         }
+        .textbox {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            @include pc {
+                right:0;top:0;left:0;bottom:0;
+                height: 70%;
+                width: 60%;
+                margin: auto;
+
+            }
+            &::before{
+                background-color: rgba(0,0,0,0.5);
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                content: '';
+                @include pc {
+                    border-radius: 1%;
+                    background-color: rgba(0,0,0,0.6);
+                    margin: auto;
+                }
+            }
+        }
         .note_category {
             position: absolute;
+            display: block;
             font-weight: inherit;
             color: #fff;
             font-size: 18px;
@@ -1673,29 +1695,24 @@ header {
                 content: '';
                 float: left;
             }
-            @include pc {
-                margin-left: 20%;
-                margin-top: 9%;
-            }
         }
-        .textbox {
+        .note_title {
+            padding-top: 50px;
             position: absolute;
             text-align: center;
-            top:0; right:0;bottom:0;left:0;
+            width: 98%;
+            font-weight: inherit;
+            color: #fff;
+            font-size: 24px;
             margin: auto;
-            height: 90px;
-            vertical-align: middle;
-            @include pc {
-                width: 58%;
-            }
-            h2 {
-                width: 99%;
-                font-weight: inherit;
-                color: #fff;
-                font-size: 24px;
-                margin: auto;
-            }
+        }
+        .note_countries {
+            margin-top: 125px;
+            right: 0; left: 0;
+            text-align: center;
+            position: absolute;
             .note_country {
+                text-align: center;
                 font-weight: inherit;
                 color: #fff;
                 font-size: 18px;
@@ -1710,9 +1727,6 @@ header {
             color: #fff;
             font-size: 20px;
             margin: 5px 15px 32px 10px;
-            @include pc {
-                margin: 5px 22% 14% 10px;
-            }
         }
         h5 {
             position: absolute;
@@ -1722,22 +1736,15 @@ header {
             color: #fff;
             font-size: 17px;
             margin: 8px 15px;
-            @include pc {
-                margin: 5px 22% 10.5% 10px;
-            }
         }
     }
-    img {
+    .best_icon {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 60px;
         margin-bottom: 12px;
         margin-left: 12px;
-        @include pc {
-            margin-bottom: 11%;
-            margin-left: 22%;
-        }
     }
     .edit {
         display: block;
@@ -1750,10 +1757,6 @@ header {
         img {
             width: 24px; height: 24px;
             margin: 0;
-        }
-        @include pc {
-            margin-top: 10%;
-            margin-right: 22%;
         }
     }
     h6 {
@@ -1780,7 +1783,8 @@ header {
     .content {
         color: #444;
         max-width: 768px;
-        width: 95%;
+        width: 92%;
+        line-height: 1.9em;
         font-size: 16px;
         margin: auto;
         word-wrap: break-word;

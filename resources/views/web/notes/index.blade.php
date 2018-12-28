@@ -13,7 +13,7 @@
                             <img src="/img/top_note.png" alt="">
                         </a>
                         <div class="text">
-                            <a href="/notes">
+                            <a class="" href="/notes">
                             {{ 'Notes' }}
                             </a>
                         </div>
