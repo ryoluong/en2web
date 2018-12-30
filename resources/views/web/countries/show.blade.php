@@ -5,42 +5,42 @@
     </head>
     <body>
         @include('layouts.web.header')
-        <div class="country_show">
+        <div id="country_show">
             <div class="no_border_card">
-                <div class="title border_none">
-                    <div class="table_view">
-                        <div class="text">
-                            <img class="country_flag" src="/img/flags/{{ $country->english_name }}.png" alt="flag">
-                            <p class="country_name">{{ $country->name }}</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="title">
                     <div class="table_view">
-                        <div class="icon">
-                            <img src="/img/top_members.png" alt="members">
-                        </div>
+                        <p class="icon" href="/countries">
+                            <img src="/img/flags/{{ $country->english_name }}.png" alt="note">
+                        </p>
                         <div class="text">
                             <p>
-                            {{ 'Members' }}
+                            {{ $country->name }}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div class="users">
-                        @if($country->users->count())
-                        @foreach($country->users as $user)
-                        <div class="form_view">
-                            <div class="property"><a href="/users/{{ $user->id }}">{{ $user->name }}</a></div>
-                            <p class="value">{{ $user->university }}</p>
-                        </div>
-                        @endforeach
-                        @else
-                        <p class="no_note">まだメンバーがいません。</p>
-                        @endif
-                    </div>
+            </div>
+            <div class="note_wrapper">
+                <div class="category_wrapper">
+                    <img src="/img/top_members.png" alt="" class="category_icon">
+                    <p class="category_name">Members</p>
                 </div>
+                @if($country->users->count())
+                <ul class="member_list">
+                    @foreach($country->users as $user)
+                    <li class="member_item">
+                        <a class="linker" href="/users/{{ $user->id }}">
+                            <p class="user_name">{{ $user->name }}</p>
+                            <p class="user_university">{{ $user->generation.'期生' }}</p>
+                            <p class="user_university">{{ $user->department }}</p>
+                            <p class="user_university">{{ $user->university }}</p>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                @else
+                <p class="no_note">まだメンバーがいません。</p>
+                @endif
             </div>
             <div class="note_wrapper">
                 <div class="category_wrapper">

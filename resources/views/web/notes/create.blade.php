@@ -19,12 +19,13 @@
                             <div class="property"><p>Title</p></div>
                             <div class="value">
                                 <input type="text" name="title" class="input_text" value="{{ old('title') }}" placeholder="Enter title" required>
-                            </div>
-                            @if ($errors->has('title'))
+                                @if ($errors->has('title'))
                             <div class="help-box">
                                     <strong>{{ $errors->first('title') }}</strong>
                             </div>
                             @endif
+                            </div>
+    
                         </div>
                         <div class="form_view">
                             <div class="property"><p>Author</p></div>

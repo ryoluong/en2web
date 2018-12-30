@@ -20,7 +20,10 @@ class FourthUsersSeeder extends Seeder
             'Erimo Taniguchi',
             'Kiyoka Ebina',
             'Toshie Go',
-            'Koyo Yoshino'
+            'Koyo Yoshino',
+            'Hana Nakamura',
+            'Rika Sugimoto',
+            'Reimi Iwashita',
         ];
         $now = \Carbon\Carbon::now();
         

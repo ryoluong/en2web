@@ -42,14 +42,16 @@
                 @endif
             );">
                 <div class="textbox">
-                    <h2 class="note_title">{{ $note->title }}</h2>
-                    @if($note->countries->count())
-                    <div class="note_countries">
-                    @foreach($note->countries as $country)
-                    <a class="note_country" href="/countries/{{ $country->id }}/notes">{{ '＠'.$country->name }}</a>
-                    @endforeach
+                    <div class="title_country_wrapper">
+                        <h1 class="note_title">{{ $note->title }}</h1>
+                        @if($note->countries->count())
+                        <div class="note_countries">
+                        @foreach($note->countries as $country)
+                        <a class="note_country" href="/countries/{{ $country->id }}/notes">{{ '＠'.$country->name }}&nbsp;</a>
+                        @endforeach
+                        </div>
+                        @endif
                     </div>
-                    @endif
                     <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
                     <h5>{{ $note->date }}</h5>
                     @if($note->isBest === 1)

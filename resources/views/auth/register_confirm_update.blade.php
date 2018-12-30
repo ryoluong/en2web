@@ -19,8 +19,11 @@
                     <div class="content">
                         <div class="form_view">
                             <div class="property"><p class="prof_head">Name:</p></div>
-                            <div class="value"><p>{{ $user->name }}</p></div>
-                            <div class="help-box"><p>*ご自身の名前であることを必ず確認してください。</p></div>
+                            <div class="value">
+                                <p>{{ $user->name }}</p>
+                                <div class="help-box"><p>*ご自身の名前であることを必ず確認してください。</p></div>
+                            </div>
+                            
                         </div>
                         <div class="form_view">
                             <div class="property"><p class="prof_head">E-Mail Address:</p></div>
