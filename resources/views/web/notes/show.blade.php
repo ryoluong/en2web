@@ -64,6 +64,15 @@
                 </div>
             </div>
             <h6>@foreach($note->tags as $tag)<a class="tag" href="/tags/{{ $tag->id }}/notes">{{ '#'.$tag->name }}</a>@endforeach</h6>
+            @if($note->photos->count())
+            <ul class="photos_wrapper">
+                @foreach($note->photos as $photo)
+                <li class="photo">
+                    <img src="{{app()->isLocal() ? '/storage'.$photo->path : $photo->path }}" alt="">
+                </li>
+                @endforeach
+            </ul>
+            @endif
             <p class="content"><?php echo nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8')); ?></p>
             
         </div>
