@@ -21,13 +21,14 @@
                         </div>
                         <div class="value">
                             <input type="email" class="input_text" name="email" value="{{ $email or old('email') }}" required autofocus>
-                            <input type="hidden" name="token" value="{{ $token }}">
-                        </div>
-                        <div class="help-block">
+                            <div class="help-box">
                             @if ($errors->has('email'))
                             <strong>{{ $errors->first('email') }}</strong>
                             @endif
+                            </div>
+                            <input type="hidden" name="token" value="{{ $token }}">
                         </div>
+                    
                     </div>
                     <div class="form_view">
                         <div class="property">
@@ -35,12 +36,13 @@
                         </div>
                         <div class="value">
                             <input type="password" class="input_text" name="password" value="">
-                        </div>
-                        <div class="help-box">
+                            <div class="help-box">
                             @if ($errors->has('password'))
                             <strong>{{ $errors->first('password') }}</strong>
                             @endif
                         </div>
+                        </div>
+          
                     </div>
                     <div class="form_view">
                         <div class="property">
@@ -48,9 +50,10 @@
                         </div>
                         <div class="value">
                             <input type="password" class="input_text" name="password_confirmation">
+                            <div class="help-box">
                         </div>
-                        <div class="help-box">
                         </div>
+                   
                     </div>
                     <div class="form_view">
                         <div class="button_wrapper">

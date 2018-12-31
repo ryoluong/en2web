@@ -25,10 +25,10 @@
                             </div>
                             <div class="value">
                                 <input id="email" type="email" class="input_text" name="email" value="{{ old('email') }}" autofocus>
-                            </div>
-                            <div class="help-box">
                                 @if ($errors->has('email'))
-                                <strong>{{ $errors->first('email') }}</strong>
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -37,11 +37,11 @@
                                 <p>Password</p>
                             </div>
                             <div class="value">
-                                <input type="password" class="input_text" name="password" value="">
-                            </div>
-                            <div class="help-box">
+                                <input type="password" class="input_text" name="password" value="" required>
                                 @if ($errors->has('password'))
-                                <strong>{{ $errors->first('password') }}</strong>
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -50,9 +50,7 @@
                                 <p>Confirm Password</p>
                             </div>
                             <div class="value">
-                                <input type="password" class="input_text" name="password_confirmation">
-                            </div>
-                            <div class="help-box">
+                                <input type="password" class="input_text" name="password_confirmation" required>
                             </div>
                         </div>
                         <div class="form_view">
@@ -60,12 +58,11 @@
                                 <p>Registration Code</p>
                             </div>
                             <div class="value">
-                                <input type="text" class="input_text" name="code" value="{{ old('code') }}">
-                            </div>
-
-                            <div class="help-box">
-                                   @if ($errors->has('code'))
+                                <input type="text" class="input_text" name="code" value="{{ old('code') }}" required>
+                                @if ($errors->has('code'))
+                                <div class="help-box">
                                     <strong>{{ $errors->first('code') }}</strong>
+                                </div>
                                 @endif
                             </div>
                         </div>

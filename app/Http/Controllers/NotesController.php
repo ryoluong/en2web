@@ -22,46 +22,59 @@ class NotesController extends Controller
      */
     public function index()
     {
-        $notes = Note::all();
+        $notes = Note::where('isBest', true)->inRandomOrder()->take(6)->get();
         $flag = 'index';
         $categories = Category::all();
         $tags = Tag::all();
         return view('web.notes.index', compact(['notes', 'categories', 'tags', 'flag']));
     }
 
+    public function showAll()
+    {
+        $notes = Note::orderBy('date', 'desc')->paginate(6);
+        $flag = 'all';
+        $count = Note::all()->count();
+        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+    }
+
     public function showBest()
     {
-        $notes= Note::where('isBest', true)->orderBy('date', 'desc')->paginate(9);
+        $notes = Note::where('isBest', true)->orderBy('date', 'desc')->paginate(6);
         $flag = 'isBest';
-        return view('web.notes.paginate', compact(['notes', 'flag']));
+        $count = Note::where('isBest', true)->count();
+        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
     }
 
     public function showByTag(Tag $tag)
     {
-        $notes = $tag->notes()->orderBy('date', 'desc')->paginate(9);
+        $notes = $tag->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'tag';
-        return view('web.notes.paginate', compact(['notes', 'tag', 'flag']));
+        $count = $tag->notes()->count();
+        return view('web.notes.paginate', compact(['notes', 'tag', 'flag', 'count']));
     }
 
     public function showByCategory(Category $category)
     {
-        $notes = Note::where('category_id', $category->id)->orderBy('date', 'desc')->paginate(9);
+        $notes = Note::where('category_id', $category->id)->orderBy('date', 'desc')->paginate(6);
         $flag = 'category';
-        return view('web.notes.paginate', compact(['notes', 'category', 'flag']));
+        $count = Note::where('category_id', $category->id)->count();
+        return view('web.notes.paginate', compact(['notes', 'category', 'flag', 'count']));
     }
 
     public function showByAuthor(User $user)
     {
-        $notes = $user->notes()->orderBy('date', 'desc')->paginate(9);
+        $notes = $user->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'author';
-        return view('web.notes.paginate', compact(['notes', 'flag']));
+        $count = $user->notes()->count();
+        return view('web.notes.paginate', compact(['notes', 'user', 'flag', 'count']));
     }
 
     public function showByCountry(Country $country)
     {
-        $notes = $country->notes()->orderBy('date', 'desc')->paginate(9);
+        $notes = $country->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'country';
-        return view('web.notes.paginate', compact(['notes', 'country', 'flag']));
+        $count = $country->notes()->count();
+        return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'count']));
     }
 
 
@@ -130,33 +143,22 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        $action = $request->get('action', 'back');
-        $input = $request->except('action');
+        $action = request('action');
+        $input = request()->except('action');
+
         if($action === 'create')
         {
             $user_id = DB::table('users')->where('name', $request->author)->first()->id;
 
-            $note = new Note();
-            $note->title = $request->title;
-            $note->date = $request->date;
-            $note->user_id = $user_id;
-            $note->category_id = $request->category_id;
-            $note->isBest = $request->isBest;
-            $note->content = $request->content;
-
-            $note->save();
+            $note = Note::create(
+                request(['title', 'date', 'category_id', 'isBest', 'content']) + ['user_id' => $user_id]
+            );
 
             //タグの処理
-            if($request->tag_ids !== null) 
-            {
-                $tag_ids[] = $request->tag_ids;
-                foreach ($tag_ids as $tag_id)
-                {
-                    $note->tags()->sync($tag_id);
-                }
-            }
+            $note->tags()->sync(request('tag_ids'));
+
             //国の処理
-            $temp = mb_convert_kana($request->country, 's');
+            $temp = mb_convert_kana(request('country'), 's');
             $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
             $country_ids = [];
             foreach ($country_names as $country_name) {
@@ -176,7 +178,7 @@ class NotesController extends Controller
                     $note->photos()->create(['path' => '/img/note/'.$filename]);
                 }
             }
-            return redirect('/notes');
+            return redirect('/notes/'.$note->id);
 
         } else {
             if ($request->paths !== null)
@@ -310,7 +312,7 @@ class NotesController extends Controller
                     unlink(public_path('storage').$path);
                 }
             }
-            return redirect('/notes');
+            return redirect('/notes/'.$note->id);
 
         } else {
             if (isset($request->paths))

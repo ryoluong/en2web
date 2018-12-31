@@ -41,21 +41,27 @@
                 {{ '/img/note/'.$note->category_id.'.jpg' }}
                 @endif
             );">
-                <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
                 <div class="textbox">
-                    <h2>{{ $note->title }}</h2>
-                    @foreach($note->countries as $country)
-                    <a class="note_country" href="/countries/{{ $country->id }}/notes">{{ '＠'.$country->name }}</a>
-                    @endforeach
+                    <div class="title_country_wrapper">
+                        <h1 class="note_title">{{ $note->title }}</h1>
+                        @if($note->countries->count())
+                        <div class="note_countries">
+                        @foreach($note->countries as $country)
+                        <a class="note_country" href="/countries/{{ $country->id }}/notes">{{ '＠'.$country->name }}&nbsp;</a>
+                        @endforeach
+                        </div>
+                        @endif
+                    </div>
+                    <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
+                    <h5>{{ $note->date }}</h5>
+                    @if($note->isBest === 1)
+                    <img class="best_icon" src="/img/best_note.png" alt="">
+                    @endif
+                    @if(auth()->user()->isAdmin === 1)
+                    <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
+                    @endif
+                    <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
                 </div>
-                <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
-                <h5>{{ $note->date }}</h5>
-                @if($note->isBest === 1)
-                <img src="/img/best_note.png" alt="">
-                @endif
-                @if(auth()->user()->isAdmin == 1)
-                <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
-                @endif
             </div>
             <h6>@foreach($note->tags as $tag)<a class="tag" href="/tags/{{ $tag->id }}/notes">{{ '#'.$tag->name }}</a>@endforeach</h6>
             <p class="content"><?php echo nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8')); ?></p>

@@ -28,15 +28,29 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('countries', 'CountriesController');
 
-    Route::resource('notes', 'NotesController');
-    Route::post('/notes/create', 'NotesController@Confirm');
-    Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
-    Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
-    Route::get('/bestnotes', 'NotesController@showBest');
+    //Route::resource('notes', 'NotesController');
+    
+    //index
+    Route::get('/notes', 'NotesController@index');
+    //create
+    Route::get('/notes/create', 'NotesController@create');
+    Route::post('/notes/create', 'NotesController@confirm');
+    Route::post('/notes', 'NotesController@store');
+    //show
+    Route::get('/notes/{note}', 'NotesController@show');
+    Route::get('/all/notes', 'NotesController@showAll');
+    Route::get('/best/notes', 'NotesController@showBest');
     Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
     Route::get('/tags/{tag}/notes', 'NotesController@showByTag');
     Route::get('/users/{user}/notes', 'NotesController@showByAuthor');
     Route::get('/countries/{country}/notes', 'NotesController@showByCountry');
+    //edit
+    Route::get('/notes/{note}/edit', 'NotesController@edit');
+    Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
+    Route::patch('/notes/{note}', 'NotesController@update');
+    //delete
+    Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
+    Route::delete('/notes/{note}', 'NotesController@destroy');
 });
 
 

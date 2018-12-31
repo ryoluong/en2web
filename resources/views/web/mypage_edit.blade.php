@@ -26,12 +26,13 @@
                                     <option value="{{ $i }}" {{ $i == $year ? 'selected' : ''}}>{{ $i }}</option>    
                                     @endfor
                                 </select>
-                            </div>
-                            @if ($errors->has('year'))
+                                @if ($errors->has('year'))
                             <div class="help-box">
                                 <strong>{{ $errors->first('year') }}</strong>
                             </div>
                             @endif
+                            </div>
+
                         </div>
                         <div class="form_view">
                             <div class="property"><p>学部</p></div>
@@ -76,8 +77,7 @@
                             <div class="property"><p>留学先国・地域</p></div>
                             <div class="value">
                                 <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.'　' }}@endforeach">
-                            </div>
-                            <div class="help-box">
+                                <div class="help-box">
                               <p>*複数可</p>
                             </div>
                             @if ($errors->has('countries'))
@@ -85,17 +85,20 @@
                                     <strong>{{ $errors->first('countries') }}</strong>
                             </div>
                             @endif
+                            </div>
+  
                         </div>
                         <div class="form_view">
                             <div class="property"><p>留学先大学・機関</p></div>
                             <div class="value">
                                 <input name="university" type="text" class="input_text" value="{{ old('university') !== null ? old('university') : $user->university }}">
-                            </div>
-                            @if ($errors->has('university'))
+                                @if ($errors->has('university'))
                             <div class="help-box">
                                     <strong>{{ $errors->first('university') }}</strong>
                             </div>
                             @endif
+                            </div>
+ 
                         </div>
                         <div class="form_view">
                             <div class="property"><p>OB・OG</p></div>
@@ -109,10 +112,11 @@
                             <div class="property"><p>就職・進路等</p></div>
                             <div class="value">
                                 <input name="job" type="text" class="input_text" value="{{ old('job') !== null ? old('job') : $user->job }}">
-                            </div>
-                            <div class="help-box">
+                                <div class="help-box">
                               <p>*【上級生, 卒業生のみ】さしつかえのない範囲で、進路をご記入ください</p>
                             </div>
+                            </div>
+
                         </div>
                         <div class="form_view">
                             <div class="property"><p>Profile</p></div>

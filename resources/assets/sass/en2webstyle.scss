@@ -73,10 +73,10 @@ strong {
  *               *
  ****************/ 
 
-.graybtn,.bluebtn,.redbtn {
+.graybtn,.bluebtn,.redbtn,.purplebtn {
     font-size: 15px;
     border: none;
-    border-radius: 5%;
+    border-radius: 3%;
     cursor: hand;
     cursor: pointer;
     width: 90px;
@@ -107,6 +107,14 @@ strong {
     color: #fff;
     &:hover {
         background-color: #990033;
+        transition: 0.3s;
+    }
+}
+.purplebtn {
+    background-color: #777799;
+    color: #fff;
+    &:hover {
+        background-color: #555577;
         transition: 0.3s;
     }
 }
@@ -714,13 +722,13 @@ header {
                 }
             }
             .text {
-                width: 75%;
                 display: table-cell;
                 height: 40px;
                 padding: 5px 0;
                 margin: 0;
-                a,p {
-                    display: inline;
+                position: relative;
+                p,a {
+                    display: inline-block;
                     text-decoration: none;
                     color: #333;
                     text-align: left;
@@ -739,21 +747,24 @@ header {
                     margin-left: 15px;
                 }
                 .user_country {
-                    margin-left: 9px;
+                    display: inline;
+                    margin-left: 8px;
                     @include pc {
-                        margin-left: 15px;
+                        margin-left: 10px;
                     }
                     img {
                         vertical-align: middle;
-                        margin-bottom: 5px;
-                        width: 30px;
+                        height: 25px;
+                        width: 25px;
+                        margin-bottom: 4px;
                         @include pc {
-                            width: 50px;
+                            height: 40px;
+                            width: 40px;
                         }
                     }
                 }
                 .country_flag {
-                    width: 55px;
+                    width: 35px;
                     margin: 5px 15px 5px 20px;
                     @include pc {
                         width: 70px;
@@ -770,7 +781,7 @@ header {
                 }
             }
             .link {
-                width: 40px;
+                width: 35px;
                 position: relative;
                 display: table-cell;
                 @include pc {
@@ -842,8 +853,8 @@ header {
             flex-wrap: wrap;
             padding: 0;
             align-items: center;
-            max-width: 980px;   
-            margin: 0 auto;
+            justify-content: flex-start;
+            margin: auto;
             background-color: #fff;
             box-shadow: none;
             .note_item {
@@ -851,6 +862,7 @@ header {
                 display: block;
                 flex: 0 0 85%; 
                 margin: 10px auto;
+                max-width: 310px;
                 @include pc {
                     height: 377px;
                     display: block;
@@ -860,7 +872,7 @@ header {
                 @include pc_wide {
                     display: block;
                     flex: 0 0 31%;
-                    margin: 15px auto;
+                    margin: 15px 11px;
                 }
                 a {
                     text-decoration: none;
@@ -1040,6 +1052,12 @@ header {
                         }
                     }
                 }
+                @include pc {
+                    
+                }
+                @include pc_wide {
+                    margin: 15px 6.5px;
+                }
             }
         }
         .pagination {
@@ -1104,10 +1122,11 @@ header {
                     color: #333;
                 }
                 @include pc {
-                    margin-right: 0px;
+                    padding: 10px;
+                    margin-right: 0;
                     flex: 0 0 30%;
                     p {
-                        line-height: 44px;
+                        line-height: 1.5em;
                         font-size: 18px;
                         width: 100%;
                         text-align: right;
@@ -1115,7 +1134,6 @@ header {
                 }
             }
             .value {
-                
                 margin-left: 18px;
                 display: flex;
                 flex: 0 0 100%;
@@ -1152,7 +1170,7 @@ header {
             }
             .value {
                 margin-left: 0px;
-                flex: 0 0 66%;
+                flex: 0 0 60%;
             }
             .profile_value {
                 flex: 0 0 100%;
@@ -1200,11 +1218,21 @@ header {
                 font-size: 20px;
             }
         }
+        .numOfNotes {
+            margin-left: 15px;
+            font-size: 17px;
+            @include pc {
+                margin-top: 5px;
+                margin-left: 35px;
+                font-size: 20px;
+            }
+        }
 
     }
     .flex_container {
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start;
         padding: 8px 15px;
         @include pc {
             padding: 15px 30px;
@@ -1212,15 +1240,11 @@ header {
         }
         .subtitle {
             flex: 0 0 100%;
-            @include pc {
-                margin-left: 30px;
-            }
             p {
                 text-align: center;
                 width: 70px;
                 margin: 5px 0px;
                 font-size: 17px;
-                //padding: 8px 0px;
                 border-bottom: 2px solid #7777bb;
                 color: #444;
                 @include pc {
@@ -1234,16 +1258,16 @@ header {
             position: relative;
             flex: 0 0 50%;
             max-width: 50%;
-            margin: 7.5px 0;
+            margin: 10px 0;
             @include pc {
-                flex: 0 0 33%;
+                flex: 0 0 33.3%;
+                max-width: 33.3%;
+                margin: 20px 0;
             }
             .user_name {
                 text-decoration: none;
                 line-height: 26px;
-                margin-left: 10px;
                 @include pc {
-                    margin: 4px 0px 4px 30px;
                     line-height: 38px;
                 }
                 &:hover {
@@ -1254,29 +1278,30 @@ header {
             }
             .country_flag {
                 display: block;
-                margin: auto;
+                margin: 0 auto;
                 width: 42px;
-                height: 28px;
+                height: 42px;
+                padding: 3px;
                 @include pc {
                     width: 70px;
-                    height: 47px;
+                    height: 70px;
+                    padding: 7.5px;
                 }
                 img {
                     width: 42px;
-                    height: 28px;
-                    transition: 0.3s;
+                    height: 42px;
                     @include pc {
                         width: 70px;
-                        height: 47px;
+                        height: 70px;
                     }
                 }
             }
             .country_name {
                 display: inline-block;
                 text-decoration: none;
-                margin: 5px auto;
+                margin: auto;
                 @include pc {
-                    margin: 10px auto 20px auto;
+                
                 }
                 &:hover {
                     color: #aaa;
@@ -1302,6 +1327,13 @@ header {
         }
     }
 }
+#showMembers {
+    @include pc {
+        .flex_view {
+            margin: 10px 0;
+        }
+    }
+}
 #showCountries {
     .no_border_card {
         .flex_container {
@@ -1323,7 +1355,7 @@ header {
     @include pc {
         margin: 30px auto;
         width: 95%;
-        max-width: 950px;
+        max-width: 1000px;
     }
     .title {
         width: 100%;
@@ -1431,7 +1463,7 @@ header {
                 .input_text {
                     border: 1px solid #ccc;
                     width: 80%;
-                    height: 60%;
+                    height: 20px;
                     padding: 5px 9px;
                     @include pc {
                         padding: 2px 12px;
@@ -1484,16 +1516,17 @@ header {
                 }
             }
             .help-box {
-                padding: 0 5px;
+                padding: 5px;
                 display: flex;
                 flex: 0 0 90%;
-                @include pc {
-                    margin-left: 35%;
-                }
+                margin-top: 5px;
                 p {
-                    margin-left: 6px;
+                    line-height: 18px;
+                    margin-left: 0;
                     font-size: 12px;
+                    margin-top: 5px;
                     @include pc {
+                        margin-top: 5px;
                         margin-left: 0;
                         font-size: 15px;
                     }
@@ -1585,15 +1618,35 @@ header {
         color: #444;
         margin-left: 10px;
         display: inline-block;
-        padding-top: 2px;
+        padding-top: 1px;
         height: 30px;
         vertical-align: middle;
         @include pc {
+            line-height: 45px;
             height: 45px;
-            padding-top: 8px;
+            padding-top: 0;
             font-size: 24px;
+
         }
     }
+    .link {
+        color: #00aaca;
+        margin-left: 5px;
+        display: inline-block;
+        height: 16px;
+        vertical-align: middle;
+        font-size: 15px;
+        @include pc {
+            line-height: 45px;
+            height: 45px;
+            padding-top: 0;
+            margin-left: 15px;
+            font-size: 20px;
+        }
+    }
+}
+a.category_wrapper:hover .category_name {
+    text-decoration: underline;
 }
 /**************************
  *                        *
@@ -1624,33 +1677,46 @@ header {
     }
     .top_photo {
         width: 100%;
-        height: 210px;
+        height: 230px;
         background-size: cover;
         background-position: center center;
         position: relative;
         max-width: 768px;
         margin: auto;
-        &::before{
-            background-color: rgba(0,0,0,0.5);
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            content: '';
-            @include pc {
-                border-radius: 1%;
-                background-color: rgba(0,0,0,0.6);
-                width: 60%;
-                height: 60%;
-                margin: auto;
-            }
-        }
         @include pc {
             height: 340px;
         }
+        .textbox {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            @include pc {
+                right:0;top:0;left:0;bottom:0;
+                height: 70%;
+                width: 60%;
+                margin: auto;
+
+            }
+            &::before{
+                background-color: rgba(0,0,0,0.5);
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                content: '';
+                @include pc {
+                    border-radius: 1%;
+                    background-color: rgba(0,0,0,0.6);
+                    margin: auto;
+                }
+            }
+        }
         .note_category {
             position: absolute;
+            display: block;
             font-weight: inherit;
             color: #fff;
             font-size: 18px;
@@ -1668,33 +1734,30 @@ header {
                 content: '';
                 float: left;
             }
-            @include pc {
-                margin-left: 20%;
-                margin-top: 9%;
-            }
         }
-        .textbox {
+        .title_country_wrapper{
+            padding-top: 50px;
             position: absolute;
             text-align: center;
-            top:0; right:0;bottom:0;left:0;
+            width: 95%;
+            font-weight: inherit;
             margin: auto;
-            height: 90px;
-            vertical-align: middle;
-            @include pc {
-                width: 58%;
-            }
-            h2 {
-                width: 99%;
+            right: 0; left:0;
+            .note_title {
                 font-weight: inherit;
+                margin: 0 auto;
                 color: #fff;
-                font-size: 24px;
-                margin: auto;
+                font-size: 23px;
             }
-            .note_country {
-                font-weight: inherit;
-                color: #fff;
-                font-size: 18px;
-                margin: auto;
+            .note_countries {
+                margin: 5px auto;
+                text-align: center;
+                .note_country {
+                    text-align: center;
+                    font-weight: inherit;
+                    color: #fff;
+                    font-size: 17px;
+                }
             }
         }
         .note_author {
@@ -1705,9 +1768,6 @@ header {
             color: #fff;
             font-size: 20px;
             margin: 5px 15px 32px 10px;
-            @include pc {
-                margin: 5px 22% 14% 10px;
-            }
         }
         h5 {
             position: absolute;
@@ -1717,22 +1777,15 @@ header {
             color: #fff;
             font-size: 17px;
             margin: 8px 15px;
-            @include pc {
-                margin: 5px 22% 10.5% 10px;
-            }
         }
     }
-    img {
+    .best_icon {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 60px;
         margin-bottom: 12px;
         margin-left: 12px;
-        @include pc {
-            margin-bottom: 11%;
-            margin-left: 22%;
-        }
     }
     .edit {
         display: block;
@@ -1745,10 +1798,6 @@ header {
         img {
             width: 24px; height: 24px;
             margin: 0;
-        }
-        @include pc {
-            margin-top: 10%;
-            margin-right: 22%;
         }
     }
     h6 {
@@ -1775,7 +1824,8 @@ header {
     .content {
         color: #444;
         max-width: 768px;
-        width: 95%;
+        width: 92%;
+        line-height: 1.9em;
         font-size: 16px;
         margin: auto;
         word-wrap: break-word;
@@ -1798,8 +1848,10 @@ header {
         background-color: #fff;
         width: 95%;
         max-width: 980px;
-        margin: 30px auto;
+        margin: 15px auto;
+        padding-top: 0;
         padding-bottom: 12px;
+        box-shadow: none;
     }
     .note_list {
         overflow-x: auto;
@@ -2076,19 +2128,22 @@ header {
                         }
                     }
                 }
-                .category_detail {
-                    width: 96%;
-                    margin: auto;
-                    line-height: 20px;
-                    text-align: center;
-                    vertical-align: middle;
-                    padding: 10px 0; 
-                    font-size: 13px;
-                    white-space: normal;
-                    @include pc {
-                        font-size: 15px;
-                        line-height: 22px;
-                        padding: 8px;
+                .detail_wrapper {
+                    width:100%;
+                    .category_detail {
+                        width: 95%;
+                        margin: auto;
+                        line-height: 20px;
+                        text-align: center;
+                        vertical-align: middle;
+                        padding: 10px 0;
+                        font-size: 13px;
+                        white-space: normal;
+                        @include pc {
+                            font-size: 15px;
+                            line-height: 22px;
+                            padding: 8px 0;
+                        }
                     }
                 }
             }
@@ -2181,6 +2236,115 @@ header {
         padding: 20px;
         @include pc {
             font-size: 17px;
+        }
+    }
+    .member_list{
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #f5f5f5;
+        width: 100%;
+        // padding: 0;
+        margin: 0;
+        padding: 7px 0 25px 0;
+        @include pc {
+            background-color: #fff;
+        }
+        .member_item {
+            background-color: #fff;
+            margin: 10px auto;
+            list-style: none;
+            box-shadow: 2px 2px 5px 1px #ccc;
+            border-radius: 0%;
+            flex: 0 0 80%;
+            //padding: 10px 0;
+            justify-content: flex-start;
+            border-left: 25px solid #555577;
+            @include pc {
+                flex: 0 0 44%;
+                margin: 10px 1%;    
+            }
+            &:first-child {
+                margin-top: 5px;
+                @include pc {
+                    margin-top: 10px;
+                }
+            }
+            &:last-child {
+                margin-bottom: 5px;
+                @include pc {
+                    margin-bottom: 10px;
+                }
+            }
+            .linker {
+                display: block;
+                text-decoration: none;
+                padding: 6px 0;
+                .user_name {
+                    display: inline-block;
+                    width: 75%;
+                    color: #333;
+                    font-size: 20px;
+                    padding: 2px 10px;
+                    text-align: left;
+                    
+                    background-color: #fff;
+                }
+                .user_university {
+                    padding: 2px 20px;
+                }
+            }
+        }
+    }
+}
+.seeall {
+    border-radius: 1%;
+    width: 50%;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: 2px 2px 5px 1px #ccc;
+    max-width: 280px;
+    @include pc {
+        margin: 10px auto;
+        margin-bottom: 30px;
+        height: 50px;
+    }
+    a {
+        line-height: 40px;
+        color: #fff;
+        font-size: 20px;
+        text-decoration: none;
+        @include pc {
+            line-height: 50px;
+            font-size: 24px;
+        }
+    }
+}
+
+#country_show {
+    .table_view {
+        padding: 5px 0;
+        .icon {
+            img {
+                width: 35px;
+                height: 35px;
+                @include pc {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
+        .text {
+            p {
+                font-size: 20px;
+                margin-left: 5px;
+                height: 35px;
+                @include pc {
+                    font-size: 26px;
+                }
+            }
         }
     }
 }

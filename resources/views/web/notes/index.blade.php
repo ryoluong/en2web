@@ -13,7 +13,7 @@
                             <img src="/img/top_note.png" alt="">
                         </a>
                         <div class="text">
-                            <a href="/notes">
+                            <a class="" href="/notes">
                             {{ 'Notes' }}
                             </a>
                         </div>
@@ -31,16 +31,16 @@
                 </div>
             </div>
             <div class="note_wrapper">
-                <a class="category_wrapper" href="/bestnotes">
+                <a class="category_wrapper" href="/best/notes">
                     <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
                     <p class="category_name">Best Notes</p>
                 </a>
                 <ul class="note_list">
-                    @foreach($notes->where('isBest', true)->take(6) as $note)
+                    @foreach($notes as $note)
                     @include('layouts.web.notes')
                     @endforeach
                     <li class="note_item small">
-                        <a class="see_more" href="/bestnotes"><p>See more</p></a>
+                        <a class="see_more" href="/best/notes"><p>See more</p></a>
                     </li>
                 </ul>
             </div>
@@ -56,6 +56,7 @@
                             <div class="image_wrapper" style="background-image:url({{ '/img/note/'.$category->id.'.jpg' }})">
                                 <p class="category_name">{{ $category->name }}</p>
                             </div>
+                            <div class="detail_wrapper">
                                 <p class="category_detail">
                                 @if($category->id === 1)
                                 {{ '定番となった月一報告。みんなの活動をまとめて見よう。' }}
@@ -70,7 +71,8 @@
                                 @else
                                 {{ 'ベストノート最多のカテゴリ。みんなの考えを知ろう。' }}
                                 @endif
-                            </p>
+                                </p>
+                            </div>
                         </a>
                     </li>
                     @endforeach
@@ -89,6 +91,8 @@
                     </ul>
                 </div>
             </div>
+            <div class="bluebtn seeall"><a href="/search/notes">Search notes</p></div>
+            <div class="purplebtn seeall"><a href="/all/notes">See all notes</p></div>
         </div>
     </body>
 </html>

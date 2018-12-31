@@ -125,9 +125,9 @@
                     @foreach($notes as $note)
                     @include('layouts.web.notes')
                     @endforeach
-                    @if($user->notes->count() > 6)
+                    @if($user->notes->count() > 3)
                     <li class="note_item small">
-                        <a class="see_more" href="users/{{ $user->id }}/notes"><p>See more</p></a>
+                        <a class="see_more" href="/users/{{ $user->id }}/notes"><p>See more</p></a>
                     </li>
                     @endif
                 </ul>
