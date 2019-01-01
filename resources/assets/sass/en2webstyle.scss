@@ -1221,6 +1221,7 @@ header {
         .numOfNotes {
             margin-left: 15px;
             font-size: 17px;
+            padding: 5px 0;
             @include pc {
                 margin-top: 5px;
                 margin-left: 35px;

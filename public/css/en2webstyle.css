@@ -1672,6 +1672,7 @@ header .menu .splitter div {
 .no_border_card .content .numOfNotes {
   margin-left: 15px;
   font-size: 17px;
+  padding: 5px 0;
 }
 
 @media (min-width: 768px) {

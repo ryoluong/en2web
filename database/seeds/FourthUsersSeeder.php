@@ -12,18 +12,21 @@ class FourthUsersSeeder extends Seeder
     public function run()
     {
         $users = [
-            'Ryohei Takahashi',
-            'Mei Mishina',
-            'Daisuke Kikuchi',
-            'Ayaho Tsunematsu',
-            'Seiho Shindo',
-            'Erimo Taniguchi',
-            'Kiyoka Ebina',
-            'Toshie Go',
-            'Koyo Yoshino',
-            'Hana Nakamura',
-            'Rika Sugimoto',
-            'Reimi Iwashita',
+            // 'Ryohei Takahashi',
+            // 'Mei Mishina',
+            // 'Daisuke Kikuchi',
+            // 'Ayaho Tsunematsu',
+            // 'Seiho Shindo',
+            // 'Erimo Taniguchi',
+            // 'Kiyoka Ebina',
+            // 'Toshie Go',
+            // 'Koyo Yoshino',
+            // 'Hana Nakamura',
+            // 'Rika Sugimoto',
+            // 'Reimi Iwashita',
+            'Miharu Koga',
+            'Akiko Takako',
+            'Miku Shogen',
         ];
         $now = \Carbon\Carbon::now();
         
