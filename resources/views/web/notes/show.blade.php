@@ -32,11 +32,7 @@
             </div>    
             <div class="top_photo" style="background-image:url(
                 @if($note->photos->count())
-                @if(app()->isLocal())
-                {{ '/storage'.$note->photos->first()->path }}
-                @else
                 {{ $note->photos->first()->path }}
-                @endif
                 @else
                 {{ '/img/note/'.$note->category_id.'.jpg' }}
                 @endif
@@ -68,7 +64,7 @@
             <ul class="photos_wrapper">
                 @foreach($note->photos as $photo)
                 <li class="photo">
-                    <img src="{{app()->isLocal() ? '/storage'.$photo->path : $photo->path }}" alt="">
+                    <img src="{{ $photo->path }}" alt="">
                 </li>
                 @endforeach
             </ul>

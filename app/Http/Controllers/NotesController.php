@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Storage;
 
 class NotesController extends Controller
 {
+    public function getCountryIDsFromRequest(String $country_names)
+    {
+        $temp = mb_convert_kana($country_names, 'as');
+        $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
+        $country_ids = [];
+        foreach ($country_names as $country_name) {
+            $country = Country::firstOrCreate([
+                'name' => $country_name,
+            ]);
+            $country_ids[] = $country->id;
+        }
+        return $country_ids;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -158,7 +172,7 @@ class NotesController extends Controller
             $note->tags()->sync(request('tag_ids'));
 
             //国の処理
-            $temp = mb_convert_kana(request('country'), 's');
+            $temp = mb_convert_kana(request('country'), 'as');
             $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
             $country_ids = [];
             foreach ($country_names as $country_name) {
@@ -175,7 +189,12 @@ class NotesController extends Controller
                 {
                     $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
                     Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    $note->photos()->create(['path' => '/img/note/'.$filename]);
+                    if(app()->isLocal())
+                    {
+                        $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+                    } else {
+                        $note->photos()->create(['path' => '/img/note/'.$filename]);
+                    }
                 }
             }
             return redirect('/notes/'.$note->id);
