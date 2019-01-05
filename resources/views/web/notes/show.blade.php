@@ -53,7 +53,7 @@
                     @if($note->isBest === 1)
                     <img class="best_icon" src="/img/best_note.png" alt="">
                     @endif
-                    @if(auth()->user()->isAdmin === 1)
+                    @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
                     <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
                     @endif
                     <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>

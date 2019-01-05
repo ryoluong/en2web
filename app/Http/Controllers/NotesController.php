@@ -91,12 +91,6 @@ class NotesController extends Controller
         return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'count']));
     }
 
-
-
-
-
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -172,25 +166,19 @@ class NotesController extends Controller
             $note->tags()->sync(request('tag_ids'));
 
             //国の処理
-            $temp = mb_convert_kana(request('country'), 'as');
-            $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
-            $country_ids = [];
-            foreach ($country_names as $country_name) {
-                $country = Country::firstOrCreate([
-                    'name' => $country_name,
-                ]);
-                $country_ids[] = $country->id;
+            if(request('country') !== null)
+            {
+                $country_ids = getCountryIdsFromRequest(request('country'));
+                $note->countries()->sync($country_ids);
             }
-            $note->countries()->sync($country_ids);
-
+        
             if($request->paths !== null)
             {
                 foreach ($request->paths as $index => $path) 
                 {
                     $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
                     Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    if(app()->isLocal())
-                    {
+                    if(app()->isLocal()) {
                         $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
                     } else {
                         $note->photos()->create(['path' => '/img/note/'.$filename]);
@@ -320,7 +308,11 @@ class NotesController extends Controller
                     $newindex = $index + $current_index;
                     $filename = 'photo_'.$note->id.'_'.$newindex.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
                     Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    $note->photos()->create(['path' => '/img/note/'.$filename]);
+                    if(app()->isLocal()) {
+                        $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+                    } else {
+                        $note->photos()->create(['path' => '/img/note/'.$filename]);
+                    }
                 }
             }
             if($request->delete_paths !== null)
@@ -328,7 +320,11 @@ class NotesController extends Controller
                 foreach ($request->delete_paths as $path)
                 {
                     Photo::where('path', $path)->first()->delete();
-                    unlink(public_path('storage').$path);
+                    if(app()->isLocal()) {
+                        unlink(public_path().$path);
+                    } else {
+                        unlink(public_path('storage').$path);
+                    }
                 }
             }
             return redirect('/notes/'.$note->id);
@@ -359,10 +355,13 @@ class NotesController extends Controller
     {
         foreach($note->photos as $photo)
         {
-            unlink(public_path('storage').$photo->path);
+            if(app()->isLocal()) {
+                unlink(public_path().$photo->path);
+            } else {
+                unlink(public_path('storage').$photo->path);
+            }
         }
         $note->delete();
-
         return redirect('/notes');
     }
 }

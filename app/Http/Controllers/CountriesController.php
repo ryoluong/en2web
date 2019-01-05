@@ -15,10 +15,9 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $temp = DB::table('country_user')->select('country_id');
-        $ids = DB::table('country_note')->select('country_id')->union($temp)->orderBy('country_id', 'asc')->get();
-        $countries = Country::all();
-        return view('web.countries.index', compact(['countries', 'ids']));
+        $temp = DB::table('country_user')->select('country_id')->join('countries', 'country_user.country_id', '=', 'countries.id')->addSelect('name', 'english_name');
+        $countries = DB::table('country_note')->select('country_id')->join('countries', 'country_note.country_id', '=', 'countries.id')->addSelect('name', 'english_name')->union($temp)->orderBy('country_id', 'asc')->get();
+        return view('web.countries.index', compact(['countries']));
     }
 
     /**

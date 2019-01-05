@@ -62,7 +62,7 @@
                         <div class="value">
                             <p>
                                 @if($user->status == 1)
-                                    {{ $user->university }}
+                                <?php echo nl2br(htmlspecialchars($user->university, ENT_QUOTES, 'UTF-8')); ?>
                                 @else
                                 @endif
                             </p>

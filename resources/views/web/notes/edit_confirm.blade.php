@@ -91,18 +91,14 @@
                         @endif
                         <div class="form_view">
                             <div class="property"><p>Image(s) will be deleted</p></div>
-                        @if(!isset($delete_paths))
+                            @if(!isset($delete_paths))
                             <div class="value"><p>none</p></div>
-                        @endif
+                            @endif
                         </div>
                         @if(isset($delete_paths))
                         <div class="form_view jcenter">
                             @foreach($delete_paths as $path)
-                            @if(app()->isLocal())
-                            <div class="image_wrapper" style="background-image:url({{ '/storage'.$path }});">
-                            @else
                             <div class="image_wrapper" style="background-image:url({{ $path }});">
-                            @endif
                                 <input type="hidden" class="input_text" name="delete_paths[]" value="{{ $path }}">
                             </div>
                             @endforeach
