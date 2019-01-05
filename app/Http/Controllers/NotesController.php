@@ -15,20 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class NotesController extends Controller
 {
-    public function getCountryIDsFromRequest(String $country_names)
-    {
-        $temp = mb_convert_kana($country_names, 'as');
-        $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
-        $country_ids = [];
-        foreach ($country_names as $country_name) {
-            $country = Country::firstOrCreate([
-                'name' => $country_name,
-            ]);
-            $country_ids[] = $country->id;
-        }
-        return $country_ids;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -125,20 +111,10 @@ class NotesController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        $paths = [];
         if($request->file('files') !== null) {
-            foreach ($request->file('files') as $index => $e)
-            {
-            $filename = uniqid('photo_').'.'.$e['photo']->guessExtension();
-            $path = \Image::make(file_get_contents($e['photo']->getRealPath()));
-            $path
-                ->resize(800, null, function($constraint)
-                    {
-                        $constraint->aspectRatio();
-                    })
-                ->save(public_path().'/storage/img/tmp/'.$filename);
-            $paths[] = '/img/tmp/'.$filename;
-            }
+            $paths = resizeAndSavePhotosToTempDir($request->file('files'), 800);
+        } else {
+            $paths = [];
         }
         return view('web.notes.create_confirm', compact(['categories', 'tags', 'paths']))->with($bridge_request);
     }
@@ -171,20 +147,13 @@ class NotesController extends Controller
                 $country_ids = getCountryIdsFromRequest(request('country'));
                 $note->countries()->sync($country_ids);
             }
-        
+            
+            //画像の移動
             if($request->paths !== null)
             {
-                foreach ($request->paths as $index => $path) 
-                {
-                    $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-                    Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    if(app()->isLocal()) {
-                        $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
-                    } else {
-                        $note->photos()->create(['path' => '/img/note/'.$filename]);
-                    }
-                }
+                movePhotosFromTempDirToNoteDir($request->paths, $note);
             }
+
             return redirect('/notes/'.$note->id);
 
         } else {
