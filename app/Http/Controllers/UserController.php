@@ -21,7 +21,6 @@ class UserController extends Controller
         } else {
             $user_country = "noCountry";
         }
-        
         return view('web.home', compact(['user', 'user_country']));
     }
 
@@ -65,7 +64,7 @@ class UserController extends Controller
             $university = '';
             foreach($unis as $u)
             {
-                $university .= $u.' ';
+                $university .= $u."\n";
             }
             $user->university = $university;
         } else {
@@ -76,15 +75,7 @@ class UserController extends Controller
         $user->profile = request('profile');
         $user->save();
 
-        $temp = mb_convert_kana(request('countries'), 's');
-        $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
-        $country_ids = [];
-        foreach ($country_names as $country_name) {
-            $country = Country::firstOrCreate([
-                'name' => $country_name,
-            ]);
-            $country_ids[] = $country->id;
-        }
+        $country_ids = getCountryIdsFromRequest(request('countries'));
         $user->countries()->sync($country_ids);
         
         return redirect('/mypage');

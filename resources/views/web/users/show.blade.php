@@ -51,7 +51,7 @@
                         <div class="property"><p class="prof_head">留学先国：</p></div>
                         <div class="value">
                                 @if($user->countries()->get() === null)
-                                <p>{{ "" }}</p>
+                                <p></p>
                                 @else
                                 @foreach($user->countries()->get() as $country)
                                 <p>{{ $country->name }}&ensp;</p>
@@ -65,7 +65,7 @@
                         <div class="value">
                             <p>
                                 @if($user->status == 1)
-                                    {{ $user->university }}
+                                <?php echo nl2br(htmlspecialchars($user->university, ENT_QUOTES, 'UTF-8')); ?>
                                 @else
                                 @endif
                             </p>

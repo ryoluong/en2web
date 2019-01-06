@@ -2833,7 +2833,7 @@ a.category_wrapper:hover .category_name {
 .note_wrapper .note_list .note_item .note .description {
   width: 100%;
   position: relative;
-  height: 115px;
+  height: 120px;
 }
 
 @media (min-width: 768px) {
@@ -3240,14 +3240,25 @@ a.category_wrapper:hover .category_name {
   }
 }
 
-#country_show .table_view .text p {
-  font-size: 20px;
-  margin-left: 5px;
+#country_show .table_view .text {
   height: 35px;
 }
 
 @media (min-width: 768px) {
+  #country_show .table_view .text {
+    height: 50px;
+  }
+}
+
+#country_show .table_view .text p {
+  font-size: 20px;
+  margin-left: 5px;
+  height: 37px;
+}
+
+@media (min-width: 768px) {
   #country_show .table_view .text p {
+    height: 57px;
     font-size: 26px;
   }
 }

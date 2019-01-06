@@ -2073,7 +2073,7 @@ a.category_wrapper:hover .category_name {
                 .description {
                     width: 100%;
                     position: relative;
-                    height: 115px;
+                    height: 120px;
                     @include pc {
                         height: 160px;
                     }
@@ -2375,11 +2375,16 @@ a.category_wrapper:hover .category_name {
             }
         }
         .text {
+            height: 35px;
+            @include pc {
+                height: 50px;
+            }
             p {
                 font-size: 20px;
                 margin-left: 5px;
-                height: 35px;
+                height: 37px;
                 @include pc {
+                    height: 57px;
                     font-size: 26px;
                 }
             }

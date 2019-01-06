@@ -121,6 +121,7 @@ class RegisterController extends Controller
         DB::table('codes')->where('code', $request->code)->delete();
         return view('auth.registered');
     }
+
     public function registerExistingUser(Request $request)
     {
         $user = User::where('identification_code', $request->code)->first();
@@ -213,15 +214,7 @@ class RegisterController extends Controller
         $user->job = $request->job;
         $user->save();
 
-        $temp = mb_convert_kana($request->countries, 's');
-        $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
-        $country_ids = [];
-        foreach ($country_names as $country_name) {
-            $country = Country::firstOrCreate([
-                'name' => $country_name,
-            ]);
-            $country_ids[] = $country->id;
-        }
+        $country_ids = getCountryIdsFromRequest($request->countries);
         $user->Countries()->sync($country_ids);
 
         Mail::to($user->email)->send(new RegisterNotification($user));

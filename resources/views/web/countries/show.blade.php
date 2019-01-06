@@ -33,7 +33,9 @@
                             <p class="user_name">{{ $user->name }}</p>
                             <p class="user_university">{{ $user->generation.'期生' }}</p>
                             <p class="user_university">{{ $user->department }}</p>
-                            <p class="user_university">{{ $user->university }}</p>
+                            <p class="user_university">
+                                <?php echo nl2br(htmlspecialchars($user->university, ENT_QUOTES, 'UTF-8')); ?>
+                            </p>
                         </a>
                     </li>
                     @endforeach

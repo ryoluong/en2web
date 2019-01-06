@@ -76,7 +76,7 @@
                         <div class="form_view">
                             <div class="property"><p>留学先国・地域</p></div>
                             <div class="value">
-                                <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.'　' }}@endforeach">
+                                <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.' ' }}@endforeach">
                                 <div class="help-box">
                               <p>*複数可</p>
                             </div>
@@ -91,12 +91,13 @@
                         <div class="form_view">
                             <div class="property"><p>留学先大学・機関</p></div>
                             <div class="value">
-                                <input name="university" type="text" class="input_text" value="{{ old('university') !== null ? old('university') : $user->university }}">
+                                <?php $univ = preg_replace('/[\n]/', ' ', $user->university); ?>
+                                <input name="university" type="text" class="input_text" value="{{ old('university') !== null ? old('university') : $univ }}">
                                 @if ($errors->has('university'))
-                            <div class="help-box">
+                                <div class="help-box">
                                     <strong>{{ $errors->first('university') }}</strong>
-                            </div>
-                            @endif
+                                </div>
+                                @endif
                             </div>
  
                         </div>

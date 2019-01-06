@@ -32,11 +32,7 @@
             </div>    
             <div class="top_photo" style="background-image:url(
                 @if($note->photos->count())
-                @if(app()->isLocal())
-                {{ '/storage'.$note->photos->first()->path }}
-                @else
                 {{ $note->photos->first()->path }}
-                @endif
                 @else
                 {{ '/img/note/'.$note->category_id.'.jpg' }}
                 @endif
@@ -57,7 +53,7 @@
                     @if($note->isBest === 1)
                     <img class="best_icon" src="/img/best_note.png" alt="">
                     @endif
-                    @if(auth()->user()->isAdmin === 1)
+                    @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
                     <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
                     @endif
                     <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
@@ -68,7 +64,7 @@
             <ul class="photos_wrapper">
                 @foreach($note->photos as $photo)
                 <li class="photo">
-                    <img src="{{app()->isLocal() ? '/storage'.$photo->path : $photo->path }}" alt="">
+                    <img src="{{ $photo->path }}" alt="">
                 </li>
                 @endforeach
             </ul>
