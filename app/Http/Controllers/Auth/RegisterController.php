@@ -213,9 +213,12 @@ class RegisterController extends Controller
         $user->isOB = $request->isOB;
         $user->job = $request->job;
         $user->save();
-
-        $country_ids = getCountryIdsFromRequest($request->countries);
-        $user->Countries()->sync($country_ids);
+        
+        if($request->countries !== null)
+        {
+            $country_ids = getCountryIdsFromRequest($request->countries);
+            $user->Countries()->sync($country_ids);
+        }
 
         Mail::to($user->email)->send(new RegisterNotification($user));
 
