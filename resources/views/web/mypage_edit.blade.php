@@ -23,14 +23,14 @@
                                 <select name="year" id="year" class="input_select">
                                     <?php use Carbon\Carbon; $year = Carbon::now()->year; ?>
                                     @for($i = 2012; $i <= $year; $i++)
-                                    <option value="{{ $i }}" {{ $i == $year ? 'selected' : ''}}>{{ $i }}</option>    
+                                    <option value="{{ $i }}" {{ $i == $user->year ? 'selected' : ''}}>{{ $i }}</option>    
                                     @endfor
                                 </select>
                                 @if ($errors->has('year'))
-                            <div class="help-box">
-                                <strong>{{ $errors->first('year') }}</strong>
-                            </div>
-                            @endif
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('year') }}</strong>
+                                </div>
+                                @endif
                             </div>
 
                         </div>
@@ -44,6 +44,11 @@
                                     <option value="都市科学部" {{ $user->department == '都市科学部' ? ' selected' : '' }}>都市科学部</option>
                                     <option value="理工学部" {{ $user->department == '理工学部' ? ' selected' : '' }}>理工学部</option>
                                 </select>
+                                @if ($errors->has('major'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('department') }}</strong>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="form_view">
@@ -61,6 +66,11 @@
                                     <option value="化学・生命系学科" {{ $user->major == '化学・生命系学科' ? ' selected' : '' }}>化学・生命系学科</option>
                                     <option value="数物・電子情報系学科" {{ $user->major == '数物・電子情報系学科' ? ' selected' : '' }}>数物・電子情報系学科</option>
                                 </select>
+                                @if ($errors->has('major'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('major') }}</strong>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="form_view">
