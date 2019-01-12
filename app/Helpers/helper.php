@@ -3,7 +3,7 @@
 use App\Country;
 use App\Note;
 
-function getCountryIdsFromRequest(string $str)
+function getCountryIdsFromRequest(string $str = null)
 {
     $temp = mb_convert_kana($str, 'as');
     $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);

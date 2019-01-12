@@ -2190,6 +2190,11 @@ a.category_wrapper:hover .category_name {
             background-color: #7777bb;
             height: 50px;
             width: 150px;
+            transition: 0.3s;
+            &:hover {
+                background-color: #555577;
+                transition: 0.3s;
+            }
         }
         .bestnote {
             border: 5px solid #9999cc;
@@ -2233,10 +2238,15 @@ a.category_wrapper:hover .category_name {
                 height: 29px;
                 box-shadow: 2px 2px 5px 1px #ccc;
                 border-radius: 1%;
+                transition: 0.3s;
                 @include pc {
                     margin: 10px 7.5px;
                     display: inline-block;
                     height: 40px;
+                }
+                &:hover {
+                    background-color: #777799;
+                    transition: 0.3s;
                 }
                 a {
                     display: block;

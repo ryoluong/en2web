@@ -2983,6 +2983,14 @@ a.category_wrapper:hover .category_name {
   background-color: #7777bb;
   height: 50px;
   width: 150px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.note_wrapper .note_list .small:hover {
+  background-color: #555577;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .note_wrapper .note_list .bestnote {
@@ -3045,6 +3053,8 @@ a.category_wrapper:hover .category_name {
   -webkit-box-shadow: 2px 2px 5px 1px #ccc;
           box-shadow: 2px 2px 5px 1px #ccc;
   border-radius: 1%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 @media (min-width: 768px) {
@@ -3053,6 +3063,12 @@ a.category_wrapper:hover .category_name {
     display: inline-block;
     height: 40px;
   }
+}
+
+.note_wrapper .tag_list_wrapper .tag_list .tag_item:hover {
+  background-color: #777799;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .note_wrapper .tag_list_wrapper .tag_list .tag_item a {
