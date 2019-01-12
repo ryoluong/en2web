@@ -2121,6 +2121,10 @@ a.category_wrapper:hover .category_name {
                         font-size: 24px;
                     }
                 }
+                &:hover {
+                    background-color: #555577;
+                    transition: 0.3s;
+                }
             }
         }
         .category_item {

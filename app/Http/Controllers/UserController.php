@@ -27,7 +27,7 @@ class UserController extends Controller
     public function showMyPage() {
         $countries = Country::all();
         $user = auth()->user();
-        $notes = auth()->user()->notes->take(3);
+        $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
         return view('web.mypage', compact(['user', 'countries', 'notes']));
     }
 

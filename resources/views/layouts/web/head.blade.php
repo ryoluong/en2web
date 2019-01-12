@@ -49,6 +49,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/img/favicons/icon-32x32.png">
 <link rel="manifest" href="/img/favicons/manifest.json">
 
+@if(app()->isLocal())
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-1"></script>
 <script>
@@ -58,3 +59,4 @@
 
   gtag('config', 'UA-131467484-1');
 </script>
+@endif

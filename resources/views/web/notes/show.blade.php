@@ -18,7 +18,7 @@
                             </a>
                         </div>
                         <div class="link">
-                            <a href="/notes">
+                            <a href="/search/notes">
                                 <img src="/img/note_search.png" alt="">
                             </a>
                         </div>

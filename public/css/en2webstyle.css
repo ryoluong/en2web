@@ -2900,6 +2900,12 @@ a.category_wrapper:hover .category_name {
   }
 }
 
+.note_wrapper .note_list .note_item .see_more:hover {
+  background-color: #555577;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
 .note_wrapper .note_list .category_item {
   width: 220px;
   height: 210px;
