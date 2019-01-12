@@ -12,34 +12,33 @@ class ThirdUsersSeeder extends Seeder
     public function run()
     {
         $users = [
-            'Yusaku Yanagawa',
-            'Tomoki Shima',
-            'Kojiro Aichi',
-            'Souta Inoue',
-            'Ryota Shinde',
-            'Yuta Adachi',
-            'Masashi Kato',
-            'Kana Koizumi',
-            'Momoka Kushida',
-            'Kento Tawada',
-            'Wataru Nakamura',
-            'Yuzuki Kitayama',
-            'Mana Odaka',
-            'Kotaro Ariki',
-            'Takahiro Matsumoto',
-            'Yuki Yamamoto',
-            'Hisashi Arai',
-            'Yu Uchiya',
-            'Haruna Sorita',
-            'Ryota Onuma',
-            'Takahiro Tomota',
-            'Keishun Sakamoto',
-            'Haruki Sasaki',
-            'Yasuhiro Kai',
+            // 'Yusaku Yanagawa',
+            // 'Tomoki Shima',
+            // 'Kojiro Aichi',
+            // 'Souta Inoue',
+            // 'Ryota Shinde',
+            // 'Yuta Adachi',
+            // 'Masashi Kato',
+            // 'Kana Koizumi',
+            // 'Momoka Kushida',
+            // 'Kento Tawada',
+            // 'Wataru Nakamura',
+            // 'Yuzuki Kitayama',
+            // 'Mana Odaka',
+            // 'Kotaro Ariki',
+            // 'Takahiro Matsumoto',
+            // 'Yuki Yamamoto',
+            // 'Hisashi Arai',
+            // 'Yu Uchiya',
+            // 'Haruna Sorita',
+            // 'Ryota Onuma',
+            // 'Takahiro Tomota',
+            // 'Keishun Sakamoto',
+            // 'Haruki Sasaki',
+            // 'Yasuhiro Kai',
+            'Sayaka Fujiwara',
+            'Kazuki Shimotori'
         ];
-        // foreach ($tags as $tag) {
-        //     DB::table('tags')->insert('tag');
-        // }
         $now = \Carbon\Carbon::now();
         
         for ($i = 0; $i < count($users); $i++) {
