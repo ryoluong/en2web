@@ -37,7 +37,8 @@ class ThirdUsersSeeder extends Seeder
             // 'Haruki Sasaki',
             // 'Yasuhiro Kai',
             'Sayaka Fujiwara',
-            'Kazuki Shimotori'
+            'Kazuki Shimotori',
+            'Megumi Kimura'
         ];
         $now = \Carbon\Carbon::now();
         
