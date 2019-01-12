@@ -56,7 +56,7 @@
                     @endforeach
                     @if($country->notes->count() > 6)
                     <li class="note_item small">
-                        <a class="see_more" href="users/{{ $user->id }}/notes"><p>See more</p></a>
+                        <a class="see_more" href="countries/{{ $country->id }}/notes"><p>See more</p></a>
                     </li>
                     @endif
                 </ul>
