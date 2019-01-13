@@ -11,7 +11,11 @@
 |
 */
 
+/**
+ * En2 HomePage
+ */
 Route::get('/', function () { return view('auth.login'); });//return view('hp.index'); });
+Route::get('/login', function() { return view('auth.login'); });
 // Route::get('/about_us', function () { return view('hp.about_us'); });
 // Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
 // Route::get('/activities', function () { return view('hp.activities'); });
@@ -24,20 +28,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mypage/edit', 'UserController@editMyPage');
     Route::patch('/mypage/update', 'UserController@updateMyPage');
 
-    Route::resource('users', 'UsersController');
+    /**
+     * Users
+     */
+    Route::resource('users', 'UsersController', ['only' => ['index','show']]);
 
-    Route::resource('countries', 'CountriesController');
+    /**
+     * Countries
+     */
+    Route::resource('countries', 'CountriesController', ['only' => ['index','show']]);
 
-    //Route::resource('notes', 'NotesController');
-    
-    //index
-    Route::get('/notes', 'NotesController@index');
+    /**
+     * Notes
+     */
+    //resource
+    Route::resource('notes', 'NotesController');
     //create
-    Route::get('/notes/create', 'NotesController@create');
     Route::post('/notes/create', 'NotesController@confirm');
-    Route::post('/notes', 'NotesController@store');
     //show
-    Route::get('/notes/{note}', 'NotesController@show');
     Route::get('/all/notes', 'NotesController@showAll');
     Route::get('/best/notes', 'NotesController@showBest');
     Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
@@ -45,26 +53,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/notes', 'NotesController@showByAuthor');
     Route::get('/countries/{country}/notes', 'NotesController@showByCountry');
     //edit
-    Route::get('/notes/{note}/edit', 'NotesController@edit');
     Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
-    Route::patch('/notes/{note}', 'NotesController@update');
     //delete
     Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
-    Route::delete('/notes/{note}', 'NotesController@destroy');
 });
 
-
-// Route::get('/users', 'UsersController@index');
-// Route::get('/users/create', 'UsersController@create');
-// Route::get('/users/{user}', 'UsersController@show');
-// Route::post('/users', 'UsersController@store');
-// Route::get('/users/{user}/edit', 'UsersController@edit');
-// Route::patch('/users/{user}', 'UsersController@update');
-// Route::delete('/users/{user}', 'UsersController@destroy');
-
-
-
-/*Auth and Register*/
+/**
+ * Auth and Register
+ */
 Auth::routes();
 Route::post('register/confirm', 'Auth\RegisterController@confirm')->name('register.confirm');
 Route::post('register/confirm/existinguser', 'Auth\RegisterController@registerExistingUser')->name('register.existing.user');
