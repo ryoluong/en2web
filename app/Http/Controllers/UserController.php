@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Rules\GenerationVali;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Country;
@@ -25,10 +26,10 @@ class UserController extends Controller
     }
 
     public function showMyPage() {
-        $countries = Country::all();
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
-        return view('web.mypage', compact(['user', 'countries', 'notes']));
+        $flag = 'mypage';
+        return view('web.mypage', compact(['user', 'notes', 'flag']));
     }
 
     public function editMyPage() {
@@ -79,5 +80,124 @@ class UserController extends Controller
         $user->countries()->sync($country_ids);
         
         return redirect('/mypage');
+    }
+
+    public function uploadAvater() {
+        $flag = 'avater';
+        return view('web.user.upload_an_image', compact(['flag']));
+    }
+
+    public function uploadAvater_confirm(Request $request) {
+        $photo = $request->file('file');
+        $filename = uniqid('image_').'.'.$photo->guessExtension();
+        $image = \Image::make(file_get_contents($photo->getRealPath()));
+        if($image->width() >= $image->height())
+        {
+            $image
+                ->orientate()
+                ->resize(null, 500, function($constraint)
+                    {
+                        $constraint->aspectRatio();
+                    })
+                ->save(public_path().'/storage/img/tmp/'.$filename);
+        } else {
+            $image
+                ->orientate()
+                ->resize(500, null, function($constraint)
+                    {
+                        $constraint->aspectRatio();
+                    })
+                
+                ->save(public_path().'/storage/img/tmp/'.$filename);
+        }
+        $path = '/img/tmp/'.$filename;
+
+        return view('web.avater_upload_confirm', compact(['path']));
+    }
+
+    public function uploadAvater_save(Request $request) 
+    {
+        $action = $request->get('action', 'back');
+        $input = $request->except('action');
+        $path = $request->path;
+        if($action === 'update')
+        {
+            $user = auth()->user();
+            $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
+            Storage::disk('public')->move($path, '/img/user/'.$filename);
+            if(app()->isLocal()) {
+                if($user->avater_path !== null)
+                {
+                    unlink(public_path().$user->avater_path);
+                }
+                $user->update(['avater_path' => '/storage/img/user/'.$filename]);
+            } else {
+                if($user->avater_path !== null)
+                {
+                    unlink(public_path('storage').$user->avater_path);
+                }
+                $user->update(['avater_path' => '/img/user/'.$filename]);
+            }
+            return redirect('/mypage');
+        } else {
+            Storage::disk('public')->delete($request->paths);
+            return redirect('/mypage/upload_avater');
+        }
+    }
+
+    /**
+     * 
+     * Upload Cover Image
+     * 
+     */
+    public function uploadCoverimg() {
+        $flag = 'coverimg';
+        return view('web.user.upload_an_image', compact(['flag']));
+    }
+
+    public function uploadCoverimg_confirm(Request $request) {
+        $photo = $request->file('file');
+        $filename = uniqid('image_').'.'.$photo->guessExtension();
+        $image = \Image::make(file_get_contents($photo->getRealPath()));
+        $image
+            ->orientate()
+            ->resize(null, 900, function($constraint)
+                {
+                    $constraint->aspectRatio();
+                })
+            ->save(public_path().'/storage/img/tmp/'.$filename);
+        $path = '/img/tmp/'.$filename;
+
+        return view('web.user.upload_coverimg_confirm', compact(['path']));
+    }
+
+    public function uploadCoverimg_save(Request $request) 
+    {
+        $action = $request->get('action', 'back');
+        $input = $request->except('action');
+        $path = $request->path;
+        if($action === 'update')
+        {
+            $user = auth()->user();
+            $filename = 'coverimg_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
+            Storage::disk('public')->move($path, '/img/user/'.$filename);
+            if(app()->isLocal()) {
+                if($user->coverimg_path !== null)
+                {
+                    unlink(public_path().$user->coverimg_path);
+                }
+                $user->update(['coverimg_path' => '/storage/img/user/'.$filename]);
+            } else {
+                if($user->coverimg_path !== null)
+                {
+                    unlink(public_path('storage').$user->coverimg_path);
+                }
+                $user->update(['coverimg_path' => '/img/user/'.$filename]);
+            }
+            return redirect('/mypage');
+        } else {
+            Storage::disk('public')->delete($request->paths);
+            return redirect('/mypage/upload_coverimg');
+        }
     }
 }

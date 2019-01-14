@@ -32,7 +32,8 @@
                     </div>
                     @foreach($users->where('generation', $i) as $user)
                     <div class="flex_view">
-                        <a class="user_name" href="users/{{ $user->id }}">{{ $user->name }}</a>
+                        <a href="/users/{{ $user->id }}"><img class="user_icon" src="{{ $user->avater_path !== null ? $user->avater_path : '/img/categories/user.png' }}" alt="user_icon"></a>
+                        <a class="user_name" href="/users/{{ $user->id }}">{{ $user->name }}</a>
                     </div>
                     @endforeach
                 </div>

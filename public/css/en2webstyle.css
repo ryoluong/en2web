@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /*************************
  *                       *
  *      Base             *
@@ -12,7 +14,7 @@ body {
   margin: 0 auto;
   padding: 0;
   font-size: 15px;
-  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "\30D2\30E9\30AE\30CE\89D2\30B4   ProN W3", Hiragino Kaku Gothic ProN, Arial, "\30E1\30A4\30EA\30AA", Meiryo, sans-serif;
 }
 
 p {
@@ -1129,6 +1131,19 @@ header .menu .splitter div {
   }
 }
 
+.no_border_card .content .user_name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-left: 5px;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .content .user_name {
+    font-size: 32px;
+  }
+}
+
 .no_border_card .content .details_link {
   margin-left: 10px;
   color: #00aaca;
@@ -1162,8 +1177,8 @@ header .menu .splitter div {
 }
 
 .no_border_card .content .note_view .note_item {
-  -webkit-box-shadow: 2px 2px 5px 1px #ccc;
-          box-shadow: 2px 2px 5px 1px #ccc;
+  -webkit-box-shadow: 1px 1px 10px 2px #ccc;
+          box-shadow: 1px 1px 10px 2px #ccc;
   display: block;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 85%;
@@ -1200,7 +1215,7 @@ header .menu .splitter div {
 .no_border_card .content .note_view .note_item .note .image_holder {
   background-size: cover;
   background-position: center center;
-  height: 190px;
+  height: 170px;
   border-top-left-radius: 1%;
   border-top-right-radius: 1%;
   position: relative;
@@ -1305,49 +1320,12 @@ header .menu .splitter div {
   text-decoration: underline;
 }
 
-.no_border_card .content .note_view .note_item .note .image_holder .textbox object .note_author {
-  position: absolute;
-  margin: 0 10px 30px 0;
-  bottom: 0;
-  right: 0;
-  font-size: 20px;
-  text-align: center;
-  padding: 0;
-}
-
-@media (min-width: 768px) {
-  .no_border_card .content .note_view .note_item .note .image_holder .textbox object .note_author {
-    margin: 0 10px 34px 0;
-    font-size: 21px;
-  }
-}
-
-.no_border_card .content .note_view .note_item .note .image_holder .textbox object .note_author:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.no_border_card .content .note_view .note_item .note .image_holder .textbox .note_date {
-  padding: 0 10px 5px 0;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 16px;
-}
-
-@media (min-width: 768px) {
-  .no_border_card .content .note_view .note_item .note .image_holder .textbox .note_date {
-    padding: 0 10px 8px 0;
-    font-size: 17px;
-  }
-}
-
 .no_border_card .content .note_view .note_item .note .image_holder .textbox .bestnote_icon img {
-  padding: 0 0 12px 12px;
+  padding: 0 12px 12px 0;
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 48px;
+  right: 0;
+  width: 50px;
 }
 
 @media (min-width: 768px) {
@@ -1356,10 +1334,47 @@ header .menu .splitter div {
   }
 }
 
+.no_border_card .content .note_view .note_item .note .note_author {
+  position: relative;
+  height: 40px;
+  display: inline-block;
+  float: left;
+}
+
+.no_border_card .content .note_view .note_item .note .note_author .author_icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 5px 2.5px 5px 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20%;
+  vertical-align: bottom;
+}
+
+.no_border_card .content .note_view .note_item .note .note_author .author_name {
+  display: inline-block;
+  line-height: 30px;
+  margin: 7px 8px 3px 0;
+  vertical-align: bottom;
+  font-size: 17px;
+  color: #333;
+}
+
+.no_border_card .content .note_view .note_item .note .note_author:hover p {
+  text-decoration: underline;
+}
+
+.no_border_card .content .note_view .note_item .note .note_date {
+  line-height: 30px;
+  padding: 7px 0 3px 0;
+  font-size: 13px;
+}
+
 .no_border_card .content .note_view .note_item .note .description {
   width: 100%;
   position: relative;
-  height: 120px;
+  height: 110px;
 }
 
 @media (min-width: 768px) {
@@ -1373,7 +1388,6 @@ header .menu .splitter div {
   width: 95%;
   margin-right: auto;
   margin-left: auto;
-  padding-top: 5px;
   font-size: 12px;
 }
 
@@ -1672,7 +1686,8 @@ header .menu .splitter div {
 .no_border_card .content .numOfNotes {
   margin-left: 15px;
   font-size: 17px;
-  padding: 5px 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 @media (min-width: 768px) {
@@ -1710,11 +1725,13 @@ header .menu .splitter div {
 
 .no_border_card .flex_container .subtitle p {
   text-align: center;
-  width: 70px;
+  width: 100px;
   margin: 5px 0px;
-  font-size: 17px;
-  border-bottom: 2px solid #7777bb;
-  color: #444;
+  font-size: 18px;
+  border: 2px solid #777799;
+  color: #777799;
+  padding: 2px 0;
+  border-radius: 5px;
 }
 
 @media (min-width: 768px) {
@@ -1732,6 +1749,7 @@ header .menu .splitter div {
           flex: 0 0 50%;
   max-width: 50%;
   margin: 10px 0;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -1744,14 +1762,33 @@ header .menu .splitter div {
   }
 }
 
+.no_border_card .flex_container .flex_view .user_icon {
+  display: block;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 20%;
+  margin: 5px auto 7px auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .no_border_card .flex_container .flex_view .user_icon {
+    width: 60px;
+    height: 60px;
+    margin: 10px auto;
+  }
+}
+
 .no_border_card .flex_container .flex_view .user_name {
+  font-size: 17px;
   text-decoration: none;
-  line-height: 26px;
 }
 
 @media (min-width: 768px) {
   .no_border_card .flex_container .flex_view .user_name {
-    line-height: 38px;
+    font-size: 20px;
   }
 }
 
@@ -2206,7 +2243,7 @@ header .menu .splitter div {
   font-size: 20px;
   height: 30px;
   padding: 5px;
-  margin: 0px 10px 5px 10px;
+  margin: 0px 10px;
 }
 
 @media (min-width: 768px) {
@@ -2229,14 +2266,32 @@ header .menu .splitter div {
   }
 }
 
+.category_wrapper .user_icon {
+  height: 30px;
+  width: 30px;
+  float: left;
+  border-radius: 20%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .category_wrapper .user_icon {
+    height: 45px;
+    width: 45px;
+    margin-left: 20px;
+    margin-right: 5px;
+  }
+}
+
 .category_wrapper .category_name {
   font-weight: bold;
   color: #444;
   margin-left: 10px;
-  display: inline-block;
   padding-top: 1px;
   height: 30px;
   vertical-align: middle;
+  float: left;
 }
 
 @media (min-width: 768px) {
@@ -2250,9 +2305,9 @@ header .menu .splitter div {
 
 .category_wrapper .link {
   color: #00aaca;
-  margin-left: 5px;
+  margin: 7.5px 10px;
   display: inline-block;
-  height: 16px;
+  height: 15px;
   vertical-align: middle;
   font-size: 15px;
 }
@@ -2559,6 +2614,144 @@ a.category_wrapper:hover .category_name {
   }
 }
 
+/*********************************
+ *
+ *  Mypage
+ *
+ *
+ *********************************/
+
+.prof_top {
+  height: 165px;
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .prof_top {
+    height: 285px;
+  }
+}
+
+.prof_top .cover {
+  display: block;
+  width: 100%;
+  background-color: gray;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .prof_top .cover {
+    height: 200px;
+  }
+}
+
+.prof_top .user_icon_holder {
+  position: absolute;
+  bottom: 0;
+  width: 90px;
+  height: 90px;
+  margin-left: 10px;
+}
+
+@media (min-width: 768px) {
+  .prof_top .user_icon_holder {
+    width: 170px;
+    height: 170px;
+    margin-left: 20px;
+  }
+}
+
+.prof_top .user_icon_holder img {
+  width: 80px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20%;
+  border: 5px solid #fff;
+}
+
+@media (min-width: 768px) {
+  .prof_top .user_icon_holder img {
+    width: 150px;
+    height: 150px;
+    border-width: 10px;
+  }
+}
+
+.prof_top .country_holder {
+  position: absolute;
+  bottom: 0;
+  margin-left: 105px;
+  height: 45px;
+}
+
+@media (min-width: 768px) {
+  .prof_top .country_holder {
+    height: 85px;
+    margin-left: 200px;
+  }
+}
+
+.prof_top .country_holder .user_country {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 7.5px 4px;
+}
+
+@media (min-width: 768px) {
+  .prof_top .country_holder .user_country {
+    width: 50px;
+    height: 50px;
+    margin: 17.5px 10px;
+  }
+}
+
+.prof_top .country_holder .user_country .country_icon {
+  width: 30px;
+  height: 30px;
+}
+
+@media (min-width: 768px) {
+  .prof_top .country_holder .user_country .country_icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.prof_top .country_holder .status {
+  display: inline-block;
+  height: 25px;
+  margin: 10px 5px;
+  vertical-align: bottom;
+  background-color: #7777bb;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0 5px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .prof_top .country_holder .status {
+    height: 35px;
+    margin: 25px 5px;
+    padding: 0 10px;
+    font-size: 20px;
+  }
+}
+
+#mypage .no_border_card {
+  margin-bottom: 2px;
+}
+
+#mypage .no_border_card .content {
+  padding: 0;
+}
+
 /********************************
  *                              *
  *      Note Index              *
@@ -2673,7 +2866,7 @@ a.category_wrapper:hover .category_name {
 .note_wrapper .note_list .note_item .note .image_holder {
   background-size: cover;
   background-position: center center;
-  height: 200px;
+  height: 170px;
   border-top-left-radius: 1%;
   border-top-right-radius: 1%;
   position: relative;
@@ -2816,12 +3009,12 @@ a.category_wrapper:hover .category_name {
 }
 
 .note_wrapper .note_list .note_item .note .image_holder .textbox .bestnote_icon img {
-  padding: 0 0 8px 5px;
+  padding: 0 8px 8px 0;
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 55px;
-  height: 55px;
+  right: 0;
+  width: 50px;
+  height: 50px;
 }
 
 @media (min-width: 768px) {
@@ -2830,10 +3023,47 @@ a.category_wrapper:hover .category_name {
   }
 }
 
+.note_wrapper .note_list .note_item .note .note_author {
+  position: relative;
+  height: 40px;
+  display: inline-block;
+  float: left;
+}
+
+.note_wrapper .note_list .note_item .note .note_author .author_icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 5px 2.5px 5px 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20%;
+  vertical-align: bottom;
+}
+
+.note_wrapper .note_list .note_item .note .note_author .author_name {
+  display: inline-block;
+  line-height: 30px;
+  margin: 7px 8px 3px 0;
+  vertical-align: bottom;
+  font-size: 17px;
+  color: #333;
+}
+
+.note_wrapper .note_list .note_item .note .note_author:hover p {
+  text-decoration: underline;
+}
+
+.note_wrapper .note_list .note_item .note .note_date {
+  line-height: 30px;
+  padding: 7px 0 3px 0;
+  font-size: 13px;
+}
+
 .note_wrapper .note_list .note_item .note .description {
   width: 100%;
   position: relative;
-  height: 120px;
+  height: 110px;
 }
 
 @media (min-width: 768px) {
@@ -2847,7 +3077,6 @@ a.category_wrapper:hover .category_name {
   width: 95%;
   margin-right: auto;
   margin-left: auto;
-  padding-top: 5px;
   font-size: 12px;
 }
 

@@ -18,8 +18,6 @@
                     @foreach($note->countries as $country)
                     <object><a class="note_country" href="/countries/{{ $country->id }}/notes">＠{{ $country->name }}</a></object>
                     @endforeach
-                    <object><a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a></object>
-                    <p class="note_date">{{ $note->date }}</p>
                     @if($note->isBest == 1) 
                     <p class="bestnote_icon"><img src="/img/best_note.png" alt=""></p>
                     @endif

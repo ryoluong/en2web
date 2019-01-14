@@ -22,7 +22,7 @@ body {
     margin: 0 auto;
     padding: 0;
     font-size: 15px;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 }
 p {
     line-height: 1.5em;
@@ -838,6 +838,15 @@ header {
             padding-top: 10px;
             padding-bottom: 10px;
         }
+        .user_name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 5px;
+            @include pc {
+                font-size: 32px;
+            }
+        }
         .details_link {
             margin-left: 10px;
             color: #00aaca;
@@ -847,7 +856,6 @@ header {
                 font-size: 18px;
             }
         }
-        
         .note_view {
             display: flex;
             flex-wrap: wrap;
@@ -858,7 +866,7 @@ header {
             background-color: #fff;
             box-shadow: none;
             .note_item {
-                box-shadow: 2px 2px 5px 1px #ccc;
+                box-shadow: 1px 1px 10px 2px #ccc;
                 display: block;
                 flex: 0 0 85%; 
                 margin: 10px auto;
@@ -881,7 +889,7 @@ header {
                     .image_holder {
                         background-size: cover;
                         background-position: center center;
-                        height:190px;
+                        height:170px;
                         border-top-left-radius: 1%;
                         border-top-right-radius: 1%;
                         position: relative;
@@ -958,52 +966,55 @@ header {
                                     text-decoration: underline;
                                 }
                             }
-                            object .note_author {
-                                position: absolute;
-                                margin: 0 10px 30px 0; 
-                                bottom: 0;
-                                right: 0;
-                                font-size: 20px;
-                                text-align: center;
-                                padding: 0;
-                                @include pc {
-                                    margin: 0 10px 34px 0;
-                                    font-size: 21px;
-                                }
-                                &:hover {
-                                    color: #fff;
-                                    text-decoration: underline;
-                                }
-                            }
-                            .note_date {
-                                padding: 0 10px 5px 0;
-                                position: absolute;
-                                bottom: 0;
-                                right: 0;
-                                font-size: 16px;
-                                @include pc {
-                                    padding: 0 10px 8px 0;
-                                    font-size: 17px;
-                                }
-                            }
                             .bestnote_icon {
                                 img {
-                                    padding: 0 0 12px 12px;
+                                    padding: 0 12px 12px 0;
                                     position: absolute;
                                     bottom: 0;
-                                    left: 0;
-                                    width: 48px;
+                                    right: 0;
+                                    width: 50px;
                                     @include pc {
                                         width: 56px;
                                     }
                                 }
                             }
                         }
-                    }    
+                    }
+                    .note_author {
+                        position: relative;
+                        height: 40px;
+                        display: inline-block;
+                        float: left;
+                        .author_icon {
+                            display: inline-block;
+                            width: 30px;
+                            height: 30px;
+                            margin: 5px 2.5px 5px 5px; 
+                            object-fit: cover;
+                            border-radius: 20%;
+                            vertical-align: bottom;
+                        }
+                        .author_name {
+                            display: inline-block;
+                            line-height: 30px;
+                            margin: 7px 8px 3px 0;
+                            vertical-align: bottom;
+                            font-size: 17px;
+                            color: #333;
+                        }
+                        &:hover p {
+                            text-decoration: underline;
+                        }
+                    }
+                    .note_date {
+                        line-height: 30px;
+                        padding: 7px 0 3px 0;
+                        font-size: 13px;
+                    }
                     .description {
                         width: 100%;
                         position: relative;
-                        height: 120px;
+                        height: 110px;
                         @include pc {
                             height: 155px;
                         }
@@ -1012,7 +1023,6 @@ header {
                             width: 95%;
                             margin-right: auto;
                             margin-left: auto;
-                            padding-top: 5px;
                             font-size: 12px;
                             object a {
                                 display: inline;
@@ -1221,7 +1231,8 @@ header {
         .numOfNotes {
             margin-left: 15px;
             font-size: 17px;
-            padding: 5px 0;
+            padding-top: 5px;
+            padding-bottom: 5px;
             @include pc {
                 margin-top: 5px;
                 margin-left: 35px;
@@ -1243,11 +1254,13 @@ header {
             flex: 0 0 100%;
             p {
                 text-align: center;
-                width: 70px;
+                width: 100px;
                 margin: 5px 0px;
-                font-size: 17px;
-                border-bottom: 2px solid #7777bb;
-                color: #444;
+                font-size: 18px;
+                border: 2px solid #777799;
+                color: #777799;
+                padding: 2px 0;
+                border-radius: 5px;
                 @include pc {
                     margin: 8px 0;
                     font-size: 20px;
@@ -1260,16 +1273,31 @@ header {
             flex: 0 0 50%;
             max-width: 50%;
             margin: 10px 0;
+            text-align: center;
             @include pc {
                 flex: 0 0 33.3%;
                 max-width: 33.3%;
                 margin: 20px 0;
             }
-            .user_name {
-                text-decoration: none;
-                line-height: 26px;
+            .user_icon {
+                display: block;
+                margin: auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 20%;
+                margin: 5px auto 7px auto;
+                object-fit: cover;
                 @include pc {
-                    line-height: 38px;
+                    width: 60px;
+                    height: 60px;
+                    margin: 10px auto;
+                }
+            }
+            .user_name {
+                font-size: 17px;
+                text-decoration: none;
+                @include pc {
+                    font-size: 20px;
                 }
                 &:hover {
                     color: #aaa;
@@ -1600,7 +1628,7 @@ header {
     font-size: 20px;
     height: 30px;
     padding: 5px;
-    margin: 0px 10px 5px 10px;
+    margin: 0px 10px;
     @include pc {
         height: 45px;
         margin: 5px 10px 0px 10px;
@@ -1614,27 +1642,39 @@ header {
             margin-right: 5px;
         }
     }
+    .user_icon {
+        height: 30px;
+        width: 30px;
+        float:left;
+        border-radius: 20%;
+        object-fit: cover;
+        @include pc {
+            height: 45px;
+            width: 45px;
+            margin-left: 20px;
+            margin-right: 5px;
+        }
+    }
     .category_name {
         font-weight: bold;
         color: #444;
         margin-left: 10px;
-        display: inline-block;
         padding-top: 1px;
         height: 30px;
         vertical-align: middle;
+        float: left;
         @include pc {
             line-height: 45px;
             height: 45px;
             padding-top: 0;
             font-size: 24px;
-
         }
     }
     .link {
         color: #00aaca;
-        margin-left: 5px;
+        margin: 7.5px 10px;
         display: inline-block;
-        height: 16px;
+        height: 15px;
         vertical-align: middle;
         font-size: 15px;
         @include pc {
@@ -1872,6 +1912,112 @@ a.category_wrapper:hover .category_name {
         }
     }
 }
+/*********************************
+ *
+ *  Mypage
+ *
+ *
+ *********************************/
+.prof_top{
+    height: 165px;
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+    @include pc {
+        height: 285px;
+    }
+    .cover {
+        display: block;
+        width: 100%;
+        background-color: gray;
+        height: 120px;
+        background-size: cover;
+        background-position: center;
+        @include pc {
+            height: 200px;
+        }
+    }
+    .user_icon_holder {
+        position: absolute;
+        bottom: 0;
+        width: 90px;
+        height: 90px;
+        margin-left: 10px;
+        @include pc {
+            width: 170px;
+            height: 170px;
+            margin-left: 20px;
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 20%;
+            border: 5px solid #fff;
+            @include pc {
+                width: 150px;
+                height: 150px;
+                border-width: 10px;
+            }
+        }
+    }
+    .country_holder{
+        position: absolute;
+        bottom: 0;
+        margin-left: 105px;
+        height: 45px;
+        @include pc {
+            height: 85px;
+            margin-left: 200px;
+        }
+        .user_country {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 7.5px 4px;
+            @include pc {
+                width: 50px;
+                height: 50px;
+                margin: 17.5px 10px;
+            }
+            .country_icon {
+                width: 30px;
+                height: 30px;
+                @include pc {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
+        .status {
+            display: inline-block;
+            height: 25px;
+            margin: 10px 5px;
+            vertical-align: bottom;
+            background-color: #7777bb;
+            color: #fff;
+            border-radius: 5px;
+            padding: 0 5px;
+            text-align: center;
+            @include pc {
+                height: 35px;
+                margin: 25px 5px;
+                padding: 0 10px;
+                font-size: 20px;
+            }
+        }
+    }
+}
+#mypage {
+    .no_border_card {
+        margin-bottom: 2px;
+       .content {
+           padding: 0;
+       }
+    }
+}
+
+
 /********************************
  *                              *
  *      Note Index              *
@@ -1950,7 +2096,7 @@ a.category_wrapper:hover .category_name {
                 .image_holder {
                     background-size: cover;
                     background-position: center center;
-                    height:200px;
+                    height:170px;
                     border-top-left-radius: 1%;
                     border-top-right-radius: 1%;
                     position: relative;
@@ -2057,23 +2203,54 @@ a.category_wrapper:hover .category_name {
                         }
                         .bestnote_icon {
                             img {
-                                padding: 0 0 8px 5px;
+                                padding: 0 8px 8px 0;
                                 position: absolute;
                                 bottom: 0;
-                                left: 0;
-                                width: 55px;
-                                height: 55px;
+                                right: 0;
+                                width: 50px;
+                                height: 50px;
                                 @include pc {
                                     width: 56px;
                                 }
                             }
                         }
                     }
-                }    
+                }
+                .note_author {
+                    position: relative;
+                    height: 40px;
+                    display: inline-block;
+                    float: left;
+                    .author_icon {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        margin: 5px 2.5px 5px 5px; 
+                        object-fit: cover;
+                        border-radius: 20%;
+                        vertical-align: bottom;
+                    }
+                    .author_name {
+                        display: inline-block;
+                        line-height: 30px;
+                        margin: 7px 8px 3px 0;
+                        vertical-align: bottom;
+                        font-size: 17px;
+                        color: #333;
+                    }
+                    &:hover p {
+                        text-decoration: underline;
+                    }
+                }
+                .note_date {
+                    line-height: 30px;
+                    padding: 7px 0 3px 0;
+                    font-size: 13px;
+                }
                 .description {
                     width: 100%;
                     position: relative;
-                    height: 120px;
+                    height: 110px;
                     @include pc {
                         height: 160px;
                     }
@@ -2082,7 +2259,6 @@ a.category_wrapper:hover .category_name {
                         width: 95%;
                         margin-right: auto;
                         margin-left: auto;
-                        padding-top: 5px;
                         font-size: 12px;
                         object a {
                             display: inline;

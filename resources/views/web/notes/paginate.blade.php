@@ -33,21 +33,24 @@
                     @if($flag == 'isBest')
                     <div class="category_wrapper">
                         <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
-                        <p class="category_name">Best Notes</p>      
+                        <p class="category_name">Best Notes</p>
+                        <div class="link" ></div>     
                     </div>    
                     @elseif($flag == 'category')
                     <div class="category_wrapper">
                         <img class="category_icon" src="/img/categories/category.png" alt="category">
-                        <p class="category_name">{{ $category->name }}</p>      
+                        <p class="category_name">{{ $category->name }}</p>
+                        <div class="link" ></div>    
                     </div>
                     @elseif($flag == 'tag')
                     <div class="category_wrapper">
                         <img class="category_icon" src="/img/categories/tag.png" alt="tag">
-                        <p class="category_name">{{ $tag->name }}</p>      
+                        <p class="category_name">{{ $tag->name }}</p>
+                        <div class="link" ></div> 
                     </div>
                     @elseif($flag == 'author')
                     <div class="category_wrapper">
-                        <img class="category_icon" src="/img/categories/user.png" alt="user">
+                        <img class="user_icon" src="{{ $user->avater_path !== null ? $user->avater_path : '/img/categories/user.png' }}" alt="user">
                         <p class="category_name">{{ $user->name }}</p>
                         <a class="link" href="/users/{{ $user->id }}">See profile</a>
                     </div>
@@ -61,6 +64,7 @@
                     <div class="category_wrapper">
                         <img class="category_icon" src="/img/categories/allnotes.png" alt="all notes">
                         <p class="category_name">全てのノート</p>
+                        <div class="link" ></div>
                     </div>
                     @endif
                     <p class="numOfNotes">{{ $count }}件のノート</p>
@@ -68,7 +72,7 @@
                     <ul class="note_view">
                     @foreach($notes as $note)
                     @include('layouts.web.notes')
-                    @endforeach    
+                    @endforeach
                     </ul>
                     {{ $notes->links() }}
                 </div>

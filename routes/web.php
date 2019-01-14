@@ -24,15 +24,25 @@ Route::get('/login', function() { return view('auth.login'); });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'UserController@showHome');
+
+    /**
+     * Mypage
+     */
     Route::get('/mypage', 'UserController@showMyPage');
     Route::get('/mypage/edit', 'UserController@editMyPage');
     Route::patch('/mypage/update', 'UserController@updateMyPage');
+    Route::get('/mypage/upload_avater', 'UserController@uploadAvater');
+    Route::post('/mypage/upload_avater', 'UserController@uploadAvater_confirm');
+    Route::patch('/mypage/upload_avater', 'UserController@uploadAvater_save');
+    
+    Route::get('/mypage/upload_coverimg', 'UserController@uploadCoverimg');
+    Route::post('/mypage/upload_coverimg', 'UserController@uploadCoverimg_confirm');
+    Route::patch('/mypage/upload_coverimg', 'UserController@uploadCoverimg_save');
 
     /**
      * Users
      */
     Route::resource('users', 'UsersController', ['only' => ['index','show']]);
-
     /**
      * Countries
      */
