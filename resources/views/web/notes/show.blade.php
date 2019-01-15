@@ -48,8 +48,8 @@
                         </div>
                         @endif
                     </div>
-                    <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
-                    <h5>{{ $note->date }}</h5>
+                    <!-- <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
+                    <h5>{{ $note->date }}</h5> -->
                     @if($note->isBest === 1)
                     <img class="best_icon" src="/img/best_note.png" alt="">
                     @endif
@@ -58,6 +58,13 @@
                     @endif
                     <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
                 </div>
+            </div>
+            <div class="author_and_date">
+                <a class="note_author" href="/users/{{ $note->user->id }}/notes">
+                    <img src="{{$note->user->avater_path !== null ? $note->user->avater_path : '/img/categories/user.png' }}" alt="icon">
+                    <p>{{ $note->user->name }}</p>
+                </a>
+                <p class="note_date">{{ $note->date }}</p>
             </div>
             <h6>@foreach($note->tags as $tag)<a class="tag" href="/tags/{{ $tag->id }}/notes">{{ '#'.$tag->name }}</a>@endforeach</h6>
             @if($note->photos->count())

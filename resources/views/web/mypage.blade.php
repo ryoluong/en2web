@@ -75,17 +75,12 @@
             <div class="no_border_card" style="margin-top:0;">
                 <div class="content">
                     <p class="user_name">{{ $user->name }}</p>
+                    @if($user->department !== null)
+                    <p class="user_department">{{ $user->department.' '.$user->major }}</p>
+                    @endif
                     <div class="prof_view">
                         <div class="property"><p class="prof_head">入学年度：</p></div>
                         <div class="value"><p>{{ $user->year }}</p></div>
-                    </div>
-                    <div class="prof_view">
-                        <div class="property"><p class="prof_head">学部：</p></div>
-                        <div class="value"><p>{{ $user->department }}</p></div>
-                    </div>
-                    <div class="prof_view">
-                        <div class="property"><p class="prof_head">学科：</p></div>
-                        <div class="value"><p>{{ $user->major }}</p></div>
                     </div>
                     <div class="prof_view">
                         <div class="property"><p class="prof_head">入会時期：</p></div>

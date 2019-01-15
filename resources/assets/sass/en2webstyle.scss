@@ -243,6 +243,362 @@ strong {
         }
     }
 }
+/**************************************************
+ *                                                *
+ *            ノート個別アイテム                  *
+ *                                                *
+ *************************************************/                      
+ .note_item {
+    display: inline-block;
+    width: 280px;
+    vertical-align: middle;
+    box-shadow: 2px 2px 5px 1px #ccc;
+    border-radius: 1%;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #fff;
+    position: relative;
+    &:first-child {
+        margin-left: 20px;
+    }
+    &:last-child {
+        margin-right: 20px;
+    }
+    @include pc {
+        display: block;
+        flex: 0 0 40%;
+        margin: 15px auto;
+        &:first-child {
+            margin-left: auto;
+        }
+        &:last-child {
+            margin-right: auto;
+        }
+    }
+    @include pc_wide {
+        display: block;
+        flex: 0 0 31%;
+        margin: 15px auto;
+    }
+    a {
+        text-decoration: none;
+    }
+    .note {
+        .image_holder {
+            background-size: cover;
+            background-position: center center;
+            height:170px;
+            border-top-left-radius: 1%;
+            border-top-right-radius: 1%;
+            position: relative;
+            @include pc {
+                height: 220px;
+            }
+            &::before{
+                background-color: rgba(0,0,0,0.5);
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                border-top-left-radius: 1%;
+                border-top-right-radius: 1%;
+                transition: 0.3s;
+            }
+            .textbox {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                p,a {
+                    color: #fff;
+                }
+                object .note_category {
+                    display: block;
+                    width: 60%;
+                    margin: 0;
+                    padding: 6px 0 3px 7.5px;
+                    border-bottom: 1px solid white;
+                    @include pc {
+                        padding: 6px 0 6px 8px;
+                        width: 70%;
+                        font-size: 17px;
+                    }
+                    &::before {
+                        background-image: url('/img/note_category.png');
+                        background-size: cover;
+                        display: inline-block;
+                        vertical-align: top;
+                        height:15px;
+                        width:15px;
+                        margin: 2px;
+                        margin-right: 5px;
+                        margin-top: 4px;
+                        content: '';
+                        @include pc {
+                            height: 17px;
+                            width: 17px;
+                        }
+                    }
+                    &:hover {
+                        color: #fff;
+                        text-decoration: underline;
+                    }
+                    
+                }
+                .note_title {
+                    padding: 7px 5px 1px 7.5px;
+                    font-size: 20px;
+                    white-space: normal;
+                    @include pc {
+                        font-size: 21px;
+                    }
+                }
+                object .note_country {
+                    display: inline;
+                    padding: 0 0 0 7.5px;
+                    @include pc {
+                        font-size: 18px;
+                    }
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                .bestnote_icon {
+                    img {
+                        padding: 0 8px 8px 0;
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        width: 50px;
+                        @include pc {
+                            width: 56px;
+                        }
+                    }
+                }
+            }
+        }
+        .text_holder {
+            padding: 1px 0 2px 0;
+            .note_author {
+                margin-left: 2px;
+                padding: 0 2px;
+                position: relative;
+                height: 40px;
+                display: inline-block;
+                float: left;
+                .author_icon {
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                    margin: 5px 2.5px 5px 5px; 
+                    object-fit: cover;
+                    border-radius: 20%;
+                    vertical-align: bottom;
+                    position: relative;
+                    z-index: 2;
+                    box-shadow: 0 0 4px 1px #ddd;
+                }
+                .author_name {
+                    display: inline-block;
+                    line-height: 30px;
+                    margin: 7px 8px 3px 0;
+                    vertical-align: bottom;
+                    font-size: 17px;
+                    color: #333;
+                }
+                &:hover p {
+                    text-decoration: underline;
+                }
+                &:before {
+                    content: "";
+                    display: inline-block;
+                    width: 31px;
+                    height: 31px;
+                    background-color: #00aaca;
+                    position: absolute;
+                    top:0;
+                    bottom:0;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 0.32em;
+                    background-color: rgba(100,100,230,0.3);
+                    border-radius: 10%;
+                    transform:rotate(8deg);
+                    z-index: 1;
+                }
+                &:after {
+                    content: "";
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                    background-color: #00aaca;
+                    position: absolute;
+                    top:0;
+                    bottom:0;
+                    left: 0;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    margin-left: 0.45em;
+                    background-color: rgba(0,170,230,0.2);
+                    border-radius: 10%;
+                    transform:rotate(24deg);
+                    z-index: 0;
+                }
+            }
+            .note_date {
+                line-height: 30px;
+                padding: 7px 0 3px 0;
+                font-size: 13px;
+            }
+            .description {
+                width: 100%;
+                position: relative;
+                height: 110px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                @include pc {
+                    height: 150px;
+                }
+                .note_content {
+                    white-space: normal;
+                    width: 95%;
+                    margin-right: auto;
+                    margin-left: auto;
+                    font-size: 12px;
+                    object a {
+                        display: inline;
+                        span {
+                            color: #00aaff;
+                        }
+                        &:hover {
+                            text-decoration: underline;
+                            color: #00aaff;
+                        }
+                    }
+                    @include pc {
+                        width: 93%;
+                        font-size: 14px;
+                    }
+                }
+            }
+            &:hover {
+                .image_holder::before {
+                    background-color: rgba(0,0,0,0.1);
+                    transition: 0.3s;
+                }
+            }  
+        }
+    }
+    .see_more {
+        position: absolute;
+        display: block;
+        margin:auto;
+        top:0;right:0;bottom:0;left:0;
+        text-align: center;
+        p {
+            font-size: 20px;
+            line-height: 50px;
+            color:#fff;
+            @include pc {
+                font-size: 24px;
+            }
+        }
+        &:hover {
+            background-color: #555577;
+            transition: 0.3s;
+        }
+    }
+}
+.category_item {
+    width: 220px;
+    height: 210px;
+    border-radius: 1%;
+    .link_wrapper {
+        width: 220px;
+        height: 210px;
+        &:hover .image_wrapper::before {
+            background-color: rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .image_wrapper {
+            border-top-left-radius: 1%;
+            border-top-right-radius: 1%;
+            height: 150px;
+            width: 100%;
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+            &::before{
+                background-color: rgba(0,0,0,0.6);
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                border-top-left-radius: 1%;
+                border-top-right-radius: 1%;
+                transition: 0.3s;
+            }
+            .category_name {
+                line-height: 150px;
+                width: 100%;
+                color: #fff;
+                text-align: center;
+                font-size: 22px;
+                position: absolute;
+                @include pc {
+                    font-size: 24px;
+                }
+            }
+        }
+        .detail_wrapper {
+            width:100%;
+            .category_detail {
+                width: 95%;
+                margin: auto;
+                line-height: 20px;
+                text-align: center;
+                vertical-align: middle;
+                padding: 10px 0;
+                font-size: 13px;
+                white-space: normal;
+                @include pc {
+                    font-size: 15px;
+                    line-height: 22px;
+                    padding: 8px 0;
+                }
+            }
+        }
+    }
+}
+.small {
+    background-color: #7777bb;
+    height: 50px;
+    width: 150px;
+    transition: 0.3s;
+    &:hover {
+        background-color: #555577;
+        transition: 0.3s;
+    }
+}
+.bestnote {
+    border: 5px solid #9999cc;
+    .note {
+        border-radius: 0%;
+        .image_holder {
+            border-radius: 0%;
+            &::before {
+                border-radius: 0%;
+            }
+            .textbox {
+                border-radius: 0%;
+            }
+        }
+    }
+}
 /********************
  *                  *
  * Header           *
@@ -842,9 +1198,21 @@ header {
             font-size: 24px;
             font-weight: bold;
             color: #333;
+            margin-top: 10px;
             margin-left: 5px;
+            margin-bottom: 1px;
             @include pc {
                 font-size: 32px;
+                margin-bottom: 3px;
+            }
+        }
+        .user_department {
+            color: #333;
+            margin-left: 5px;
+            font-size: 16px;
+            margin-bottom: 6px;
+            @include pc {
+                font-size: 20px;
             }
         }
         .details_link {
@@ -854,220 +1222,6 @@ header {
             @include pc {
                 margin-left: 12px;
                 font-size: 18px;
-            }
-        }
-        .note_view {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            align-items: center;
-            justify-content: flex-start;
-            margin: auto;
-            background-color: #fff;
-            box-shadow: none;
-            .note_item {
-                box-shadow: 1px 1px 10px 2px #ccc;
-                display: block;
-                flex: 0 0 85%; 
-                margin: 10px auto;
-                max-width: 310px;
-                @include pc {
-                    height: 377px;
-                    display: block;
-                    flex: 0 0 40%;
-                    margin: 15px auto;
-                }
-                @include pc_wide {
-                    display: block;
-                    flex: 0 0 31%;
-                    margin: 15px 11px;
-                }
-                a {
-                    text-decoration: none;
-                }
-                .note {
-                    .image_holder {
-                        background-size: cover;
-                        background-position: center center;
-                        height:170px;
-                        border-top-left-radius: 1%;
-                        border-top-right-radius: 1%;
-                        position: relative;
-                        @include pc {
-                            height: 220px;
-                        }
-                        &::before{
-                            background-color: rgba(0,0,0,0.5);
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            bottom: 0;
-                            left: 0;
-                            content: '';
-                            border-top-left-radius: 1%;
-                            border-top-right-radius: 1%;
-                            transition: 0.3s;
-                        }
-                        .textbox {
-                            width: 100%;
-                            height: 100%;
-                            position: relative;
-                            p,a {
-                                color: #fff;
-                            }
-                            object .note_category {
-                                display: block;
-                                width: 60%;
-                                margin: 0;
-                                padding: 6px 0 3px 7.5px;
-                                border-bottom: 1px solid white;
-                                @include pc {
-                                    padding: 6px 0 6px 8px;
-                                    width: 70%;
-                                    font-size: 17px;
-                                }
-                                &::before {
-                                    background-image: url('/img/note_category.png');
-                                    background-size: cover;
-                                    display: inline-block;
-                                    vertical-align: top;
-                                    height:15px;
-                                    width:15px;
-                                    margin: 2px;
-                                    margin-right: 5px;
-                                    margin-top: 4px;
-                                    content: '';
-                                    @include pc {
-                                        height: 17px;
-                                        width: 17px;
-                                    }
-                                }
-                                &:hover {
-                                    color: #fff;
-                                    text-decoration: underline;
-                                }
-                                
-                            }
-                            .note_title {
-                                padding: 7px 5px 1px 7.5px;
-                                font-size: 20px;
-                                white-space: normal;
-                                @include pc {
-                                    font-size: 21px;
-                                }
-                            }
-                            object .note_country {
-                                display: inline;
-                                padding: 0 0 0 7.5px;
-                                @include pc {
-                                    font-size: 18px;
-                                }
-                                &:hover {
-                                    text-decoration: underline;
-                                }
-                            }
-                            .bestnote_icon {
-                                img {
-                                    padding: 0 12px 12px 0;
-                                    position: absolute;
-                                    bottom: 0;
-                                    right: 0;
-                                    width: 50px;
-                                    @include pc {
-                                        width: 56px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .note_author {
-                        position: relative;
-                        height: 40px;
-                        display: inline-block;
-                        float: left;
-                        .author_icon {
-                            display: inline-block;
-                            width: 30px;
-                            height: 30px;
-                            margin: 5px 2.5px 5px 5px; 
-                            object-fit: cover;
-                            border-radius: 20%;
-                            vertical-align: bottom;
-                        }
-                        .author_name {
-                            display: inline-block;
-                            line-height: 30px;
-                            margin: 7px 8px 3px 0;
-                            vertical-align: bottom;
-                            font-size: 17px;
-                            color: #333;
-                        }
-                        &:hover p {
-                            text-decoration: underline;
-                        }
-                    }
-                    .note_date {
-                        line-height: 30px;
-                        padding: 7px 0 3px 0;
-                        font-size: 13px;
-                    }
-                    .description {
-                        width: 100%;
-                        position: relative;
-                        height: 110px;
-                        @include pc {
-                            height: 155px;
-                        }
-                        .note_content {
-                            white-space: normal;
-                            width: 95%;
-                            margin-right: auto;
-                            margin-left: auto;
-                            font-size: 12px;
-                            object a {
-                                display: inline;
-                                span {
-                                    color: #00aaff;
-                                }
-                                &:hover {
-                                    text-decoration: underline;
-                                    color: #00aaff;
-                                }
-                            }
-                            @include pc {
-                                width: 93%;
-                                font-size: 14px;
-                            }
-                        }
-                    }
-                    &:hover {
-                        .image_holder::before {
-                            background-color: rgba(0,0,0,0.1);
-                            transition: 0.3s;
-                        }
-                    }  
-                }
-            }
-            .bestnote {
-                border: 5px solid #9999cc;
-                .note {
-                    border-radius: 0%;
-                    .image_holder {
-                        border-radius: 0%;
-                        &::before {
-                            border-radius: 0%;
-                        }
-                        .textbox {
-                            border-radius: 0%;
-                        }
-                    }
-                }
-                @include pc {
-                    
-                }
-                @include pc_wide {
-                    margin: 15px 6.5px;
-                }
             }
         }
         .pagination {
@@ -1114,6 +1268,26 @@ header {
                 border-color: #777;
                 span {
                     color: #555;
+                }
+            }
+        }
+        .note_view {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            align-items: center;
+            justify-content: flex-start;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: none;
+            .note_item {
+                box-shadow: 1px 1px 10px 2px #ccc;
+                display: block;
+                width: 305px;
+                margin: 10px auto;
+                @include pc {
+                }
+                @include pc_wide {
                 }
             }
         }
@@ -1252,19 +1426,61 @@ header {
         }
         .subtitle {
             flex: 0 0 100%;
+            position: relative;
+            margin-bottom: 3px;
+            @include pc {
+                margin-bottom: 9px;
+            }
             p {
                 text-align: center;
                 width: 100px;
                 margin: 5px 0px;
                 font-size: 18px;
-                border: 2px solid #777799;
-                color: #777799;
+                color: #fff;
+                background-color: #7777cc;
                 padding: 2px 0;
                 border-radius: 5px;
                 @include pc {
                     margin: 8px 0;
                     font-size: 20px;
-                    width: 80px;
+                    width: 200px;
+                    height: 30px;
+                }
+            }
+            &::before {
+                display: block;
+                content: "";
+                height: 20px;
+                width: 70px;
+                position: absolute;
+                background-color: rgba(100,100,230,0.3);
+                border-radius: 2px;
+                z-index: -1;
+                top:0;
+                left:0;
+                margin-top: 1px;
+                margin-left: -4px;
+                @include pc {
+                    width: 150px;
+                    margin-left: -8px;
+                }
+            }
+            &::after {
+                display: block;
+                content: "";
+                height: 20px;
+                width: 70px;
+                position: absolute;
+                background-color: rgba(0,170,230,0.2);
+                border-radius: 2px;
+                z-index: -2;
+                bottom: 0;
+                left:0;
+                margin-bottom: 1px;
+                margin-left: 35px;
+                @include pc {
+                    width: 150px;
+                    margin-left: 59px;
                 }
             }
         }
@@ -1279,6 +1495,50 @@ header {
                 max-width: 33.3%;
                 margin: 20px 0;
             }
+            &::before {
+                display: block;
+                content: "";
+                height: 43px;
+                width: 43px;
+                position: absolute;
+                background-color: rgba(100,100,230,0.3);
+                border-radius: 10%;
+                transform:rotate(8deg);
+                z-index: -1;
+                top:0;
+                right: 0;
+                left:0;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 0.24em;
+                @include pc {
+                    width: 65px;
+                    height: 65px;
+                    margin-top: 0.38em;
+                }
+            }
+            &::after {
+                display: block;
+                content: "";
+                height: 42px;
+                width: 42px;
+                position: absolute;
+                background-color: rgba(0,170,230,0.2);
+                border-radius: 10%;
+                transform:rotate(24deg);
+                z-index: -2;
+                top: 0;
+                right: 0;
+                left:0;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 0.25em;
+                @include pc {
+                    width: 65px;
+                    height: 65px;
+                    margin-top: 0.4em;
+                }
+            }
             .user_icon {
                 display: block;
                 margin: auto;
@@ -1287,11 +1547,13 @@ header {
                 border-radius: 20%;
                 margin: 5px auto 7px auto;
                 object-fit: cover;
+                box-shadow: 0 0 1px 0.5px #ddd; 
                 @include pc {
                     width: 60px;
                     height: 60px;
-                    margin: 10px auto;
+                    margin: 10px auto 15px auto;
                 }
+   
             }
             .user_name {
                 font-size: 17px;
@@ -1310,11 +1572,13 @@ header {
                 margin: 0 auto;
                 width: 42px;
                 height: 42px;
-                padding: 3px;
+                margin-bottom: 5px;
+                box-shadow: 1px 2px 8px 2px #eaeaea;
+                border-radius: 100%;
                 @include pc {
                     width: 70px;
                     height: 70px;
-                    padding: 7.5px;
+                    margin-bottom: 10px;
                 }
                 img {
                     width: 42px;
@@ -1330,7 +1594,7 @@ header {
                 text-decoration: none;
                 margin: auto;
                 @include pc {
-                
+                    font-size: 20px;
                 }
                 &:hover {
                     color: #aaa;
@@ -1369,6 +1633,14 @@ header {
             padding-right: 5px;
             padding-left: 5px;
             text-align: center;
+            .flex_view {
+                &::before {
+                    display: none;
+                }
+                &::after {
+                    display: none;
+                }
+            }
         }
     }
 }
@@ -1678,6 +1950,7 @@ header {
         vertical-align: middle;
         font-size: 15px;
         @include pc {
+            margin: 0;
             line-height: 45px;
             height: 45px;
             padding-top: 0;
@@ -1718,7 +1991,7 @@ a.category_wrapper:hover .category_name {
     }
     .top_photo {
         width: 100%;
-        height: 230px;
+        height: 200px;
         background-size: cover;
         background-position: center center;
         position: relative;
@@ -1801,32 +2074,14 @@ a.category_wrapper:hover .category_name {
                 }
             }
         }
-        .note_author {
-            position: absolute;
-            bottom:0;
-            right: 0;
-            font-weight: inherit;
-            color: #fff;
-            font-size: 20px;
-            margin: 5px 15px 32px 10px;
-        }
-        h5 {
-            position: absolute;
-            bottom:0;
-            right: 0;
-            font-weight: inherit;
-            color: #fff;
-            font-size: 17px;
-            margin: 8px 15px;
-        }
     }
     .best_icon {
         position: absolute;
         bottom: 0;
-        left: 0;
-        width: 60px;
+        right: 0;
+        width: 50px;
         margin-bottom: 12px;
-        margin-left: 12px;
+        margin-right: 12px;
     }
     .edit {
         display: block;
@@ -1841,6 +2096,83 @@ a.category_wrapper:hover .category_name {
             margin: 0;
         }
     }
+    .author_and_date{
+        display: block;
+        max-width: 768px;
+        margin: 12px auto 0 auto;
+        .note_author {
+            display: inline-block;
+            height: 40px;
+            margin-left: 12px;
+            position: relative;
+            img {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                border-radius: 20%;
+                margin-right: 7px;
+                position: relative;
+                z-index: 2;
+                box-shadow: 0 0 4px 1px #ddd;
+            }
+            p {
+                color: #333;
+                font-weight: bold;
+                display: inline-block;
+                height: 40px;
+                line-height: 40px;
+                vertical-align: top;
+                margin: 0;
+                font-size: 20px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            &:before {
+                content: "";
+                display: inline-block;
+                width: 41px;
+                height: 41px;
+                background-color: #00aaca;
+                position: absolute;
+                top:0;
+                bottom:0;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: -0.05em;
+                background-color: rgba(100,100,230,0.3);
+                border-radius: 10%;
+                transform:rotate(8deg);
+                z-index: 1;
+            }
+            &:after {
+                content: "";
+                display: inline-block;
+                width: 42px;
+                height: 42px;
+                background-color: #00aaca;
+                position: absolute;
+                top:0;
+                bottom:0;
+                left: 0;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: -0.1em;
+                background-color: rgba(0,170,230,0.2);
+                border-radius: 10%;
+                transform:rotate(18deg);
+                z-index: 0;
+            }
+        }
+        .note_date {
+            display: inline-block;
+            height: 40px;
+            line-height: 42px;
+            vertical-align: top;
+            margin-left: 5px;
+        }
+    }
     h6 {
         max-width: 768px;
         display: flex;
@@ -1848,13 +2180,13 @@ a.category_wrapper:hover .category_name {
         //flex-direction: row-reverse;
         width: 95%;
         font-weight: inherit;
-        margin: 10px auto;
+        margin: 10px auto 12px auto;
         line-height: 20px;
         .tag {
             font-size: 15px;
             flex: 0 0 auto;
             padding: 1px 3px;
-            line-height: 20px;
+            line-height: 21px;
             color: #00aaca;
             border: none;
             @include pc {
@@ -1924,7 +2256,7 @@ a.category_wrapper:hover .category_name {
     max-width: 1000px;
     margin: auto;
     @include pc {
-        height: 285px;
+        height: 320px;
     }
     .cover {
         display: block;
@@ -1934,7 +2266,7 @@ a.category_wrapper:hover .category_name {
         background-size: cover;
         background-position: center;
         @include pc {
-            height: 200px;
+            height: 235px;
         }
     }
     .user_icon_holder {
@@ -1943,6 +2275,7 @@ a.category_wrapper:hover .category_name {
         width: 90px;
         height: 90px;
         margin-left: 10px;
+        z-index: 0;
         @include pc {
             width: 170px;
             height: 170px;
@@ -1953,11 +2286,53 @@ a.category_wrapper:hover .category_name {
             height: 80px;
             object-fit: cover;
             border-radius: 20%;
-            border: 5px solid #fff;
+            margin: 5px;
+            box-shadow: 0 0 4px 0px #ddd;
             @include pc {
                 width: 150px;
                 height: 150px;
-                border-width: 10px;
+            }
+        }
+        &::before {
+            content:'';
+            display: block;
+            width: 82px;
+            height: 82px;
+            position: absolute;
+            background-color: rgba(160,160,255,0.7);
+            border-radius: 7%;
+            transform:rotate(11deg);
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 0.3em;
+            @include pc {
+                margin-top: 0.15em;
+                width: 155px;
+                height: 155px;
+            }
+        }
+        &::after {
+            content:'';
+            display: block;
+            width: 84px;
+            height: 84px;
+            position: absolute;
+            background-color: rgba(120,220,255,0.7);
+            border-radius: 7%;
+            transform:rotate(22deg);
+            z-index: -2;
+            top: 0;
+            bottom: 0;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 0.3em;
+            @include pc {
+                margin-top: 0.15em;
+                width: 160px;
+                height: 160px;
             }
         }
     }
@@ -1983,6 +2358,8 @@ a.category_wrapper:hover .category_name {
             .country_icon {
                 width: 30px;
                 height: 30px;
+                box-shadow: 0px 0.5px 4px 1px #eaeaea;
+                border-radius: 100%;
                 @include pc {
                     width: 50px;
                     height: 50px;
@@ -1999,6 +2376,7 @@ a.category_wrapper:hover .category_name {
             border-radius: 5px;
             padding: 0 5px;
             text-align: center;
+            box-shadow: 0 0 5px 2px #eaeaea;
             @include pc {
                 height: 35px;
                 margin: 25px 5px;
@@ -2056,341 +2434,7 @@ a.category_wrapper:hover .category_name {
             background-color: #fff;
             box-shadow: none;
         }
-        .note_item {
-            display: inline-block;
-            width: 280px;
-            vertical-align: middle;
-            box-shadow: 2px 2px 5px 1px #ccc;
-            border-radius: 1%;
-            margin-right: 10px;
-            margin-left: 10px;
-            background-color: #fff;
-            position: relative;
-            &:first-child {
-                margin-left: 20px;
-            }
-            &:last-child {
-                margin-right: 20px;
-            }
-            @include pc {
-                height: 377px;
-                display: block;
-                flex: 0 0 40%;
-                margin: 15px auto;
-                &:first-child {
-                    margin-left: auto;
-                }
-                &:last-child {
-                    margin-right: auto;
-                }
-            }
-            @include pc_wide {
-                display: block;
-                flex: 0 0 31%;
-                margin: 15px auto;
-            }
-            a {
-                text-decoration: none;
-            }
-            .note {
-                .image_holder {
-                    background-size: cover;
-                    background-position: center center;
-                    height:170px;
-                    border-top-left-radius: 1%;
-                    border-top-right-radius: 1%;
-                    position: relative;
-                    @include pc {
-                        height: 220px;
-                    }
-                    &::before{
-                        background-color: rgba(0,0,0,0.5);
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        content: '';
-                        border-top-left-radius: 1%;
-                        border-top-right-radius: 1%;
-                        transition: 0.3s;
-                    }
-                    .textbox {
-                        width: 100%;
-                        height: 100%;
-                        position: relative;
-                        p,a {
-                            color: #fff;
-                        }
-                        object .note_category {
-                            display: block;
-                            width: 60%;
-                            margin: 0;
-                            padding: 6px 0 3px 7.5px;
-                            border-bottom: 1px solid white;
-                            @include pc {
-                                padding: 6px 0 6px 8px;
-                                width: 70%;
-                                font-size: 17px;
-                            }
-                            &::before {
-                                background-image: url('/img/note_category.png');
-                                background-size: cover;
-                                display: inline-block;
-                                vertical-align: top;
-                                height:15px;
-                                width:15px;
-                                margin: 2px;
-                                margin-right: 5px;
-                                margin-top: 4px;
-                                content: '';
-                                @include pc {
-                                    height: 17px;
-                                    width: 17px;
-                                }
-                            }
-                            &:hover {
-                                color: #fff;
-                                text-decoration: underline;
-                            }
-                            
-                        }
-                        .note_title {
-                            padding: 7px 5px 1px 7.5px;
-                            font-size: 20px;
-                            white-space: normal;
-                            @include pc {
-                                font-size: 21px;
-                            }
-                        }
-                        object .note_country {
-                            display: inline;
-                            padding: 0 0 0 7.5px;
-                            @include pc {
-                                font-size: 18px;
-                            }
-                            &:hover {
-                                text-decoration: underline;
-                            }
-                        }
-                        object .note_author {
-                            position: absolute;
-                            margin: 0 10px 30px 0; 
-                            bottom: 0;
-                            right: 0;
-                            font-size: 20px;
-                            text-align: center;
-                            padding: 0;
-                            @include pc {
-                                margin: 0 10px 34px 0;
-                                font-size: 21px;
-                            }
-                            &:hover {
-                                color: #fff;
-                                text-decoration: underline;
-                            }
-                        }
-                        .note_date {
-                            padding: 0 10px 5px 0;
-                            position: absolute;
-                            bottom: 0;
-                            right: 0;
-                            font-size: 16px;
-                            @include pc {
-                                padding: 0 10px 8px 0;
-                                font-size: 17px;
-                            }
-                        }
-                        .bestnote_icon {
-                            img {
-                                padding: 0 8px 8px 0;
-                                position: absolute;
-                                bottom: 0;
-                                right: 0;
-                                width: 50px;
-                                height: 50px;
-                                @include pc {
-                                    width: 56px;
-                                }
-                            }
-                        }
-                    }
-                }
-                .note_author {
-                    position: relative;
-                    height: 40px;
-                    display: inline-block;
-                    float: left;
-                    .author_icon {
-                        display: inline-block;
-                        width: 30px;
-                        height: 30px;
-                        margin: 5px 2.5px 5px 5px; 
-                        object-fit: cover;
-                        border-radius: 20%;
-                        vertical-align: bottom;
-                    }
-                    .author_name {
-                        display: inline-block;
-                        line-height: 30px;
-                        margin: 7px 8px 3px 0;
-                        vertical-align: bottom;
-                        font-size: 17px;
-                        color: #333;
-                    }
-                    &:hover p {
-                        text-decoration: underline;
-                    }
-                }
-                .note_date {
-                    line-height: 30px;
-                    padding: 7px 0 3px 0;
-                    font-size: 13px;
-                }
-                .description {
-                    width: 100%;
-                    position: relative;
-                    height: 110px;
-                    @include pc {
-                        height: 160px;
-                    }
-                    .note_content {
-                        white-space: normal;
-                        width: 95%;
-                        margin-right: auto;
-                        margin-left: auto;
-                        font-size: 12px;
-                        object a {
-                            display: inline;
-                            span {
-                                color: #00aaff;
-                            }
-                            &:hover {
-                                text-decoration: underline;
-                                color: #00aaff;
-                            }
-                        }
-                        @include pc {
-                            width: 93%;
-                            font-size: 14px;
-                        }
-                    }
-                }
-                &:hover {
-                    .image_holder::before {
-                        background-color: rgba(0,0,0,0.1);
-                        transition: 0.3s;
-                    }
-                }  
-            }
-            .see_more {
-                position: absolute;
-                display: block;
-                margin:auto;
-                top:0;right:0;bottom:0;left:0;
-                text-align: center;
-                p {
-                    font-size: 20px;
-                    line-height: 50px;
-                    color:#fff;
-                    @include pc {
-                        font-size: 24px;
-                    }
-                }
-                &:hover {
-                    background-color: #555577;
-                    transition: 0.3s;
-                }
-            }
-        }
-        .category_item {
-            width: 220px;
-            height: 210px;
-            border-radius: 1%;
-            .link_wrapper {
-                width: 220px;
-                height: 210px;
-                &:hover .image_wrapper::before {
-                    background-color: rgba(0,0,0,0.1);
-                    transition: 0.3s;
-                }
-                .image_wrapper {
-                    border-top-left-radius: 1%;
-                    border-top-right-radius: 1%;
-                    height: 150px;
-                    width: 100%;
-                    background-size: cover;
-                    background-position: center center;
-                    position: relative;
-                    &::before{
-                        background-color: rgba(0,0,0,0.6);
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        content: '';
-                        border-top-left-radius: 1%;
-                        border-top-right-radius: 1%;
-                        transition: 0.3s;
-                    }
-                    .category_name {
-                        line-height: 150px;
-                        width: 100%;
-                        color: #fff;
-                        text-align: center;
-                        font-size: 22px;
-                        position: absolute;
-                        @include pc {
-                            font-size: 24px;
-                        }
-                    }
-                }
-                .detail_wrapper {
-                    width:100%;
-                    .category_detail {
-                        width: 95%;
-                        margin: auto;
-                        line-height: 20px;
-                        text-align: center;
-                        vertical-align: middle;
-                        padding: 10px 0;
-                        font-size: 13px;
-                        white-space: normal;
-                        @include pc {
-                            font-size: 15px;
-                            line-height: 22px;
-                            padding: 8px 0;
-                        }
-                    }
-                }
-            }
-        }
-        .small {
-            background-color: #7777bb;
-            height: 50px;
-            width: 150px;
-            transition: 0.3s;
-            &:hover {
-                background-color: #555577;
-                transition: 0.3s;
-            }
-        }
-        .bestnote {
-            border: 5px solid #9999cc;
-            .note {
-                border-radius: 0%;
-                .image_holder {
-                    border-radius: 0%;
-                    &::before {
-                        border-radius: 0%;
-                    }
-                    .textbox {
-                        border-radius: 0%;
-                    }
-                }
-            }
-        }
+ 
     }
     .tag_list_wrapper {
         overflow-x: scroll;
@@ -2504,7 +2548,6 @@ a.category_wrapper:hover .category_name {
                     font-size: 20px;
                     padding: 2px 10px;
                     text-align: left;
-                    
                     background-color: #fff;
                 }
                 .user_university {

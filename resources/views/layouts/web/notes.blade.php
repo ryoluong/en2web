@@ -18,21 +18,23 @@
                 @endif
             </div>
         </div>
-        <object>
-            <a class="note_author" href="/users/{{ $note->user->id }}/notes">
-                <img class="author_icon" src="{{$note->user->avater_path !== null ? $note->user->avater_path : '/img/categories/user.png' }}" alt="">
-                <p class="author_name">{{ $note->user->name }}</p>
-            </a>
-        </object>
-        <p class="note_date">{{ $note->date }}</p>
-        <div class="description">
-            <p class="note_content">
-            <?php $temp = mb_substr($note->content, 0, 100).'......　';?>
-            {{ $temp }}
-            @foreach($note->tags as $tag)
-            <object><a href="/tags/{{ $tag->id }}/notes"><span>{{ '#'.$tag->name }}</span></a></object>
-            @endforeach
-            </p>
-        </div> 
+        <div class="text_holder">
+            <object>
+                <a class="note_author" href="/users/{{ $note->user->id }}/notes">
+                    <img class="author_icon" src="{{$note->user->avater_path !== null ? $note->user->avater_path : '/img/categories/user.png' }}" alt="">
+                    <p class="author_name">{{ $note->user->name }}</p>
+                </a>
+            </object>
+            <p class="note_date">{{ $note->date }}</p>
+            <div class="description">
+                <p class="note_content">
+                <?php $temp = mb_substr($note->content, 0, 100).'......　';?>
+                {{ $temp }}
+                @foreach($note->tags as $tag)
+                <object><a href="/tags/{{ $tag->id }}/notes"><span>{{ '#'.$tag->name }}</span></a></object>
+                @endforeach
+                </p>
+            </div> 
+        </div>
     </a>
 </li>
