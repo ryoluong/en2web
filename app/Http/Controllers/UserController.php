@@ -140,7 +140,7 @@ class UserController extends Controller
             }
             return redirect('/mypage');
         } else {
-            Storage::disk('public')->delete($request->paths);
+            Storage::disk('public')->delete($path);
             return redirect('/mypage/upload_avater');
         }
     }
@@ -196,7 +196,7 @@ class UserController extends Controller
             }
             return redirect('/mypage');
         } else {
-            Storage::disk('public')->delete($request->paths);
+            Storage::disk('public')->delete($path);
             return redirect('/mypage/upload_coverimg');
         }
     }
