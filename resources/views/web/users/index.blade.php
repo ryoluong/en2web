@@ -6,15 +6,15 @@
     <body>
         @include('layouts.web.header')
         <div id="showMembers">
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <div class="icon">
-                            <img src="img/top_members.png" alt="">
-                        </div>
-                        <div class="text"><p>Members</p></div>
-                    </div>
+            <div class="content_head with_border">
+                <div class="icon">
+                    <img src="img/top_members.png" alt="members">
                 </div>
+                <div class="text">
+                    <p>Members</p>
+                </div>
+            </div>
+            <div class="no_border_card">
                 @for($i = 1; $i <= $max; $i++)
                 <div class="flex_container">
                     <div class="subtitle">

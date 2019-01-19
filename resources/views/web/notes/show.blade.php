@@ -6,30 +6,20 @@
     <body>
         @include('layouts.web.header')
         <div class="note_show">
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <a class="icon" href="/notes">
-                            <img src="/img/top_note.png" alt="note">
-                        </a>
-                        <div class="text">
-                            <a href="/notes">
-                            {{ 'Notes' }}
-                            </a>
-                        </div>
-                        <div class="link">
-                            <a href="/search/notes">
-                                <img src="/img/note_search.png" alt="">
-                            </a>
-                        </div>
-                        <div class="link">
-                            <a href="/notes/create">
-                                <img src="/img/note_create.png" alt="">
-                            </a>
-                        </div>
-                    </div>
+            <div class="content_head">
+                <a class="icon" href="/notes">
+                    <img src="/img/top_note.png" alt="note">
+                </a>
+                <div class="text">
+                    <a href="/notes">Notes</a>
                 </div>
-            </div>    
+                <a class="link" href="/search/notes">
+                    <img src="/img/note_search.png" alt="">
+                </a>
+                <a class="link" href="/notes/create">
+                    <img src="/img/note_create.png" alt="">
+                </a>
+            </div>   
             <div class="top_photo" style="background-image:url(
                 @if($note->photos->count())
                 {{ $note->photos->first()->path }}
@@ -48,8 +38,6 @@
                         </div>
                         @endif
                     </div>
-                    <!-- <a class="note_author" href="/users/{{ $note->user->id }}/notes">{{ $note->user->name }}</a>
-                    <h5>{{ $note->date }}</h5> -->
                     @if($note->isBest === 1)
                     <img class="best_icon" src="/img/best_note.png" alt="">
                     @endif

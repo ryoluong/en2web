@@ -6,35 +6,27 @@
     <body>
         @include('layouts.web.header')
         <div id="showNotes">
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <a class="icon" href="/notes">
-                            <img src="/img/top_note.png" alt="">
-                        </a>
-                        <div class="text">
-                            <a class="" href="/notes">
-                            {{ 'Notes' }}
-                            </a>
-                        </div>
-                        <div class="link">
-                            <a href="/search/notes">
-                                <img src="/img/note_search.png" alt="">
-                            </a>
-                        </div>
-                        <div class="link">
-                            <a href="/notes/create">
-                                <img src="/img/note_create.png" alt="">
-                            </a>
-                        </div>
-                    </div>
+            <div class="content_head with_border_pc">
+                <a class="icon" href="/notes">
+                    <img src="/img/top_note.png" alt="note">
+                </a>
+                <div class="text">
+                    <a href="/notes">Notes</a>
                 </div>
+                <a class="link" href="/search/notes">
+                    <img src="/img/note_search.png" alt="">
+                </a>
+                <a class="link" href="/notes/create">
+                    <img src="/img/note_create.png" alt="">
+                </a>
             </div>
             <div class="note_wrapper">
-                <a class="category_wrapper" href="/best/notes">
+                <div class="category_wrapper">
+                    <a class="href" href="/best/notes">
                     <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
                     <p class="category_name">Best Notes</p>
-                </a>
+                    </a>
+                </div>
                 <ul class="note_list">
                     @foreach($notes as $note)
                     @include('layouts.web.notes')

@@ -6,43 +6,37 @@
     <body>
         @include('layouts.web.header')
         <div id="mypage">
-            <div class="no_border_card" >
-                <div class="title border_none">
-                    <div class="table_view">
-                        <div class="icon">
-                            @if($flag == 'mypage')
-                            <img src="/img/top_mypage.png" alt="">
-                            @else
-                            <img src="/img/top_members.png" alt="">
-                            @endif
-                        </div>
-                        <div class="text">
-                            @if($flag == 'mypage')
-                            <p>Mypage</p>
-                            @else
-                            <p>Members</p>
-                            @endif
-                        </div>
-                        @if($flag == 'mypage')
-                        <div class="link">
-                            <a href="/mypage/edit">
-                                <img src="/img/mypage_edit.png" alt="edit">
-                            </a>
-                        </div>
-                        @else
-                        <div class="link">
-                            @if($id_previous !== -1)
-                            <a href="/users/{{ $id_previous }}"><img class="arrow" src="/img/back.png" alt="back"></a>
-                            @endif
-                        </div>
-                        <div class="link">
-                            @if($id_next !== -1)
-                            <a href="/users/{{ $id_next }}"><img class="arrow" src="/img/next.png" alt="next"></a>
-                            @endif
-                        </div>
-                        @endif
-                    </div>
+            <div class="content_head">
+                <div class="icon">
+                    @if($flag == 'mypage')
+                    <img src="/img/top_mypage.png" alt="">
+                    @else
+                    <img src="/img/top_members.png" alt="">
+                    @endif
                 </div>
+                <div class="text">
+                    @if($flag == 'mypage')
+                    <p>Mypage</p>
+                    @else
+                    <p>Members</p>
+                    @endif
+                </div>
+                @if($flag == 'mypage')
+                <a class="link" href="/mypage/edit">
+                    <img src="/img/mypage_edit.png" alt="edit">
+                </a>
+                @else
+                <a class="link" href="/users/{{ $id_previous }}">
+                    @if($id_previous !== -1)
+                    <img class="arrow" src="/img/back.png" alt="back">
+                    @endif
+                </a>
+                <a class="link" href="/users/{{ $id_next }}">
+                    @if($id_next !== -1)
+                    <img class="arrow" src="/img/next.png" alt="next">
+                    @endif
+                </a>
+                @endif
             </div>
             <div class="prof_top">
                 @if($flag == 'mypage')
@@ -83,7 +77,7 @@
                         <div class="value"><p>{{ $user->year }}</p></div>
                     </div>
                     <div class="prof_view">
-                        <div class="property"><p class="prof_head">入会時期：</p></div>
+                    <div class="property"><p class="prof_head">入会時期：</p></div>
                         <div class="value"><p>{{ $user->generation }}期生</p></div>
                     </div>
                     <div class="prof_view">

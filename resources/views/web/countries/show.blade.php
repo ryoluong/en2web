@@ -6,19 +6,17 @@
     <body>
         @include('layouts.web.header')
         <div id="country_show">
-            <div class="no_border_card">
-                <div class="title">
-                    <div class="table_view">
-                        <p class="icon" href="/countries">
-                            <img src="/img/flags/{{ $country->english_name }}.png" alt="note">
-                        </p>
-                        <div class="text">
-                            <p>
-                            {{ $country->name }}
-                            </p>
-                        </div>
-                    </div>
+            <div class="content_head with_border">
+                <a class="icon" href="/countries">
+                    <img src="/img/top_world.png" alt="note">
+                </a>
+                <div class="text">
+                    <a href="/countries">Countries</a>
                 </div>
+            </div>
+            <div class="category_wrapper country_wrapper">
+                <img src="/img/flags/{{ $country->english_name.'.png' }}" alt="flag" class="category_icon">
+                <p class="category_name">{{ $country->name }}</p>
             </div>
             <div class="note_wrapper">
                 <div class="category_wrapper">

@@ -1,125 +1,146 @@
 /*************************
  *                       *
- *      Base             *
+ *      Setting          *
  *                       *
  ************************/
 
 @mixin pc {
-    @media (min-width:768px) {
-        @content;
-    }
+  @media (min-width: 768px) {
+    @content;
+  }
 }
 @mixin pc_wide {
-    @media (min-width:1024px) {
-        @content;
-    }
+  @media (min-width: 1024px) {
+    @content;
+  }
 }
+@mixin absolute_center {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
 * {
-    color: #555;
+  color: #555;
 }
 
 body {
-    margin: 0 auto;
-    padding: 0;
-    font-size: 15px;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic,
+    "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo,
+    sans-serif;
 }
 p {
-    line-height: 1.5em;
-    margin: 0;
-    padding: 0;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
 }
 input::placeholder {
-    color: #888;
+  color: #888;
 }
 strong {
-    font-size: 13px;
-    color: #ff1155;
+  font-size: 13px;
+  color: #ff1155;
 }
 
 .pc {
-    display: none !important;
-    
-    @include pc {
-        display: inline !important;
-    }
+  display: none !important;
+
+  @include pc {
+    display: inline !important;
+  }
 }
 .sp {
-    display: inline !important;
+  display: inline !important;
 
-    @include pc {
-        display: none !important;
-    }
+  @include pc {
+    display: none !important;
+  }
 }
 .pc_block {
-    display: none !important;
-    
-    @include pc {
-        display: block !important;
-    }
+  display: none !important;
+
+  @include pc {
+    display: block !important;
+  }
 }
 .sp_block {
-    display: block !important;
+  display: block !important;
 
-    @include pc {
-        display: none !important;
-    }
+  @include pc {
+    display: none !important;
+  }
 }
 
+/**
+ *
+ *  Imports
+ * 
+ */
+@import "header";
+@import "home";
 
 /*****************
  *               *
  *  button       *
  *               *
- ****************/ 
+ ****************/
 
-.graybtn,.bluebtn,.redbtn,.purplebtn {
-    font-size: 15px;
-    border: none;
-    border-radius: 3%;
-    cursor: hand;
-    cursor: pointer;
-    width: 90px;
-    height: 35px;
-    transition: 0.3s;
+.graybtn,
+.bluebtn,
+.redbtn,
+.purplebtn {
+  font-size: 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: hand;
+  cursor: pointer;
+  width: 90px;
+  height: 35px;
+  transition: 0.3s;
 }
 .graybtn {
-    background-color: #ddd;
-    color: #444;
-    &:hover {
-        background-color: #bbb;
-        transition: 0.3s; 
-    }
+  background-color: #ddd;
+  color: #444;
+  &:hover {
+    background-color: #bbb;
+    transition: 0.3s;
+  }
 }
 .bluebtn {
-    background-color: #7777bb;
-    color: #fff;
-    &:hover {
-        background-color: #555577;
-        transition: 0.3s;
-    }
+  background-color: #7777bb;
+  color: #fff;
+  &:hover {
+    background-color: #555577;
+    transition: 0.3s;
+  }
 }
 .redbtn {
-    font-size: 17px;
-    width: 120px;
-    height: 40px;
-    background-color: #ff1155;
-    color: #fff;
-    &:hover {
-        background-color: #990033;
-        transition: 0.3s;
-    }
+  font-size: 17px;
+  width: 120px;
+  height: 40px;
+  background-color: #ff1155;
+  color: #fff;
+  &:hover {
+    background-color: #990033;
+    transition: 0.3s;
+  }
 }
 .purplebtn {
-    background-color: #777799;
-    color: #fff;
-    &:hover {
-        background-color: #555577;
-        transition: 0.3s;
-    }
+  background-color: #777799;
+  color: #fff;
+  &:hover {
+    background-color: #555577;
+    transition: 0.3s;
+  }
 }
 .passreset {
-    width: 200px;
+  width: 200px;
 }
 
 /********************
@@ -127,50 +148,50 @@ strong {
  * Radio Button     *
  *                  *
  ********************/
- .radio_wrapper { 
-    label {
-        line-height: 100%;
-        cursor: pointer;
-        cursor: hand;
-        font-size: 14px;
-        position: relative;
-        line-height: 1rem;
-        @include pc {
-            font-size: 15px;
-        }
+.radio_wrapper {
+  label {
+    line-height: 100%;
+    cursor: pointer;
+    cursor: hand;
+    font-size: 14px;
+    position: relative;
+    line-height: 1rem;
+    @include pc {
+      font-size: 15px;
     }
-    .radio_button {
-        position: relative;
-        margin: 0 8px 0 0;
+  }
+  .radio_button {
+    position: relative;
+    margin: 0 8px 0 0;
 
-        &::before {
-            position: absolute;
-            z-index: 1;
-            top: 0.15rem;
-            left: 0.15rem;
-            width: 0.6rem;
-            height: 0.6rem;
-            content: '';
-            transition: 0.2s;
-            background-color: #fff;
-            border-radius: 100%;
-        }
-        &:checked::before {
-            background-color: #00aaca;
-        }
-        &::after {
-            position: absolute;
-            top: -0.125rem;
-            left: -0.125rem;
-            width: 1rem;
-            height: 1rem;
-            content: '';
-            cursor: pointer;
-            border: 1px solid #ccc;
-            background: #ffffff;
-            border-radius: 100%;
-        }
+    &::before {
+      position: absolute;
+      z-index: 1;
+      top: 0.15rem;
+      left: 0.15rem;
+      width: 0.6rem;
+      height: 0.6rem;
+      content: "";
+      transition: 0.2s;
+      background-color: #fff;
+      border-radius: 100%;
     }
+    &:checked::before {
+      background-color: #00aaca;
+    }
+    &::after {
+      position: absolute;
+      top: -0.125rem;
+      left: -0.125rem;
+      width: 1rem;
+      height: 1rem;
+      content: "";
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #ffffff;
+      border-radius: 100%;
+    }
+  }
 }
 
 /********************
@@ -178,1471 +199,963 @@ strong {
  * Checkbox         *
  *                  *
  ********************/
-.cp_ipcheck,.checkbox_wrapper { 
-    label {
-        cursor: pointer;
-        font-size: 14px;
-        position: relative;
-        line-height: 1rem;
-        vertical-align: middle;
-        @include pc {
-            font-size: 15px;
-        }
+.cp_ipcheck,
+.checkbox_wrapper {
+  label {
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+    line-height: 1rem;
+    vertical-align: middle;
+    @include pc {
+      font-size: 15px;
     }
-    .checkbox,.checkbox_simple {
-        position: relative;
-        margin: 0 8px 0 0;
+  }
+  .checkbox,
+  .checkbox_simple {
+    position: relative;
+    margin: 0 8px 0 0;
 
-        &::before {
-            position: absolute;
-            z-index: 1;
-            top: 0.22rem;
-            left: 0.08rem;
-            width: 0.62rem;
-            height: 0.30rem;
-            content: '';
-            -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
-                    transition:         transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
-            -webkit-transform: rotate(-45deg) scale(0, 0);
-                    transform: rotate(-45deg) scale(0, 0);
-            border: 2px solid #555577;
-            border-top-style: none;
-            border-right-style: none;
-        }
-        &:checked::before {
-            -webkit-transform: rotate(-45deg) scale(1, 1);
-	        transform: rotate(-45deg) scale(1, 1);
-        }
-        &::after {
-            display: inline-block;
-            position: absolute;
-            top: -0.05rem;
-            left: -0.1rem;
-            width: 0.9rem;
-            height: 0.9rem;
-            content: '';
-            cursor: pointer;
-            border: 2px solid #777799;
-            background: #ffffff;
-        }
+    &::before {
+      position: absolute;
+      z-index: 1;
+      top: 0.22rem;
+      left: 0.08rem;
+      width: 0.62rem;
+      height: 0.3rem;
+      content: "";
+      -webkit-transition: -webkit-transform 0.4s
+        cubic-bezier(0.45, 1.8, 0.5, 0.75);
+      transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+      -webkit-transform: rotate(-45deg) scale(0, 0);
+      transform: rotate(-45deg) scale(0, 0);
+      border: 2px solid #555577;
+      border-top-style: none;
+      border-right-style: none;
     }
-    .checkbox_simple {
-        &::before {
-            border-color: #00aaca;
-            top: 0.125rem;
-            left: 0.02rem;
-            width: 0.75rem;
-            height: 0.375rem;
-        }
-        &::after {
-            border: 1px solid #ccc;
-            top: -0.05rem;
-            left: -0.1rem;
-            width: 1rem;
-            height: 1rem;
-        }
+    &:checked::before {
+      -webkit-transform: rotate(-45deg) scale(1, 1);
+      transform: rotate(-45deg) scale(1, 1);
     }
+    &::after {
+      display: inline-block;
+      position: absolute;
+      top: -0.05rem;
+      left: -0.1rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      content: "";
+      cursor: pointer;
+      border: 2px solid #777799;
+      background: #ffffff;
+    }
+  }
+  .checkbox_simple {
+    &::before {
+      border-color: #00aaca;
+      top: 0.125rem;
+      left: 0.02rem;
+      width: 0.75rem;
+      height: 0.375rem;
+    }
+    &::after {
+      border: 1px solid #ccc;
+      top: -0.05rem;
+      left: -0.1rem;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+/**************************************************
+ *                                                *
+ *            Pagination                          *
+ *                                                *
+ *************************************************/
+.pagination {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 85%;
+  margin: 3px auto;
+  justify-content: center;
+  li {
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    //border: 1px solid #6666bb;
+    border-radius: 100%;
+    text-align: center;
+    vertical-align: middle;
+    a,
+    span {
+      text-decoration: none;
+      color: #6666bb;
+      display: block;
+      font-size: 15px;
+      line-height: 30px;
+      //font-weight: bold;
+    }
+    @include pc {
+      width: 36px;
+      height: 36px;
+      margin: 4px;
+      a,
+      span {
+        font-size: 17px;
+        line-height: 36px;
+      }
+    }
+  }
+  .active {
+    background-color: #6666bb;
+    span {
+      color: #fff;
+    }
+  }
+  .disabled {
+    border-color: #777;
+    span {
+      color: #555;
+    }
+  }
 }
 /**************************************************
  *                                                *
  *            ノート個別アイテム                  *
  *                                                *
- *************************************************/                      
- .note_item {
-    display: inline-block;
-    width: 280px;
-    vertical-align: middle;
-    box-shadow: 2px 2px 5px 1px #ccc;
-    border-radius: 1%;
-    margin-right: 10px;
-    margin-left: 10px;
-    background-color: #fff;
-    position: relative;
+ *************************************************/
+.note_item {
+  display: inline-block;
+  width: 280px;
+  vertical-align: middle;
+  box-shadow: 2px 2px 5px 1px #ccc;
+  border-radius: 1%;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #fff;
+  position: relative;
+  &:first-child {
+    margin-left: 20px;
+  }
+  &:last-child {
+    margin-right: 20px;
+  }
+  @include pc {
+    display: block;
+    flex: 0 0 40%;
+    margin: 15px auto;
     &:first-child {
-        margin-left: 20px;
+      margin-left: auto;
     }
     &:last-child {
-        margin-right: 20px;
+      margin-right: auto;
     }
-    @include pc {
-        display: block;
-        flex: 0 0 40%;
-        margin: 15px auto;
-        &:first-child {
-            margin-left: auto;
+  }
+  @include pc_wide {
+    display: block;
+    flex: 0 0 31%;
+    margin: 15px auto;
+  }
+  a {
+    text-decoration: none;
+  }
+  .note {
+    .image_holder {
+      background-size: cover;
+      background-position: center center;
+      height: 170px;
+      border-top-left-radius: 1%;
+      border-top-right-radius: 1%;
+      position: relative;
+      @include pc {
+        height: 220px;
+      }
+      &::before {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: "";
+        border-top-left-radius: 1%;
+        border-top-right-radius: 1%;
+        transition: 0.3s;
+      }
+      .textbox {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        p,
+        a {
+          color: #fff;
         }
-        &:last-child {
-            margin-right: auto;
-        }
-    }
-    @include pc_wide {
-        display: block;
-        flex: 0 0 31%;
-        margin: 15px auto;
-    }
-    a {
-        text-decoration: none;
-    }
-    .note {
-        .image_holder {
+        object .note_category {
+          display: block;
+          width: 60%;
+          margin: 0;
+          padding: 6px 0 3px 7.5px;
+          border-bottom: 1px solid white;
+          @include pc {
+            padding: 6px 0 6px 8px;
+            width: 70%;
+            font-size: 17px;
+          }
+          &::before {
+            background-image: url("/img/note_category.png");
             background-size: cover;
-            background-position: center center;
-            height:170px;
-            border-top-left-radius: 1%;
-            border-top-right-radius: 1%;
-            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            height: 15px;
+            width: 15px;
+            margin: 2px;
+            margin-right: 5px;
+            margin-top: 4px;
+            content: "";
             @include pc {
-                height: 220px;
+              height: 17px;
+              width: 17px;
             }
-            &::before{
-                background-color: rgba(0,0,0,0.5);
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                content: '';
-                border-top-left-radius: 1%;
-                border-top-right-radius: 1%;
-                transition: 0.3s;
-            }
-            .textbox {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                p,a {
-                    color: #fff;
-                }
-                object .note_category {
-                    display: block;
-                    width: 60%;
-                    margin: 0;
-                    padding: 6px 0 3px 7.5px;
-                    border-bottom: 1px solid white;
-                    @include pc {
-                        padding: 6px 0 6px 8px;
-                        width: 70%;
-                        font-size: 17px;
-                    }
-                    &::before {
-                        background-image: url('/img/note_category.png');
-                        background-size: cover;
-                        display: inline-block;
-                        vertical-align: top;
-                        height:15px;
-                        width:15px;
-                        margin: 2px;
-                        margin-right: 5px;
-                        margin-top: 4px;
-                        content: '';
-                        @include pc {
-                            height: 17px;
-                            width: 17px;
-                        }
-                    }
-                    &:hover {
-                        color: #fff;
-                        text-decoration: underline;
-                    }
-                    
-                }
-                .note_title {
-                    padding: 7px 5px 1px 7.5px;
-                    font-size: 20px;
-                    white-space: normal;
-                    @include pc {
-                        font-size: 21px;
-                    }
-                }
-                object .note_country {
-                    display: inline;
-                    padding: 0 0 0 7.5px;
-                    @include pc {
-                        font-size: 18px;
-                    }
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-                .bestnote_icon {
-                    img {
-                        padding: 0 8px 8px 0;
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        width: 50px;
-                        @include pc {
-                            width: 56px;
-                        }
-                    }
-                }
-            }
+          }
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
         }
-        .text_holder {
-            padding: 1px 0 2px 0;
-            .note_author {
-                margin-left: 2px;
-                padding: 0 2px;
-                position: relative;
-                height: 40px;
-                display: inline-block;
-                float: left;
-                .author_icon {
-                    display: inline-block;
-                    width: 30px;
-                    height: 30px;
-                    margin: 5px 2.5px 5px 5px; 
-                    object-fit: cover;
-                    border-radius: 20%;
-                    vertical-align: bottom;
-                    position: relative;
-                    z-index: 2;
-                    box-shadow: 0 0 4px 1px #ddd;
-                }
-                .author_name {
-                    display: inline-block;
-                    line-height: 30px;
-                    margin: 7px 8px 3px 0;
-                    vertical-align: bottom;
-                    font-size: 17px;
-                    color: #333;
-                }
-                &:hover p {
-                    text-decoration: underline;
-                }
-                &:before {
-                    content: "";
-                    display: inline-block;
-                    width: 31px;
-                    height: 31px;
-                    background-color: #00aaca;
-                    position: absolute;
-                    top:0;
-                    bottom:0;
-                    margin-top: auto;
-                    margin-bottom: auto;
-                    margin-left: 0.32em;
-                    background-color: rgba(100,100,230,0.3);
-                    border-radius: 10%;
-                    transform:rotate(8deg);
-                    z-index: 1;
-                }
-                &:after {
-                    content: "";
-                    display: inline-block;
-                    width: 30px;
-                    height: 30px;
-                    background-color: #00aaca;
-                    position: absolute;
-                    top:0;
-                    bottom:0;
-                    left: 0;
-                    margin-top: auto;
-                    margin-bottom: auto;
-                    margin-left: 0.45em;
-                    background-color: rgba(0,170,230,0.2);
-                    border-radius: 10%;
-                    transform:rotate(24deg);
-                    z-index: 0;
-                }
+        .note_title {
+          padding: 7px 5px 1px 7.5px;
+          font-size: 20px;
+          white-space: normal;
+          @include pc {
+            font-size: 21px;
+          }
+        }
+        object .note_country {
+          display: inline;
+          padding: 0 0 0 7.5px;
+          @include pc {
+            font-size: 18px;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .bestnote_icon {
+          img {
+            padding: 0 8px 8px 0;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            @include pc {
+              width: 56px;
             }
-            .note_date {
-                line-height: 30px;
-                padding: 7px 0 3px 0;
-                font-size: 13px;
-            }
-            .description {
-                width: 100%;
-                position: relative;
-                height: 110px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                @include pc {
-                    height: 150px;
-                }
-                .note_content {
-                    white-space: normal;
-                    width: 95%;
-                    margin-right: auto;
-                    margin-left: auto;
-                    font-size: 12px;
-                    object a {
-                        display: inline;
-                        span {
-                            color: #00aaff;
-                        }
-                        &:hover {
-                            text-decoration: underline;
-                            color: #00aaff;
-                        }
-                    }
-                    @include pc {
-                        width: 93%;
-                        font-size: 14px;
-                    }
-                }
+          }
+        }
+      }
+    }
+    .text_holder {
+      padding: 1px 0 2px 0;
+      .note_author {
+        margin-left: 2px;
+        padding: 0 2px;
+        position: relative;
+        height: 40px;
+        display: inline-block;
+        float: left;
+        .author_icon {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          margin: 5px 2.5px 5px 5px;
+          object-fit: cover;
+          border-radius: 20%;
+          vertical-align: bottom;
+          position: relative;
+          z-index: 2;
+          background-color: #eee;
+        }
+        .author_name {
+          display: inline-block;
+          line-height: 30px;
+          margin: 7px 8px 3px 0;
+          vertical-align: bottom;
+          font-size: 17px;
+          color: #333;
+        }
+        &:hover p {
+          text-decoration: underline;
+        }
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 31px;
+          height: 31px;
+          background-color: #00aaca;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 0.32em;
+          // background-color: rgba(100,100,230,0.3);
+          background-color: rgba(160, 160, 255, 0.7);
+          border-radius: 10%;
+          transform: rotate(10deg);
+          z-index: 1;
+        }
+        &:after {
+          content: "";
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          background-color: #00aaca;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 0.45em;
+          // background-color: rgba(0,170,230,0.2);
+          background-color: rgba(120, 220, 255, 0.7);
+          border-radius: 10%;
+          transform: rotate(24deg);
+          z-index: 0;
+        }
+      }
+      .note_date {
+        line-height: 33px;
+        padding: 7px 0 3px 0;
+        font-size: 13px;
+      }
+      .description {
+        width: 100%;
+        position: relative;
+        height: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @include pc {
+          height: 150px;
+        }
+        .note_content {
+          white-space: normal;
+          width: 95%;
+          margin-right: auto;
+          margin-left: auto;
+          font-size: 12px;
+          object a {
+            display: inline;
+            span {
+              color: #00aaff;
             }
             &:hover {
-                .image_holder::before {
-                    background-color: rgba(0,0,0,0.1);
-                    transition: 0.3s;
-                }
-            }  
-        }
-    }
-    .see_more {
-        position: absolute;
-        display: block;
-        margin:auto;
-        top:0;right:0;bottom:0;left:0;
-        text-align: center;
-        p {
-            font-size: 20px;
-            line-height: 50px;
-            color:#fff;
-            @include pc {
-                font-size: 24px;
+              text-decoration: underline;
+              color: #00aaff;
             }
+          }
+          @include pc {
+            width: 93%;
+            font-size: 14px;
+          }
         }
-        &:hover {
-            background-color: #555577;
-            transition: 0.3s;
+      }
+      &:hover {
+        .image_holder::before {
+          background-color: rgba(0, 0, 0, 0.1);
+          transition: 0.3s;
         }
+      }
     }
+  }
+  .see_more {
+    position: absolute;
+    display: block;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    p {
+      font-size: 20px;
+      line-height: 50px;
+      color: #fff;
+      @include pc {
+        font-size: 24px;
+      }
+    }
+    &:hover {
+      background-color: #555577;
+      transition: 0.3s;
+    }
+  }
 }
 .category_item {
+  width: 220px;
+  height: 210px;
+  border-radius: 1%;
+  .link_wrapper {
     width: 220px;
     height: 210px;
-    border-radius: 1%;
-    .link_wrapper {
-        width: 220px;
-        height: 210px;
-        &:hover .image_wrapper::before {
-            background-color: rgba(0,0,0,0.1);
-            transition: 0.3s;
-        }
-        .image_wrapper {
-            border-top-left-radius: 1%;
-            border-top-right-radius: 1%;
-            height: 150px;
-            width: 100%;
-            background-size: cover;
-            background-position: center center;
-            position: relative;
-            &::before{
-                background-color: rgba(0,0,0,0.6);
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                content: '';
-                border-top-left-radius: 1%;
-                border-top-right-radius: 1%;
-                transition: 0.3s;
-            }
-            .category_name {
-                line-height: 150px;
-                width: 100%;
-                color: #fff;
-                text-align: center;
-                font-size: 22px;
-                position: absolute;
-                @include pc {
-                    font-size: 24px;
-                }
-            }
-        }
-        .detail_wrapper {
-            width:100%;
-            .category_detail {
-                width: 95%;
-                margin: auto;
-                line-height: 20px;
-                text-align: center;
-                vertical-align: middle;
-                padding: 10px 0;
-                font-size: 13px;
-                white-space: normal;
-                @include pc {
-                    font-size: 15px;
-                    line-height: 22px;
-                    padding: 8px 0;
-                }
-            }
-        }
+    &:hover .image_wrapper::before {
+      background-color: rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
     }
+    .image_wrapper {
+      border-top-left-radius: 1%;
+      border-top-right-radius: 1%;
+      height: 150px;
+      width: 100%;
+      background-size: cover;
+      background-position: center center;
+      position: relative;
+      &::before {
+        background-color: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: "";
+        border-top-left-radius: 1%;
+        border-top-right-radius: 1%;
+        transition: 0.3s;
+      }
+      .category_name {
+        line-height: 150px;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        font-size: 22px;
+        position: absolute;
+        @include pc {
+          font-size: 24px;
+        }
+      }
+    }
+    .detail_wrapper {
+      width: 100%;
+      .category_detail {
+        width: 95%;
+        margin: auto;
+        line-height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px 0;
+        font-size: 13px;
+        white-space: normal;
+        @include pc {
+          font-size: 15px;
+          line-height: 22px;
+          padding: 8px 0;
+        }
+      }
+    }
+  }
 }
 .small {
-    background-color: #7777bb;
-    height: 50px;
-    width: 150px;
+  background-color: #7777bb;
+  height: 50px;
+  width: 150px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #555577;
     transition: 0.3s;
-    &:hover {
-        background-color: #555577;
-        transition: 0.3s;
-    }
+  }
 }
 .bestnote {
-    border: 5px solid #9999cc;
-    .note {
+  border: 5px solid #9999cc;
+  .note {
+    border-radius: 0%;
+    .image_holder {
+      border-radius: 0%;
+      &::before {
         border-radius: 0%;
-        .image_holder {
-            border-radius: 0%;
-            &::before {
-                border-radius: 0%;
-            }
-            .textbox {
-                border-radius: 0%;
-            }
-        }
+      }
+      .textbox {
+        border-radius: 0%;
+      }
     }
+  }
 }
-/********************
- *                  *
- * Header           *
- *                  *
- ********************/
-header {
-    #web_header {
-        display :flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        height: 50px;
-        padding: 5px 20px;
 
-        @include pc {
-            height: 75px;
-            padding: 7px 20px;
-        }
-
-        .logo {
-            display: block;
-            height: 40px;
-
-            @include pc {
-                height: 65px;
-            }
-        }
-        .elements {
-            display: block;
-            padding-top: 3px;
-            width: 22px;
-            height: 22px;
-            @include pc {
-                width: 30px;
-                height: 30px;
-                margin-right: 50px;
-            }
-        }
-    }
-    .dammy_menu {
-        width: 100%;
-        height: 3px;
-        background-color: #777799;
-    }
-    .menu {
-        width: 100%;
-        height: 35px;
-        background-color: #555577;
-        display: table;
-        table-layout: fixed;
-        margin: 0;
-        padding: 0;
-        @include pc {
-            height: 35px;
-        }
-        .menu_content {
-            text-align: center;
-            display: table-cell;
-            align-items: center;
-            a {
-                display: block;
-                font-size: 14px;
-                color: #fafafa;
-                text-decoration: none;
-                line-height:35px;
-                transition: 0.3s;
-                &:hover {
-                    background-color: #7777bb;
-                    transition: 0.3s;
-                }
-                @include pc {
-                    font-size: 16px;
-                    line-height: 35px;
-                }
-            }
-        }
-        .splitter {
-            display: table-cell;
-            width: 1px;
-            vertical-align: middle;
-            div {
-                margin: 0;
-                padding: 0;
-                background-color: #ddd;
-                width: 1px;
-                height: 23px;
-                @include pc {
-                    height: 20px;
-                }
-            }
-        }
-    }
-
+/*************************************
+ *                                   *
+ *     Content Head                  *
+ *                                   *
+ ************************************/
+.with_border {
+  border-bottom: 1px solid #9999aa;
 }
-/********************
- *                  *
- * Top page         *
- *                  *
- ********************/
-#home,#login {
-    margin: 50px auto; 
-    .top_logo {
-        text-align: center;
-        margin: 25px auto;
-        @include pc {
-            margin: 0 auto;
-        }
-        img {
-            width: 80%;
-            @include pc {
-                max-width: 550px;
-                margin: 10px 0px 10px 0px;
-            }
-        }
-        p {
-            text-align: center;
-            margin: 10px 0;
-            color: #555577;
-            @include pc {
-                    font-size: 20px;
-                    padding: 7px 0;
-            }
-        }
-        
-    }
-    .icon_table {
-        width: 100%;
-        height: 70vw;
-        @include pc {
-            height: 160px;
-            margin: 40px auto;
-        }
-        .icon_tr {
-            width: 70%;
-            height: 65vw;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            min-width: 250px;
-            @include pc {
-                width: 95%;
-                height: 155px;
-                max-width: 950px;
-            }
-            .icon_td {
-                height: 34vw;
-                position: relative;
-                display: block;
-                text-align: center;
-                flex: 0 0 49%;
-                margin: auto;
-                @include pc {
-                    height: 150px;
-                    flex: 0 0 24%;
-                }
-                a {
-                    width: 81px;
-                    height: 81px;
-                    display: block;
-                    text-decoration: none;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    margin: auto;
-                    @include pc {
-                        width: 140px;
-                        height: 140px;
-                        display: block;
-                        text-decoration: none;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        margin: auto;
-                    }
-                    p {
-                        text-align: center;
-                        font-size: 14px;
-                        padding: 2px 0;
-                        font-weight: bold;
-                        color: #555577;
-                        @include pc {
-                            font-size: 20px;
-                            padding: 7px 0;
-                        }
-                    }
-                    img {
-                        width: 48px;
-                        margin-top: 7.5px;
-                        @include pc {
-                            width: 90px;
-                            margin-top: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .logout {
-        margin: 10px auto; 
-        text-align: center;
-        height: 55px;
-        width: 55px;
-        @include pc {
-            margin: 20px auto;
-            width: 110px;
-            height: 110px;
-        }
-        a {
-            display: block;
-            text-decoration: none;
-            p {
-                text-align: center;
-                font-size: 13px;
-                font-weight: bold;
-                color: #7777bb;
-                padding-bottom: 2px;
-                @include pc {
-                    font-size: 18px;
-                    padding: 5px 0;
-                }
-            }
-            img {
-                margin-top: 4px;
-                height: 32px;
-                @include pc {
-                    margin-top: 0;
-                    height: 66px;
-                }
-            }
-        }
-    }
+.with_border_pc {
+  @include pc {
+    border-bottom: 1px solid #9999aa;
+  }
 }
-#login {
-    .login_table {
-        height: 230px;
-        width: 100%;
-        @include pc {
-            height: 320px;
-            margin: 30px auto 0 auto;
-            max-width: 600px;
-        }
-        .tr {
-            margin: 0 auto;
-            display: table;
-            table-layout: fixed;
-            width: 70%;
-            min-width: 250px;
-            height: 36px;
-            text-align: center;
-            position: relative;
-            @include pc {
-                height: 60px;
-            }
-            .img {
-                padding: 5px;
-                width: 36px;
-                display: table-cell;
-                position: relative;
-                @include pc {
-                    padding: 10px;
-                    width: 60px;
-                    height: 60px;
-                }
-                img {
-                    width: 36px;
-                    position: absolute;
-                    margin: auto;
-                    top:0;right:0;bottom:0;left:0;
-                    @include pc {
-                        width: 48px;
-                    }
-                }
-            }
-            .input {
-                padding: 5px;
-                height: 36px;
-                display: table-cell;
-                text-align: center;
-                vertical-align: middle;
-                @include pc {
-                    padding: 10px;
-                    height: 60px;
-                }
-                input {
-                    width: 90%;
-                    border: 2px solid #555577;
-                    line-height: 22px;
-                    padding: 4px 6px 1px 6px;
-                    @include pc {
-                        border-width: 3px;
-                        padding: 5px 10px;
-                        line-height: 26px;
-                        font-size: 16px;
-                    }
-                }
-            }
-            .button {
-                display: table-cell;
-                text-align: left;
-                width: 50%;
-                @include pc {
-                    width: 50%;
-                    text-align: center;
-                }
-                
-                button {
-                    font-size: 16px;
-                    font-weight: bold;
-                    margin: 5px;
-                    width: 95px;
-                    height: 35px;
-                    border: 3px solid #555577;
-                    background-color: #555577;
-                    border-radius: 5%;
-                    color: #fff;
-                    cursor: hand;
-                    cursor: pointer;
-                    transition: 0.3s;
-                    @include pc {
-                        font-size: 18px;
-                        margin: 10px;
-                        width: 100px;
-                        height: 40px;
-                        border-width: 3px;
-                    }
-                    &:hover {
-                        border: 3px solid #555577;
-                        background-color: #fff;
-                        color: #555577;
-                        transition: 0.3s;
-                    }
-                }
-            }
-        }
-        .help-block {
-            height: 25px;
-            vertical-align: top;
-            text-align: center;
-        }
-        .passreset {
-            height: 25px;
-            margin: 15px auto 0 auto;
-            a {
-                text-decoration: underline;
-                width: 160px;
-                display: block;
-                margin: 0 auto;
-                font-size: 14px;
-                @include pc {
-                    width: 100%;
-                    font-size: 15px;
-                }
-                p {
-                    transition: 0.3s;
-                }
-                &:hover {
-                    p {
-                    color: #888;
-                    transition: 0.3s;
-                    }
-                }
-            }
-        }
+.content_head {
+  width: 95%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  padding: 3px 0;
+  height: 50px;
+  align-items: center;
+  @include pc {
+    padding: 10px;
+    height: 60px;
+    max-width: 980px;
+  }
+  .icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    @include pc {
+      width: 60px;
+      height: 60px;
     }
-    table {
-        height: 40px;
-        width: 90%;
-        margin:auto;
-        table-layout: fixed;
-        @include pc {
-            max-width: 550px;
-        }
-        tr {
-            td {
-                .border {
-                    height: 2px;
-                    background-color: #555577;
-                }
-            }
-            .text {
-                width: 10%;
-                text-align: center;
-                p {
-                    color: #555577;
-                    font-weight: bold;
-                }
-            }
-        }
-        
+    img {
+      @include absolute_center();
+      width: 28px;
+      @include pc {
+        width: 40px;
+      }
     }
-    .register {
-        display: block;
-        font-size: 16px;
-        font-weight: bold;
-        margin: 10px auto; 
-        text-align: center;
-        text-decoration: none;
-        width: 95px;
-        height: 35px;
-        border: 2px solid #6666bb  ;
-        color: #fff;
-        background-color: #6666bb;
-        border-radius: 5%;
-        cursor: hand;
-        cursor: pointer;
-        transition: 0.3s;
-        @include pc {
-            border-width: 3px;
-            font-size: 18px;
-            width: 100px;
-            height: 40px;
-            margin: 12px auto;
-        }
-        &:hover {
-            background-color: #fff;
-            color: #6666bb;
-            transition: 0.3s;
-        }
+  }
+  .text {
+    height: 50px;
+    flex-grow: 1;
+    @include pc {
+      height: 60px;
     }
+    p,
+    a {
+      text-decoration: none;
+      line-height: 50px;
+      font-size: 20px;
+      color: #333;
+      @include pc {
+        margin-left: 5px;
+        font-size: 24px;
+        line-height: 60px;
+      }
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  .link {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    @include pc {
+      width: 50px;
+      height: 50px;
+      margin: 0 5px;
+    }
+    img {
+      @include absolute_center();
+      width: 24px;
+      @include pc {
+        width: 30px;
+      }
+    }
+    .arrow {
+      width: 20px;
+      @include pc {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
 }
 
 /******************************************************************************
  *                                                                            *
  *                            No_border_card                                  *
  *                                                                            *
- ******************************************************************************/ 
+ ******************************************************************************/
 .no_border_card {
-    border: none;
+  border: none;
+  width: 95%;
+  margin: 5px auto 10px auto;
+  @include pc {
+    margin: 15px auto;
     width: 95%;
-    margin: 5px auto 10px auto;
+    max-width: 1000px;
+  }
+  .border_none {
+    border-bottom: none;
+  }
+  .content {
+    padding-top: 8px;
+    padding-bottom: 8px;
     @include pc {
-        margin: 15px auto;
-        width: 95%;
-        max-width: 1000px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
-    .title {
-        border-bottom: 1px solid #9999aa;
-        width: 100%;
-        .table_view {
-            display: table;
-            table-layout: fixed;
-            width: 100%;
-            height: 40px;
-            @include pc {
-                padding: 0;
-                height: 60px;
-            }
-            .icon {
-                display:table-cell;
-                width: 50px;
-                height: 40px;
-                margin: auto;
-                padding: 0;
-                position: relative;
-                @include pc {
-                    width: 90px;
-                    height: 60px;
-                }
-                img {
-                    display: block;
-                    position: absolute;
-                    margin: auto;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 26px;
-                    width: 26px;
-                    @include pc {
-                        height: 36px;
-                        width: 36px;
-                    }
-                }
-            }
-            .text {
-                display: table-cell;
-                height: 40px;
-                padding: 5px 0;
-                margin: 0;
-                position: relative;
-                p,a {
-                    display: inline-block;
-                    text-decoration: none;
-                    color: #333;
-                    text-align: left;
-                    font-size: 19px;
-                    line-height: 40px;
-                    @include pc {
-                        padding-top: 0;
-                        font-size: 24px;
-                        line-height: 60px;
-                    }   
-                }
-                a:hover {
-                    text-decoration: underline;
-                }
-                .user_name {
-                    margin-left: 15px;
-                }
-                .user_country {
-                    display: inline;
-                    margin-left: 8px;
-                    @include pc {
-                        margin-left: 10px;
-                    }
-                    img {
-                        vertical-align: middle;
-                        height: 25px;
-                        width: 25px;
-                        margin-bottom: 4px;
-                        @include pc {
-                            height: 40px;
-                            width: 40px;
-                        }
-                    }
-                }
-                .country_flag {
-                    width: 35px;
-                    margin: 5px 15px 5px 20px;
-                    @include pc {
-                        width: 70px;
-                    }
-                    float: left;
-                }
-                .country_name {
-                    font-size: 21px;
-                    line-height: 50px;
-                    @include pc {
-                        line-height: 58px;
-                        font-size: 24px;
-                    }
-                }
-            }
-            .link {
-                width: 35px;
-                position: relative;
-                display: table-cell;
-                @include pc {
-                    width: 60px;
-                }
-                a {
-                    display: block;
-                    position: absolute;
-                    margin: auto;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 22px;
-                    width: 22px;
-                    @include pc {
-                        height: 30px;
-                        width: 30px;
-                    }
-                    img {
-                        display: block;
-                        position: absolute;
-                        margin: auto;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 22px;
-                        width: 22px;
-                        @include pc {
-                            height: 30px;
-                            width: 30px;
-                        }
-                    }
-                    .arrow {
-                        height: 16px;
-                        width: 16px;
-                        @include pc {
-                            width: 20px;
-                            height: 20px;
-                        }
-                    }
-                }
-            }
-        }
+    .user_name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+      margin-left: 5px;
+      margin-bottom: 1px;
+      @include pc {
+        font-size: 32px;
+        margin-bottom: 3px;
+      }
     }
-    .border_none {
-        border-bottom: none;
+    .user_department {
+      color: #333;
+      margin-left: 5px;
+      font-size: 16px;
+      margin-bottom: 6px;
+      @include pc {
+        font-size: 20px;
+      }
     }
-    .content {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        @include pc {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        .user_name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-            margin-left: 5px;
-            margin-bottom: 1px;
-            @include pc {
-                font-size: 32px;
-                margin-bottom: 3px;
-            }
-        }
-        .user_department {
-            color: #333;
-            margin-left: 5px;
-            font-size: 16px;
-            margin-bottom: 6px;
-            @include pc {
-                font-size: 20px;
-            }
-        }
-        .details_link {
-            margin-left: 10px;
-            color: #00aaca;
-            font-size: 15px;
-            @include pc {
-                margin-left: 12px;
-                font-size: 18px;
-            }
-        }
-        .pagination {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            width: 85%;
-            margin: 5px auto;
-            justify-content: center;
-            li {
-                width: 30px;
-                height: 30px;
-                margin: 3px;
-                //border: 1px solid #6666bb;
-                border-radius: 100%;
-                text-align: center;
-                vertical-align: middle;
-                a,span {
-                    text-decoration: none;
-                    color: #6666bb;
-                    display: block;
-                    font-size: 15px;
-                    line-height: 30px;
-                    //font-weight: bold;
-                }
-                @include pc {
-                    width: 36px;
-                    height: 36px;
-                    margin: 4px;
-                    a,span {
-                        font-size: 17px;
-                        line-height: 36px;
-                    }
-                }
-            }
-            .active {
-                background-color: #6666bb;
-                span {
-                    color: #fff;
-                }
-            }
-            .disabled {
-                border-color: #777;
-                span {
-                    color: #555;
-                }
-            }
-        }
-        .note_view {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            align-items: center;
-            justify-content: flex-start;
-            margin: auto;
-            background-color: #fff;
-            box-shadow: none;
-            .note_item {
-                box-shadow: 1px 1px 10px 2px #ccc;
-                display: block;
-                width: 305px;
-                margin: 10px auto;
-                @include pc {
-                }
-                @include pc_wide {
-                }
-            }
-        }
-        .form_view,.prof_view {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 5px 10px;
-            @include pc {
-                padding: 0px;
-            }
-            .property {
-                padding-bottom: 3px;
-                display: flex;
-                flex: 0 0 100%;
-                p {
-                    color: #333;
-                }
-                @include pc {
-                    padding: 10px;
-                    margin-right: 0;
-                    flex: 0 0 30%;
-                    p {
-                        line-height: 1.5em;
-                        font-size: 18px;
-                        width: 100%;
-                        text-align: right;
-                    }
-                }
-            }
-            .value {
-                margin-left: 18px;
-                display: flex;
-                flex: 0 0 100%;
-                @include pc {
-                    margin-left: 0;
-                    flex: 0 0 55%;
-                    padding: 10px;
-                }
-                p {
-                    line-height: 1.5em;
-                    @include pc {
-                        font-size: 18px;
-                    }
-                }
-            }
-        }
-        .prof_view {
-            .property {
-                flex: 0 0 30%;
-                p {
-                    color: #333;
-                    width: 100%;
-                    text-align: right;
-                }
-            }
-            .line {
-                height: 1px;
-                width: 75%;
-                margin: 3px auto 10px auto;
-                background-color: #9999aa;
-                @include pc {
-                    margin: 15px auto 20px auto;
-                }
-            }
-            .value {
-                margin-left: 0px;
-                flex: 0 0 60%;
-            }
-            .profile_value {
-                flex: 0 0 100%;
-                margin: 5px auto;
-                @include pc {
-                    font-size: 18px;
-                    max-width: 800px;
-                }
-            }
-        }
-        .users {
-            .form_view {
-                .property {
-                    a {
-                        display: inline;
-                        font-size: 20px;
-                        text-decoration: none;
-                        color: #333;
-                        @include pc {
-                            margin-bottom: 0;
-                            margin-left: 30%;
-                            font-size: 22px;
-                            margin-top: 2px;
-                        }
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                }
-                .value {
-                    font-size: 15px;
-                    @include pc {
-                        font-size: 18px;
-                    }
-                }
-                @include pc {
-                    margin: 7px auto 7px auto;
-                }
-            }
-            .icon {
-                height: 24px;
-            }
-            .members {
-                display: inline;
-                font-size: 20px;
-            }
-        }
-        .numOfNotes {
-            margin-left: 15px;
-            font-size: 17px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            @include pc {
-                margin-top: 5px;
-                margin-left: 35px;
-                font-size: 20px;
-            }
-        }
-
+    .details_link {
+      margin-left: 10px;
+      color: #00aaca;
+      font-size: 15px;
+      @include pc {
+        margin-left: 12px;
+        font-size: 18px;
+      }
     }
-    .flex_container {
+    .form_view,
+    .prof_view {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px 10px;
+      @include pc {
+        padding: 0px;
+      }
+      .property {
+        padding-bottom: 3px;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding: 8px 15px;
+        flex: 0 0 100%;
+        p {
+          color: #333;
+        }
         @include pc {
-            padding: 15px 30px;
+          padding: 10px;
+          margin-right: 0;
+          flex: 0 0 30%;
+          p {
+            line-height: 1.5em;
             font-size: 18px;
+            width: 100%;
+            text-align: right;
+          }
         }
-        .subtitle {
-            flex: 0 0 100%;
-            position: relative;
-            margin-bottom: 3px;
-            @include pc {
-                margin-bottom: 9px;
-            }
-            p {
-                text-align: center;
-                width: 100px;
-                margin: 5px 0px;
-                font-size: 18px;
-                color: #fff;
-                background-color: #7777cc;
-                padding: 2px 0;
-                border-radius: 5px;
-                @include pc {
-                    margin: 8px 0;
-                    font-size: 20px;
-                    width: 200px;
-                    height: 30px;
-                }
-            }
-            &::before {
-                display: block;
-                content: "";
-                height: 20px;
-                width: 70px;
-                position: absolute;
-                background-color: rgba(100,100,230,0.3);
-                border-radius: 2px;
-                z-index: -1;
-                top:0;
-                left:0;
-                margin-top: 1px;
-                margin-left: -4px;
-                @include pc {
-                    width: 150px;
-                    margin-left: -8px;
-                }
-            }
-            &::after {
-                display: block;
-                content: "";
-                height: 20px;
-                width: 70px;
-                position: absolute;
-                background-color: rgba(0,170,230,0.2);
-                border-radius: 2px;
-                z-index: -2;
-                bottom: 0;
-                left:0;
-                margin-bottom: 1px;
-                margin-left: 35px;
-                @include pc {
-                    width: 150px;
-                    margin-left: 59px;
-                }
-            }
-        }
-        .flex_view {
-            position: relative;
-            flex: 0 0 50%;
-            max-width: 50%;
-            margin: 10px 0;
-            text-align: center;
-            @include pc {
-                flex: 0 0 33.3%;
-                max-width: 33.3%;
-                margin: 20px 0;
-            }
-            &::before {
-                display: block;
-                content: "";
-                height: 43px;
-                width: 43px;
-                position: absolute;
-                background-color: rgba(100,100,230,0.3);
-                border-radius: 10%;
-                transform:rotate(8deg);
-                z-index: -1;
-                top:0;
-                right: 0;
-                left:0;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 0.24em;
-                @include pc {
-                    width: 65px;
-                    height: 65px;
-                    margin-top: 0.38em;
-                }
-            }
-            &::after {
-                display: block;
-                content: "";
-                height: 42px;
-                width: 42px;
-                position: absolute;
-                background-color: rgba(0,170,230,0.2);
-                border-radius: 10%;
-                transform:rotate(24deg);
-                z-index: -2;
-                top: 0;
-                right: 0;
-                left:0;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 0.25em;
-                @include pc {
-                    width: 65px;
-                    height: 65px;
-                    margin-top: 0.4em;
-                }
-            }
-            .user_icon {
-                display: block;
-                margin: auto;
-                width: 40px;
-                height: 40px;
-                border-radius: 20%;
-                margin: 5px auto 7px auto;
-                object-fit: cover;
-                box-shadow: 0 0 1px 0.5px #ddd; 
-                @include pc {
-                    width: 60px;
-                    height: 60px;
-                    margin: 10px auto 15px auto;
-                }
-   
-            }
-            .user_name {
-                font-size: 17px;
-                text-decoration: none;
-                @include pc {
-                    font-size: 20px;
-                }
-                &:hover {
-                    color: #aaa;
-                    text-decoration: underline;
-                    transition: 0.3s;
-                }
-            }
-            .country_flag {
-                display: block;
-                margin: 0 auto;
-                width: 42px;
-                height: 42px;
-                margin-bottom: 5px;
-                box-shadow: 1px 2px 8px 2px #eaeaea;
-                border-radius: 100%;
-                @include pc {
-                    width: 70px;
-                    height: 70px;
-                    margin-bottom: 10px;
-                }
-                img {
-                    width: 42px;
-                    height: 42px;
-                    @include pc {
-                        width: 70px;
-                        height: 70px;
-                    }
-                }
-            }
-            .country_name {
-                display: inline-block;
-                text-decoration: none;
-                margin: auto;
-                @include pc {
-                    font-size: 20px;
-                }
-                &:hover {
-                    color: #aaa;
-                    text-decoration: underline;
-                    transition: 0.3s;
-                }
-            }            
-        }
-    }
-    .button_wrapper {
+      }
+      .value {
+        margin-left: 18px;
+        display: flex;
+        flex: 0 0 100%;
         @include pc {
-            margin-left: 33%;
+          margin-left: 0;
+          flex: 0 0 55%;
+          padding: 10px;
         }
-        button {
-            font-size: 16px;
-            margin: 5px 10px;
-                @include pc {
-                    margin-left: 10px 15px;
-                    font-size: 18px;
-                    width: 100px;
-                    height: 40px;
-                }
+        p {
+          line-height: 1.5em;
+          @include pc {
+            font-size: 18px;
+          }
         }
+      }
     }
-}
-#showMembers {
+    .prof_view {
+      .property {
+        flex: 0 0 30%;
+        p {
+          color: #333;
+          width: 100%;
+          text-align: right;
+        }
+      }
+      .line {
+        height: 1px;
+        width: 75%;
+        margin: 3px auto 10px auto;
+        background-color: #9999aa;
+        @include pc {
+          margin: 15px auto 20px auto;
+        }
+      }
+      .value {
+        margin-left: 0px;
+        flex: 0 0 60%;
+      }
+      .profile_value {
+        flex: 0 0 100%;
+        margin: 5px auto;
+        @include pc {
+          font-size: 18px;
+          max-width: 800px;
+        }
+      }
+    }
+    .users {
+      .form_view {
+        .property {
+          a {
+            display: inline;
+            font-size: 20px;
+            text-decoration: none;
+            color: #333;
+            @include pc {
+              margin-bottom: 0;
+              margin-left: 30%;
+              font-size: 22px;
+              margin-top: 2px;
+            }
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        .value {
+          font-size: 15px;
+          @include pc {
+            font-size: 18px;
+          }
+        }
+        @include pc {
+          margin: 7px auto 7px auto;
+        }
+      }
+      .icon {
+        height: 24px;
+      }
+      .members {
+        display: inline;
+        font-size: 20px;
+      }
+    }
+  }
+  .flex_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 8px 15px;
     @include pc {
-        .flex_view {
-            margin: 10px 0;
-        }
+      padding: 15px 30px;
+      font-size: 18px;
     }
+    .subtitle {
+      flex: 0 0 100%;
+      position: relative;
+      margin-bottom: 3px;
+      @include pc {
+        margin-bottom: 9px;
+      }
+      p {
+        text-align: center;
+        width: 100px;
+        margin: 5px 0px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #7777cc;
+        padding: 2px 0;
+        border-radius: 5px;
+        @include pc {
+          margin: 8px 0;
+          font-size: 20px;
+          width: 200px;
+          height: 30px;
+        }
+      }
+      &::before {
+        display: block;
+        content: "";
+        height: 20px;
+        width: 70px;
+        position: absolute;
+        background-color: rgba(100, 100, 230, 0.3);
+        border-radius: 2px;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        margin-top: 1px;
+        margin-left: -4px;
+        @include pc {
+          width: 150px;
+          margin-left: -8px;
+        }
+      }
+      &::after {
+        display: block;
+        content: "";
+        height: 20px;
+        width: 70px;
+        position: absolute;
+        background-color: rgba(0, 170, 230, 0.2);
+        border-radius: 2px;
+        z-index: -2;
+        bottom: 0;
+        left: 0;
+        margin-bottom: 1px;
+        margin-left: 35px;
+        @include pc {
+          width: 150px;
+          margin-left: 59px;
+        }
+      }
+    }
+    .flex_view {
+      position: relative;
+      flex: 0 0 50%;
+      max-width: 50%;
+      margin: 10px 0;
+      text-align: center;
+      @include pc {
+        flex: 0 0 33.3%;
+        max-width: 33.3%;
+        margin: 20px 0;
+      }
+      &::before {
+        display: block;
+        content: "";
+        height: 43px;
+        width: 43px;
+        position: absolute;
+        background-color: rgba(100, 100, 230, 0.3);
+        border-radius: 10%;
+        transform: rotate(8deg);
+        z-index: -1;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.24em;
+        @include pc {
+          width: 65px;
+          height: 65px;
+          margin-top: 0.38em;
+        }
+      }
+      &::after {
+        display: block;
+        content: "";
+        height: 42px;
+        width: 42px;
+        position: absolute;
+        background-color: rgba(0, 170, 230, 0.2);
+        border-radius: 10%;
+        transform: rotate(24deg);
+        z-index: -2;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.25em;
+        @include pc {
+          width: 65px;
+          height: 65px;
+          margin-top: 0.4em;
+        }
+      }
+      .user_icon {
+        display: block;
+        margin: auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 20%;
+        margin: 5px auto 7px auto;
+        object-fit: cover;
+        box-shadow: 0 0 1px 0.5px #ddd;
+        @include pc {
+          width: 60px;
+          height: 60px;
+          margin: 10px auto 15px auto;
+        }
+      }
+      .user_name {
+        font-size: 17px;
+        text-decoration: none;
+        @include pc {
+          font-size: 20px;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      .country_flag {
+        display: block;
+        margin: 0 auto;
+        width: 42px;
+        height: 42px;
+        margin-bottom: 5px;
+        box-shadow: 1px 2px 8px 2px #eaeaea;
+        border-radius: 100%;
+        @include pc {
+          width: 70px;
+          height: 70px;
+          margin-bottom: 10px;
+        }
+        img {
+          width: 42px;
+          height: 42px;
+          @include pc {
+            width: 70px;
+            height: 70px;
+          }
+        }
+      }
+      .country_name {
+        display: inline-block;
+        text-decoration: none;
+        margin: auto;
+        @include pc {
+          font-size: 20px;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .button_wrapper {
+    @include pc {
+      margin-left: 33%;
+    }
+    button {
+      font-size: 16px;
+      margin: 5px 10px;
+      @include pc {
+        margin-left: 10px 15px;
+        font-size: 18px;
+        width: 100px;
+        height: 40px;
+      }
+    }
+  }
 }
 #showCountries {
-    .no_border_card {
-        .flex_container {
-            padding-right: 5px;
-            padding-left: 5px;
-            text-align: center;
-            .flex_view {
-                &::before {
-                    display: none;
-                }
-                &::after {
-                    display: none;
-                }
-            }
+  .no_border_card {
+    .flex_container {
+      padding-right: 5px;
+      padding-left: 5px;
+      text-align: center;
+      .flex_view {
+        &::before {
+          display: none;
         }
+        &::after {
+          display: none;
+        }
+      }
     }
+  }
 }
 /*****************************
 
@@ -1650,599 +1163,652 @@ header {
 
 *****************************/
 .border_card {
-    box-shadow: 1px 1px 5px 2px #ccc;
+  box-shadow: 1px 1px 5px 2px #ccc;
+  width: 95%;
+  margin: 15px auto;
+  @include pc {
+    margin: 30px auto;
     width: 95%;
-    margin: 15px auto;
-    @include pc {
-        margin: 30px auto;
-        width: 95%;
-        max-width: 1000px;
+    max-width: 1000px;
+  }
+  .title {
+    width: 100%;
+    border: none;
+    background-color: #7777bb;
+    border-top-right-radius: 1%;
+    border-top-left-radius: 1%;
+    .table_view {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      .text {
+        width: 75%;
+        display: table-cell;
+        p {
+          color: #fff;
+          font-size: 18px;
+          margin: 12px 0px 12px 20px;
+          @include pc {
+            font-size: 22px;
+            margin-left: 50px;
+          }
+        }
+      }
+      .link {
+        width: 25%;
+        position: relative;
+        display: table-cell;
+        a {
+          display: block;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 22px;
+          width: 22px;
+          @include pc {
+            height: 24px;
+            width: 24px;
+          }
+          img {
+            height: 22px;
+            width: 22px;
+            @include pc {
+              height: 24px;
+              width: 24px;
+            }
+          }
+        }
+      }
     }
-    .title {
-        width: 100%;
-        border: none;
-        background-color: #7777bb;
-        border-top-right-radius: 1%;
-        border-top-left-radius: 1%;
-        .table_view {
-            display: table;
-            table-layout: fixed;
+  }
+  .content {
+    background-color: #fbfbff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    @include pc {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .jcenter {
+      justify-content: center;
+    }
+    .form_view {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px 10px;
+
+      .property {
+        padding: 5px;
+        display: flex;
+        flex: 0 0 100%;
+        p {
+          color: #333;
+        }
+        @include pc {
+          padding: 10px;
+          margin-right: 15px;
+          flex: 0 0 30%;
+          p {
+            line-height: 36px;
+            font-size: 17px;
             width: 100%;
-            .text {
-                width: 75%;
-                display: table-cell;
-                p {
-                    color: #fff;
-                    font-size: 18px;
-                    margin: 12px 0px 12px 20px;
-                    @include pc {
-                        font-size: 22px;
-                        margin-left: 50px;
-                    }
-                }
-            }
-            .link {
-                width: 25%;
-                position: relative;
-                display: table-cell;
-                a {
-                    display: block;
-                    position: absolute;
-                    margin: auto;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 22px;
-                    width: 22px;
-                    @include pc {
-                        height: 24px;
-                        width: 24px;
-                    }
-                    img {
-                        height: 22px;
-                        width: 22px;
-                        @include pc {
-                            height: 24px;
-                            width: 24px;
-                        }
-                    }
-                }
-            }
+            text-align: right;
+          }
         }
-    }
-    .content {
-        background-color: #fbfbff;
-        padding-top: 5px;
-        padding-bottom: 5px;
+      }
+      .value {
+        padding: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 0 100%;
         @include pc {
-            padding-top: 8px;
-            padding-bottom: 8px;
+          flex: 0 0 60%;
+          padding: 10px;
         }
-        .jcenter {
-            justify-content: center;
+        p,
+        input,
+        select,
+        textarea,
+        button {
+          font-size: 15px;
+          @include pc {
+            font-size: 17px;
+          }
         }
-        .form_view {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 5px 10px;
-
-            .property {
-                padding: 5px;
-                display: flex;
-                flex: 0 0 100%;
-                p {
-                    color: #333;
-                }
-                @include pc {
-                    padding: 10px;
-                    margin-right: 15px;
-                    flex: 0 0 30%;
-                    p {
-                        line-height: 36px;
-                        font-size: 17px;
-                        width: 100%;
-                        text-align: right;
-                    }
-                }
-            }
-            .value {
-                padding: 5px;
-                display: flex;
-                flex-wrap: wrap;
-                flex: 0 0 100%;
-                @include pc {
-                    flex: 0 0 60%;
-                    padding: 10px;
-                }
-                p,input,select,textarea,button {
-                    font-size: 15px;
-                    @include pc {
-                        font-size: 17px;
-                    }
-                }
-                .input_text {
-                    border: 1px solid #ccc;
-                    width: 80%;
-                    height: 20px;
-                    padding: 5px 9px;
-                    @include pc {
-                        padding: 2px 12px;
-                        height: 30px;
-                        width: 70%;
-                        max-width: 300px;
-                    }
-                }
-                .input_select {
-                    background-color: #ffffff;
-                    border: 1px solid #ccc;
-                    width: 65%;
-                    height: 32px;
-                    padding: 0px 5px;
-                    @include pc {
-                        padding: 0 8px;
-                        height: 35px;
-                        width: 300px;
-                    }
-                }
-                .cp_ipcheck {
-                    margin: auto 0;
-                }
-                .input_textarea {
-                    width: 90%;
-                    height: 150px;
-                    border: 1px solid #ccc;
-                    padding: 5px;
-                    @include pc {
-                        height: 200px;
-                    }
-                }
-                .input_file {
-                    padding-top: 2.5px;
-                }
-                p {
-                    margin-left: 25px;
-                    line-height: 36px;
-                    @include pc {
-                        margin-left: 0;
-                    }
-                }
-                .checkbox_wrapper,.radio_wrapper {
-                    width: 50%;
-                    margin: 6px 0;
-                    @include pc {
-                        margin: 8px 0;
-                        width: 33%;
-                    }
-                }
-            }
-            .help-box {
-                padding: 5px;
-                display: flex;
-                flex: 0 0 90%;
-                margin-top: 5px;
-                p {
-                    line-height: 18px;
-                    margin-left: 0;
-                    font-size: 12px;
-                    margin-top: 5px;
-                    @include pc {
-                        margin-top: 5px;
-                        margin-left: 0;
-                        font-size: 15px;
-                    }
-                }
-            }
-            .button_wrapper {
-                @include pc {
-                    margin-left: 33.75%;
-                }
-                button {
-                    font-size: 16px;
-                    margin: 5px 10px;
-                        @include pc {
-                            margin-left: 10px 15px;
-                            font-size: 18px;
-                            width: 100px;
-                            height: 40px;
-                        }
-                }
-            }
-            .image_wrapper {
-                display:block;
-                width: 32%;
-                height: 220px;
-                background-size: cover;
-                background-position: center center;
-                margin: 5px;
-                img {
-                    width: 100%;
-                }
-                .image_delete {
-                    margin: 5px 10px;
-                }
-            }
-            .long_text {
-                display:block;
-                width: 90%;
-                margin: 15px auto;
-                
-            }
+        .input_text {
+          border: 1px solid #ccc;
+          width: 80%;
+          height: 20px;
+          padding: 5px 9px;
+          @include pc {
+            padding: 2px 12px;
+            height: 30px;
+            width: 70%;
+            max-width: 300px;
+          }
         }
-        .text_view {
-            p {
-                padding: 5px 10px;
-                @include pc {
-                    padding: 5px 40px;
-                }
-            }
+        .input_select {
+          background-color: #ffffff;
+          border: 1px solid #ccc;
+          width: 65%;
+          height: 32px;
+          padding: 0px 5px;
+          @include pc {
+            padding: 0 8px;
+            height: 35px;
+            width: 300px;
+          }
         }
-    }
-}
-#edit_note,#delete_note {
-    .deletebtn {
-        width: 200px;
-        text-align: center;
-        margin: 0 auto 30px auto;
-    }
-    h2 {
-        text-align: center;
-        font-size: 15px;
+        .cp_ipcheck {
+          margin: auto 0;
+        }
+        .input_textarea {
+          width: 90%;
+          height: 150px;
+          border: 1px solid #ccc;
+          padding: 5px;
+          @include pc {
+            height: 200px;
+          }
+        }
+        .input_file {
+          padding-top: 2.5px;
+        }
+        p {
+          margin-left: 25px;
+          line-height: 36px;
+          @include pc {
+            margin-left: 0;
+          }
+        }
+        .checkbox_wrapper,
+        .radio_wrapper {
+          width: 50%;
+          margin: 6px 0;
+          @include pc {
+            margin: 8px 0;
+            width: 33%;
+          }
+        }
+      }
+      .help-box {
+        padding: 5px;
+        display: flex;
+        flex: 0 0 90%;
+        margin-top: 5px;
+        p {
+          line-height: 18px;
+          margin-left: 0;
+          font-size: 12px;
+          margin-top: 5px;
+          @include pc {
+            margin-top: 5px;
+            margin-left: 0;
+            font-size: 15px;
+          }
+        }
+      }
+      .button_wrapper {
         @include pc {
-            font-size: 20px;
+          margin-left: 33.75%;
         }
+        button {
+          font-size: 16px;
+          margin: 5px 10px;
+          @include pc {
+            margin-left: 10px 15px;
+            font-size: 18px;
+            width: 100px;
+            height: 40px;
+          }
+        }
+      }
+      .image_wrapper {
+        display: block;
+        width: 32%;
+        height: 220px;
+        background-size: cover;
+        background-position: center center;
+        margin: 5px;
+        img {
+          width: 100%;
+        }
+        .image_delete {
+          margin: 5px 10px;
+        }
+      }
+      .long_text {
+        display: block;
+        width: 90%;
+        margin: 15px auto;
+      }
     }
+    .text_view {
+      p {
+        padding: 5px 10px;
+        @include pc {
+          padding: 5px 40px;
+        }
+      }
+    }
+  }
 }
-
-.category_wrapper {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 20px;
-    height: 30px;
-    padding: 5px;
-    margin: 0px 10px;
+#edit_note,
+#delete_note {
+  .deletebtn {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto 30px auto;
+  }
+  h2 {
+    text-align: center;
+    font-size: 15px;
     @include pc {
-        height: 45px;
-        margin: 5px 10px 0px 10px;
+      font-size: 20px;
     }
-    .category_icon {
-        height: 30px;
-        float:left;
-        @include pc {
-            height: 45px;
-            margin-left: 20px;
-            margin-right: 5px;
-        }
-    }
-    .user_icon {
-        height: 30px;
-        width: 30px;
-        float:left;
-        border-radius: 20%;
-        object-fit: cover;
-        @include pc {
-            height: 45px;
-            width: 45px;
-            margin-left: 20px;
-            margin-right: 5px;
-        }
-    }
-    .category_name {
-        font-weight: bold;
-        color: #444;
-        margin-left: 10px;
-        padding-top: 1px;
-        height: 30px;
-        vertical-align: middle;
-        float: left;
-        @include pc {
-            line-height: 45px;
-            height: 45px;
-            padding-top: 0;
-            font-size: 24px;
-        }
-    }
-    .link {
-        color: #00aaca;
-        margin: 7.5px 10px;
-        display: inline-block;
-        height: 15px;
-        vertical-align: middle;
-        font-size: 15px;
-        @include pc {
-            margin: 0;
-            line-height: 45px;
-            height: 45px;
-            padding-top: 0;
-            margin-left: 15px;
-            font-size: 20px;
-        }
-    }
+  }
 }
-a.category_wrapper:hover .category_name {
-    text-decoration: underline;
+/***********************************************************
+ *                                                         *
+ *                   category_wrapper                      *
+ *                                                         *
+ **********************************************************/
+.category_wrapper {
+  display: flex;
+  text-decoration: none;
+  font-size: 20px;
+  height: 40px;
+  padding: 6px 0 4px 0;
+  align-items: center;
+  margin-left: 5%;
+  max-width: 1000px;
+  @include pc {
+    height: 50px;
+    margin: auto;
+  }
+  .href {
+    display: flex;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .category_icon {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    @include pc {
+      height: 35px;
+      width: 35px;
+      margin: 7.5px;
+    }
+  }
+  .user_icon {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    border-radius: 20%;
+    object-fit: cover;
+    @include pc {
+      height: 35px;
+      width: 35px;
+      margin: 7.5px;
+    }
+  }
+  .category_name {
+    font-weight: bold;
+    color: #444;
+    margin-right: 5px;
+    margin-left: 2px;
+    margin-top: 7px;
+    margin-bottom: 3px;
+    @include pc {
+      font-size: 24px;
+      line-height: 40px;
+    }
+  }
+  .link {
+    color: #00aaca;
+    height: 15px;
+    font-size: 15px;
+    margin: 5px;
+    @include pc {
+      margin: 0;
+      line-height: 45px;
+      height: 45px;
+      padding-top: 0;
+      margin-left: 15px;
+      font-size: 20px;
+    }
+  }
 }
+.country_wrapper {
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  @include pc {
+    height: 60px;
+  }
+  .category_icon {
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 0 5px 1px #ddd;
+    border-radius: 100%;
+    @include pc {
+      width: 42px;
+      height: 42px;
+      margin-left: 15px;
+    }
+  }
+  .category_name {
+    font-size: 22px;
+    margin-left: 4px;
+    @include pc {
+      font-size: 26px;
+    }
+  }
+}
+.numOfNotes {
+  margin-left: 5%;
+  font-size: 17px;
+  padding: 2px 5px;
+  max-width: 1000px;
+  @include pc {
+    margin-top: 5px;
+    margin: auto;
+    padding-left: 20px;
+    font-size: 20px;
+  }
+}
+
 /**************************
  *                        *
  *       Show Note        *
  *                        *
  **************************/
 .note_show {
-    .no_border_card {
+  .no_border_card {
+    margin-bottom: 0;
+    @include pc {
+      margin-bottom: 25px;
+    }
+    .title {
+      border: none;
+      margin-bottom: 2px;
+      @include pc {
         margin-bottom: 0;
-        @include pc {
-            margin-bottom: 25px;
-        }
-        .title {
-            border: none;
-            margin-bottom: 2px;
-            @include pc {
-                margin-bottom: 0;
-                border-bottom: 1px solid #9999aa;
-            }
-        }
+        border-bottom: 1px solid #9999aa;
+      }
     }
-    a {
-        text-decoration: none;
-        color: #fff;
-        &:hover {
-            text-decoration: underline;
-        }
+  }
+  a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
     }
-    .top_photo {
-        width: 100%;
-        height: 200px;
-        background-size: cover;
-        background-position: center center;
-        position: relative;
-        max-width: 768px;
-        margin: auto;
-        @include pc {
-            height: 340px;
-        }
-        .textbox {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            @include pc {
-                right:0;top:0;left:0;bottom:0;
-                height: 70%;
-                width: 60%;
-                margin: auto;
-
-            }
-            &::before{
-                background-color: rgba(0,0,0,0.5);
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                content: '';
-                @include pc {
-                    border-radius: 1%;
-                    background-color: rgba(0,0,0,0.6);
-                    margin: auto;
-                }
-            }
-        }
-        .note_category {
-            position: absolute;
-            display: block;
-            font-weight: inherit;
-            color: #fff;
-            font-size: 18px;
-            margin: 0;
-            padding: 6px 30px 5px 5px;
-            border-bottom: 1px solid #fff;
-            &::before {
-                //background-color: #00aaca;
-                background-image: url('/img/note_category.png');
-                background-size: cover;
-                display:block;
-                height:18px;
-                width:18px;
-                margin: 5px 6px 5px 5px;
-                content: '';
-                float: left;
-            }
-        }
-        .title_country_wrapper{
-            padding-top: 50px;
-            position: absolute;
-            text-align: center;
-            width: 95%;
-            font-weight: inherit;
-            margin: auto;
-            right: 0; left:0;
-            .note_title {
-                font-weight: inherit;
-                margin: 0 auto;
-                color: #fff;
-                font-size: 23px;
-            }
-            .note_countries {
-                margin: 5px auto;
-                text-align: center;
-                .note_country {
-                    text-align: center;
-                    font-weight: inherit;
-                    color: #fff;
-                    font-size: 17px;
-                }
-            }
-        }
+  }
+  .top_photo {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    max-width: 768px;
+    margin: auto;
+    @include pc {
+      height: 340px;
     }
-    .best_icon {
-        position: absolute;
-        bottom: 0;
+    .textbox {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      @include pc {
         right: 0;
-        width: 50px;
-        margin-bottom: 12px;
-        margin-right: 12px;
-    }
-    .edit {
-        display: block;
-        width: 24px; height: 24px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 70%;
+        width: 60%;
+        margin: auto;
+      }
+      &::before {
+        background-color: rgba(0, 0, 0, 0.5);
         position: absolute;
         top: 0;
         right: 0;
-        margin-top: 10px;
-        margin-right: 12px;
-        img {
-            width: 24px; height: 24px;
-            margin: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        content: "";
+        @include pc {
+          border-radius: 1%;
+          background-color: rgba(0, 0, 0, 0.6);
+          margin: auto;
         }
+      }
     }
-    .author_and_date{
+    .note_category {
+      position: absolute;
+      display: block;
+      font-weight: inherit;
+      color: #fff;
+      font-size: 18px;
+      margin: 0;
+      padding: 6px 30px 5px 5px;
+      border-bottom: 1px solid #fff;
+      &::before {
+        //background-color: #00aaca;
+        background-image: url("/img/note_category.png");
+        background-size: cover;
         display: block;
-        max-width: 768px;
-        margin: 12px auto 0 auto;
-        .note_author {
-            display: inline-block;
-            height: 40px;
-            margin-left: 12px;
-            position: relative;
-            img {
-                display: inline-block;
-                width: 40px;
-                height: 40px;
-                object-fit: cover;
-                border-radius: 20%;
-                margin-right: 7px;
-                position: relative;
-                z-index: 2;
-                box-shadow: 0 0 4px 1px #ddd;
-            }
-            p {
-                color: #333;
-                font-weight: bold;
-                display: inline-block;
-                height: 40px;
-                line-height: 40px;
-                vertical-align: top;
-                margin: 0;
-                font-size: 20px;
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-            &:before {
-                content: "";
-                display: inline-block;
-                width: 41px;
-                height: 41px;
-                background-color: #00aaca;
-                position: absolute;
-                top:0;
-                bottom:0;
-                margin-top: auto;
-                margin-bottom: auto;
-                margin-left: -0.05em;
-                background-color: rgba(100,100,230,0.3);
-                border-radius: 10%;
-                transform:rotate(8deg);
-                z-index: 1;
-            }
-            &:after {
-                content: "";
-                display: inline-block;
-                width: 42px;
-                height: 42px;
-                background-color: #00aaca;
-                position: absolute;
-                top:0;
-                bottom:0;
-                left: 0;
-                margin-top: auto;
-                margin-bottom: auto;
-                margin-left: -0.1em;
-                background-color: rgba(0,170,230,0.2);
-                border-radius: 10%;
-                transform:rotate(18deg);
-                z-index: 0;
-            }
-        }
-        .note_date {
-            display: inline-block;
-            height: 40px;
-            line-height: 42px;
-            vertical-align: top;
-            margin-left: 5px;
-        }
+        height: 18px;
+        width: 18px;
+        margin: 5px 6px 5px 5px;
+        content: "";
+        float: left;
+      }
     }
-    h6 {
-        max-width: 768px;
-        display: flex;
-        flex-wrap: wrap;
-        //flex-direction: row-reverse;
-        width: 95%;
+    .title_country_wrapper {
+      padding-top: 50px;
+      position: absolute;
+      text-align: center;
+      width: 95%;
+      font-weight: inherit;
+      margin: auto;
+      right: 0;
+      left: 0;
+      .note_title {
         font-weight: inherit;
-        margin: 10px auto 12px auto;
-        line-height: 20px;
-        .tag {
-            font-size: 15px;
-            flex: 0 0 auto;
-            padding: 1px 3px;
-            line-height: 21px;
-            color: #00aaca;
-            border: none;
-            @include pc {
-                font-size: 17px;
-            }
+        margin: 0 auto;
+        color: #fff;
+        font-size: 23px;
+      }
+      .note_countries {
+        margin: 5px auto;
+        text-align: center;
+        .note_country {
+          text-align: center;
+          font-weight: inherit;
+          color: #fff;
+          font-size: 17px;
         }
+      }
     }
-    .content {
-        color: #444;
-        max-width: 768px;
-        width: 92%;
-        line-height: 1.9em;
-        font-size: 16px;
-        margin: 15px auto;
-        word-wrap: break-word;
-        @include pc {
-            font-size: 18px;
-        }
+  }
+  .best_icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    margin-bottom: 12px;
+    margin-right: 12px;
+  }
+  .edit {
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 12px;
+    img {
+      width: 24px;
+      height: 24px;
+      margin: 0;
     }
-    .photos_wrapper {
-        overflow-x: auto;
-        white-space: nowrap;
-        background-color: #f0f0f0;
-        box-shadow: 0 0 9px 1px #ccc;
-        align-items: center;
-        width: 100vw;
-        padding: 15px 0;
-        margin: 10px 0;
-        @include pc {
-            max-width: 768px;
-            margin: 20px auto;
-            background-color: #f0f0f0;
-            box-shadow: none;
+  }
+  .author_and_date {
+    display: block;
+    max-width: 768px;
+    margin: 12px auto 0 auto;
+    .note_author {
+      display: inline-block;
+      height: 40px;
+      margin-left: 12px;
+      position: relative;
+      img {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 20%;
+        margin-right: 7px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 4px 1px #ddd;
+      }
+      p {
+        color: #333;
+        font-weight: bold;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: top;
+        margin: 0;
+        font-size: 20px;
+        &:hover {
+          text-decoration: underline;
         }
-        .photo {
-            display: inline-block;
-            margin: 5px 10px;
-            img {
-                height: 200px;
-                box-shadow: 2px 2px 5px 1px #aaa;
-            
-            }
-            &:first-child {
-                margin-left: 20px;
-            }
-            &:last-child {
-                margin-right: 20px;
-            }
-            @include pc {
-                margin: 10px 20px;
-                img {
-                    height: 300px;
-                }
-            }
-        }
+      }
+      &:before {
+        content: "";
+        display: inline-block;
+        width: 41px;
+        height: 41px;
+        background-color: #00aaca;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: -0.05em;
+        background-color: rgba(100, 100, 230, 0.3);
+        border-radius: 10%;
+        transform: rotate(8deg);
+        z-index: 1;
+      }
+      &:after {
+        content: "";
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        background-color: #00aaca;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: -0.1em;
+        background-color: rgba(0, 170, 230, 0.2);
+        border-radius: 10%;
+        transform: rotate(18deg);
+        z-index: 0;
+      }
     }
+    .note_date {
+      display: inline-block;
+      height: 40px;
+      line-height: 42px;
+      vertical-align: top;
+      margin-left: 5px;
+    }
+  }
+  h6 {
+    max-width: 768px;
+    display: flex;
+    flex-wrap: wrap;
+    //flex-direction: row-reverse;
+    width: 95%;
+    font-weight: inherit;
+    margin: 10px auto 12px auto;
+    line-height: 20px;
+    .tag {
+      font-size: 15px;
+      flex: 0 0 auto;
+      padding: 1px 3px;
+      line-height: 21px;
+      color: #00aaca;
+      border: none;
+      @include pc {
+        font-size: 17px;
+      }
+    }
+  }
+  .content {
+    color: #444;
+    max-width: 768px;
+    width: 92%;
+    line-height: 1.9em;
+    font-size: 16px;
+    margin: 15px auto;
+    word-wrap: break-word;
+    @include pc {
+      font-size: 18px;
+    }
+  }
+  .photos_wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 9px 1px #ccc;
+    align-items: center;
+    width: 100vw;
+    padding: 15px 0;
+    margin: 10px 0;
+    @include pc {
+      max-width: 768px;
+      margin: 20px auto;
+      background-color: #f0f0f0;
+      box-shadow: none;
+    }
+    .photo {
+      display: inline-block;
+      margin: 5px 10px;
+      img {
+        height: 200px;
+        box-shadow: 2px 2px 5px 1px #aaa;
+      }
+      &:first-child {
+        margin-left: 20px;
+      }
+      &:last-child {
+        margin-right: 20px;
+      }
+      @include pc {
+        margin: 10px 20px;
+        img {
+          height: 300px;
+        }
+      }
+    }
+  }
 }
 /*********************************
  *
@@ -2250,367 +1816,362 @@ a.category_wrapper:hover .category_name {
  *
  *
  *********************************/
-.prof_top{
-    height: 165px;
-    position: relative;
-    max-width: 1000px;
-    margin: auto;
+.prof_top {
+  height: 170px;
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  @include pc {
+    height: 320px;
+  }
+  .cover {
+    display: block;
+    width: 100%;
+    background-color: gray;
+    height: 125px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 0px 5px 2px #ddd;
     @include pc {
-        height: 320px;
+      height: 235px;
+      box-shadow: none;
     }
-    .cover {
-        display: block;
-        width: 100%;
-        background-color: gray;
-        height: 120px;
-        background-size: cover;
-        background-position: center;
+  }
+  .user_icon_holder {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    height: 90px;
+    margin-left: 10px;
+    z-index: 0;
+    @include pc {
+      width: 170px;
+      height: 170px;
+      margin-left: 20px;
+    }
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 20%;
+      margin: 5px;
+      box-shadow: 0 0 4px 0px #ddd;
+      @include pc {
+        width: 150px;
+        height: 150px;
+      }
+    }
+    &::before {
+      content: "";
+      display: block;
+      width: 82px;
+      height: 82px;
+      position: absolute;
+      background-color: rgba(160, 160, 255, 0.7);
+      border-radius: 7%;
+      transform: rotate(11deg);
+      z-index: -1;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 0.3em;
+      @include pc {
+        margin-top: 0.15em;
+        width: 155px;
+        height: 155px;
+      }
+    }
+    &::after {
+      content: "";
+      display: block;
+      width: 84px;
+      height: 84px;
+      position: absolute;
+      background-color: rgba(120, 220, 255, 0.7);
+      border-radius: 7%;
+      transform: rotate(22deg);
+      z-index: -2;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 0.3em;
+      @include pc {
+        margin-top: 0.15em;
+        width: 160px;
+        height: 160px;
+      }
+    }
+  }
+  .country_holder {
+    position: absolute;
+    bottom: 0;
+    margin-left: 105px;
+    height: 45px;
+    @include pc {
+      height: 85px;
+      margin-left: 200px;
+    }
+    .user_country {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 7.5px 4px;
+      @include pc {
+        width: 50px;
+        height: 50px;
+        margin: 17.5px 10px;
+      }
+      .country_icon {
+        width: 30px;
+        height: 30px;
+        box-shadow: 0px 0.5px 4px 1px #eaeaea;
+        border-radius: 100%;
         @include pc {
-            height: 235px;
+          width: 50px;
+          height: 50px;
         }
+      }
     }
-    .user_icon_holder {
-        position: absolute;
-        bottom: 0;
-        width: 90px;
-        height: 90px;
-        margin-left: 10px;
-        z-index: 0;
-        @include pc {
-            width: 170px;
-            height: 170px;
-            margin-left: 20px;
-        }
-        img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 20%;
-            margin: 5px;
-            box-shadow: 0 0 4px 0px #ddd;
-            @include pc {
-                width: 150px;
-                height: 150px;
-            }
-        }
-        &::before {
-            content:'';
-            display: block;
-            width: 82px;
-            height: 82px;
-            position: absolute;
-            background-color: rgba(160,160,255,0.7);
-            border-radius: 7%;
-            transform:rotate(11deg);
-            z-index: -1;
-            top: 0;
-            bottom: 0;
-            margin-top: auto;
-            margin-bottom: auto;
-            margin-left: 0.3em;
-            @include pc {
-                margin-top: 0.15em;
-                width: 155px;
-                height: 155px;
-            }
-        }
-        &::after {
-            content:'';
-            display: block;
-            width: 84px;
-            height: 84px;
-            position: absolute;
-            background-color: rgba(120,220,255,0.7);
-            border-radius: 7%;
-            transform:rotate(22deg);
-            z-index: -2;
-            top: 0;
-            bottom: 0;
-            margin-top: auto;
-            margin-bottom: auto;
-            margin-left: 0.3em;
-            @include pc {
-                margin-top: 0.15em;
-                width: 160px;
-                height: 160px;
-            }
-        }
+    .status {
+      display: inline-block;
+      height: 25px;
+      margin: 10px 5px;
+      vertical-align: bottom;
+      background-color: #7777bb;
+      color: #fff;
+      border-radius: 5px;
+      padding: 0 5px;
+      text-align: center;
+      box-shadow: 0 0 5px 2px #eaeaea;
+      @include pc {
+        height: 35px;
+        margin: 25px 5px;
+        padding: 0 10px;
+        font-size: 20px;
+      }
     }
-    .country_holder{
-        position: absolute;
-        bottom: 0;
-        margin-left: 105px;
-        height: 45px;
-        @include pc {
-            height: 85px;
-            margin-left: 200px;
-        }
-        .user_country {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            margin: 7.5px 4px;
-            @include pc {
-                width: 50px;
-                height: 50px;
-                margin: 17.5px 10px;
-            }
-            .country_icon {
-                width: 30px;
-                height: 30px;
-                box-shadow: 0px 0.5px 4px 1px #eaeaea;
-                border-radius: 100%;
-                @include pc {
-                    width: 50px;
-                    height: 50px;
-                }
-            }
-        }
-        .status {
-            display: inline-block;
-            height: 25px;
-            margin: 10px 5px;
-            vertical-align: bottom;
-            background-color: #7777bb;
-            color: #fff;
-            border-radius: 5px;
-            padding: 0 5px;
-            text-align: center;
-            box-shadow: 0 0 5px 2px #eaeaea;
-            @include pc {
-                height: 35px;
-                margin: 25px 5px;
-                padding: 0 10px;
-                font-size: 20px;
-            }
-        }
-    }
+  }
 }
 #mypage {
-    .no_border_card {
-        margin-bottom: 2px;
-       .content {
-           padding: 0;
-       }
+  .no_border_card {
+    margin-bottom: 2px;
+    .content {
+      padding: 0;
     }
+  }
 }
-
-
 /********************************
  *                              *
- *      Note Index              *
+ *      Note Paginate           *
+ *                              *
+ *******************************/
+.note_view {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: none;
+  max-width: 1000px;
+  .note_item {
+    box-shadow: 1px 1px 10px 2px #ccc;
+    display: block;
+    width: 305px;
+    margin: 10px auto;
+    @include pc {
+    }
+    @include pc_wide {
+    }
+  }
+}
+/********************************
+ *                              *
+ *      Note Index(Slide)       *
  *                              *
  *******************************/
 .note_wrapper {
+  background-color: #f5f5f5;
+  padding-top: 5px;
+  margin: 3px 0 35px 0;
+  box-shadow: 0 0 9px 1px #ccc;
+  @include pc {
+    background-color: #fff;
+    width: 95%;
+    max-width: 980px;
+    margin: 5px auto 15px auto;
+    padding-top: 0;
+    padding-bottom: 12px;
+    box-shadow: none;
+  }
+  .note_list {
+    overflow-x: auto;
+    white-space: nowrap;
     background-color: #f5f5f5;
-    padding-top: 10px;
-    margin: 30px 0;
-    box-shadow: 0 0 9px 1px #ccc;
+    width: 100vw;
+    padding: 7px 0 30px 0;
+    margin: 0;
     @include pc {
-        background-color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 0 5px 0;
+      align-items: center;
+      overflow-x: unset;
+      white-space: normal;
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #fff;
+      box-shadow: none;
+    }
+  }
+  .tag_list_wrapper {
+    overflow-x: scroll;
+    padding: 0 15px;
+    @include pc {
+      overflow-x: unset;
+    }
+    .tag_list {
+      padding-top: 0px;
+      padding-bottom: 20px;
+      width: 170%;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      white-space: nowrap;
+      @include pc {
+        padding-top: 10px;
         width: 95%;
-        max-width: 980px;
-        margin: 15px auto;
-        padding-top: 0;
-        padding-bottom: 12px;
-        box-shadow: none;
-    }
-    .note_list {
-        overflow-x: auto;
-        white-space: nowrap;
-        background-color: #f5f5f5;
-        width: 100vw;
-        padding: 7px 0 25px 0;
-        margin: 0;
+      }
+      .tag_item {
+        display: block;
+        text-decoration: none;
+        background-color: #aaaacc;
+        margin: 5px;
+        height: 29px;
+        box-shadow: 2px 2px 5px 1px #ccc;
+        border-radius: 1%;
+        transition: 0.3s;
         @include pc {
-            display: flex;
-            flex-wrap: wrap;
+          margin: 10px 7.5px;
+          display: inline-block;
+          height: 40px;
+        }
+        &:hover {
+          background-color: #777799;
+          transition: 0.3s;
+        }
+        a {
+          display: block;
+          text-decoration: none;
+          line-height: 25px;
+          color: #fff;
+          font-size: 12px;
+          padding: 2px 9px;
+          @include pc {
             padding: 5px 10px;
-            align-items: center;
-            overflow-x: unset;
-            white-space: normal;
-            width: 95%;
-            margin: auto;
-            background-color: #fff;
-            box-shadow: none;
+            line-height: 30px;
+            font-size: 18px;
+          }
         }
- 
+        &:first-child {
+          margin-left: 5px;
+        }
+        &:last-child {
+          margin-right: 5px;
+        }
+      }
     }
-    .tag_list_wrapper {
-        overflow-x: scroll;
-        padding: 0 15px;
+  }
+  .no_note {
+    padding: 20px;
+    @include pc {
+      font-size: 17px;
+    }
+  }
+  .member_list {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+    width: 100%;
+    // padding: 0;
+    margin: 0;
+    padding: 7px 0 25px 0;
+    @include pc {
+      background-color: #fff;
+    }
+    .member_item {
+      background-color: #fff;
+      margin: 10px auto;
+      list-style: none;
+      box-shadow: 2px 2px 5px 1px #ccc;
+      border-radius: 0%;
+      flex: 0 0 80%;
+      //padding: 10px 0;
+      justify-content: flex-start;
+      border-left: 25px solid #555577;
+      @include pc {
+        flex: 0 0 44%;
+        margin: 10px 1%;
+      }
+      &:first-child {
+        margin-top: 5px;
         @include pc {
-            overflow-x: unset;
+          margin-top: 10px;
         }
-        .tag_list {
-            padding-top: 0px;
-            padding-bottom: 20px;
-            width: 170%;
-            margin: auto;
-            display: flex;
-            flex-wrap: wrap;
-            white-space: nowrap;
-            @include pc {
-                padding-top: 10px;
-                width: 95%;
-            }
-            .tag_item {
-                display: block;
-                text-decoration: none;
-                background-color: #aaaacc;
-                margin: 5px; 
-                height: 29px;
-                box-shadow: 2px 2px 5px 1px #ccc;
-                border-radius: 1%;
-                transition: 0.3s;
-                @include pc {
-                    margin: 10px 7.5px;
-                    display: inline-block;
-                    height: 40px;
-                }
-                &:hover {
-                    background-color: #777799;
-                    transition: 0.3s;
-                }
-                a {
-                    display: block;
-                    text-decoration: none;
-                    line-height: 25px;
-                    color: #fff;
-                    font-size: 12px;
-                    padding: 2px 9px;
-                    @include pc {
-                        padding: 5px 10px;
-                        line-height: 30px;
-                        font-size: 18px;
-                    }
-                }
-                &:first-child {
-                    margin-left: 5px;
-                }
-                &:last-child {
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
-    .no_note {
-        padding: 20px;
+      }
+      &:last-child {
+        margin-bottom: 5px;
         @include pc {
-            font-size: 17px;
+          margin-bottom: 10px;
         }
+      }
+      .linker {
+        display: block;
+        text-decoration: none;
+        padding: 6px 0;
+        .user_name {
+          display: inline-block;
+          width: 75%;
+          color: #333;
+          font-size: 20px;
+          padding: 2px 10px;
+          text-align: left;
+          background-color: #fff;
+        }
+        .user_university {
+          padding: 2px 20px;
+        }
+      }
     }
-    .member_list{
-        display: flex;
-        flex-wrap: wrap;
-        background-color: #f5f5f5;
-        width: 100%;
-        // padding: 0;
-        margin: 0;
-        padding: 7px 0 25px 0;
-        @include pc {
-            background-color: #fff;
-        }
-        .member_item {
-            background-color: #fff;
-            margin: 10px auto;
-            list-style: none;
-            box-shadow: 2px 2px 5px 1px #ccc;
-            border-radius: 0%;
-            flex: 0 0 80%;
-            //padding: 10px 0;
-            justify-content: flex-start;
-            border-left: 25px solid #555577;
-            @include pc {
-                flex: 0 0 44%;
-                margin: 10px 1%;    
-            }
-            &:first-child {
-                margin-top: 5px;
-                @include pc {
-                    margin-top: 10px;
-                }
-            }
-            &:last-child {
-                margin-bottom: 5px;
-                @include pc {
-                    margin-bottom: 10px;
-                }
-            }
-            .linker {
-                display: block;
-                text-decoration: none;
-                padding: 6px 0;
-                .user_name {
-                    display: inline-block;
-                    width: 75%;
-                    color: #333;
-                    font-size: 20px;
-                    padding: 2px 10px;
-                    text-align: left;
-                    background-color: #fff;
-                }
-                .user_university {
-                    padding: 2px 20px;
-                }
-            }
-        }
-    }
+  }
 }
 .seeall {
-    border-radius: 1%;
-    width: 50%;
-    height: 40px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    text-align: center;
-    vertical-align: middle;
-    box-shadow: 2px 2px 5px 1px #ccc;
-    max-width: 280px;
+  border-radius: 1%;
+  width: 50%;
+  height: 40px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 2px 2px 5px 1px #ccc;
+  max-width: 280px;
+  @include pc {
+    margin: 10px auto;
+    margin-bottom: 30px;
+    height: 50px;
+  }
+  a {
+    line-height: 40px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
     @include pc {
-        margin: 10px auto;
-        margin-bottom: 30px;
-        height: 50px;
+      line-height: 50px;
+      font-size: 24px;
     }
-    a {
-        line-height: 40px;
-        color: #fff;
-        font-size: 20px;
-        text-decoration: none;
-        @include pc {
-            line-height: 50px;
-            font-size: 24px;
-        }
-    }
-}
-
-#country_show {
-    .table_view {
-        padding: 5px 0;
-        .icon {
-            img {
-                width: 35px;
-                height: 35px;
-                @include pc {
-                    width: 50px;
-                    height: 50px;
-                }
-            }
-        }
-        .text {
-            height: 35px;
-            @include pc {
-                height: 50px;
-            }
-            p {
-                font-size: 20px;
-                margin-left: 5px;
-                height: 37px;
-                @include pc {
-                    height: 57px;
-                    font-size: 26px;
-                }
-            }
-        }
-    }
+  }
 }
