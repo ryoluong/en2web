@@ -66,6 +66,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notes/{note}/edit', 'NotesController@editConfirm');
     //delete
     Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
+    //search
+    Route::get('/search/notes', 'NotesController@showSearchForm');
+    Route::get('/search/notes/result', 'NotesController@search');
 });
 
 /**
@@ -74,6 +77,6 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 Route::post('register/confirm', 'Auth\RegisterController@confirm')->name('register.confirm');
 Route::post('register/confirm/existinguser', 'Auth\RegisterController@registerExistingUser')->name('register.existing.user');
-Route::get('register/verify/{token}', 'Auth\RegisterController@showForm');
+Route::get('register/verify/{token}', 'Auth\RegisterController@showForm')->name('show.form');
 Route::post('register/main_confirm', 'Auth\RegisterController@mainCheck')->name('register.main.confirm');
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');

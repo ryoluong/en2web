@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -36,6 +36,22 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+        $this->clearLoginAttempts($request);
+        if (auth()->user()->status === 0) {
+            auth()->logout();
+            return view('auth.error',['message' => 'メールアドレスが認証されていません。仮登録完了メールに記載されたアドレスにアクセスし、本登録を行ってください。']);
+        } elseif (auth()->user()->status === 2) {
+            $token = auth()->user()->email_verify_token;
+            auth()->logout();
+            return redirect()->route('show.form', compact('token'));
+        }
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
     }
 
     public function logout(Request $request)

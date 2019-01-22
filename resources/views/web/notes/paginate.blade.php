@@ -41,11 +41,16 @@
                 <p class="category_name">{{ $user->name }}</p>
                 <a class="link" href="/users/{{ $user->id }}">See profile</a>
             </div>
-            @elseif($flag =='country')
+            @elseif($flag == 'country')
             <div class="category_wrapper">
                 <img class="category_icon" src="/img/flags/{{ $country->english_name }}.png" alt="country">
                 <p class="category_name">{{ $country->name }}</p>
                 <a class="link" href="/countries/{{ $country->id }}">See country</a>
+            </div>
+            @elseif($flag == 'search')
+            <div class="category_wrapper">
+                <img class="category_icon" src="/img/categories/search.png" alt="country">
+                <p class="category_name">検索結果</p>
             </div>
             @else
             <div class="category_wrapper">
@@ -53,14 +58,22 @@
                 <p class="category_name">全てのノート</p>
             </div>
             @endif
-            <p class="numOfNotes">{{ $count }}件のノート</p>
-            <div class="sp">{{ $notes->links() }}</div>
+            <div class="numOfNotes"><p>{{ $count }}件のノート</p></div>
+            @if($flag == 'search')
+            <div class="sp_block">{{ $notes->appends(request()->all())->links() }}</div>
+            @else
+            <div class="sp_block">{{ $notes->links() }}</div>
+            @endif
             <ul class="note_view">
             @foreach($notes as $note)
             @include('layouts.web.notes')
             @endforeach
             </ul>
+            @if($flag == 'search')
+            {{ $notes->appends(request()->all())->links() }}
+            @else
             {{ $notes->links() }}
+            @endif
         </div>
     </body>
 </html>

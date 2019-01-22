@@ -12,6 +12,8 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SearchFormRequest;
+use App\Usecases\Note\SearchNoteUsecase;
 
 class NotesController extends Controller
 {
@@ -332,5 +334,26 @@ class NotesController extends Controller
         }
         $note->delete();
         return redirect('/notes');
+    }
+
+    public function showSearchForm()
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('web.notes.search', compact(['categories', 'tags']));
+    }
+
+    public function search(SearchFormRequest $request, SearchNoteUsecase $usecase)
+    {
+        $flag = 'search';
+        $notes_tmp = $usecase(
+            $request->category_id, 
+            $request->tag_ids, 
+            $request->author,
+            $request->isBest
+        );
+        $count = $notes_tmp->count();
+        $notes = $notes_tmp->paginate(6);
+        return view('web.notes.paginate', compact(['notes', 'count', 'flag']));
     }
 }

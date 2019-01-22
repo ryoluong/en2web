@@ -137,18 +137,18 @@ class RegisterController extends Controller
 
     public function showForm(string $email_token) {
         if(!User::where('email_verify_token', $email_token)->exists()) {
-            dd('無効なトークンです。');
+            return view('auth.error',['message' => '無効なトークンです。']);
         } else {
             $user = User::where('email_verify_token', $email_token)->first();
             if ($user->status === 1) {
-                dd('すでに登録されています。');
+                return view('auth.error',['message' => '既に登録されています。']);
             }
             $user->status = 2;
             if ($user->save()) {
                 $max = User::max('generation');
                 return view('auth.main.register', compact(['email_token', 'user', 'max']));
             } else {
-                dd('Something went wrong.');
+                return view('auth.error',['message' => '途中でエラーが発生しました。']);
             }
         }
     }
