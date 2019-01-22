@@ -33,6 +33,7 @@ class SearchNoteUsecase
             }
             return $query->whereIn('notes.id', $array);
         })->when(!is_null($author), function ($query) use ($author) {
+            $array = [];
             $user_ids = DB::table('users')->select('id')->where('name', 'LIKE', "$author")->orWhere('name', 'LIKE', "$author %")->orWhere('name', 'LIKE', "% $author")->get();
             foreach($user_ids as $user_id) {
                 $array[] = $user_id->id;
