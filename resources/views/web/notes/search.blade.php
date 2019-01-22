@@ -79,7 +79,7 @@
                         <div class="form_view">
                             <div class="property"><p>Author</p></div>
                             <div class="value">
-                                <input type="text" name="author" class="input_text" value="{{ old('author') }}" placeholder="Enter author" required>
+                                <input type="text" name="author" class="input_text" value="{{ old('author') }}" placeholder="Enter author">
                                 <div class="help-box">
                                     <p>*名字のみ、名前のみでも検索できます。</p>
                                 </div>
