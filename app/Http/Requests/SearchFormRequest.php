@@ -28,7 +28,7 @@ class SearchFormRequest extends FormRequest
             'from_month' => ['between:1,12'],
             'to_year' => ['between:2015,2029'],
             'to_month' => ['between:1,12'],
-            'author' => ['string', 'max:100'],
+            'author' => ['string', 'max:100','nullable'],
             'category_id' => ['exists:categories,id'],
             'tag_ids.*' => ['exists:tags,id'],
         ];
