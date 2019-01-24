@@ -2,6 +2,11 @@
 <html lang=jp>
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableButton() {
+                document.getElementById("disable_button").disabled = true;
+            }
+        </script>        
     </head>
     <body>
         <div id="login">
@@ -9,7 +14,7 @@
                 <img src="img/top_logo.png" alt="en2web-logo">
                 <p>A web-platform for En2 members.</p> 
             </div>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" onsubmit="disableButton()">
                 {{ csrf_field() }}
                 <div class="login_table">
                     <div class="tr">
@@ -39,7 +44,9 @@
                         @endif
                     </div>
                     <div class="tr">
-                        <div class="button"><button type="submit">Sign in</button></div>
+                        <div class="button">
+                            <button type="submit" id="disable_button">Sign in</button>
+                        </div>
                         <div class="cp_ipcheck"><label><input class="checkbox" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>Remember Me</label></div>
                     </div>
                     <div class="tr passreset">

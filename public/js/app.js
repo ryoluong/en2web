@@ -971,7 +971,6 @@ module.exports = __webpack_require__(43);
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -979,7 +978,6 @@ module.exports = __webpack_require__(43);
  */
 
 __webpack_require__(11);
-
 window.Vue = __webpack_require__(35);
 
 /**
@@ -988,10 +986,10 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(38));
+Vue.component("example-component", __webpack_require__(38));
 
 var app = new Vue({
-  el: '#app'
+  el: "#app"
 });
 
 /***/ }),

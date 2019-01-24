@@ -2,12 +2,17 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableButton() {
+                document.getElementById("disable_button").disabled = true;
+            }
+        </script>        
     </head>
     <body>
         @include('layouts.web.header')
         <div id="edit_note">
             @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
-            <form method="POST" action="/notes/{{ $note->id }}/edit" enctype="multipart/form-data">
+            <form method="POST" action="/notes/{{ $note->id }}/edit" enctype="multipart/form-data" onsubmit="disableButton()">
             {{ csrf_field() }} 
                 <div class="border_card">
                     <div class="title">
@@ -152,7 +157,7 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn">
+                                <button type="submit" class="bluebtn" id="disable_button">
                                     Next
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">

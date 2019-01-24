@@ -9,11 +9,18 @@ use DB;
 
 class SearchNoteUsecase
 {
-    public function __invoke($category_id = null, $tag_ids = null, $author = null, $isBest = null)
+    public function __invoke($keywords = null, $category_id = null, $tag_ids = null, $author = null, $isBest = null)
     {
         $notes = new Note();
 
-        $result = $notes->when(!is_null($category_id), function ($query) use ($category_id) {
+        $result = $notes->when(!is_null($keywords), function ($query) use ($keywords) {
+            $temp = mb_convert_kana($keywords, 'as');
+            $keywords_array = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
+            foreach($keywords_array as $key) {
+                $query->where('notes.content', 'LIKE', "%$key%");
+            }
+            return $query;
+        })->when(!is_null($category_id), function ($query) use ($category_id) {
             return $query->where('notes.category_id', $category_id);
         })->when(!is_null($tag_ids), function ($query) use ($tag_ids) {
             $array = [];

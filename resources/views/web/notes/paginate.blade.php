@@ -75,5 +75,6 @@
             {{ $notes->links() }}
             @endif
         </div>
+        @include('layouts.web.footer')
     </body>
 </html>

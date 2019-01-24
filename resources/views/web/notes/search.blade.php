@@ -2,11 +2,16 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableButton() {
+                document.getElementById("disable_button").disabled = true;
+            }
+        </script>
     </head>
     <body>
         @include('layouts.web.header')
         <div id="search_note">
-            <form method="GET" action="/search/notes/result">
+            <form method="GET" action="/search/notes/result" onsubmit="disableButton()">
                 <div class="border_card">
                     <div class="title">
                         <div class="table_view">
@@ -25,13 +30,13 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form_view">
-                            <div class="property"><p>Country</p></div>
+                            <div class="property"><p>Keywords</p></div>
                             <div class="value">
-                                <input type="text" name="country" class="input_text" value="{{ old('country') }}" placeholder="Ex) アメリカ 中国（複数可）">
+                                <input type="text" name="keywords" class="input_text" value="{{ old('keywords') }}" placeholder="Enter keywords">
                                 <div class="help-box">
-                                    <p>*任意, 日本語の通称で記入してください。</p>
+                                    <p>*本文に指定したキーワードが含まれるノートを検索します。複数可</p>
                                 </div>
                                 @if ($errors->has('country'))
                                 <div class="help-box">
@@ -39,7 +44,7 @@
                                 </div>
                                 @endif
                             </div>
-                        </div> -->
+                        </div>
                         <div class="form_view">
                             <div class="property"><p>Category</p></div>
                             <div class="value">
@@ -116,7 +121,7 @@
                         </div> -->
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn">
+                                <button type="submit" class="bluebtn" id="disable_button">
                                     Search
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">

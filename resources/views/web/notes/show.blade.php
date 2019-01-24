@@ -67,5 +67,6 @@
             <p class="content"><?php echo nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8')); ?></p>
             
         </div>
+        @include('layouts.web.footer')
     </body>
 </html>

@@ -234,9 +234,9 @@ class NotesController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        $action = $request->get('action', 'back');
+        $action = request('action');
         $input = $request->except('action');
-        if($action === 'update')
+        if($action == 'update')
         {
             $user_id = DB::table('users')->where('name', $request->author)->first()->id;
 
@@ -257,7 +257,11 @@ class NotesController extends Controller
                 {
                     $note->tags()->sync($tag_id);
                 }
+            } else {
+                $array = [];
+                $note->tags()->sync($array);
             }
+            
             //国の処理
             $temp = mb_convert_kana($request->country, 's');
             $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
@@ -347,6 +351,7 @@ class NotesController extends Controller
     {
         $flag = 'search';
         $notes_tmp = $usecase(
+            $request->keywords,
             $request->category_id, 
             $request->tag_ids, 
             $request->author,

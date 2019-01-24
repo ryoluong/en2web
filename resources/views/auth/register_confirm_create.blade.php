@@ -2,11 +2,16 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableButton() {
+                document.getElementById("disable_button").disabled = true;
+            }
+        </script>        
     </head>
     <body>
         @include('layouts.web.header')
         <div id="registration_conf_page">
-            <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('register') }}" onsubmit="disableButton()">
                 {{ csrf_field() }}
                 <div class="border_card">
                     <div class="title">
@@ -34,7 +39,7 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn">
+                                <button type="submit" class="bluebtn" id="disable_button">
                                     Register
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">

@@ -161,5 +161,6 @@
                 @endif
             </div>
         </div>
+        @include('layouts.web.footer')
     </body>
 </html>

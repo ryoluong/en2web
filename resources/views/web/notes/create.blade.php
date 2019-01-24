@@ -2,11 +2,16 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableButton() {
+                document.getElementById("disable_button").disabled = true;
+            }
+        </script>        
     </head>
     <body>
         @include('layouts.web.header')
         <div id="create_note">
-            <form method="POST" action="/notes/create" enctype="multipart/form-data">
+            <form method="POST" action="/notes/create" enctype="multipart/form-data" onsubmit="disableButton()">
             {{ csrf_field() }} 
                 <div class="border_card">
                     <div class="title">
@@ -114,7 +119,7 @@
                             <div class="value">
                                 <input type="file" class="input_file" name="files[]" accept="image/png,image/jpeg,image/gif" multiple>
                                 <div class="help-box">
-                                <p>*複数可, 4MBまでのjpegもしくはpng, 自動で圧縮されます。</p>
+                                    <p>*複数可, 4MBまでのjpegもしくはpng, 自動で圧縮されます。</p>
                                 </div>
                                 @if ($errors->has('files'))
                                 <div class="help-box">
@@ -136,7 +141,7 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn">
+                                <button type="submit" class="bluebtn" id="disable_button">
                                     Next
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">

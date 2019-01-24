@@ -62,6 +62,7 @@
                 <p class="no_note">ノートがまだありません。</p>
                 @endif
             </div>
-        </div>    
+        </div>
+        @include('layouts.web.footer')
     </body>
 </html>

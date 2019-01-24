@@ -83,8 +83,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="bluebtn seeall"><a href="/search/notes">Search notes</p></div>
-            <div class="purplebtn seeall"><a href="/all/notes">See all notes</p></div>
+            <div class="buttons">
+                <div class="bluebtn seeall"><a href="/search/notes">Search</a></div>
+                <div class="purplebtn seeall"><a href="/all/notes">See all</a></div>
+            </div>            
         </div>
+        @include('layouts.web.footer')
     </body>
 </html>
