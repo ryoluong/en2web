@@ -13,7 +13,7 @@
                 <div class="text">
                     <a href="/notes">Notes</a>
                 </div>
-                <a class="link" href="/search/notes">
+                <a class="link" href="/notes/search">
                     <img src="/img/note_search.png" alt="">
                 </a>
                 <a class="link" href="/notes/create">
@@ -36,7 +36,7 @@
                 <p class="category_name">{{ $tag->name }}</p>
             </div>
             @elseif($flag == 'author')
-            <div class="category_wrapper">
+            <div class="category_wrapper icon_decoration">
                 <img class="user_icon" src="{{ $user->avater_path !== null ? $user->avater_path : '/img/categories/user.png' }}" alt="user">
                 <p class="category_name">{{ $user->name }}</p>
                 <a class="link" href="/users/{{ $user->id }}">See profile</a>
@@ -60,6 +60,8 @@
             @endif
             <div class="numOfNotes"><p>{{ $count }}件のノート</p></div>
             @if($flag == 'search')
+            <div class="search_conditions">
+            </div>
             <div class="sp_block">{{ $notes->appends(request()->all())->links() }}</div>
             @else
             <div class="sp_block">{{ $notes->links() }}</div>

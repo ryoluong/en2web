@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link type="text/css" rel="stylesheet" href="/css/en2webstyle.css">
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+
 <title>En2::Web</title>
 
 <meta name="msapplication-TileColor" content="/img/favicons/#2d88ef">

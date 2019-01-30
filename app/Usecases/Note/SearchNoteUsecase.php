@@ -5,11 +5,12 @@ namespace App\Usecases\Note;
 use App\Note;
 use App\Tag;
 use App\User;
+use App\Country;
 use DB;
 
 class SearchNoteUsecase
 {
-    public function __invoke($keywords = null, $category_id = null, $tag_ids = null, $author = null, $isBest = null)
+    public function __invoke($keywords = null, $category_id = null, $tag_ids = null, $author = null, $isBest = null, $from_year, $from_month, $to_year, $to_month)
     {
         $notes = new Note();
 
@@ -17,7 +18,21 @@ class SearchNoteUsecase
             $temp = mb_convert_kana($keywords, 'as');
             $keywords_array = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
             foreach($keywords_array as $key) {
-                $query->where('notes.content', 'LIKE', "%$key%");
+                $query
+                ->where(function($query) use ($key) {
+                    if(Country::where('name', $key)->exists()) {
+                        $country_id = Country::where('name', $key)->first()->id;
+                        $note_ids = DB::table('country_note')->select('note_id')->where('country_id', $country_id)->get();
+                        foreach($note_ids as $note_id) {
+                            $array[] = $note_id->note_id;
+                        }     
+                        $query->whereIn('notes.id', $array);
+                    }
+                    $query
+                    ->orWhere('notes.content', 'LIKE', "%$key%")
+                    ->orWhere('notes.title', 'LIKE', "%$key%");
+                    return $query;
+                });
             }
             return $query;
         })->when(!is_null($category_id), function ($query) use ($category_id) {
@@ -46,6 +61,14 @@ class SearchNoteUsecase
                 $array[] = $user_id->id;
             }
             return $query->whereIn('notes.user_id', $array);
+        })->when(!empty($from_year), function($query) use ($from_year) {
+            return $query->whereYear('notes.date', '>=', $from_year);
+        })->when(!empty($from_month), function($query) use ($from_month) {
+            return $query->whereMonth('notes.date', '>=', $from_month);
+        })->when(!empty($to_year), function($query) use ($to_year) {
+            return $query->whereYear('notes.date', '<=', $to_year);
+        })->when(!empty($to_month), function($query) use ($to_month) {
+            return $query->whereMonth('notes.date', '<=', $to_month);
         })->when(!is_null($isBest), function ($query) use ($isBest) {
             return $query->where('notes.isBest', true);
         });

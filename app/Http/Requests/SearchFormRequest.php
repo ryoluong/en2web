@@ -24,11 +24,12 @@ class SearchFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'from_year' => ['between:2015,2029'],
-            'from_month' => ['between:1,12'],
-            'to_year' => ['between:2015,2029'],
-            'to_month' => ['between:1,12'],
-            'author' => ['string', 'max:100','nullable'],
+            'keywords' => ['nullable', 'string', 'max:255'],
+            'from_year' => ['nullable', 'numeric', 'between:2015,2029', 'required_with:from_month'],
+            'from_month' => ['nullable', 'numeric', 'between:1,12',],
+            'to_year' => ['nullable', 'numeric', 'between:2015,2029', 'required_with:to_month'],
+            'to_month' => ['nullable', 'numeric', 'between:1,12'],
+            'author' => ['nullable', 'string', 'max:100'],
             'category_id' => ['exists:categories,id'],
             'tag_ids.*' => ['exists:tags,id'],
         ];

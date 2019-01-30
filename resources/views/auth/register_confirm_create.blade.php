@@ -40,7 +40,8 @@
                         <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">
-                                    Register
+                                    <p class="button_text">Register</p>
+                                    <div class="loader">loading</div>
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">
                                     Back

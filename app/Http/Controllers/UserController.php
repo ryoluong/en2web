@@ -29,6 +29,12 @@ class UserController extends Controller
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
         $flag = 'mypage';
+
+        $pattern = '/%%.+%%/';
+        $replacement = '<span>$0</span>';
+        $escapedString = nl2br(htmlspecialchars($user->profile, ENT_QUOTES, 'UTF-8'));
+        $escapedString = preg_replace($pattern, $replacement, $escapedString);
+        $user->profile = preg_replace('/%%/', '', $escapedString);
         return view('web.mypage', compact(['user', 'notes', 'flag']));
     }
 

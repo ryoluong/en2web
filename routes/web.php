@@ -53,11 +53,12 @@ Route::middleware(['auth'])->group(function () {
      */
     //resource
     Route::resource('notes', 'NotesController');
+    Route::get('/notes/{note}', 'NotesController@show')->where('note', '[0-9]+'); //override
     //create
     Route::post('/notes/create', 'NotesController@confirm');
     //show
-    Route::get('/all/notes', 'NotesController@showAll');
-    Route::get('/best/notes', 'NotesController@showBest');
+    Route::get('/notes/all', 'NotesController@showAll');
+    Route::get('/notes/best', 'NotesController@showBest');
     Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
     Route::get('/tags/{tag}/notes', 'NotesController@showByTag');
     Route::get('/users/{user}/notes', 'NotesController@showByAuthor');
@@ -67,8 +68,8 @@ Route::middleware(['auth'])->group(function () {
     //delete
     Route::get('/notes/{note}/delete', 'NotesController@deleteConfirm');
     //search
-    Route::get('/search/notes', 'NotesController@showSearchForm');
-    Route::get('/search/notes/result', 'NotesController@search');
+    Route::get('/notes/search', 'NotesController@showSearchForm');
+    Route::get('/notes/search/result', 'NotesController@search');
 });
 
 /**

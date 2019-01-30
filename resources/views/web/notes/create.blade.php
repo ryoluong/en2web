@@ -142,7 +142,8 @@
                         <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">
-                                    Next
+                                    <p class="button_text">Next</p>
+                                    <div class="loader">loading</div>
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">
                                     Back

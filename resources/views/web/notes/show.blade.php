@@ -13,20 +13,22 @@
                 <div class="text">
                     <a href="/notes">Notes</a>
                 </div>
-                <a class="link" href="/search/notes">
+                <a class="link" href="/notes/search">
                     <img src="/img/note_search.png" alt="">
                 </a>
                 <a class="link" href="/notes/create">
                     <img src="/img/note_create.png" alt="">
                 </a>
             </div>   
-            <div class="top_photo" style="background-image:url(
+            <div
+                class="top_photo {{ $note->isBest == 1 ? 'best_note' : ''}}"
+                style="background-image:url(
                 @if($note->photos->count())
                 {{ $note->photos->first()->path }}
                 @else
                 {{ '/img/note/'.$note->category_id.'.jpg' }}
-                @endif
-            );">
+                @endif);"
+            >
                 <div class="textbox">
                     <div class="title_country_wrapper">
                         <h1 class="note_title">{{ $note->title }}</h1>
@@ -39,7 +41,7 @@
                         @endif
                     </div>
                     @if($note->isBest === 1)
-                    <img class="best_icon" src="/img/best_note.png" alt="">
+                    <a class="best_icon" href="/notes/best">Best Note</a>
                     @endif
                     @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
                     <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
@@ -64,8 +66,9 @@
                 @endforeach
             </ul>
             @endif
-            <p class="content"><?php echo nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8')); ?></p>
-            
+            <p class="content">
+            {!! $note->content !!}
+            </p>
         </div>
         @include('layouts.web.footer')
     </body>

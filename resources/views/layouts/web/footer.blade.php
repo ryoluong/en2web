@@ -9,5 +9,5 @@
         <li class="menu_list"><a href="/users" class="menu_link">Members</a></li>
     </ul>
     @endguest
-    <p class="copyright">copyright © 2019 En2. All rights reserved.</p>
+    <p class="copyright">© 2019 En2. All rights reserved.</p>
 </footer>

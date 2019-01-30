@@ -39,6 +39,11 @@ class UsersController extends Controller
             $id_previous = User::whereIn('status', [1,3])->where('id', '<', $user->id)->max('id');
         }
         $flag = 'user';
+        $pattern = '/%%.+%%/';
+        $replacement = '<span>$0</span>';
+        $escapedString = nl2br(htmlspecialchars($user->profile, ENT_QUOTES, 'UTF-8'));
+        $escapedString = preg_replace($pattern, $replacement, $escapedString);
+        $user->profile = preg_replace('/%%/', '', $escapedString);
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
         return view('web.mypage', compact(['user', 'id_next','id_previous', 'notes', 'flag']));
     }

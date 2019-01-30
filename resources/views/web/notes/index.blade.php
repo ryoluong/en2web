@@ -6,23 +6,29 @@
     <body>
         @include('layouts.web.header')
         <div id="showNotes">
-            <div class="content_head with_border_pc">
+            <div class="content_head with_border">
                 <a class="icon" href="/notes">
                     <img src="/img/top_note.png" alt="note">
                 </a>
                 <div class="text">
                     <a href="/notes">Notes</a>
                 </div>
-                <a class="link" href="/search/notes">
+                <a class="link" href="/notes/search">
                     <img src="/img/note_search.png" alt="">
                 </a>
                 <a class="link" href="/notes/create">
                     <img src="/img/note_create.png" alt="">
                 </a>
             </div>
+            <form method="GET" action="/notes/search/result" onsubmit="disableButton()">
+                <div class="search_wrapper">
+                    <input type="text" name="keywords" class="input_text" placeholder="Enter keyword" required>
+                    <button type ="submit" class="search_button" id="disable_button">Search</button>
+                </div>
+            </form>
             <div class="note_wrapper">
                 <div class="category_wrapper">
-                    <a class="href" href="/best/notes">
+                    <a class="href" href="/notes/best">
                     <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
                     <p class="category_name">Best Notes</p>
                     </a>
@@ -31,8 +37,8 @@
                     @foreach($notes as $note)
                     @include('layouts.web.notes')
                     @endforeach
-                    <li class="note_item small">
-                        <a class="see_more" href="/best/notes"><p>See more</p></a>
+                    <li class="note_item small_yellow">
+                        <a class="see_more" href="/notes/best"><p>See more</p></a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +77,7 @@
                 </ul>
             </div>
             <div class="note_wrapper">
-                <div class="category_wrapper" href="/bestnotes">
+                <div class="category_wrapper">
                     <img class="category_icon" src="/img/categories/tag.png" alt="bestnotes">
                     <p class="category_name">Tags</p>
                 </div>
@@ -84,8 +90,8 @@
                 </div>
             </div>
             <div class="buttons">
-                <div class="bluebtn seeall"><a href="/search/notes">Search</a></div>
-                <div class="purplebtn seeall"><a href="/all/notes">See all</a></div>
+                <a class="purplebtn seeall" href="/notes/all">See all</a>
+                <a class="bluebtn seeall" href="/notes/search">Search</a>
             </div>            
         </div>
         @include('layouts.web.footer')

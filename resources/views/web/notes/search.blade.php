@@ -11,7 +11,7 @@
     <body>
         @include('layouts.web.header')
         <div id="search_note">
-            <form method="GET" action="/search/notes/result" onsubmit="disableButton()">
+            <form method="GET" action="/notes/search/result" onsubmit="disableButton()">
                 <div class="border_card">
                     <div class="title">
                         <div class="table_view">
@@ -19,28 +19,16 @@
                         </div>
                     </div>
                     <div class="content">
-                        <!--
-                        <div class="form_view">
-                            <div class="property"><p>Date</p></div>
-                            <div class="value">
-                                <input type="text" name="date" class="input_text" value="{{ old('date') }}" placeholder="yyyy-mm-dd" required>
-                                @if ($errors->has('date'))
-                                <div class="help-box">
-                                        <strong>{{ $errors->first('date') }}</strong>
-                                </div>
-                                @endif
-                            </div>
-                        </div> -->
                         <div class="form_view">
                             <div class="property"><p>Keywords</p></div>
                             <div class="value">
-                                <input type="text" name="keywords" class="input_text" value="{{ old('keywords') }}" placeholder="Enter keywords">
+                                <input type="text" name="keywords" class="input_text" value="{{ old('keywords') }}" placeholder="Enter keyword">
                                 <div class="help-box">
-                                    <p>*本文に指定したキーワードが含まれるノートを検索します。複数可</p>
+                                    <p>*入力したキーワードや国名が含まれるノートを検索します。複数可</p>
                                 </div>
-                                @if ($errors->has('country'))
+                                @if ($errors->has('keywords'))
                                 <div class="help-box">
-                                    <strong>{{ $errors->first('country') }}</strong>
+                                    <strong>{{ $errors->first('keywords') }}</strong>
                                 </div>
                                 @endif
                             </div>
@@ -94,7 +82,62 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="form_view">
+                            <div class="property"><p>Date</p></div>
+                            <div class="value">
+                                <div class="year_month">
+                                    <p class="from_to">From:</p>
+                                    <select name="from_year" class="input_select year">
+                                        <option value="">Year</option>
+                                        @for($i = 2015; $i <= Carbon\Carbon::now()->year; $i++)
+                                        <option value="{{ $i }}" {{ old('from_year') == $i ? 'selected' : ''}}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <select name="from_month" class="input_select month">
+                                        <option value="">Month</option>
+                                        @for($i = 1; $i <= 12 ;$i++)
+                                        <option value="{{ $i }}" {{ old('from_month') == $i ? 'selected' : ''}}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="year_month">
+                                    <p class="from_to">To:</p>
+                                    <select name="to_year" class="input_select year">
+                                        <option value="">Year</option>
+                                        @for($i = 2015; $i <= Carbon\Carbon::now()->year; $i++)
+                                        <option value="{{ $i }}" {{ old('to_year') == $i ? 'selected' : ''}}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <select name="to_month" class="input_select month">
+                                        <option value="">Month</option>
+                                        @for($i = 1; $i <= 12 ;$i++)
+                                        <option value="{{ $i }}" {{ old('to_month') == $i ? 'selected' : ''}}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                @if ($errors->has('from_year'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('from_year') }}</strong>
+                                </div>
+                                @endif
+                                @if ($errors->has('from_month'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('from_month') }}</strong>
+                                </div>
+                                @endif
+                                @if ($errors->has('to_year'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('to_year') }}</strong>
+                                </div>
+                                @endif
+                                @if ($errors->has('to_month'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('to_month') }}</strong>
+                                </div>
+                                @endif                                                                                                
+                            </div>
+                        </div>     
                         <div class="form_view">
                             <div class="property"><p>Best Note</p></div>
                             <div class="value">
@@ -108,21 +151,11 @@
                             @endif
                             </div>
                         </div>
-                        <!-- <div class="form_view">
-                            <div class="property"><p>Content</p></div>
-                            <div class="value">
-                                <textarea class="input_textarea" type="checkbox" name="content" required>{{ old('content')}}</textarea>
-                                @if ($errors->has('content'))
-                                <div class="help-box">
-                                    <strong>{{ $errors->first('content') }}</strong>
-                                </div>
-                                 @endif
-                            </div>
-                        </div> -->
                         <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">
-                                    Search
+                                    <p class="button_text">Search</p>
+                                    <div class="loader">loading</div>
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">
                                     Back

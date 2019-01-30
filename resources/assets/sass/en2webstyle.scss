@@ -104,6 +104,7 @@ strong {
   width: 90px;
   height: 35px;
   transition: 0.3s;
+  vertical-align: middle;
 }
 .graybtn {
   background-color: #ddd;
@@ -142,6 +143,70 @@ strong {
 }
 .passreset {
   width: 200px;
+}
+
+#disable_button {
+  .button_text {
+    background-color: #7777bb;
+    color: #fff;
+    transition: 0.3s;
+  }
+  .loader {
+    display: none;
+  }
+
+  &:hover {
+    .button_text {
+      background-color: #555577;
+    }
+  }
+}
+#disable_button:disabled {
+  .button_text {
+    display: none;
+  }
+  .loader,
+  .loader::after {
+    display: inline-block;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+  }
+  .loader {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    text-indent: -9999em;
+    border-top: 4px solid rgba(255, 255, 255, 0.2);
+    border-right: 4px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #ffffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+  }
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 }
 
 /********************
@@ -285,7 +350,6 @@ strong {
     width: 30px;
     height: 30px;
     margin: 3px;
-    //border: 1px solid #6666bb;
     border-radius: 100%;
     text-align: center;
     vertical-align: middle;
@@ -296,7 +360,6 @@ strong {
       display: block;
       font-size: 15px;
       line-height: 30px;
-      //font-weight: bold;
     }
     @include pc {
       width: 36px;
@@ -425,6 +488,16 @@ strong {
             text-decoration: underline;
           }
         }
+        .edit_icon {
+          position: absolute;
+          right: 0;
+          top: 0;
+          .edit_icon_image {
+            margin-right: 12px;
+            margin-top: 8px;
+            width: 22px;
+          }
+        }
         .note_title {
           padding: 7px 5px 1px 7.5px;
           font-size: 20px;
@@ -444,15 +517,21 @@ strong {
           }
         }
         .bestnote_icon {
-          img {
-            padding: 0 8px 8px 0;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 50px;
-            @include pc {
-              width: 56px;
-            }
+          font-size: 14px;
+          background-color: #ee9922;
+          margin: 0 12px 10px 0;
+          padding: 4px 8px;
+          border-radius: 5px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          font-weight: bold;
+          @include pc {
+            padding: 5px 6px;
+            font-size: 15px;
+          }
+          &:hover {
+            text-decoration: underline;
           }
         }
       }
@@ -510,8 +589,8 @@ strong {
           margin-top: auto;
           margin-bottom: auto;
           margin-left: 0.32em;
-          // background-color: rgba(100,100,230,0.3);
-          background-color: rgba(160, 160, 255, 0.7);
+          background-color: rgba(100, 100, 230, 0.3);
+          // background-color: rgba(160, 160, 255, 0.7);
           border-radius: 10%;
           transform: rotate(10deg);
           z-index: 1;
@@ -529,7 +608,8 @@ strong {
           margin-top: auto;
           margin-bottom: auto;
           margin-left: 0.45em;
-          background-color: rgba(120, 220, 255, 0.7);
+          // background-color: rgba(120, 220, 255, 0.7);
+          background-color: rgba(0, 170, 230, 0.2);
           border-radius: 10%;
           transform: rotate(24deg);
           z-index: 0;
@@ -596,10 +676,6 @@ strong {
       @include pc {
         font-size: 24px;
       }
-    }
-    &:hover {
-      background-color: #555577;
-      transition: 0.3s;
     }
   }
 }
@@ -676,8 +752,18 @@ strong {
     transition: 0.3s;
   }
 }
+.small_yellow {
+  background-color: #ee9922;
+  transition: 0.3s;
+  height: 50px;
+  width: 150px;
+  &:hover {
+    transition: 0.3s;
+    background-color: #cc7700;
+  }
+}
 .bestnote {
-  border: 5px solid #9999cc;
+  border: 5px solid #ffbb55;
   .note {
     border-radius: 0%;
     .image_holder {
@@ -908,6 +994,20 @@ strong {
         @include pc {
           font-size: 18px;
           max-width: 800px;
+        }
+        span {
+          // font-weight: bold;
+          min-width: 75px;
+          text-align: center;
+          display: inline-block;
+          font-size: 16px;
+          color: #fff;
+          background-color: #7777bb;
+          padding: 4px 8px;
+          border-radius: 5px;
+          margin-right: 5px;
+          margin-bottom: 4px;
+          margin-top: 8px;
         }
       }
     }
@@ -1248,7 +1348,6 @@ strong {
       display: flex;
       flex-wrap: wrap;
       padding: 5px 10px;
-
       .property {
         padding: 5px;
         display: flex;
@@ -1311,12 +1410,31 @@ strong {
             width: 300px;
           }
         }
+        .year_month {
+          width: 100%;
+          margin-bottom: 5px;
+          @include pc {
+            margin-bottom: 10px;
+          }
+          .from_to {
+            margin: 0;
+            width: 50px;
+            display: inline-block;
+          }
+          .year {
+            width: 100px;
+            margin-right: 5px;
+          }
+          .month {
+            width: 100px;
+          }
+        }
         .cp_ipcheck {
           margin: auto 0;
         }
         .input_textarea {
-          width: 90%;
-          height: 150px;
+          width: 95%;
+          height: 250px;
           border: 1px solid #ccc;
           padding: 5px;
           @include pc {
@@ -1457,11 +1575,13 @@ strong {
     }
   }
   .user_icon {
+    display: inline-block;
     height: 30px;
     width: 30px;
     margin: 5px;
     border-radius: 20%;
     object-fit: cover;
+    position: relative;
     @include pc {
       height: 35px;
       width: 35px;
@@ -1496,6 +1616,40 @@ strong {
     }
   }
 }
+.icon_decoration {
+  z-index: 1;
+  position: relative;
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 31px;
+    height: 31px;
+    background-color: #00aaca;
+    position: absolute;
+    margin-left: 0.225em;
+    background-color: rgba(100, 100, 230, 0.3);
+    border-radius: 10%;
+    transform: rotate(8deg);
+    z-index: -1;
+  }
+  &:after {
+    content: "";
+    display: inline-block;
+    width: 31px;
+    height: 31px;
+    background-color: #00aaca;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: 0.52em;
+    margin-bottom: auto;
+    margin-left: 0.225em;
+    background-color: rgba(0, 170, 230, 0.2);
+    border-radius: 10%;
+    transform: rotate(18deg);
+    z-index: -2;
+  }
+}
 .country_wrapper {
   height: 50px;
   margin-top: 5px;
@@ -1504,6 +1658,7 @@ strong {
     height: 60px;
   }
   .category_icon {
+    position: relative;
     width: 36px;
     height: 36px;
     box-shadow: 0 0 5px 1px #ddd;
@@ -1601,8 +1756,8 @@ strong {
         width: 100%;
         content: "";
         @include pc {
-          border-radius: 1%;
-          background-color: rgba(0, 0, 0, 0.6);
+          border-radius: 1px;
+          background-color: rgba(0, 0, 0, 0.7);
           margin: auto;
         }
       }
@@ -1655,13 +1810,28 @@ strong {
       }
     }
   }
+  .best_note {
+    border-top: 7px solid #ffbb55;
+    border-bottom: 7px solid #ffbb55;
+    @include pc {
+      border-width: 8px;
+    }
+  }
   .best_icon {
+    background-color: #ee9922;
+    color: #ffffff;
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 50px;
+    padding: 4px 8px;
+    border-radius: 5px;
     margin-bottom: 12px;
-    margin-right: 12px;
+    margin-right: 14px;
+    font-weight: bold;
+    @include pc {
+      font-size: 17px;
+      padding: 4px 8px;
+    }
   }
   .edit {
     display: block;
@@ -1786,6 +1956,10 @@ strong {
     word-wrap: break-word;
     @include pc {
       font-size: 18px;
+    }
+    .escaped_link {
+      display: inline;
+      color: #00aaca;
     }
   }
   .photos_wrapper {
@@ -1999,8 +2173,18 @@ strong {
     width: 305px;
     margin: 10px auto;
     @include pc {
+      margin: 10px 38.4px;
     }
     @include pc_wide {
+      margin: 10px 11.6px;
+    }
+  }
+  .bestnote {
+    @include pc {
+      margin: 10px 33.4px !important;
+    }
+    @include pc_wide {
+      margin: 10px 6.6px !important;
     }
   }
 }
@@ -2009,10 +2193,59 @@ strong {
  *      Note Index(Slide)       *
  *                              *
  *******************************/
+form {
+  max-width: 1000px;
+  margin: auto;
+  .search_wrapper {
+    margin: 25px auto;
+    width: 95%;
+    display: flex;
+    max-width: 700px;
+    @include pc {
+      margin: 25px auto 20px auto;
+    }
+    .input_text {
+      width: 60%;
+      margin: auto;
+      border: 2px solid #9999bb;
+      height: 20px;
+      padding: 6px 8px;
+      font-size: 16px;
+      @include pc {
+        width: 70%;
+        font-size: 17px;
+        padding: 6px 12px;
+        height: 20px;
+      }
+    }
+    .search_button {
+      color: #fff;
+      background-color: #7777bb;
+      border: none;
+      width: 25%;
+      margin: auto;
+      padding: 6px 0;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: 0.3s;
+      max-width: 125px;
+      @include pc {
+        font-size: 18px;
+        height: 35px;
+      }
+      &:hover {
+        cursor: hand;
+        cursor: pointer;
+        transition: 0.3s;
+        background-color: #555577;
+      }
+    }
+  }
+}
 .note_wrapper {
   background-color: #f5f5f5;
   padding-top: 5px;
-  margin: 3px 0 35px 0;
+  margin: 5px 0 35px 0;
   box-shadow: 0 0 9px 1px #ccc;
   @include pc {
     background-color: #fff;
@@ -2170,7 +2403,7 @@ strong {
   display: flex;
   max-width: 600px;
   .seeall {
-    border-radius: 1%;
+    border-radius: 1px;
     flex: 0 0 40%;
     height: 40px;
     margin: 0 auto;
@@ -2178,20 +2411,16 @@ strong {
     vertical-align: middle;
     box-shadow: 2px 2px 5px 1px #ccc;
     max-width: 280px;
+    text-decoration: none;
+    font-size: 19px;
+    color: #fff;
+    line-height: 40px;
     @include pc {
       margin: 10px auto;
       margin-bottom: 30px;
       height: 50px;
-    }
-    a {
-      line-height: 40px;
-      color: #fff;
-      font-size: 20px;
-      text-decoration: none;
-      @include pc {
-        line-height: 50px;
-        font-size: 24px;
-      }
+      font-size: 24px;
+      line-height: 50px;
     }
   }
 }

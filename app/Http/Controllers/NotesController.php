@@ -175,6 +175,10 @@ class NotesController extends Controller
      */
     public function show(Note $note)
     {
+        $escapedString = nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8'));
+        $pattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i';
+        $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
+        $note->content = preg_replace($pattern, $replacement, $escapedString);
         return view('web.notes.show', compact(['note']));
     }
 
@@ -355,10 +359,14 @@ class NotesController extends Controller
             $request->category_id, 
             $request->tag_ids, 
             $request->author,
-            $request->isBest
+            $request->isBest,
+            $request->from_year,
+            $request->from_month,
+            $request->to_year,
+            $request->to_month
         );
         $count = $notes_tmp->count();
-        $notes = $notes_tmp->paginate(6);
+        $notes = $notes_tmp->orderBy('date','desc')->paginate(6);
         return view('web.notes.paginate', compact(['notes', 'count', 'flag']));
     }
 }

@@ -9,12 +9,15 @@
         );">
             <div class="textbox">
                 <object><a class="note_category" href="/categories/{{ $note->category_id }}/notes">{{ $note->category->name }}</a></object>
-                <p class="note_title">{{ $note->title }}</p>         
+                @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
+                <object><a class="edit_icon" href="/notes/{{ $note->id }}/edit"><img class="edit_icon_image" src="/img/note_edit.png" alt=""></a></object>
+                @endif
+                <p class="note_title">{{ $note->title }}</p>  
                 @foreach($note->countries as $country)
                 <object><a class="note_country" href="/countries/{{ $country->id }}/notes">＠{{ $country->name }}</a></object>
                 @endforeach
                 @if($note->isBest == 1) 
-                <p class="bestnote_icon"><img src="/img/best_note.png" alt=""></p>
+                <object><a class="bestnote_icon" href="/notes/best">Best Note</a></object>
                 @endif
             </div>
         </div>

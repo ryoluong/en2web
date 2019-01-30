@@ -121,7 +121,7 @@
                             <div class="profile_value">
                                 <p>
                                 @if (isset($user->profile))
-                                <?php echo nl2br(htmlspecialchars($user->profile, ENT_QUOTES, 'UTF-8')); ?>
+                                {!! $user->profile !!}
                                 @else
                                 {{ "（プロフィールが入力されていません）" }}
                                 @endif
