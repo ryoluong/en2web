@@ -73,15 +73,15 @@
                     <p class="user_department">{{ $user->department.' '.$user->major }}</p>
                     @endif
                     <div class="prof_view">
-                        <div class="property"><p class="prof_head">入学年度：</p></div>
+                        <div class="property"><p class="prof_head">入学年度</p></div>
                         <div class="value"><p>{{ $user->year }}</p></div>
                     </div>
                     <div class="prof_view">
-                    <div class="property"><p class="prof_head">入会時期：</p></div>
+                    <div class="property"><p class="prof_head">入会時期</p></div>
                         <div class="value"><p>{{ $user->generation }}期生</p></div>
                     </div>
                     <div class="prof_view">
-                        <div class="property"><p class="prof_head">留学先国：</p></div>
+                        <div class="property"><p class="prof_head">留学先国</p></div>
                         <div class="value" style="display:block;">
                                 @if($user->countries()->get() === null)
                                 <p>{{ "(入力されていません)" }}</p>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <div class="prof_view">
-                        <div class="property"><p class="prof_head">留学先：</p></div>
+                        <div class="property"><p class="prof_head">留学先</p></div>
                         <div class="value">
                             <p>
                                 @if($user->status == 1)
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="prof_view">
-                        <div class="property"><p class="prof_head">就職・進路：</p></div>
+                        <div class="property"><p class="prof_head">就職・進路</p></div>
                         <div class="value">
                             <p>
                                 @if($user->status == 1)
@@ -118,9 +118,9 @@
                     </div>
                     <div class="prof_view">
                         <div class="line"></div>
-                            <div class="profile_value">
+                            <div class="profile_text_value">
                                 <p>
-                                @if (isset($user->profile))
+                                @if (!empty($user->profile))
                                 {!! $user->profile !!}
                                 @else
                                 {{ "（プロフィールが入力されていません）" }}

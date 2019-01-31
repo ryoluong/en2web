@@ -969,10 +969,48 @@ strong {
     .prof_view {
       .property {
         flex: 0 0 30%;
+        max-width: 150px;
         p {
-          color: #333;
+          background-color: #7777bb;
+          color: #fff;
           width: 100%;
           text-align: right;
+          height: 25px;
+          line-height: 25px;
+          text-align: center;
+          border-radius: 5px;
+          margin-right: 10px;
+          padding: 1px 0;
+        }
+      }
+      .value {
+        margin-left: 0px;
+        flex: 0 0 60%;
+        p {
+          line-height: 27px;
+        }
+      }
+      .profile_text_value {
+        flex: 0 0 100%;
+        margin: 5px auto 15px auto;
+        @include pc {
+          font-size: 18px;
+          max-width: 800px;
+        }
+        h2 {
+          padding: 0;
+          margin: 0;
+        }
+        p span {
+          font-weight: bold;
+          display: inline-block;
+          font-size: 15px;
+          color: #7777bb;
+          //border: 1px solid #7777bb;
+          border-left: 10px solid #7777bb;
+          padding: 4px 6px;
+          margin-bottom: 4px;
+          margin-top: 8px;
         }
       }
       .line {
@@ -982,32 +1020,6 @@ strong {
         background-color: #9999aa;
         @include pc {
           margin: 15px auto 20px auto;
-        }
-      }
-      .value {
-        margin-left: 0px;
-        flex: 0 0 60%;
-      }
-      .profile_value {
-        flex: 0 0 100%;
-        margin: 5px auto 15px auto;
-        @include pc {
-          font-size: 18px;
-          max-width: 800px;
-        }
-        span {
-          // font-weight: bold;
-          min-width: 75px;
-          text-align: center;
-          display: inline-block;
-          font-size: 16px;
-          color: #fff;
-          background-color: #7777bb;
-          padding: 4px 8px;
-          border-radius: 5px;
-          margin-right: 5px;
-          margin-bottom: 4px;
-          margin-top: 8px;
         }
       }
     }

@@ -23,6 +23,7 @@ class SearchNoteUsecase
                     if(Country::where('name', $key)->exists()) {
                         $country_id = Country::where('name', $key)->first()->id;
                         $note_ids = DB::table('country_note')->select('note_id')->where('country_id', $country_id)->get();
+                        $array = [];
                         foreach($note_ids as $note_id) {
                             $array[] = $note_id->note_id;
                         }     
