@@ -493,8 +493,8 @@ strong {
           right: 0;
           top: 0;
           .edit_icon_image {
-            margin-right: 12px;
-            margin-top: 8px;
+            margin-right: 10px;
+            margin-top: 6px;
             width: 22px;
           }
         }
@@ -926,12 +926,11 @@ strong {
     .prof_view {
       display: flex;
       flex-wrap: wrap;
-      padding: 5px 10px;
+      margin: 12px 0;
       @include pc {
         padding: 0px;
       }
       .property {
-        padding-bottom: 3px;
         display: flex;
         flex: 0 0 100%;
         p {
@@ -967,6 +966,8 @@ strong {
       }
     }
     .prof_view {
+      padding-right: 5px;
+      padding-left: 5px;
       .property {
         flex: 0 0 30%;
         max-width: 150px;
@@ -981,13 +982,19 @@ strong {
           border-radius: 5px;
           margin-right: 10px;
           padding: 1px 0;
+          @include pc {
+            padding: 2px 0;
+          }
         }
       }
       .value {
         margin-left: 0px;
-        flex: 0 0 60%;
+        flex: 0 0 70%;
         p {
           line-height: 27px;
+          @include pc {
+            line-height: 29px;
+          }
         }
       }
       .profile_text_value {
@@ -995,28 +1002,32 @@ strong {
         margin: 5px auto 15px auto;
         @include pc {
           font-size: 18px;
-          max-width: 800px;
-        }
-        h2 {
-          padding: 0;
-          margin: 0;
+          max-width: 980px;
+          margin-right: 10px;
+          margin-left: 10px;
         }
         p span {
           font-weight: bold;
           display: inline-block;
-          font-size: 15px;
+          font-size: 16px;
           color: #7777bb;
           //border: 1px solid #7777bb;
           border-left: 10px solid #7777bb;
           padding: 4px 6px;
           margin-bottom: 4px;
           margin-top: 8px;
+          @include pc {
+            font-size: 19px;
+            padding: 6px;
+            margin-bottom: 6px;
+            margin-top: 10px;
+          }
         }
       }
       .line {
         height: 1px;
         width: 75%;
-        margin: 3px auto 10px auto;
+        margin: 10px auto 4px auto;
         background-color: #9999aa;
         @include pc {
           margin: 15px auto 20px auto;
@@ -1350,6 +1361,8 @@ strong {
     padding-top: 5px;
     padding-bottom: 5px;
     @include pc {
+      width: 90%;
+      margin: auto;
       padding-top: 8px;
       padding-bottom: 8px;
     }
@@ -1370,7 +1383,7 @@ strong {
         @include pc {
           padding: 10px;
           margin-right: 15px;
-          flex: 0 0 30%;
+          flex: 0 0 25%;
           p {
             line-height: 36px;
             font-size: 17px;
@@ -1385,7 +1398,7 @@ strong {
         flex-wrap: wrap;
         flex: 0 0 100%;
         @include pc {
-          flex: 0 0 60%;
+          flex: 0 0 65%;
           padding: 10px;
         }
         p,
@@ -1492,7 +1505,7 @@ strong {
       }
       .button_wrapper {
         @include pc {
-          margin-left: 33.75%;
+          margin-left: 29.5%;
         }
         button {
           font-size: 16px;
