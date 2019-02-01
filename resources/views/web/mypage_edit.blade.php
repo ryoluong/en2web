@@ -88,7 +88,7 @@
                             <div class="value">
                                 <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.' ' }}@endforeach">
                                 <div class="help-box">
-                                    <p>*複数可</p>
+                                    <p>*複数可, 日本語の通称で入力してください</p>
                                 </div>
                             @if ($errors->has('countries'))
                             <div class="help-box">

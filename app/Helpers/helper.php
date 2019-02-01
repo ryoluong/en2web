@@ -41,10 +41,6 @@ function movePhotosFromTempDirToNoteDir(array $paths, Note $note)
     {
         $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
         Storage::disk('public')->move($path, '/img/note/'.$filename);
-        if(app()->isLocal()) {
-            $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
-        } else {
-            $note->photos()->create(['path' => '/img/note/'.$filename]);
-        }
+        $note->photos()->create(['path' => '/img/note/'.$filename]);
     }
 }

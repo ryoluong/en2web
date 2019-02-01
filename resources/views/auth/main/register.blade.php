@@ -123,7 +123,7 @@
                             <div class="value">
                                 <input type="text" class="input_text" name="countries" value="" placeholder="Ex) アメリカ, 香港">
                                 <div class="help-box">
-                                    <p>*複数可</p>
+                                    <p>*複数可, 日本語の通称で入力してください</p>
                                 </div>
                                 @if ($errors->has('countries'))
                                 <div class="help-box">

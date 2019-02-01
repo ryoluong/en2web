@@ -1195,7 +1195,7 @@ footer .copyright .logo {
 }
 
 .note_item .note .image_holder::before {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
   right: 0;
@@ -1280,7 +1280,7 @@ footer .copyright .logo {
 
 @media (min-width: 768px) {
   .note_item .note .image_holder .textbox .note_title {
-    font-size: 21px;
+    font-size: 22px;
   }
 }
 

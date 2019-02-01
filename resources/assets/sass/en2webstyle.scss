@@ -437,7 +437,7 @@ strong {
         height: 220px;
       }
       &::before {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.6);
         position: absolute;
         top: 0;
         right: 0;
@@ -503,7 +503,7 @@ strong {
           font-size: 20px;
           white-space: normal;
           @include pc {
-            font-size: 21px;
+            font-size: 22px;
           }
         }
         object .note_country {

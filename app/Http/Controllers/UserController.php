@@ -126,19 +126,11 @@ class UserController extends Controller
             $user = auth()->user();
             $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/img/user/'.$filename);
-            if(app()->isLocal()) {
-                if($user->avater_path !== null)
-                {
-                    unlink(public_path().$user->avater_path);
-                }
-                $user->update(['avater_path' => '/storage/img/user/'.$filename]);
-            } else {
-                if($user->avater_path !== null)
-                {
-                    unlink(public_path('storage').$user->avater_path);
-                }
-                $user->update(['avater_path' => '/img/user/'.$filename]);
+            if($user->avater_path !== null)
+            {
+                unlink(public_path('storage').$user->avater_path);
             }
+            $user->update(['avater_path' => '/img/user/'.$filename]);
             return redirect('/mypage');
         } else {
             Storage::disk('public')->delete($path);
@@ -182,19 +174,11 @@ class UserController extends Controller
             $user = auth()->user();
             $filename = 'coverimg_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/img/user/'.$filename);
-            if(app()->isLocal()) {
-                if($user->coverimg_path !== null)
-                {
-                    unlink(public_path().$user->coverimg_path);
-                }
-                $user->update(['coverimg_path' => '/storage/img/user/'.$filename]);
-            } else {
-                if($user->coverimg_path !== null)
-                {
-                    unlink(public_path('storage').$user->coverimg_path);
-                }
-                $user->update(['coverimg_path' => '/img/user/'.$filename]);
+            if($user->coverimg_path !== null)
+            {
+                unlink(public_path('storage').$user->coverimg_path);
             }
+            $user->update(['coverimg_path' => '/img/user/'.$filename]);
             return redirect('/mypage');
         } else {
             Storage::disk('public')->delete($path);
