@@ -138,6 +138,9 @@
                             </div>
                             <div class="value">
                                 <input type="text" class="input_text" name="university" value="{{ old('university') }}" placeholder="Ex) シドニー工科大学">
+                                <div class="help-box">
+                                  <p>*複数入力する場合は , (カンマ) で区切ってください</p>
+                                </div>                                
                                 @if ($errors->has('university'))
                                 <div class="help-box">
                                     <strong>{{ $errors->first('university') }}</strong>

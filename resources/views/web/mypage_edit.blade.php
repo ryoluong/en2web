@@ -88,8 +88,8 @@
                             <div class="value">
                                 <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.' ' }}@endforeach">
                                 <div class="help-box">
-                              <p>*複数可</p>
-                            </div>
+                                    <p>*複数可</p>
+                                </div>
                             @if ($errors->has('countries'))
                             <div class="help-box">
                                     <strong>{{ $errors->first('countries') }}</strong>
@@ -101,8 +101,10 @@
                         <div class="form_view">
                             <div class="property"><p>留学先大学・機関</p></div>
                             <div class="value">
-                                <?php $univ = preg_replace('/[\n]/', ' ', $user->university); ?>
-                                <input name="university" type="text" class="input_text" value="{{ old('university') !== null ? old('university') : $univ }}">
+                                <input name="university" type="text" class="input_text" value="{{ old('university') !== null ? old('university') : $user->university }}">
+                                <div class="help-box">
+                                    <p>*複数入力する場合は , (カンマ) で区切ってください</p>
+                                </div>
                                 @if ($errors->has('university'))
                                 <div class="help-box">
                                     <strong>{{ $errors->first('university') }}</strong>
@@ -134,7 +136,7 @@
                             <div class="value">
                                 <textarea name="profile" class="input_textarea" placeholder="例)３年次に、交換留学で１年間ハノイ貿易大学へ行っていました。現在はIT開発やその勉強に取り組んでいます！">{{ old('profile') !== null ? old('profile') : $user->profile }}</textarea>
                                 <div class="help-box">
-                                    <p>* %%文字列%%と入力すると見出しになります。</p>
+                                    <p>* %%見出し%%と入力すると<span>見出し</span>になります。</p>
                                 </div>
                             </div>
 

@@ -2,11 +2,6 @@
 <html lang=jp>
     <head>
         @include('layouts.web.head')
-        <script>
-            function disableButton() {
-                document.getElementById("disable_button").disabled = true;
-            }
-        </script>        
     </head>
     <body>
         <div id="login">

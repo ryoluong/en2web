@@ -778,9 +778,9 @@ footer .copyright .logo {
   cursor: pointer;
   width: 90px;
   height: 35px;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
   vertical-align: middle;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
 .graybtn {
@@ -790,8 +790,8 @@ footer .copyright .logo {
 
 .graybtn:hover {
   background-color: #bbb;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
 .bluebtn {
@@ -801,8 +801,8 @@ footer .copyright .logo {
 
 .bluebtn:hover {
   background-color: #555577;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
 .redbtn {
@@ -815,8 +815,8 @@ footer .copyright .logo {
 
 .redbtn:hover {
   background-color: #990033;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
 .purplebtn {
@@ -826,8 +826,8 @@ footer .copyright .logo {
 
 .purplebtn:hover {
   background-color: #555577;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
 .passreset {
@@ -2362,6 +2362,7 @@ footer .copyright .logo {
           box-shadow: 1px 1px 5px 2px #ccc;
   width: 95%;
   margin: 15px auto;
+  background-color: #fbfbff;
 }
 
 @media (min-width: 768px) {
@@ -2375,7 +2376,7 @@ footer .copyright .logo {
 .border_card .title {
   width: 100%;
   border: none;
-  background-color: #7777bb;
+  background-color: #7777bb !important;
   border-top-right-radius: 1%;
   border-top-left-radius: 1%;
 }
@@ -2442,7 +2443,6 @@ footer .copyright .logo {
 }
 
 .border_card .content {
-  background-color: #fbfbff;
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -2612,7 +2612,7 @@ footer .copyright .logo {
 
 @media (min-width: 768px) {
   .border_card .content .form_view .value .input_textarea {
-    height: 200px;
+    height: 300px;
   }
 }
 
@@ -2671,6 +2671,23 @@ footer .copyright .logo {
   }
 }
 
+.border_card .content .form_view .help-box span {
+  font-weight: bold;
+  display: inline-block;
+  color: #7777bb;
+  background-color: #ffffff;
+  border-left: 8px solid #7777bb;
+  padding: 2px 4px;
+  margin: 0 3px;
+}
+
+@media (min-width: 768px) {
+  .border_card .content .form_view .help-box span {
+    padding: 6px;
+    margin: 0 5px;
+  }
+}
+
 @media (min-width: 768px) {
   .border_card .content .form_view .button_wrapper {
     margin-left: 29.5%;
@@ -2710,8 +2727,20 @@ footer .copyright .logo {
 
 .border_card .content .form_view .long_text {
   display: block;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   width: 90%;
   margin: 15px auto;
+  padding: 5px 8px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  .border_card .content .form_view .long_text {
+    padding: 8px 10px;
+    max-height: 500px;
+  }
 }
 
 .border_card .content .text_view p {

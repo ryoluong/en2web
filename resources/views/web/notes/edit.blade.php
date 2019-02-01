@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang=jp">
     <head>
-        @include('layouts.web.head')
-        <script>
-            function disableButton() {
-                document.getElementById("disable_button").disabled = true;
-            }
-        </script>        
+        @include('layouts.web.head')       
     </head>
     <body>
         @include('layouts.web.header')

@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang=jp">
     <head>
-        @include('layouts.web.head')
-        <script>
-            function disableButton() {
-                document.getElementById("disable_button").disabled = true;
-            }
-        </script>        
+        @include('layouts.web.head')       
     </head>
     <body>
         @include('layouts.web.header')
@@ -143,7 +138,7 @@
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">
                                     <p class="button_text">Next</p>
-                                    <div class="loader">loading</div>
+                                    <div class="loader">Loading</div>
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">
                                     Back

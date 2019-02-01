@@ -29,12 +29,8 @@ class UserController extends Controller
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
         $flag = 'mypage';
-
-        $pattern = '/%%.+%%/';
-        $replacement = '<span>$0</span>';
-        $escapedString = nl2br(htmlspecialchars($user->profile, ENT_QUOTES, 'UTF-8'));
-        $escapedString = preg_replace($pattern, $replacement, $escapedString);
-        $user->profile = preg_replace('/%%/', '', $escapedString);
+        $user->university = $user->getEscapedStringWithBr();
+        $user->profile = $user->getEscapedProfileWithHeader();
         return view('web.mypage', compact(['user', 'notes', 'flag']));
     }
 
@@ -49,7 +45,7 @@ class UserController extends Controller
         request()->validate([
             'year' => ['nullable', 'digits:4'],
             'department' => ['required', Rule::in(['経済学部','経営学部','教育学部','都市科学部','理工学部'])],
-            'major' => ['required',],// Rule::in(['経済学科','経営学科','教育学科','都市社会共生学科','環境リスク共生学科','建築学科','都市基盤学科','数物・電子情報系学科','化学・生命系学科','機械・材料・海洋系学科'])],
+            'major' => ['required'],
             'generation' => ['required', new GenerationVali],
             'countries' => ['nullable', 'string', 'max:255'],
             'university' => ['nullable', 'string', 'max:255'],
@@ -64,19 +60,18 @@ class UserController extends Controller
         $user->major = request('major');
         $user->generation = request('generation');
         
-        if(request('university') !== null)
-        {
-            $uni_temp = mb_convert_kana(request()->university, 's');
-            $unis = preg_split('/[\s,]+/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
-            $university = '';
-            foreach($unis as $u)
-            {
-                $university .= $u."\n";
-            }
-            $user->university = $university;
-        } else {
-            $user->university = request('university');
-        }
+        // if(request('university') !== null)
+        // {
+        //     $uni_temp = mb_convert_kana(request()->university, 'as');
+        //     $unis = preg_split('/,[\s]*/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
+        //     $university = '';
+        //     foreach($unis as $u)
+        //     {
+        //         $university .= $u."\n";
+        //     }
+        //     $user->university = $university;
+        // } else {}
+        $user->university = request('university');
         $user->isOB = $isOB;
         $user->job = request('job');
         $user->profile = request('profile');

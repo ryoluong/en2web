@@ -98,7 +98,7 @@
                         <div class="value">
                             <p>
                                 @if($user->status == 1)
-                                <?php echo nl2br(htmlspecialchars($user->university, ENT_QUOTES, 'UTF-8')); ?>
+                                {!! $user->university !!}
                                 @else
                                 @endif
                             </p>

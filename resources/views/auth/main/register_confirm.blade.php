@@ -6,7 +6,7 @@
     <body>
         @include('layouts.web.header')
         <div id="registration_conf_page">
-            <form class="form-horizontal" method="POST" action="{{ route('register.main.registered') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('register.main.registered') }}" onsubmit="disableButton()">
                 {{ csrf_field() }}
                 <input type="hidden" class="input_text" name="email_token" value="{{ $email_token }}">
                 <div class="border_card">
@@ -69,8 +69,9 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn">
-                                    Register
+                                <button type="submit" class="bluebtn" id="disable_button">
+                                    <p class="button_text">Register</p>
+                                    <div class="loader">Loading</div>
                                 </button>
                                 <button type="button" onclick="history.back()" class="graybtn">
                                     Back

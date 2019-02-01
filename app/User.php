@@ -42,4 +42,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
+
+    /**
+     * プロフィールのエスケープをした上で、
+     * プロフィールページの%%で囲まれた部分をヘッダー(span)に置き換える
+     * 
+     * @return string
+     */
+    public function getEscapedProfileWithHeader()
+    {
+        $pattern = ['/%%.+%%/', '/%%/'];
+        $replacement = ['<span>$0</span>', ''];
+        $escapedString = nl2br(htmlspecialchars($this->profile, ENT_QUOTES, 'UTF-8'));
+        $escapedString = preg_replace($pattern, $replacement, $escapedString);
+        return $escapedString;        
+    }
+
+    public function getEscapedStringWithBr()
+    {
+        $temp = mb_convert_kana($this->university, 'as');
+        $temp = preg_replace('/,[\s]*/', "\n", $temp);
+        return nl2br(htmlspecialchars($temp, ENT_QUOTES, 'UTF-8'));
+    }
 }
