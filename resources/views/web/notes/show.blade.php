@@ -26,7 +26,7 @@
                 @if($note->photos->count())
                 {{ $note->photos->first()->path }}
                 @else
-                {{ '/img/note/'.$note->category_id.'.jpg' }}
+                {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }}
                 @endif);"
             >
                 <div class="textbox">

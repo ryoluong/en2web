@@ -51,7 +51,7 @@
                     @foreach($categories as $category)
                     <li class="note_item category_item">
                         <a class="link_wrapper" href="/categories/{{ $category->id }}/notes">
-                            <div class="image_wrapper" style="background-image:url({{ '/img/note/'.$category->id.'.jpg' }})">
+                            <div class="image_wrapper" style="background-image:url({{ '/img/note_cover_photo/'.$category->id.'.jpg' }})">
                                 <p class="category_name">{{ $category->name }}</p>
                             </div>
                             <div class="detail_wrapper">
