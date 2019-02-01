@@ -61,7 +61,7 @@ class User extends Authenticatable
     public function getEscapedStringWithBr()
     {
         $temp = mb_convert_kana($this->university, 'as');
-        $temp = preg_replace('/,[\s]*/', "\n", $temp);
+        $temp = preg_replace('/,\s*/', "\n", $temp);
         return nl2br(htmlspecialchars($temp, ENT_QUOTES, 'UTF-8'));
     }
 }
