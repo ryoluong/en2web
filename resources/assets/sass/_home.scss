@@ -3,328 +3,330 @@
  * Top page         *
  *                  *
  ********************/
- #home,#login {
-    margin: 50px auto; 
-    .top_logo {
-        text-align: center;
-        margin: 25px auto;
-        @include pc {
-            margin: 0 auto;
-        }
-        img {
-            width: 80%;
-            @include pc {
-                max-width: 550px;
-                margin: 10px 0px 10px 0px;
-            }
-        }
-        p {
-            text-align: center;
-            margin: 10px 0;
-            color: #555577;
-            @include pc {
-                    font-size: 20px;
-                    padding: 7px 0;
-            }
-        }
-        
+#home,
+#login {
+  margin: 50px auto;
+  .top_logo {
+    text-align: center;
+    margin: 25px auto;
+    @include pc {
+      margin: 0 auto;
     }
-    .icon_table {
-        width: 100%;
-        height: 70vw;
-        @include pc {
-            height: 160px;
-            margin: 40px auto;
-        }
-        .icon_tr {
-            width: 70%;
-            height: 65vw;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            min-width: 250px;
-            @include pc {
-                width: 95%;
-                height: 155px;
-                max-width: 950px;
-            }
-            .icon_td {
-                height: 34vw;
-                position: relative;
-                display: block;
-                text-align: center;
-                flex: 0 0 49%;
-                margin: auto;
-                @include pc {
-                    height: 150px;
-                    flex: 0 0 24%;
-                }
-                a {
-                    width: 81px;
-                    height: 81px;
-                    display: block;
-                    text-decoration: none;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    margin: auto;
-                    @include pc {
-                        width: 140px;
-                        height: 140px;
-                        display: block;
-                        text-decoration: none;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        margin: auto;
-                    }
-                    p {
-                        text-align: center;
-                        font-size: 14px;
-                        padding: 2px 0;
-                        font-weight: bold;
-                        color: #555577;
-                        @include pc {
-                            font-size: 20px;
-                            padding: 7px 0;
-                        }
-                    }
-                    img {
-                        width: 48px;
-                        margin-top: 7.5px;
-                        @include pc {
-                            width: 90px;
-                            margin-top: 0;
-                        }
-                    }
-                }
-            }
-        }
+    img {
+      width: 80%;
+      @include pc {
+        max-width: 550px;
+        margin: 10px 0px 10px 0px;
+      }
     }
-    .logout {
-        margin: 10px auto; 
+    p {
+      text-align: center;
+      margin: 10px 0;
+      color: #555577;
+      @include pc {
+        font-size: 20px;
+        padding: 7px 0;
+      }
+    }
+  }
+  .icon_table {
+    width: 100%;
+    height: 70vw;
+    @include pc {
+      height: 160px;
+      margin: 40px auto;
+    }
+    .icon_tr {
+      width: 70%;
+      height: 65vw;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      min-width: 250px;
+      @include pc {
+        width: 95%;
+        height: 155px;
+        max-width: 950px;
+      }
+      .icon_td {
+        height: 34vw;
+        position: relative;
+        display: block;
         text-align: center;
-        height: 55px;
-        width: 55px;
+        flex: 0 0 49%;
+        margin: auto;
         @include pc {
-            margin: 20px auto;
-            width: 110px;
-            height: 110px;
+          height: 150px;
+          flex: 0 0 24%;
         }
         a {
+          width: 81px;
+          height: 81px;
+          display: block;
+          text-decoration: none;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          @include pc {
+            width: 140px;
+            height: 140px;
             display: block;
             text-decoration: none;
-            p {
-                text-align: center;
-                font-size: 13px;
-                font-weight: bold;
-                color: #7777bb;
-                padding-bottom: 2px;
-                @include pc {
-                    font-size: 18px;
-                    padding: 5px 0;
-                }
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+          }
+          p {
+            text-align: center;
+            font-size: 14px;
+            padding: 2px 0;
+            font-weight: bold;
+            color: #555577;
+            @include pc {
+              font-size: 20px;
+              padding: 7px 0;
             }
-            img {
-                margin-top: 4px;
-                height: 32px;
-                @include pc {
-                    margin-top: 0;
-                    height: 66px;
-                }
+          }
+          img {
+            width: 48px;
+            margin-top: 7.5px;
+            @include pc {
+              width: 90px;
+              margin-top: 0;
             }
+          }
         }
+      }
     }
+  }
+  .logout {
+    margin: 10px auto;
+    text-align: center;
+    height: 55px;
+    width: 55px;
+    @include pc {
+      margin: 20px auto;
+      width: 110px;
+      height: 110px;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      p {
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #7777bb;
+        padding-bottom: 2px;
+        @include pc {
+          font-size: 18px;
+          padding: 5px 0;
+        }
+      }
+      img {
+        margin-top: 4px;
+        height: 32px;
+        @include pc {
+          margin-top: 0;
+          height: 66px;
+        }
+      }
+    }
+  }
 }
 #login {
-    .login_table {
-        height: 230px;
-        width: 100%;
-        @include pc {
-            height: 320px;
-            margin: 30px auto 0 auto;
-            max-width: 600px;
-        }
-        .tr {
-            margin: 0 auto;
-            display: table;
-            table-layout: fixed;
-            width: 70%;
-            min-width: 250px;
-            height: 36px;
-            text-align: center;
-            position: relative;
-            @include pc {
-                height: 60px;
-            }
-            .img {
-                padding: 5px;
-                width: 36px;
-                display: table-cell;
-                position: relative;
-                @include pc {
-                    padding: 10px;
-                    width: 60px;
-                    height: 60px;
-                }
-                img {
-                    width: 36px;
-                    position: absolute;
-                    margin: auto;
-                    top:0;right:0;bottom:0;left:0;
-                    @include pc {
-                        width: 48px;
-                    }
-                }
-            }
-            .input {
-                padding: 5px;
-                height: 36px;
-                display: table-cell;
-                text-align: center;
-                vertical-align: middle;
-                @include pc {
-                    padding: 10px;
-                    height: 60px;
-                }
-                input {
-                    width: 90%;
-                    border: 2px solid #555577;
-                    line-height: 22px;
-                    padding: 4px 6px 1px 6px;
-                    @include pc {
-                        border-width: 3px;
-                        padding: 5px 10px;
-                        line-height: 26px;
-                        font-size: 16px;
-                    }
-                }
-            }
-            .button {
-                display: table-cell;
-                text-align: left;
-                width: 50%;
-                @include pc {
-                    width: 50%;
-                    text-align: center;
-                }
-                
-                button {
-                    font-size: 16px;
-                    font-weight: bold;
-                    margin: 5px;
-                    width: 95px;
-                    height: 35px;
-                    border: 3px solid #555577;
-                    background-color: #555577;
-                    border-radius: 3px;
-                    color: #fff;
-                    cursor: hand;
-                    cursor: pointer;
-                    transition: 0.3s;
-                    @include pc {
-                        font-size: 18px;
-                        margin: 10px;
-                        width: 100px;
-                        height: 40px;
-                        border-width: 3px;
-                    }
-                    &:hover {
-                        border: 3px solid #555577;
-                        background-color: #fff;
-                        color: #555577;
-                        transition: 0.3s;
-                    }
-                }
-            }
-        }
-        .help-block {
-            height: 25px;
-            vertical-align: top;
-            text-align: center;
-        }
-        .passreset {
-            height: 25px;
-            margin: 15px auto 0 auto;
-            a {
-                text-decoration: underline;
-                width: 160px;
-                display: block;
-                margin: 0 auto;
-                font-size: 14px;
-                @include pc {
-                    width: 100%;
-                    font-size: 15px;
-                }
-                p {
-                    transition: 0.3s;
-                }
-                &:hover {
-                    p {
-                    color: #888;
-                    transition: 0.3s;
-                    }
-                }
-            }
-        }
+  .login_table {
+    height: 230px;
+    width: 100%;
+    @include pc {
+      height: 320px;
+      margin: 30px auto 0 auto;
+      max-width: 600px;
     }
-    table {
-        height: 40px;
-        width: 90%;
-        margin:auto;
-        table-layout: fixed;
+    .tr {
+      margin: 0 auto;
+      display: table;
+      table-layout: fixed;
+      width: 70%;
+      min-width: 250px;
+      height: 36px;
+      text-align: center;
+      position: relative;
+      @include pc {
+        height: 60px;
+      }
+      .img {
+        padding: 5px;
+        width: 36px;
+        display: table-cell;
+        position: relative;
         @include pc {
-            max-width: 550px;
+          padding: 10px;
+          width: 60px;
+          height: 60px;
         }
-        tr {
-            td {
-                .border {
-                    height: 2px;
-                    background-color: #555577;
-                }
-            }
-            .text {
-                width: 10%;
-                text-align: center;
-                p {
-                    color: #555577;
-                    font-weight: bold;
-                }
-            }
+        img {
+          width: 36px;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          @include pc {
+            width: 48px;
+          }
         }
-        
-    }
-    .register {
-        display: block;
-        font-size: 16px;
-        font-weight: bold;
-        margin: 10px auto; 
+      }
+      .input {
+        padding: 5px;
+        height: 36px;
+        display: table-cell;
         text-align: center;
-        text-decoration: none;
-        width: 95px;
-        height: 35px;
-        border: 2px solid #6666bb  ;
-        color: #fff;
-        background-color: #6666bb;
-        border-radius: 3px;
-        cursor: hand;
-        cursor: pointer;
-        transition: 0.3s;
+        vertical-align: middle;
         @include pc {
-            border-width: 3px;
+          padding: 10px;
+          height: 60px;
+        }
+        input {
+          width: 90%;
+          border: 2.3px solid #555577;
+          line-height: 22px;
+          padding: 3px 6px 3px 6px;
+          @include pc {
+            border-width: 3.3px;
+            padding: 5px 10px;
+            line-height: 26px;
+            font-size: 16px;
+          }
+        }
+      }
+      .button {
+        display: table-cell;
+        text-align: left;
+        width: 50%;
+        @include pc {
+          width: 50%;
+          text-align: center;
+        }
+
+        button {
+          font-size: 16px;
+          font-weight: bold;
+          margin: 5px;
+          width: 95px;
+          height: 35px;
+          border: 3px solid #555577;
+          background-color: #555577;
+          border-radius: 3px;
+          color: #fff;
+          cursor: hand;
+          cursor: pointer;
+          transition: 0.3s;
+          @include pc {
             font-size: 18px;
+            margin: 10px;
             width: 100px;
             height: 40px;
-            margin: 12px auto;
+            border-width: 3px;
+          }
+          &:hover {
+            border: 3px solid #555577;
+            background-color: #fff;
+            color: #555577;
+            transition: 0.3s;
+          }
+        }
+      }
+    }
+    .help-block {
+      height: 25px;
+      vertical-align: top;
+      text-align: center;
+    }
+    .passreset {
+      height: 25px;
+      margin: 15px auto 0 auto;
+      a {
+        text-decoration: underline;
+        width: 160px;
+        display: block;
+        margin: 0 auto;
+        font-size: 14px;
+        @include pc {
+          width: 100%;
+          font-size: 15px;
+        }
+        p {
+          transition: 0.3s;
         }
         &:hover {
-            background-color: #fff;
-            color: #6666bb;
+          p {
+            color: #888;
             transition: 0.3s;
+          }
         }
+      }
     }
+  }
+  table {
+    height: 40px;
+    width: 90%;
+    margin: auto;
+    table-layout: fixed;
+    @include pc {
+      max-width: 550px;
+    }
+    tr {
+      td {
+        .border {
+          height: 2px;
+          background-color: #555577;
+        }
+      }
+      .text {
+        width: 10%;
+        text-align: center;
+        p {
+          color: #555577;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .register {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    text-decoration: none;
+    width: 95px;
+    height: 35px;
+    border: 2px solid #6666bb;
+    color: #fff;
+    background-color: #6666bb;
+    border-radius: 3px;
+    cursor: hand;
+    cursor: pointer;
+    transition: 0.3s;
+    @include pc {
+      border-width: 3px;
+      font-size: 18px;
+      width: 100px;
+      height: 40px;
+      margin: 12px auto;
+    }
+    &:hover {
+      background-color: #fff;
+      color: #6666bb;
+      transition: 0.3s;
+    }
+  }
 }

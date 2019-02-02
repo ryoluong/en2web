@@ -176,7 +176,7 @@ class NotesController extends Controller
     public function show(Note $note)
     {
         $escapedString = nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8'));
-        $pattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:[\.\/][A-Z0-9][\?&;=A-Z0-9_-]*)+):?(\d+)?\/?/i';
+        $pattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:[\.\/][\?%#A-Z0-9][\?&%;=#A-Z0-9_-]*)+):?(\d+)?\/?/i';
         $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
         $note->content = preg_replace($pattern, $replacement, $escapedString);
         return view('web.notes.show', compact(['note']));
@@ -287,11 +287,7 @@ class NotesController extends Controller
                     $newindex = $index + $current_index;
                     $filename = 'photo_'.$note->id.'_'.$newindex.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
                     Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    if(app()->isLocal()) {
-                        $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
-                    } else {
-                        $note->photos()->create(['path' => '/img/note/'.$filename]);
-                    }
+                    $note->photos()->create(['path' => '/img/note/'.$filename]);
                 }
             }
             if($request->delete_paths !== null)

@@ -1724,6 +1724,55 @@ strong {
     }
   }
 }
+
+.search_conditions {
+  max-width: 950px;
+  margin: auto;
+  width: 95vw;
+  background-color: #eeeeff;
+  padding: 5px 0;
+  border-left: 5vw solid #7777bb;
+  margin-bottom: 10px;
+  @include pc {
+    border-left-width: 50px;
+    padding: 8px 0;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  .conditions_title {
+    font-size: 18px;
+    color: #fff;
+    background-color: #7777bb;
+  }
+  .conditions_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3px 0;
+    @include pc {
+      font-size: 18px;
+      padding: 6px 0;
+    }
+    .property {
+      display: block;
+      width: 25%;
+      text-align: right;
+      color: #333350;
+      font-weight: bold;
+      @include pc {
+        width: 15%;
+      }
+    }
+    .value {
+      display: block;
+      width: 70%;
+      padding-left: 10px;
+      color: #333333;
+      @include pc {
+        padding-left: 20px;
+      }
+    }
+  }
+}
 .numOfNotes {
   font-size: 17px;
   padding: 2px 0;
@@ -1734,11 +1783,16 @@ strong {
     font-size: 20px;
   }
   p {
+    color: #333333;
     padding-left: 25px;
     @include pc {
       padding-left: 20px;
     }
   }
+}
+.not_found {
+  display: block;
+  font-size: 18px;
 }
 
 /**************************
@@ -1993,22 +2047,6 @@ strong {
       }
     }
   }
-  .content {
-    color: #444;
-    max-width: 768px;
-    width: 92%;
-    line-height: 1.9em;
-    font-size: 16px;
-    margin: 15px auto;
-    word-wrap: break-word;
-    @include pc {
-      font-size: 18px;
-    }
-    .escaped_link {
-      display: inline;
-      color: #00aaca;
-    }
-  }
   .photos_wrapper {
     overflow-x: auto;
     white-space: nowrap;
@@ -2043,6 +2081,22 @@ strong {
           height: 300px;
         }
       }
+    }
+  }
+  .content {
+    color: #444;
+    max-width: 768px;
+    width: 92.5%;
+    line-height: 1.9em;
+    font-size: 15.5px;
+    margin: 15px auto;
+    word-wrap: break-word;
+    @include pc {
+      font-size: 18px;
+    }
+    .escaped_link {
+      display: inline;
+      color: #00aaca;
     }
   }
 }

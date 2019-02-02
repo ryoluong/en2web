@@ -58,10 +58,64 @@
                 <p class="category_name">全てのノート</p>
             </div>
             @endif
-            <div class="numOfNotes"><p>{{ $count }}件のノート</p></div>
             @if($flag == 'search')
             <div class="search_conditions">
+                @if(!empty(request('keywords')))
+                <div class="conditions_wrapper">
+                    <p class="property">Keyword</p>
+                    <p class="value">{{ request('keywords') }}</p>
+                </div>
+                @endif
+                @if(!is_null(request('category_id')))
+                <div class="conditions_wrapper">
+                    <p class="property">Category</p>
+                    <p class="value">{{ App\Category::where('id', request('category_id'))->first()->name }}</p>
+                </div>
+                @endif
+                @if(!is_null(request('tag_ids')))
+                <div class="conditions_wrapper">
+                    <p class="property">Tag</p>
+                    <p class="value">
+                        @foreach(request('tag_ids') as $tag_id)
+                        {{ App\Tag::where('id', $tag_id)->first()->name }}
+                        @endforeach
+                    </p>
+                </div>
+                @endif
+                @if(!empty(request('author')))
+                <div class="conditions_wrapper">
+                    <p class="property">Author</p>
+                    <p class="value">{{ request('author') }}</p>
+                </div>
+                @endif
+                @if(!empty(request('from_year')))
+                <div class="conditions_wrapper">
+                    <p class="property">Date</p>
+                    <p class="value">{{ request('from_year').'年' }}{{ !empty(request('from_month')) ? request('from_month').'月' : ''}}から</p>
+                </div>
+                @endif         
+                @if(!empty(request('to_year')))
+                <div class="conditions_wrapper">
+                    <p class="property">{{ empty(request('from_year')) ? 'Date' : '' }}</p>
+                    <p class="value">{{ request('to_year').'年' }}{{ !empty(request('to_month')) ? request('to_month').'月' : ''}}まで</p>
+                </div>
+                @endif     
+                @if(!empty(request('isBest')))
+                <div class="conditions_wrapper">
+                    <p class="property">Best Note</p>
+                    <p class="value">Best Noteのみ</p>
+                </div>
+                @endif                                                 
             </div>
+            @endif
+            @if($notes->count())
+            <div class="numOfNotes"><p>{{ $count }}件のノート</p></div>
+            @else
+            <div class="numOfNotes">
+                <p>ノートが見つかりませんでした。</p>
+            </div>
+            @endif
+            @if($flag == 'search')
             <div class="sp_block">{{ $notes->appends(request()->all())->links() }}</div>
             @else
             <div class="sp_block">{{ $notes->links() }}</div>

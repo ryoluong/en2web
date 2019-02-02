@@ -11,8 +11,11 @@
             <div class="border_card">
                 <div class="title">
                     <div class="table_view">
-                        <div class="text"><p>Reset Password</p></div>
+                        <div class="text">
+                            <p>Reset Password</p>
+                        </div>
                         <div class="link"></div>
+                    </div>
                 </div>
                 <div class="content">
                     <div class="form_view">
@@ -27,8 +30,7 @@
                             @endif
                             </div>
                             <input type="hidden" name="token" value="{{ $token }}">
-                        </div>
-                    
+                        </div>             
                     </div>
                     <div class="form_view">
                         <div class="property">

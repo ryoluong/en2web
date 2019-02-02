@@ -15,6 +15,11 @@
                     </div>
                     <div class="content">
                         <div class="form_view">
+                            @if ($errors->has('validator'))
+                            <div class="help-box">
+                                <strong style="font-size: 15px;">検索条件を指定してください</strong>
+                            </div>
+                            @endif   
                             <div class="property"><p>Keywords</p></div>
                             <div class="value">
                                 <input type="text" name="keywords" class="input_text" value="{{ old('keywords') }}" placeholder="Enter keyword">
@@ -143,9 +148,10 @@
                             <div class="help-box">
                                 <strong>{{ $errors->first('isBest') }}</strong>
                             </div>
-                            @endif
+                            @endif                        
                             </div>
                         </div>
+                        <input type="hidden" value="" name="validator">
                         <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">

@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link type="text/css" rel="stylesheet" href="/css/en2webstyle.css?v=20190201">
+<link type="text/css" rel="stylesheet" href="/css/en2webstyle.css?v=20190202">
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
 <title>En2::Web</title>
@@ -52,12 +52,13 @@
 
 @if(!app()->isLocal())
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-131467484-1');
+
+  gtag('config', 'UA-131467484-2');
 </script>
 @endif
 <!-- Disable Button -->

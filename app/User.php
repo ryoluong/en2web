@@ -44,9 +44,8 @@ class User extends Authenticatable
     }
 
     /**
-     * プロフィールのエスケープをした上で、
-     * プロフィールページの%%で囲まれた部分をヘッダー(span)に置き換える
-     * 
+     * ユーザーの「プロフィール」のエスケープをした上で、
+     * %%で囲まれた部分をヘッダー(span)に置き換える
      * @return string
      */
     public function getEscapedProfileWithHeader()
@@ -58,6 +57,10 @@ class User extends Authenticatable
         return $escapedString;        
     }
 
+    /**
+     * ユーザーの「留学先大学」を,(コンマ)で区切り改行する
+     * @return string
+     */
     public function getEscapedStringWithBr()
     {
         $temp = mb_convert_kana($this->university, 'as');

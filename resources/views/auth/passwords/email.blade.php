@@ -13,6 +13,7 @@
                     <div class="table_view">
                         <div class="text"><p>Reset Password</p></div>
                         <div class="link"></div>
+                    </div>
                 </div>
                 <div class="content">
                     <div class="form_view">
