@@ -25,8 +25,10 @@ class SearchFormRequest extends FormRequest
     {
         $custom_validator = function ($attribute, $value, $fail) {
             $input_data = $this->all();
-            if($input_data['from_year'] > $input_data['to_year'] or $input_data['from_year'] = $input_data['to_year'] && $input_data['from_month'] > $input_data['to_month']) {
-                $fail('Selected data is invalid.');
+            if(!empty($input_data['from_year'])) {
+                if($input_data['from_year'] > $input_data['to_year'] or $input_data['from_year'] = $input_data['to_year'] && $input_data['from_month'] > $input_data['to_month']) {
+                    $fail('Selected data is invalid.');
+                }
             }
         };
         return [
