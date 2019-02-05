@@ -41,12 +41,6 @@
                         </a>
                     </td>
                     <td class="icon_td">
-                        <a href="/countries">
-                            <img src="/img/top_world.png" alt="countries">
-                            <p>Countries</p>
-                        </a>
-                    </td>
-                    <td class="icon_td">
                         <a href="/notes">
                             <img src="/img/top_note.png" alt="note">
                             <p>Notes</p>
@@ -57,18 +51,34 @@
                             <img src="/img/top_members.png" alt="members">
                             <p>Members</p>
                         </a>
+                    </td>
+                    <td class="icon_td">
+                        <a href="/countries">
+                            <img src="/img/top_world.png" alt="countries">
+                            <p>Countries</p>
+                        </a>
                     </td>                    
+                    <td class="icon_td">
+                        <a href="/calendar">
+                            <img src="/img/top_calendar.png" alt="calendar">
+                            <p>Calendar</p>
+                        </a>
+                    </td>
+                    <td class="icon_td">
+                        <a href="/support">
+                            <img src="/img/top_support.png" alt="support">
+                            <p>Support</p>
+                        </a>
+                    </td>
                 </tr>
             </table>
-            <div class="logout">
-                <a href=""{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <img src="/img/top_logout.png" alt="logout">
-                    <p>Logout</p>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </a>
-            </div>
+            <a class="logout" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <img class="icon" src="/img/top_logout.png" alt="logout">
+                <p class="text">Logout</p>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </a>
         </div>
     </body>
 </html>

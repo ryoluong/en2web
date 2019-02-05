@@ -81,6 +81,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar/{eventId}', 'CalendarController@edit');
     Route::post('/calendar/{eventId}', 'CalendarController@update');
     Route::delete('/calendar/{eventId}', 'CalendarController@destroy');
+
+    /**
+     * Support
+     */
+    Route::get('/support', 'UserController@support');
+    Route::post('/support', 'UserController@sendMail');
 });
 
 /**

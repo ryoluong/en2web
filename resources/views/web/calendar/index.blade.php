@@ -10,7 +10,7 @@
                 <img src="/img/top_calendar.png" alt="calendar">
             </a>
             <div class="text">
-                <a href="/calendar">Calendar (β版)</a>
+                <a href="/calendar">Calendar</a>
             </div>
             <a class="link" href="/calendar/create">
                 <img src="/img/note_create.png" alt="">

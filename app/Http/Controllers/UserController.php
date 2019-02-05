@@ -8,6 +8,8 @@ use App\Rules\GenerationVali;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use App\Mail\SupportFormMessage;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Country;
 use App\Tag;
@@ -184,5 +186,20 @@ class UserController extends Controller
             Storage::disk('public')->delete($path);
             return redirect('/mypage/upload_coverimg');
         }
+    }
+
+    public function support()
+    {
+        return view('web.support.form');
+    }
+
+    public function sendMail()
+    {
+        request()->validate([
+            'message' => ['required', 'string', 'max:2000']
+        ]);
+        $email = new SupportFormMessage(request('message'));
+        Mail::to('admin@en2ynu.com')->send($email);
+        return view('web.support.sent');
     }
 }

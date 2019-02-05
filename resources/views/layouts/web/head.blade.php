@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link type="text/css" rel="stylesheet" href="/css/en2webstyle.css?v=20190205">
+<link type="text/css" rel="stylesheet" href="/css/en2webstyle.css?v=2019020502">
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
 <title>En2::Web</title>
