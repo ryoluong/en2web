@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <form method="POST" action="/support">
+                    <form method="POST" action="/support" onsubmit="disableButton()">
                     {{ csrf_field() }}
                         <div class="form_view">
                             <div class="property"><p>Message</p></div>
@@ -34,9 +34,10 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                            <button type="submit" class="bluebtn">
-                                Send
-                            </button>
+                                <button type="submit" class="bluebtn" id="disable_button">
+                                    <p class="button_text">Send</p>
+                                    <div class="loader">Loading</div>
+                                </button>
                             <button type="button" onclick="history.back()" class="graybtn">
                                 Back
                             </button>

@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <form method="POST" action="/mypage/update">
+                    <form method="POST" action="/mypage/update" onsubmit="disableButton()">
                     {{ method_field('PATCH') }}
                     {{ csrf_field() }}
                         <div class="form_view">
@@ -143,12 +143,13 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                            <button type="submit" class="bluebtn">
-                                Save
-                            </button>
-                            <button type="button" onclick="history.back()" class="graybtn">
-                                Back
-                            </button>
+                                <button type="submit" class="bluebtn" id="disable_button">
+                                    <p class="button_text">Save</p>
+                                    <div class="loader">Loading</div>
+                                </button>
+                                <button type="button" onclick="history.back()" class="graybtn">
+                                    Back
+                                </button>
                             </div>
                         </div>
                     </form>
