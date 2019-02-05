@@ -24,7 +24,7 @@
             <div class="headerTop">
                 <div class="blank"><a href=""></a></div>
                 <div class="logo"><a href="/"><img src="img/logo.png" alt="logo"></a></div>
-                <div class="btn"><a href="/login" target=”_blank”>For members</a></div>
+                <div class="btn"><a href="/login" target="_blank">For members</a></div>
             </div>
                 <ul class="menu">
                     <li><a href="/study_abroad">Study abroad</a></li>

@@ -14,12 +14,4 @@ class Tag extends Model
     {
         return $this->belongsToMany(Note::class);
     }
-
-    // public function syncNote(array $tag_ids, Note $note)
-    // {
-    //     foreach ($tag_ids as $tag_id)
-    //     {
-    //         $note->tags()->sync($tag_id);
-    //     }
-    // }
 }

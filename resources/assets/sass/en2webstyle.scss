@@ -22,6 +22,26 @@
   left: 0;
   margin: auto;
 }
+@mixin icon_deco_before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-color: rgba(100, 100, 230, 0.3);
+  border-radius: 10%;
+  transform: rotate(10deg);
+  z-index: -2;
+}
+@mixin icon_deco_after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-color: rgba(0, 170, 230, 0.2);
+  border-radius: 10%;
+  transform: rotate(24deg);
+  z-index: -1;
+}
 
 * {
   color: #555;
@@ -85,6 +105,7 @@ strong {
 @import "header";
 @import "home";
 @import "footer";
+@import "calendar";
 
 /*****************
  *               *
@@ -1435,6 +1456,14 @@ strong {
             width: 300px;
           }
         }
+        .input_time {
+          width: 100px;
+        }
+        .fromto {
+          width: 25px;
+          text-align: center;
+          margin: 0 5px;
+        }
         .year_month {
           width: 100%;
           margin-bottom: 5px;
@@ -1572,11 +1601,6 @@ strong {
 }
 #edit_note,
 #delete_note {
-  .deletebtn {
-    width: 200px;
-    text-align: center;
-    margin: 0 auto 30px auto;
-  }
   h2 {
     text-align: center;
     font-size: 15px;
@@ -1585,6 +1609,11 @@ strong {
     }
   }
 }
+  .deletebtn {
+    width: 200px;
+    text-align: center;
+    margin: 0 auto 30px auto;
+  }
 /***********************************************************
  *                                                         *
  *                   category_wrapper                      *
@@ -1678,23 +1707,30 @@ strong {
     border-radius: 10%;
     transform: rotate(8deg);
     z-index: -1;
+    @include pc {
+      margin-left: 0.83em;
+      width: 36px;
+      height: 36px;
+    }
   }
   &:after {
     content: "";
     display: inline-block;
     width: 31px;
     height: 31px;
-    background-color: #00aaca;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    margin-top: 0.52em;
+    margin-top: auto;
     margin-bottom: auto;
     margin-left: 0.225em;
     background-color: rgba(0, 170, 230, 0.2);
     border-radius: 10%;
     transform: rotate(18deg);
     z-index: -2;
+    @include pc {
+      margin-left: 0.83em;
+      width: 36px;
+      height: 36px;
+    }
   }
 }
 .country_wrapper {

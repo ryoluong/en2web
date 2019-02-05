@@ -71,6 +71,16 @@ Route::middleware(['auth'])->group(function () {
     //search
     Route::get('/notes/search', 'NotesController@showSearchForm');
     Route::get('/notes/search/result', 'NotesController@search');
+
+    /**
+     * Calendar
+     */
+    Route::get('/calendar', 'CalendarController@index');
+    Route::get('/calendar/create', 'CalendarController@create');
+    Route::post('/calendar', 'CalendarController@store');
+    Route::get('/calendar/{eventId}', 'CalendarController@edit');
+    Route::post('/calendar/{eventId}', 'CalendarController@update');
+    Route::delete('/calendar/{eventId}', 'CalendarController@destroy');
 });
 
 /**

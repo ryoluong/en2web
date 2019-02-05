@@ -681,7 +681,7 @@ header .menu .splitter div {
 footer {
   background-color: #3a3a55;
   position: relative;
-  height: 75px;
+  height: 85px;
   text-align: center;
   -webkit-box-shadow: 0 0 6px 2px #ccc;
           box-shadow: 0 0 6px 2px #ccc;
@@ -691,13 +691,13 @@ footer {
 @media (min-width: 768px) {
   footer {
     margin-top: 45px;
-    height: 110px;
+    height: 125px;
   }
 }
 
 footer .footer_menu {
   width: 90%;
-  max-width: 800px;
+  max-width: 1000px;
   list-style: none;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -716,9 +716,15 @@ footer .footer_menu {
 
 footer .footer_menu .menu_list {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 20%;
-          flex: 0 0 20%;
+      -ms-flex: 0 0 33%;
+          flex: 0 0 33%;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  footer .footer_menu .menu_list {
+    line-height: 24px;
+  }
 }
 
 footer .footer_menu .menu_list .menu_link {
@@ -759,6 +765,216 @@ footer .copyright {
 
 footer .copyright .logo {
   height: 20px;
+}
+
+.main {
+  width: 95%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  height: 400px;
+  margin: 20px auto;
+}
+
+@media (min-width: 768px) {
+  iframe {
+    height: 600px;
+  }
+}
+
+.agenda {
+  display: block;
+  width: 90%;
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+}
+
+@media (min-width: 768px) {
+  .agenda {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+.agenda .add {
+  display: block;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  position: relative;
+  height: 50px;
+  padding: 5px 0;
+}
+
+@media (min-width: 768px) {
+  .agenda .add {
+    height: 60px;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 30%;
+            flex: 0 0 30%;
+    margin: 1.6%;
+    padding: 15px 0;
+  }
+}
+
+.agenda .add .button {
+  background-color: #7777bb;
+  -webkit-box-shadow: 1px 1px 5px 1px #ddd;
+          box-shadow: 1px 1px 5px 1px #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  display: block;
+  height: 50px;
+  width: 55%;
+  text-align: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .agenda .add .button {
+    width: 75%;
+    height: 60px;
+  }
+}
+
+.agenda .add .button .icon {
+  height: 18px;
+  width: 18px;
+  padding: 16px 5px;
+}
+
+@media (min-width: 768px) {
+  .agenda .add .button .icon {
+    height: 20px;
+    width: 20px;
+    padding: 20px 5px;
+  }
+}
+
+.agenda .add .button .text {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 0 5px;
+  vertical-align: top;
+}
+
+@media (min-width: 768px) {
+  .agenda .add .button .text {
+    font-size: 20px;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+
+.agenda .add .button:hover {
+  background-color: #555577;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.agenda .event {
+  display: block;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px 1px #ddd;
+          box-shadow: 1px 1px 5px 1px #ddd;
+}
+
+@media (min-width: 768px) {
+  .agenda .event {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 30%;
+            flex: 0 0 30%;
+    margin: 1.6%;
+  }
+}
+
+.agenda .event .title {
+  display: block;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #7777bb;
+  height: 35px;
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .agenda .event .title {
+    font-size: 20px;
+  }
+}
+
+.agenda .event .title .text {
+  color: #ffffff;
+  font-size: 18px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  line-height: 35px;
+}
+
+.agenda .event .title .icon {
+  height: 35px;
+  width: 35px;
+}
+
+@media (min-width: 768px) {
+  .agenda .event .title .icon {
+    height: 35px;
+    width: 35px;
+    padding: 0;
+  }
+}
+
+.agenda .event .title .icon .img {
+  height: 20px;
+  width: 20px;
+  padding: 7.5px;
+}
+
+.agenda .event .wrapper {
+  display: block;
+  background-color: #fdfdff;
+  padding: 7px 0;
+}
+
+@media (min-width: 768px) {
+  .agenda .event .wrapper {
+    padding: 7px 10px;
+  }
+}
+
+.agenda .event .wrapper .description {
+  padding: 0 12px;
+}
+
+@media (min-width: 768px) {
+  .agenda .event .wrapper .description {
+    padding: 0 15px;
+  }
 }
 
 /*****************
@@ -2573,6 +2789,16 @@ footer .copyright .logo {
   }
 }
 
+.border_card .content .form_view .value .input_time {
+  width: 100px;
+}
+
+.border_card .content .form_view .value .fromto {
+  width: 25px;
+  text-align: center;
+  margin: 0 5px;
+}
+
 .border_card .content .form_view .value .year_month {
   width: 100%;
   margin-bottom: 5px;
@@ -2753,13 +2979,6 @@ footer .copyright .logo {
   }
 }
 
-#edit_note .deletebtn,
-#delete_note .deletebtn {
-  width: 200px;
-  text-align: center;
-  margin: 0 auto 30px auto;
-}
-
 #edit_note h2,
 #delete_note h2 {
   text-align: center;
@@ -2771,6 +2990,12 @@ footer .copyright .logo {
   #delete_note h2 {
     font-size: 20px;
   }
+}
+
+.deletebtn {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto 30px auto;
 }
 
 /***********************************************************
@@ -2901,16 +3126,21 @@ footer .copyright .logo {
   z-index: -1;
 }
 
+@media (min-width: 768px) {
+  .icon_decoration:before {
+    margin-left: 0.83em;
+    width: 36px;
+    height: 36px;
+  }
+}
+
 .icon_decoration:after {
   content: "";
   display: inline-block;
   width: 31px;
   height: 31px;
-  background-color: #00aaca;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-top: 0.52em;
+  margin-top: auto;
   margin-bottom: auto;
   margin-left: 0.225em;
   background-color: rgba(0, 170, 230, 0.2);
@@ -2918,6 +3148,14 @@ footer .copyright .logo {
   -webkit-transform: rotate(18deg);
           transform: rotate(18deg);
   z-index: -2;
+}
+
+@media (min-width: 768px) {
+  .icon_decoration:after {
+    margin-left: 0.83em;
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .country_wrapper {

@@ -1,17 +1,17 @@
 footer {
   background-color: #3a3a55;
   position: relative;
-  height: 75px;
+  height: 85px;
   text-align: center;
   box-shadow: 0 0 6px 2px #ccc;
   margin-top: 20px;
   @include pc {
     margin-top: 45px;
-    height: 110px;
+    height: 125px;
   }
   .footer_menu {
     width: 90%;
-    max-width: 800px;
+    max-width: 1000px;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -21,8 +21,11 @@ footer {
       padding-top: 8px;
     }
     .menu_list {
-      flex: 0 0 20%;
+      flex: 0 0 33%;
       text-align: center;
+      @include pc {
+        line-height: 24px;
+      }
       .menu_link {
         text-decoration: none;
         display: inline-block;
