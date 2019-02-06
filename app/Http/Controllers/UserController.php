@@ -61,18 +61,6 @@ class UserController extends Controller
         $user->department = request('department');
         $user->major = request('major');
         $user->generation = request('generation');
-        
-        // if(request('university') !== null)
-        // {
-        //     $uni_temp = mb_convert_kana(request()->university, 'as');
-        //     $unis = preg_split('/,[\s]*/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
-        //     $university = '';
-        //     foreach($unis as $u)
-        //     {
-        //         $university .= $u."\n";
-        //     }
-        //     $user->university = $university;
-        // } else {}
         $user->university = request('university');
         $user->isOB = $isOB;
         $user->job = request('job');
@@ -87,17 +75,16 @@ class UserController extends Controller
 
     public function uploadAvater() {
         $flag = 'avater';
-        return view('web.user.upload_an_image', compact(['flag']));
+        return view('web.user.upload_image', compact(['flag']));
     }
 
     public function uploadAvater_confirm(Request $request) {
         $photo = $request->file('file');
         $filename = uniqid('image_').'.'.$photo->guessExtension();
         $image = \Image::make(file_get_contents($photo->getRealPath()));
-        if($image->width() >= $image->height())
-        {
+        $image = getOrientatedImage($image, $photo);
+        if($image->width() >= $image->height()) {
             $image
-                ->orientate()
                 ->resize(null, 500, function($constraint)
                     {
                         $constraint->aspectRatio();
@@ -105,12 +92,10 @@ class UserController extends Controller
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         } else {
             $image
-                ->orientate()
                 ->resize(500, null, function($constraint)
                     {
                         $constraint->aspectRatio();
                     })
-                
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         }
         $path = '/img/tmp/'.$filename;
@@ -120,10 +105,10 @@ class UserController extends Controller
 
     public function uploadAvater_save(Request $request) 
     {
-        $action = $request->get('action', 'back');
+        $action = $request->get('action', 'update');
         $input = $request->except('action');
         $path = $request->path;
-        if($action === 'update')
+        if($action == 'update')
         {
             $user = auth()->user();
             $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
@@ -147,28 +132,27 @@ class UserController extends Controller
      */
     public function uploadCoverimg() {
         $flag = 'coverimg';
-        return view('web.user.upload_an_image', compact(['flag']));
+        return view('web.user.upload_image', compact(['flag']));
     }
 
     public function uploadCoverimg_confirm(Request $request) {
         $photo = $request->file('file');
         $filename = uniqid('image_').'.'.$photo->guessExtension();
         $image = \Image::make(file_get_contents($photo->getRealPath()));
+        $image = getOrientatedImage($image, $photo);
         $image
-            ->orientate()
             ->resize(null, 900, function($constraint)
                 {
                     $constraint->aspectRatio();
                 })
             ->save(public_path().'/storage/img/tmp/'.$filename);
         $path = '/img/tmp/'.$filename;
-
         return view('web.user.upload_coverimg_confirm', compact(['path']));
     }
 
     public function uploadCoverimg_save(Request $request) 
     {
-        $action = $request->get('action', 'back');
+        $action = $request->get('action', 'update');
         $input = $request->except('action');
         $path = $request->path;
         if($action === 'update')

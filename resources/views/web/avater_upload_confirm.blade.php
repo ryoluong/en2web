@@ -26,13 +26,14 @@
                             <input type="hidden" class="input_text" name="path" value="{{ $path }}">
                             </div>
                             <div class="help-box">
-                                <p>※スマホからアップロードすると、画像の向きが正しく表示されない場合があります。その場合は画像を正方形にトリミングしてから再度アップロードしてください。</p>
+                                <p>自動で画像がトリミングされます。調整したい場合、トリミングしてから再度アップロードしてください。</p>
                             </div>
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn" name='action' value="update">
-                                    Confirm
+                                <button type="submit" class="bluebtn" id="disable_button" onclick="disableButton();submit()">
+                                    <div class="button_text">Confirm</div>
+                                    <div class="loader">Loading</div>
                                 </button>
                                 <button type="submit" class="graybtn" name='action' value="back">
                                     Back

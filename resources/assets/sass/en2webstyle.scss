@@ -1574,6 +1574,13 @@ strong {
           margin: 5px 10px;
         }
       }
+      .cover_image {
+        height: 120px;
+        width: 100%;
+        @include pc {
+          height: 160px;
+        }
+      }
       .long_text {
         display: block;
         background-color: #ffffff;

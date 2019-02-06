@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <form method="POST" action="{{ $flag == 'coverimg' ? '/mypage/upload_coverimg' : '/mypage/upload_avater' }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ $flag == 'coverimg' ? '/mypage/upload_coverimg' : '/mypage/upload_avater' }}" enctype="multipart/form-data" onsubmit="disableButton()">
                     {{ csrf_field() }}
                         <div class="form_view">
                             <div class="value">
@@ -31,8 +31,9 @@
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                            <button type="submit" class="bluebtn">
-                                Next
+                            <button type="submit" class="bluebtn" id="disable_button">
+                                <div class="button_text">Next</div>
+                                <div class="loader">Loading</div>
                             </button>
                             <button type="button" onclick="location.href='/mypage'" class="graybtn">
                                 Back

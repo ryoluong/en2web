@@ -44,3 +44,31 @@ function movePhotosFromTempDirToNoteDir(array $paths, Note $note)
         $note->photos()->create(['path' => '/img/note/'.$filename]);
     }
 }
+
+function getImageOrientation($photo)
+{
+    try{
+        $exif = exif_read_data($photo->getRealPath(), 0 ,true);
+        $orientation = $exif['IFD0']['Orientation'];
+    } catch(Exception $e) {
+        $orientation = 1;
+    }
+    return $orientation;
+}
+
+/**
+ * Orientate Image
+ * @param Image $image Intervention Imageで生成される画像インスタンス
+ * @param file $photo Requestから取得できるfileスタイルの画像 $request->file('file');
+ * @return Image $image
+ */
+function getOrientatedImage($image, $photo)
+{
+    $orientation = getImageOrientation($photo);
+    if($orientation === 6) {
+        $image->rotate(-90);
+    } else if($orientation === 8) {
+        $image->rotate(90);
+    }
+    return $image;
+}

@@ -18,21 +18,18 @@
                     {{ method_field('PATCH') }}
                     {{ csrf_field() }}
                         <div class="form_view jcenter">
-                            @if(app()->isLocal())
-                            <div class="image_wrapper" style="background-image:url({{ asset("/storage{$path}") }}); height: 160px; width: 100%;">
-                            @else
-                            <div class="image_wrapper" style="background-image:url({{ asset("{$path}") }}); height: 160px; width: 100%;">
-                            @endif
+                            <div class="image_wrapper cover_image" style="background-image:url({{ $path }});">
                             <input type="hidden" class="input_text" name="path" value="{{ $path }}">
                             </div>
                             <div class="help-box">
-                                <p>※スマホからアップロードすると、画像の向きが正しく表示されない場合があります。その場合は画像をトリミングしてから再度アップロードしてください。</p>
+                                <p>自動で中央がトリミングされます。調整したい場合は、画像をトリミングしてから再度アップロードしてください。</p>
                             </div>
                         </div>
                         <div class="form_view">
                             <div class="button_wrapper">
-                                <button type="submit" class="bluebtn" name='action' value="update">
-                                    Confirm
+                                <button type="submit" class="bluebtn" id="disable_button" onclick="disableButton();submit()">
+                                    <div class="button_text">Confirm</div>
+                                    <div class="loader">Loading</div>
                                 </button>
                                 <button type="submit" class="graybtn" name='action' value="back">
                                     Back
