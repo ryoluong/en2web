@@ -90,13 +90,12 @@
                                 <div class="help-box">
                                     <p>*複数可, 日本語の通称で入力してください</p>
                                 </div>
-                            @if ($errors->has('countries'))
-                            <div class="help-box">
-                                    <strong>{{ $errors->first('countries') }}</strong>
+                                @if ($errors->has('countries'))
+                                <div class="help-box">
+                                        <strong>{{ $errors->first('countries') }}</strong>
+                                </div>
+                                @endif
                             </div>
-                            @endif
-                            </div>
-  
                         </div>
                         <div class="form_view">
                             <div class="property"><p>留学先大学・機関</p></div>
@@ -111,8 +110,15 @@
                                 </div>
                                 @endif
                             </div>
- 
                         </div>
+                        <div class="form_view">
+                            <div class="property"><p>留学中</p></div>
+                            <div class="value">
+                                <div class="cp_ipcheck">
+                                    <input name="isOverseas" type="checkbox" class="checkbox_simple" value="1" {{ $user->isOverseas == 1 ? ' checked' : '' }}>
+                                </div>
+                            </div>
+                        </div>                        
                         <div class="form_view">
                             <div class="property"><p>OB・OG</p></div>
                             <div class="value">
@@ -128,8 +134,7 @@
                                 <div class="help-box">
                               <p>*【上級生, 卒業生のみ】さしつかえのない範囲で、進路をご記入ください</p>
                             </div>
-                            </div>
-
+                        </div>
                         </div>
                         <div class="form_view">
                             <div class="property"><p>Profile</p></div>

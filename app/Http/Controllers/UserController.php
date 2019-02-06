@@ -52,17 +52,18 @@ class UserController extends Controller
             'countries' => ['nullable', 'string', 'max:255'],
             'university' => ['nullable', 'string', 'max:255'],
             'isOB' => ['nullable', 'in:1'],
+            'isOverseas' => ['nullable', 'in:1'],
             'job' => ['nullable', 'string', 'max:255'],
             'profile' => ['nullable', 'max:2000'],
         ]);
 
-        if ((request('isOB')) === null) { $isOB = 0; } else { $isOB = 1; }
         $user->year = request('year');
         $user->department = request('department');
         $user->major = request('major');
         $user->generation = request('generation');
         $user->university = request('university');
-        $user->isOB = $isOB;
+        $user->isOB = request('isOB', 0);
+        $user->isOverseas = request('isOverseas', 0);
         $user->job = request('job');
         $user->profile = request('profile');
         $user->save();

@@ -58,6 +58,9 @@
                     </a>
                     @endforeach
                     @endif
+                    @if($user->isOverseas == 1)
+                    <div class="status">留学中</div>
+                    @endif
                     @if($user->isOB == 1)
                     <div class="status">OB･OG</div>
                     @endif

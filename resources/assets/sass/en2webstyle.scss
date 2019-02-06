@@ -567,7 +567,7 @@ strong {
     }
     .text_holder {
       padding: 1px 0 2px 0;
-      background-color: #fafafa;
+      background-color: #fdfdfd;
       .note_author {
         margin-left: 2px;
         padding: 0 2px;
@@ -1616,11 +1616,11 @@ strong {
     }
   }
 }
-  .deletebtn {
-    width: 200px;
-    text-align: center;
-    margin: 0 auto 30px auto;
-  }
+.deletebtn {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto 30px auto;
+}
 /***********************************************************
  *                                                         *
  *                   category_wrapper                      *
@@ -2204,7 +2204,7 @@ strong {
       position: absolute;
       background-color: rgba(160, 160, 255, 0.7);
       border-radius: 7%;
-      transform: rotate(11deg);
+      transform: rotate(8deg);
       z-index: -1;
       top: 0;
       bottom: 0;
@@ -2220,12 +2220,12 @@ strong {
     &::after {
       content: "";
       display: block;
-      width: 84px;
-      height: 84px;
+      width: 83px;
+      height: 83px;
       position: absolute;
       background-color: rgba(120, 220, 255, 0.7);
       border-radius: 7%;
-      transform: rotate(22deg);
+      transform: rotate(18deg);
       z-index: -2;
       top: 0;
       bottom: 0;
