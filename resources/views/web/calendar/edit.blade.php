@@ -2,6 +2,19 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function disableInputs() {
+                var eles = document.getElementsByClassName('input_time');
+                for(var i = 0; i < eles.length; i++) {
+                    if(eles[i].disabled == false) {
+                        eles[i].disabled = true;
+                    } else {
+                        eles[i].disabled = false;
+                    }
+                    
+                }
+            }
+        </script>
     </head>
     <body>
         @include('layouts.web.header')
@@ -27,6 +40,19 @@
                             </div>
                         </div>
                         <div class="form_view">
+                            <div class="property"><p>All day</p></div>
+                            <div class="value">
+                                <div class="cp_ipcheck">
+                                    <input name="isAllDay" type="checkbox" class="checkbox_simple" value="1" onclick="disableInputs()" {{ is_null($start) ? 'checked' : '' }}>
+                                </div>     
+                                @if ($errors->has('isAllDay'))
+                                <div class="help-box">
+                                        <strong>{{ $errors->first('isAllDay') }}</strong>
+                                </div>
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="form_view">
                             <div class="property"><p>Date</p></div>
                             <div class="value">
                                 <input type="date" name="date" class="input_text" value="{{ old('date') !== null ? old('date') : $date }}" required>
@@ -40,9 +66,9 @@
                         <div class="form_view">
                             <div class="property"><p>Time</p></div>
                             <div class="value">
-                                    <input type="time" name="time_from" class="input_text input_time" value="{{ old('time_from') !== null ? old('time_from') : $start }}" required>
+                                    <input type="time" name="time_from" class="input_text input_time" value="{{ old('time_from') !== null ? old('time_from') : $start }}" {{ is_null($start) ? 'disabled' : ''}}>
                                     <p class="fromto">~</p>
-                                    <input type="time" name="time_to" class="input_text input_time" value="{{ old('time_to') !== null ? old('time_to') : $end }}" required>
+                                    <input type="time" name="time_to" class="input_text input_time" value="{{ old('time_to') !== null ? old('time_to') : $end }}" {{ is_null($end) ? 'disabled' : ''}}>
                                     @if ($errors->has('time_to') || $errors->has('time_from'))
                                     <div class="help-box">
                                         <strong>{{ $errors->first('time_from') }}</strong>

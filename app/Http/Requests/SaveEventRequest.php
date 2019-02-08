@@ -26,8 +26,9 @@ class SaveEventRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'date' => ['required', 'date'],
-            'time_from' => ['required'],
-            'time_to' => ['required', 'after:time_from'],
+            // checkされていないときはタイムを必須にするバリデーション
+            'time_from' => ['nullable'],
+            'time_to' => ['nullable', 'after:time_from'],
             'location' => ['string', 'nullable', 'max:255'],
         ];
     }

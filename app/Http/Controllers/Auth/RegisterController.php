@@ -107,7 +107,7 @@ class RegisterController extends Controller
         $bridge_request = $request->all();
         $bridge_request['password_mask'] = '********';
         $bridge_request['code_mask'] = '********';
-        if (DB::table('codes')->where('code', $request->code)->exists()) { //strlen($request->code) === 12) {
+        if (DB::table('codes')->where('code', $request->code)->exists()) { 
             return view('auth.register_confirm_create')->with($bridge_request);
         } else {
             $user = User::where('identification_code', $request->code)->first();

@@ -29,6 +29,14 @@ class SearchNoteUsecase
                         }     
                         $query->whereIn('notes.id', $array);
                     }
+                    if(User::where('name', 'LIKE', "$key %")->orWhere('name', 'LIKE', "% $key")->exists()) {
+                        $array = [];
+                        $user_ids = DB::table('users')->select('id')->where('name', 'LIKE', "$key %")->orWhere('name', 'LIKE', "% $key")->get();
+                        foreach($user_ids as $user_id) {
+                            $array[] = $user_id->id;
+                        }
+                        $query->whereIn('notes.user_id', $array);
+                    }
                     $query
                     ->orWhere('notes.content', 'LIKE', "%$key%")
                     ->orWhere('notes.title', 'LIKE', "%$key%");

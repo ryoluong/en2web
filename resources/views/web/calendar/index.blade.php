@@ -29,7 +29,7 @@
                         </a>
                     </div>
                     <div class="wrapper">
-                    <p class="description">{{ "{$event->start->month}月{$event->start->day}日({$event->start->week}) {$event->start->time}-{$event->end->time}" }}</p>
+                    <p class="description">{{ $event->when }}</p>
                     @if(!empty($event->location))
                     <p class="description">{{ $event->location }}</p>
                     @endif

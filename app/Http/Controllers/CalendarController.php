@@ -85,15 +85,24 @@ class CalendarController extends Controller
         $results = $this->service->events->listEvents($calendarId, $optParams);
         $events = $results->getItems();
         if(!empty($events)) {
-            $week = array("日", "月", "火", "水", "木", "金", "土");
+            $weeks = array("日", "月", "火", "水", "木", "金", "土");
             foreach($events as $event)
             {
-                $datetime = date_create($event->start->dateTime);
-                $event->start->week = $week[(int)$datetime->format('w')];
-                $event->start->month = (int)$datetime->format('m');
-                $event->start->day = (int)$datetime->format('d');
-                $event->start->time = substr($event->start->dateTime, 11, 5);
-                $event->end->time = substr($event->end->dateTime, 11, 5);
+                if(!is_null($event->start->dateTime)) {
+                    $datetime = date_create($event->start->dateTime);
+                    $week = $weeks[(int)$datetime->format('w')];
+                    $month = (int)$datetime->format('m');
+                    $day = (int)$datetime->format('d');
+                    $start = substr($event->start->dateTime, 11, 5);
+                    $end = substr($event->end->dateTime, 11, 5);
+                    $event->when = "{$month}月{$day}日({$week}) {$start}-{$end}";
+                } else {
+                    $date = date_create($event->start->date);
+                    $week = $weeks[(int)$date->format('w')];
+                    $month = (int)$date->format('m');
+                    $day = (int)$date->format('d');
+                    $event->when = "{$month}月{$day}日({$week})";
+                }
             }
         }
         return view('web.calendar.index', compact(['events']));
@@ -110,6 +119,7 @@ class CalendarController extends Controller
         $event = $usecase(
             $request->title,
             $request->date,
+            $request->isAllDay,
             $request->time_from,
             $request->time_to,
             $request->location
@@ -122,10 +132,17 @@ class CalendarController extends Controller
     {
         $event = $this->service->events->get($this->calendarId, $eventId);
         $title = $event->getSummary();
-        $dateTime = $event->getStart()->dateTime;
-        $date = substr($dateTime, 0, 10);
-        $start = substr($dateTime, 11, 5);
-        $end = substr($event->getEnd()->dateTime, 11, 5);
+        if(!is_null($event->start->dateTime)) {
+            $dateTime = $event->start->dateTime;
+            $date = substr($dateTime, 0, 10);
+            $start = substr($dateTime, 11, 5);
+            $end = substr($event->getEnd()->dateTime, 11, 5);
+        } else {
+            $date = $event->start->date;
+            $start = null;
+            $end = null;
+        }
+
         $location = $event->getLocation();
         return view('web.calendar.edit', compact(['title', 'date', 'start', 'end', 'location', 'eventId']));
     }
@@ -135,6 +152,7 @@ class CalendarController extends Controller
         $event = $usecase(
             $request->title,
             $request->date,
+            $request->isAllDay,
             $request->time_from,
             $request->time_to,
             $request->location
