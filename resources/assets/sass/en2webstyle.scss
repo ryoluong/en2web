@@ -1455,6 +1455,9 @@ strong {
             height: 35px;
             width: 300px;
           }
+          &:disabled {
+            display: none;
+          }
         }
         .input_time {
           width: 100px;

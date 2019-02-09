@@ -11,7 +11,6 @@
                     } else {
                         ele.disabled = false;
                     }
-                    
                 }
             }
         </script>

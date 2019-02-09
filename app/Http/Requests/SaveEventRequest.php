@@ -26,10 +26,17 @@ class SaveEventRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'date' => ['required', 'date'],
-            // checkされていないときはタイムを必須にするバリデーション
-            'time_from' => ['nullable'],
-            'time_to' => ['nullable', 'after:time_from'],
+            'time_from' => ['required_without_all:isAllDay'],
+            'time_to' => ['required_without_all:isAllDay', 'after:time_from'],
             'location' => ['string', 'nullable', 'max:255'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'time_from.required_without_all' => 'Time field is required when it\'s an all day event.',
+            'time_to.required_without_all' => 'Time field is required when it\'s an all day event.'
         ];
     }
 }

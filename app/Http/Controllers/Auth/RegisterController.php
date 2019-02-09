@@ -159,8 +159,8 @@ class RegisterController extends Controller
         $request->validate([
             'name' => ['required', 'max:255', new AlphaName],
             'year' => ['required', 'digits:4'],
-            'department' => ['required', Rule::in(['経済学部','経営学部','教育学部','都市科学部','理工学部'])],
-            'major' => ['required', Rule::in(['経済学科','経営学科','教育学科','都市社会共生学科','環境リスク共生学科','建築学科','都市基盤学科','数物・電子情報系学科','化学・生命系学科','機械・材料・海洋系学科'])],
+            'department' => ['required'],
+            'major' => ['required'],
             'generation' => ['required', new GenerationVali],
             'countries' => ['nullable', 'string', 'max:255'],
             'university' => ['nullable', 'string', 'max:255'],

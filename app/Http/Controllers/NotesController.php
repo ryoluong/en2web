@@ -355,6 +355,7 @@ class NotesController extends Controller
             $request->category_id, 
             $request->tag_ids, 
             $request->author,
+            $request->country,
             $request->isBest,
             $request->from_year,
             $request->from_month,

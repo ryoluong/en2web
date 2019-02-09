@@ -8,27 +8,31 @@
             <div class="top_logo">
                 <img src="img/top_logo.png" alt="en2web-logo">
                 <p>
-                    @if(strcmp($user_country,"中国") == 0 || strcmp($user_country,"香港") == 0 || strcmp($user_country,"台湾") == 0)
+                @if(auth()->user()->countries()->count())
+                    @if(auth()->user()->countries()->first()->name == "中国" || auth()->user()->countries()->first()->name == "香港" || auth()->user()->countries()->first()->name == "台湾")
                         {{ "你好! " }}
-                    @elseif(strcmp($user_country,"パラグアイ") == 0 || strcmp($user_country,"スペイン") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "パラグアイ" || auth()->user()->countries()->first()->name == "スペイン")
                         {{ "¡Hola! "}}
-                    @elseif(strcmp($user_country,"フィリピン") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "フィリピン")
                         {{ "Magandang araw! " }}
-                    @elseif(strcmp($user_country,"フィンランド") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "フィンランド")
                         {{ "Moi! " }}
-                    @elseif(strcmp($user_country,"ドイツ") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "ドイツ")
                         {{ "Guten Tag! "}}
-                    @elseif(strcmp($user_country,"ハンガリー") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "ハンガリー")
                         {{ "Jó napot! "}}
-                    @elseif(strcmp($user_country,"チェコ") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "チェコ")
                         {{ "Dobrý den! "}}
-                    @elseif(strcmp($user_country,"オランダ") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "オランダ")
                         {{ "Goededag! " }}
-                    @elseif(strcmp($user_country,"ベトナム") == 0)
+                    @elseif(auth()->user()->countries()->first()->name == "ベトナム")
                         {{ "Xin chào! "}}
                     @else
                         {{ "Hello! "}}
                     @endif
+                @else
+                    {{ "Hello! " }}
+                @endif
                     {{ auth()->user()->name }}
                 </p>
             </div>

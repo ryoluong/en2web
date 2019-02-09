@@ -37,18 +37,13 @@ class UserController extends Controller
     }
 
     public function editMyPage() {
-        $max = User::max('generation');
         $user = auth()->user();
-        return view('web.mypage_edit', compact(['user','max']));
+        return view('web.mypage_edit', compact(['user']));
     }
 
     public function updateMyPage() {
         $user = auth()->user();
         request()->validate([
-            'year' => ['nullable', 'digits:4'],
-            'department' => ['required', Rule::in(['経済学部','経営学部','教育学部','都市科学部','理工学部'])],
-            'major' => ['required'],
-            'generation' => ['required', new GenerationVali],
             'countries' => ['nullable', 'string', 'max:255'],
             'university' => ['nullable', 'string', 'max:255'],
             'isOB' => ['nullable', 'in:1'],
@@ -56,11 +51,6 @@ class UserController extends Controller
             'job' => ['nullable', 'string', 'max:255'],
             'profile' => ['nullable', 'max:2000'],
         ]);
-
-        $user->year = request('year');
-        $user->department = request('department');
-        $user->major = request('major');
-        $user->generation = request('generation');
         $user->university = request('university');
         $user->isOB = request('isOB', 0);
         $user->isOverseas = request('isOverseas', 0);

@@ -2,6 +2,18 @@
 <html lang=jp">
     <head>
         @include('layouts.web.head')
+        <script>
+            function departmentSwitch() {
+                var eles = document.getElementsByClassName('switch');
+                for(var ele of eles) {
+                    if(ele.disabled == true) {
+                        ele.disabled = false;
+                    } else {
+                        ele.disabled = true;
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         @include('layouts.web.header')
@@ -52,14 +64,33 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
+                                <p>学科編成</p>
+                            </div>
+                            <div class="value">
+                                <div class="radio_wrapper">
+                                    <label for="departments_new"><input id="departments_new" class="radio_button" name="selection" type="radio" onclick="departmentSwitch(); this.disabled=true; getElementById('departments_old').disabled = false;" checked>2017年度以降</label>
+                                </div>  
+                                <div class="radio_wrapper">
+                                    <label for="departments_old"><input id="departments_old" class="radio_button" name="selection" type="radio" onclick="departmentSwitch(); this.disabled=true; getElementById('departments_new').disabled = false;">2016年度以前</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_view">
+                            <div class="property">
                                 <p>学部（必須）</p>
                             </div>
                             <div class="value">
-                                <select class="input_select" name="department">
+                                <select class="input_select switch" name="department">
                                     <option value="経済学部">経済学部</option>
                                     <option value="経営学部">経営学部</option>
                                     <option value="教育学部">教育学部</option>
                                     <option value="都市科学部">都市科学部</option>
+                                    <option value="理工学部">理工学部</option>
+                                </select>
+                                <select class="input_select switch" name="department" disabled>
+                                    <option value="経済学部">経済学部</option>
+                                    <option value="経営学部">経営学部</option>
+                                    <option value="教育人間科学部">教育人間科学部</option>
                                     <option value="理工学部">理工学部</option>
                                 </select>
                                 @if ($errors->has('department'))
@@ -74,7 +105,7 @@
                                 <p>学科（必須）</p>
                             </div>
                             <div class="value">
-                                <select class="input_select" name="major">
+                                <select class="input_select switch" name="major">
                                     <option value="経済学科">経済学科</option>
                                     <option value="経営学科">経営学科</option>
                                     <option value="教育学科">教育学科</option>
@@ -86,14 +117,20 @@
                                     <option value="化学・生命系学科">化学・生命系学科</option>
                                     <option value="数物・電子情報系学科">数物・電子情報系学科</option>
                                 </select>
-                                <div class="help-box">
-                                  <p>*2016年度以前入学の方はそれに準ずる学部・学科をお選びください。</p>
-                                </div>
-                                @if ($errors->has('major'))
-                                <div class="help-box">
-                                    <strong>{{ $errors->first('major') }}</strong>
-                                </div>
-                                @endif
+                                <select class="input_select switch" name="major" disabled>
+                                    <option value="国際経済学科">国際経済学科</option>
+                                    <option value="経済システム学科">経済システム学科</option>
+                                    <option value="経営学科">経営学科</option>
+                                    <option value="会計・情報学科">会計・情報学科</option>
+                                    <option value="経営システム学科">経営システム学科</option>
+                                    <option value="国際経営学科">国際経営学科</option>
+                                    <option value="学校教育課程">学校教育課程</option>
+                                    <option value="人間文化課程">人間文化課程</option>
+                                    <option value="機械工学・材料系学科">機械工学・材料系学科</option>
+                                    <option value="化学・生命系学科">化学・生命系学科</option>
+                                    <option value="建築都市・環境系学科">建築都市・環境系学科</option>
+                                    <option value="数物・電子情報系学科">数物・電子情報系学科</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form_view">

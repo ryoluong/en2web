@@ -65,5 +65,6 @@
                 </tr>
             </table>
             <button type="button" class="register" onclick="location.href='/register'">Sign up</button>
+        </div>
     </body>
 </html>

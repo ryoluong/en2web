@@ -10,7 +10,7 @@ use DB;
 
 class SearchNoteUsecase
 {
-    public function __invoke($keywords = null, $category_id = null, $tag_ids = null, $author = null, $isBest = null, $from_year, $from_month, $to_year, $to_month)
+    public function __invoke($keywords = null, $category_id = null, $tag_ids = null, $author = null, $country = null, $isBest = null, $from_year, $from_month, $to_year, $to_month)
     {
         $notes = new Note();
 
@@ -70,6 +70,17 @@ class SearchNoteUsecase
                 $array[] = $user_id->id;
             }
             return $query->whereIn('notes.user_id', $array);
+        })->when(!is_null($country), function ($query) use ($country) {
+            if(Country::where('name', $country)->exists()) {
+                $country_id = Country::where('name', $country)->first()->id;
+                $note_ids = DB::table('country_note')->select('note_id')->where('country_id', $country_id)->get();
+                $array = [];
+                foreach($note_ids as $note_id) {
+                    $array[] = $note_id->note_id;
+                }     
+                $query->whereIn('notes.id', $array);
+            }
+            return $query;
         })->when(!empty($from_year), function($query) use ($from_year) {
             return $query->whereYear('notes.date', '>=', $from_year);
         })->when(!empty($from_month), function($query) use ($from_month) {

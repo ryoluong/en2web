@@ -88,6 +88,12 @@
                     <p class="value">{{ request('author') }}</p>
                 </div>
                 @endif
+                @if(!empty(request('country')))
+                <div class="conditions_wrapper">
+                    <p class="property">Country</p>
+                    <p class="value">{{ request('country') }}</p>
+                </div>
+                @endif
                 @if(!empty(request('from_year')))
                 <div class="conditions_wrapper">
                     <p class="property">Date</p>

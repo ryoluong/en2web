@@ -84,6 +84,17 @@
                             </div>
                         </div>
                         <div class="form_view">
+                            <div class="property"><p>Country</p></div>
+                            <div class="value">
+                                <input type="text" name="country" class="input_text" value="{{ old('country') }}" placeholder="Enter country name">
+                                @if ($errors->has('country'))
+                                <div class="help-box">
+                                    <strong>{{ $errors->first('country') }}</strong>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form_view">
                             <div class="property"><p>Date</p></div>
                             <div class="value">
                                 <div class="year_month">

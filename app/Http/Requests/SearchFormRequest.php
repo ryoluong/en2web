@@ -38,9 +38,10 @@ class SearchFormRequest extends FormRequest
             'to_year' => ['nullable', 'numeric', 'between:2015,2029', 'required_with:to_month', $custom_validator],
             'to_month' => ['nullable', 'numeric', 'between:1,12'],
             'author' => ['nullable', 'string', 'max:100'],
+            'country' => ['nullable', 'string', 'max:100'],
             'category_id' => ['exists:categories,id'],
             'tag_ids.*' => ['exists:tags,id'],
-            'validator' => ['required_without_all:keywords,from_year,to_year,author,category_id,tag_ids']
+            'validator' => ['required_without_all:keywords,from_year,to_year,author,country,category_id,tag_ids']
         ];
     }
 }

@@ -109,7 +109,7 @@
             {{ csrf_field() }}
             {{ method_field('DELETE')}}
                 <div class="deletebtn">
-                    <button type="submit" class="redbtn">Delete</button>
+                    <button type="submit" class="redbtn" onclick="this.disabled = true;submit();">Delete</button>
                 </div>
             </form>
         </div>
