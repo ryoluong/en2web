@@ -35,8 +35,8 @@ class SaveEventRequest extends FormRequest
     public function messages()
     {
         return [
-            'time_from.required_without_all' => 'Time field is required when it\'s an all day event.',
-            'time_to.required_without_all' => 'Time field is required when it\'s an all day event.'
+            'time_from.required_without_all' => 'Time field is required when it isn\'t an all day event.',
+            'time_to.required_without_all' => 'Time field is required when it isn\'t an all day event.'
         ];
     }
 }
