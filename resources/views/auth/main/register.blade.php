@@ -155,12 +155,12 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
-                                <p>留学先国・地域</p>
+                                <p>留学先国・地域（任意）</p>
                             </div>
                             <div class="value">
                                 <input type="text" class="input_text" name="countries" value="" placeholder="Ex) アメリカ, 香港">
                                 <div class="help-box">
-                                    <p>*複数可, 日本語の通称で入力してください</p>
+                                    <p>*日本語の通称で入力してください, 複数入力する場合はスペースもしくはカンマで区切ってください</p>
                                 </div>
                                 @if ($errors->has('countries'))
                                 <div class="help-box">
@@ -171,7 +171,7 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
-                                <p>留学先大学・機関等</p>
+                                <p>留学先大学・機関等（任意）</p>
                             </div>
                             <div class="value">
                                 <input type="text" class="input_text" name="university" value="{{ old('university') }}" placeholder="Ex) シドニー工科大学">
@@ -195,7 +195,7 @@
                         </div>
                         <div class="form_view">
                             <div class="property">
-                                <p>就職・進路等</p>
+                                <p>就職・進路等（任意）</p>
                             </div>
                             <div class="value">
                                 <input type="text" class="input_text" name="job" value="{{ old('job') }}" placeholder="業界名、職種名、専攻内容など">
