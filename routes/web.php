@@ -16,7 +16,7 @@
  */
 Route::get('/', function () { return view('auth.login'); });//return view('hp.index'); });
 Route::get('/login', function() { return view('auth.login'); });
-Route::get('/oA7ZZzVelwFP4wkqPkqsrYOp1', function() { return view('hp.codes'); })->middleware('auth.basic');
+Route::get('/index', function() {return view('hp.index'); });
 // Route::get('/about_us', function () { return view('hp.about_us'); });
 // Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
 // Route::get('/activities', function () { return view('hp.activities'); });

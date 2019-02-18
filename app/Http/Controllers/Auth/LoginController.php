@@ -42,7 +42,7 @@ class LoginController extends Controller
     {
         $request->session()->regenerate();
         $this->clearLoginAttempts($request);
-        if (auth()->user()->status === 0) {
+        if (auth()->user()->status === 0 || auth()->user()->status === 3) {
             auth()->logout();
             return view('auth.error',['message' => 'メールアドレスが認証されていません。仮登録完了メールに記載されたアドレスにアクセスし、本登録を行ってください。']);
         } elseif (auth()->user()->status === 2) {
