@@ -229,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Slack' => App\Facades\Slack::class,
     ],
 
 ];

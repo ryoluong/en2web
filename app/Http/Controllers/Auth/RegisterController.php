@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use DB;
 use App\User;
 use App\Country;
+use App\Facades\Slack;
 use App\Http\Controllers\Controller;
 use App\Mail\EmailVerification;
 use App\Mail\CodeVerification;
@@ -14,6 +15,7 @@ use App\Rules\CodeCheck;
 use App\Rules\GenerationVali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
@@ -98,6 +100,8 @@ class RegisterController extends Controller
 
         $email = new EmailVerification($user);
         Mail::to($user->email)->send($email);
+        Log::info('Pre-Registered(new user): '.$user->email);
+        Slack::notice('Pre-Registered(new user): '.$user->email);
     }
 
     public function confirm(Request $request)
@@ -132,6 +136,8 @@ class RegisterController extends Controller
         ]);
         $email = new EmailVerification($user);
         Mail::to($user->email)->send($email);
+        Log::info('Pre-Registered(existing user): '.$user->email);
+        Slack::notice('Pre-Registered: '.$user->email);
         return view('auth.registered');
     }
 
@@ -221,7 +227,8 @@ class RegisterController extends Controller
         }
 
         Mail::to($user->email)->send(new RegisterNotification($user));
-
+        Log::info('Registered: '.$user->email);
+        Slack::notice("Register Completed: {$user->email}\nName: {$user->name}");
         return view('auth.main.registered');
     }
 }
