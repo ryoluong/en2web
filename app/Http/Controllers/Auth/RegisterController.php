@@ -100,8 +100,8 @@ class RegisterController extends Controller
 
         $email = new EmailVerification($user);
         Mail::to($user->email)->send($email);
-        Log::info('Pre-Registered(new user): '.$user->email);
-        Slack::notice('Pre-Registered(new user): '.$user->email);
+        Log::info('Pre-Registered: '.$user->email);
+        Slack::notice('Pre-Registered: '.$user->email);
     }
 
     public function confirm(Request $request)
@@ -136,7 +136,7 @@ class RegisterController extends Controller
         ]);
         $email = new EmailVerification($user);
         Mail::to($user->email)->send($email);
-        Log::info('Pre-Registered(existing user): '.$user->email);
+        Log::info('Pre-Registered: '.$user->email);
         Slack::notice('Pre-Registered: '.$user->email);
         return view('auth.registered');
     }
