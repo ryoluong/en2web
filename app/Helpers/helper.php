@@ -6,7 +6,7 @@ use App\Note;
 function getCountryIdsFromRequest(string $str = null)
 {
     $temp = mb_convert_kana($str, 'as');
-    $country_names = preg_split('/[\s,]+/', $temp, -1, PREG_SPLIT_NO_EMPTY);
+    $country_names = preg_split('/[\s,、・]+/u', $temp, -1, PREG_SPLIT_NO_EMPTY);
     $country_ids = [];
     foreach ($country_names as $country_name) {
         $country = Country::firstOrCreate([
