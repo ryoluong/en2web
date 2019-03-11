@@ -6,6 +6,7 @@
 
 <title>En2::Web</title>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="msapplication-TileColor" content="/img/favicons/#2d88ef">
 <meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
 <meta property="og:image" content="/img/favicons/ogp.png">
