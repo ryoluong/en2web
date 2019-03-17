@@ -37,7 +37,7 @@
                             </p>
                         </div>
                         @foreach($users->where('generation', $i) as $user)
-                            <user-item :user="{{ $user }}" :search="search"></user-item>
+                            <users-item :user="{{ $user }}" :search="search"></users-item>
                         @endforeach
                     </div>
                     @endfor

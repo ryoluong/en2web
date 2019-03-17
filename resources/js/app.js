@@ -30,7 +30,7 @@ Vue.component(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("user-item", require("./components/UsersIndexComponent.vue"));
+Vue.component("users-item", require("./components/UsersIndexComponent.vue"));
 new Vue({
   el: "#app",
   data: {

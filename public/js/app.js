@@ -1000,7 +1000,7 @@ Vue.component("example-component", __webpack_require__(38).default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("user-item", __webpack_require__(55));
+Vue.component("users-item", __webpack_require__(55));
 new Vue({
   el: "#app",
   data: {
