@@ -156,6 +156,9 @@ class NotesController extends Controller
                 movePhotosFromTempDirToNoteDir($request->paths, $note);
             }
 
+            //Push通知
+            $this->LineNotice($note);
+            
             return redirect('/notes/'.$note->id);
 
         } else {
@@ -165,6 +168,19 @@ class NotesController extends Controller
             }
             return redirect()->action('NotesController@create')->withInput($input);
         }
+    }
+
+    public function LineNotice(Note $note) {
+        $token = "sv/RKt1C3qskQg0Uh5Xdll9aXWvy42rty+y9gdYtQjzQ5AOMMKOgPPU6yTAuxkoRsTXsWVSmv648F5wXHJzpvWPCkUSnfdjuxj91YZIr7Np4rGPlgFFbsAFeyuL6I8nUFSYZCQvvEZkfHngYPfAtUgdB04t89/1O/w1cDnyilFU=
+";
+        $content = "Note has been posted by $user->author";
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => ['Content-type: application/json', 'Authorization: Bearer '.$token]
+                'to' => 
+            ]
+        ]
     }
 
     /**
