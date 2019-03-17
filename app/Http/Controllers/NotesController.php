@@ -157,7 +157,7 @@ class NotesController extends Controller
             }
 
             //Push通知
-            $this->LineNotice($note);
+            // $this->LineNotice($note);
             
             return redirect('/notes/'.$note->id);
 
@@ -170,18 +170,18 @@ class NotesController extends Controller
         }
     }
 
-    public function LineNotice(Note $note) {
-        $token = "sv/RKt1C3qskQg0Uh5Xdll9aXWvy42rty+y9gdYtQjzQ5AOMMKOgPPU6yTAuxkoRsTXsWVSmv648F5wXHJzpvWPCkUSnfdjuxj91YZIr7Np4rGPlgFFbsAFeyuL6I8nUFSYZCQvvEZkfHngYPfAtUgdB04t89/1O/w1cDnyilFU=
-";
-        $content = "Note has been posted by $user->author";
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => ['Content-type: application/json', 'Authorization: Bearer '.$token]
-                'to' => 
-            ]
-        ]
-    }
+//     public function LineNotice(Note $note) {
+//         $token = "sv/RKt1C3qskQg0Uh5Xdll9aXWvy42rty+y9gdYtQjzQ5AOMMKOgPPU6yTAuxkoRsTXsWVSmv648F5wXHJzpvWPCkUSnfdjuxj91YZIr7Np4rGPlgFFbsAFeyuL6I8nUFSYZCQvvEZkfHngYPfAtUgdB04t89/1O/w1cDnyilFU=
+// ";
+//         $content = "Note has been posted by $user->author";
+//         $options = [
+//             'http' => [
+//                 'method' => 'POST',
+//                 'header' => ['Content-type: application/json', 'Authorization: Bearer '.$token]
+//                 'to' => 
+//             ]
+//         ]
+//     }
 
     /**
      * Display the specified resource.
