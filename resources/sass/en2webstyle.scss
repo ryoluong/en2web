@@ -1093,6 +1093,14 @@ strong {
       }
     }
   }
+  .not-found {
+    margin-top: 20px;
+    font-size: 15px;
+    text-align: center;
+    @include pc {
+      font-size: 18px;
+    }
+  }
   .flex_container {
     display: flex;
     flex-wrap: wrap;

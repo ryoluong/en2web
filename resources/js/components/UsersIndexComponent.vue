@@ -1,42 +1,64 @@
 <template>
-  <div class="flex_view" v-if="display">
-    <a :href="'/users/'+user.id">
-      <img
-        class="user_icon"
-        :src="[ user.avater_path ? user.avater_path : '/img/categories/user.png']"
-        alt="user_icon"
-      >
-    </a>
-    <a class="user_name" :href="'/users/'+user.id">{{ user.name }}</a>
+  <div id="showMembers">
+    <div class="content_head with_border">
+      <div class="icon">
+        <img src="img/top_members.png" alt="members">
+      </div>
+      <div class="text">
+        <p>Members</p>
+      </div>
+    </div>
+    <form>
+      <div class="search_wrapper">
+        <input type="text" v-model="search" class="input_text" placeholder="Search members">
+      </div>
+    </form>
+    <div class="no_border_card">
+      <user-container
+        v-for="i in max"
+        :key="i"
+        :generation="i"
+        :users="where(users, i)"
+        :search="search"
+      ></user-container>
+      <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
+    </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    user: {
-      type: Object,
+    users: {
+      type: Array,
       required: true
     },
-    search: {
-      type: String,
+    max: {
+      type: Number,
       required: true
     }
   },
   data: function() {
     return {
-      username: this.user.name
+      search: ""
     };
   },
+  methods: {
+    where: function(users, i) {
+      return users.filter(user => user.generation === i);
+    }
+  },
   computed: {
-    display: function() {
-      if (
-        this.search == "" ||
-        this.user.name.toLowerCase().indexOf(this.search) != -1
-      ) {
-        return true;
-      } else {
-        return false;
+    hasActiveUser: function() {
+      for (var i = 0; i < this.users.length; i++) {
+        if (
+          this.users[i].name
+            .toLowerCase()
+            .indexOf(this.search.toLowerCase()) !== -1
+        ) {
+          return true;
+        }
       }
+      return false;
     }
   }
 };

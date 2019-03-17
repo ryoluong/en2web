@@ -6,7 +6,9 @@
     <body>
         @include('layouts.web.header')
         <div id="app">
-            <div id="showMembers">
+            <users-index :users="{{ $users }}" :max="{{ $max }}"></users-index>
+        </div>
+            <!-- <div id="showMembers">
                 <div class="content_head with_border">
                     <div class="icon">
                         <img src="img/top_members.png" alt="members">
@@ -22,7 +24,7 @@
                 </form>
                 <div class="no_border_card">
                     @for($i = 1; $i <= $max; $i++)
-                    <div class="flex_container">
+                    <div class="flex_container" v-if="displayContainer">
                         <div class="subtitle">
                             <p>
                                 @if($i % 10 === 1)
@@ -42,7 +44,7 @@
                     </div>
                     @endfor
                 </div>    
-            </div>
+            </div> -->
             @include('layouts.web.footer')
         </div>
         <script src=" {{ mix('js/app.js') }} "></script>

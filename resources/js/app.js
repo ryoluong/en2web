@@ -30,10 +30,21 @@ Vue.component(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("users-item", require("./components/UsersIndexComponent.vue"));
+Vue.component("users-index", require("./components/UsersIndexComponent.vue"));
+Vue.component(
+  "user-container",
+  require("./components/UserContainerComponent.vue")
+);
+Vue.component("user-item", require("./components/UserItemComponent.vue"));
 new Vue({
   el: "#app",
   data: {
-    search: ""
+    search: "",
+    displayContainer: true
   }
+  //   computed: {
+  //     displayContainer: function() {
+  //       return ;
+  //     }
+  //   }
 });
