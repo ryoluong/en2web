@@ -235,6 +235,7 @@ class RegisterController extends Controller
     public function webhook() {
         $json_string = file_get_contents('php://input');
         $json_object = json_decode($json_string);
-        Slack::notice($json_object);
+        Log::debug($json_object);
+        Log::debug('it works');
     }
 }
