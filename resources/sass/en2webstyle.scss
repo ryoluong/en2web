@@ -1113,7 +1113,7 @@ strong {
     .subtitle {
       flex: 0 0 100%;
       position: relative;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
       @include pc {
         margin-bottom: 9px;
       }
@@ -1174,7 +1174,7 @@ strong {
       position: relative;
       flex: 0 0 50%;
       max-width: 50%;
-      margin: 10px 0;
+      margin: 20px 0;
       text-align: center;
       @include pc {
         flex: 0 0 33.3%;
@@ -2352,49 +2352,49 @@ strong {
 form {
   max-width: 1000px;
   margin: auto;
-  .search_wrapper {
-    margin: 25px auto;
-    width: 95%;
-    display: flex;
-    max-width: 700px;
+}
+.search_wrapper {
+  margin: 25px auto;
+  width: 95%;
+  display: flex;
+  max-width: 700px;
+  @include pc {
+    margin: 25px auto 20px auto;
+  }
+  .input_text {
+    width: 60%;
+    margin: auto;
+    border: 2px solid #9999bb;
+    height: 20px;
+    padding: 6px 8px;
+    font-size: 16px;
     @include pc {
-      margin: 25px auto 20px auto;
-    }
-    .input_text {
-      width: 60%;
-      margin: auto;
-      border: 2px solid #9999bb;
+      width: 70%;
+      font-size: 17px;
+      padding: 6px 12px;
       height: 20px;
-      padding: 6px 8px;
-      font-size: 16px;
-      @include pc {
-        width: 70%;
-        font-size: 17px;
-        padding: 6px 12px;
-        height: 20px;
-      }
     }
-    .search_button {
-      color: #fff;
-      background-color: #7777bb;
-      border: none;
-      width: 25%;
-      margin: auto;
-      padding: 6px 0;
-      border-radius: 5px;
-      font-size: 16px;
+  }
+  .search_button {
+    color: #fff;
+    background-color: #7777bb;
+    border: none;
+    width: 25%;
+    margin: auto;
+    padding: 6px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    max-width: 125px;
+    @include pc {
+      font-size: 18px;
+      height: 35px;
+    }
+    &:hover {
+      cursor: hand;
+      cursor: pointer;
       transition: 0.3s;
-      max-width: 125px;
-      @include pc {
-        font-size: 18px;
-        height: 35px;
-      }
-      &:hover {
-        cursor: hand;
-        cursor: pointer;
-        transition: 0.3s;
-        background-color: #555577;
-      }
+      background-color: #555577;
     }
   }
 }

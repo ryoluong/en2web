@@ -231,4 +231,8 @@ class RegisterController extends Controller
         Slack::notice("Register Completed: {$user->email}\nName: {$user->name}");
         return view('auth.main.registered');
     }
+
+    public function webhook() {
+        Slack::notice(request()->all());
+    }
 }

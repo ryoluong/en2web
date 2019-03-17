@@ -8,11 +8,9 @@
         <p>Members</p>
       </div>
     </div>
-    <form>
-      <div class="search_wrapper">
-        <input type="text" v-model="search" class="input_text" placeholder="Search members">
-      </div>
-    </form>
+    <div class="search_wrapper">
+      <input type="text" v-model="search" class="input_text" placeholder="Search members">
+    </div>
     <div class="no_border_card">
       <user-container
         v-for="i in max"
