@@ -24,17 +24,17 @@
                     @for($i = 1; $i <= $max; $i++)
                     <div class="flex_container">
                         <div class="subtitle">
-                        <p>
-                            @if($i % 10 === 1)
-                            {{ $i."st" }}
-                            @elseif($i % 10 === 2)
-                            {{ $i."nd" }}
-                            @elseif($i % 10 === 3)
-                            {{ $i."rd" }}
-                            @else
-                            {{ $i."th" }}
-                            @endif
-                        </p>
+                            <p>
+                                @if($i % 10 === 1)
+                                {{ $i."st" }}
+                                @elseif($i % 10 === 2)
+                                {{ $i."nd" }}
+                                @elseif($i % 10 === 3)
+                                {{ $i."rd" }}
+                                @else
+                                {{ $i."th" }}
+                                @endif
+                            </p>
                         </div>
                         @foreach($users->where('generation', $i) as $user)
                             <user-item :user="{{ $user }}" :search="search"></user-item>
