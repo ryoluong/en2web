@@ -17,7 +17,7 @@ use App\Facades\Slack;
 // Route::middleware('auth:api')->post('/', function (Request $request) {
 //     return $request->user();
 // });
-Route::middleware('auth:api')->post('/webhook/line', function(Request $request) {
+Route::post('/webhook/line', function(Request $request) {
     http_response_code();
     echo '200 {}';
     $json_string = $request->getContent();
