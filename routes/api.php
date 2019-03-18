@@ -18,9 +18,9 @@ use App\Facades\Slack;
 //     return $request->user();
 // });
 Route::middleware('auth:api')->post('/webhook/line', function(Request $request) {
-    $json_string = file_get_contents('php://input');
-    $json_object = json_decode($json_string);
+    $json_string = $request->getContent();
+    $json_object = json_decode($json_string, true);
     Log::info(var_dump($json_object));
-    Slack::notice(var_dump($json_object));
     Log::info('LINE API works!');
+    return http_response_code();
 });
