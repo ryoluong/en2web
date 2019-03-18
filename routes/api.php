@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Facades\Slack;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,6 @@ Route::post('/webhook/line', function(Request $request) {
     $json_string = file_get_contents('php://input');
     $json_object = json_decode($json_string);
     Log::info(var_dump($json_object));
+    Slack::notice(var_dump($json_object));
     Log::info('LINE API works!');
-    return http_response_code();
 });
