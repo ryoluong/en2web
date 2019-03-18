@@ -18,12 +18,24 @@ use Illuminate\Support\Facades\Log;
 // Route::middleware('auth:api')->post('/', function (Request $request) {
 //     return $request->user();
 // });
+Route::get('/webhook/line', function() {
+    $array = [
+        ['hoge' => 'huga'],
+        ['fuga' => 'piyo'],
+        ['aaa' => [
+            '111', '222', '333'
+            ]
+        ],
+    ];
+    Log::info($array);
+    dd('hi');
+});
 Route::post('/webhook/line', function(Request $request) {
     http_response_code();
     echo '200 {}';
     $json_string = $request->getContent();
-    $json = json_decode($json_string, true);
-    Log::info(var_dump($json_object));
+    $json_object = json_decode($json_string, true);
+    Log::info($json_object);
     Log::info('LINE API works!');
     // $replyToken = $json->events[0]->replyToken;
     // // JSONデータから送られてきたメッセージを取得
