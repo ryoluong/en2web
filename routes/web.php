@@ -98,5 +98,3 @@ Route::post('register/confirm/existinguser', 'Auth\RegisterController@registerEx
 Route::get('register/verify/{token}', 'Auth\RegisterController@showForm')->name('show.form');
 Route::post('register/main_confirm', 'Auth\RegisterController@mainCheck')->name('register.main.confirm');
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
-
-Route::post('webhook/line', 'Auth\RegisterController@webhook');

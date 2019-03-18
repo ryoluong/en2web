@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
+// Route::middleware('auth:api')->post('/', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('/webhook/line', function(Request $request) {
+    $json_string = file_get_contents('php://input');
+    $json_object = json_decode($json_string);
+    Log::info($json_object);
+    Log::info('LINE API works!');
+    return 200;
+});
