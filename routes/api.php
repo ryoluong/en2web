@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 Route::post('/webhook/line', function(Request $request) {
     $json_string = file_get_contents('php://input');
     $json_object = json_decode($json_string);
-    Log::info($json_object);
+    Log::info(var_dump($json_object));
     Log::info('LINE API works!');
-    return 200;
+    return http_response_code();
 });
