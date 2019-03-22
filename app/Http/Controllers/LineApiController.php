@@ -59,9 +59,11 @@ class LineApiController extends Controller
                                 "uri" => $note_link
                             ],
                             "actions" => [
-                                "type" => "uri",
-                                "label" => "View detail",
-                                "uri" => $note_link
+                                [
+                                    "type" => "uri",
+                                    "label" => "View detail",
+                                    "uri" => $note_link
+                                ],
                             ]
                         ],
                     ],
