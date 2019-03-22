@@ -32,6 +32,10 @@ class LineApiController extends Controller
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
                 'messages' => [
+                    "type" => "text",
+                    "text" => "hihi",
+                ],
+                [
                     "type" => "template",
                     "altText" => "This is a buttons template",
                     "template" => [
