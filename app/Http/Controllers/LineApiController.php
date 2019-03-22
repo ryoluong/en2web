@@ -37,6 +37,7 @@ class LineApiController extends Controller
             } else {
                 $note->imageUrl = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
             }
+            $note_link = "http://en2ynu.com/notes/" . $note_id;
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
                 'messages' => [
@@ -45,21 +46,21 @@ class LineApiController extends Controller
                         "altText" => "New Note Posted!",
                         "template" => [
                             "type" => "buttons",
-                            "thumbnailImageUrl" => $note->imageUrl,
+                            "thumbnailImageUrl" => $note['imageUrl'],
                             "imageAspectRatio" => "rectangle",
                             "imageSize" => "cover",
                             "imageBackgroundColor" => "#FFFFFF",
-                            "title" => $note->title,
-                            "text" => $note->content,
+                            "title" => $note['title'],
+                            "text" => $note['content'],
                             "defaultAction" => [
                                 "type" => "uri",
                                 "label" => "See note",
-                                "uri" => "http://en2ynu.com/notes/" . $note->id
+                                "uri" => $note_link
                             ],
                             "actions" => [
                                 "type" => "uri",
                                 "label" => "View detail",
-                                "uri" => "http://en2ynu.com/notes/" . $note->id
+                                "uri" => $note_link
                             ]
                         ],
                     ],
