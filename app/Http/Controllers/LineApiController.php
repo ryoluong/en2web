@@ -50,7 +50,7 @@ class LineApiController extends Controller
                             "imageSize" => "cover",
                             "imageBackgroundColor" => "#FFFFFF",
                             "title" => "$note->title",
-                            "text" => "$content",
+                            "text" => "$note->content",
                             "defaultAction" => [
                                 "type" => "uri",
                                 "label" => "See note",
