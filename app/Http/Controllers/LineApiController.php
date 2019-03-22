@@ -29,45 +29,31 @@ class LineApiController extends Controller
                 'Authorization: Bearer ' . $channelToken,
                 'Content-Type: application/json; charset=utf-8',
             ];
+            $note = App\Note::all()->first();
+            $note->content = mb_substr($note->content, 0, 50);
+            if($note->photos->count()) {
+                $note->imageUrl = 'en2ynu.com' . $note->photos->first()->path;
+            } else {
+                $note->imageUrl = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
+            }
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
                 'messages' => [
                     [
-                        "type" => "text",
-                        "text" => "hihi",
-                    ],
-                    [
                         "type" => "template",
-                        "altText" => "This is a buttons template",
+                        "altText" => "New Note Posted!",
                         "template" => [
                             "type" => "buttons",
-                            "thumbnailImageUrl" => "https://example.com/bot/images/image.jpg",
+                            "thumbnailImageUrl" => "$note->imageUrl",
                             "imageAspectRatio" => "rectangle",
                             "imageSize" => "cover",
                             "imageBackgroundColor" => "#FFFFFF",
-                            "title" => "Menu",
-                            "text" => "Please select",
+                            "title" => "$note->title",
+                            "text" => "$content",
                             "defaultAction" => [
                                 "type" => "uri",
-                                "label" => "View detail",
-                                "uri" => "http://example.com/page/123"
-                            ],
-                            "actions" => [
-                                [
-                                    "type" => "postback",
-                                    "label" => "Buy",
-                                    "data" => "action=buy&itemid=123"
-                                ],
-                                [
-                                    "type" => "postback",
-                                    "label" => "Add to cart",
-                                    "data" => "action=add&itemid=123"
-                                ],
-                                [
-                                    "type" => "uri",
-                                    "label" => "View detail",
-                                    "uri" => "http://example.com/page/123"
-                                ]
+                                "label" => "See note",
+                                "uri" => "http://en2ynu.com/notes/$note->id"
                             ],
                         ],
                     ],
