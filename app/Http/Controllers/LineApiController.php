@@ -37,7 +37,7 @@ class LineApiController extends Controller
             } else {
                 $note->imageUrl = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
             }
-            $note_link = "http://en2ynu.com/notes/" . $note_id;
+            $note_link = "http://en2ynu.com/notes/" . $note->id;
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
                 'messages' => [
