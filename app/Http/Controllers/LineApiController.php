@@ -23,8 +23,8 @@ class LineApiController extends Controller
         $json_string = request()->getContent();
         $json_object = json_decode($json_string, true);
         $event = $json_object['events'][0];
-        if($event->type == 'join') {
-            Slack::notice('Bot joined group! groupID: '.$event->source->groupId);
+        if($event['type'] == 'join') {
+            Slack::notice('Bot joined group! groupID: '.$event['source']['groupId']);
         }
     }
 }
