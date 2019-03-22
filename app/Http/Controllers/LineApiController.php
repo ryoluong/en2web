@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Facades\Slack;
 use Illuminate\Support\Facades\Log;
+use App\Note;
 
 class LineApiController extends Controller
 {
@@ -29,7 +30,7 @@ class LineApiController extends Controller
                 'Authorization: Bearer ' . $channelToken,
                 'Content-Type: application/json; charset=utf-8',
             ];
-            $note = App\Note::all()->first();
+            $note = Note::all()->first();
             $note->content = mb_substr($note->content, 0, 50);
             if($note->photos->count()) {
                 $note->imageUrl = 'en2ynu.com' . $note->photos->first()->path;
