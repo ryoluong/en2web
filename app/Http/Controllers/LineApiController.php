@@ -33,9 +33,9 @@ class LineApiController extends Controller
             $note = Note::all()->first();
             $note_content = mb_substr($note->content, 0, 50);
             if($note->photos->count()) {
-                $note_image = 'en2ynu.com' . $note->photos->first()->path;
+                $note_image = 'https://en2ynu.com' . $note->photos->first()->path;
             } else {
-                $note_image = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
+                $note_image = 'https://en2ynu.com/img/note_cover_photo/' . $note->category_id . '.jpg';
             }
             $note_title = $note->title;
             $note_link = "http://en2ynu.com/notes/" . $note->id;
