@@ -33,25 +33,10 @@ class LineApiController extends Controller
                 'replyToken' => $event['replyToken'],
                 'messages' => [
                     [
-                        'type' => 'flex', 
-                        'altText' => 'this is a flex message',
-                        'contents' => [
-                            'type' => 'bubble',
-                            'body' => [
-                                'type' => 'box',
-                                'layout' => 'vertical',
-                                'contents' => [
-                                    'type' => 'text',
-                                    'text' => 'hello',
-                                ],
-                                [
-                                    'type' => 'text',
-                                    'text' => 'world',
-                                ],
-                            ],
-                        ],
+                        'type' => 'text', 
+                        'text' => 'this is a message',
                     ],
-                ]
+                ],
             ]);
             $options = array (
                 'http' => array (
