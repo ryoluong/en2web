@@ -41,7 +41,7 @@ class LineApiController extends Controller
                         "altText" => "This is a buttons template",
                         "template" => [
                             "type" => "buttons",
-                            "thumbnailImageUrl" => "https =>//example.com/bot/images/image.jpg",
+                            "thumbnailImageUrl" => "https://example.com/bot/images/image.jpg",
                             "imageAspectRatio" => "rectangle",
                             "imageSize" => "cover",
                             "imageBackgroundColor" => "#FFFFFF",
@@ -50,7 +50,7 @@ class LineApiController extends Controller
                             "defaultAction" => [
                                 "type" => "uri",
                                 "label" => "View detail",
-                                "uri" => "http =>//example.com/page/123"
+                                "uri" => "http://example.com/page/123"
                             ],
                             "actions" => [
                                 [
