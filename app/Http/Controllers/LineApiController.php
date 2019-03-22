@@ -31,12 +31,13 @@ class LineApiController extends Controller
                 'Content-Type: application/json; charset=utf-8',
             ];
             $note = Note::all()->first();
-            $note->content = mb_substr($note->content, 0, 50);
+            $note_content = mb_substr($note->content, 0, 50);
             if($note->photos->count()) {
-                $note->imageUrl = 'en2ynu.com' . $note->photos->first()->path;
+                $note_image = 'en2ynu.com' . $note->photos->first()->path;
             } else {
-                $note->imageUrl = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
+                $note_image = 'en2ynu.com/img/note_cover_photo/' . $note->category->id . '.jpg';
             }
+            $note_title = $note->title;
             $note_link = "http://en2ynu.com/notes/" . $note->id;
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
@@ -46,12 +47,12 @@ class LineApiController extends Controller
                         "altText" => "New Note Posted!",
                         "template" => [
                             "type" => "buttons",
-                            "thumbnailImageUrl" => $note['imageUrl'],
+                            "thumbnailImageUrl" => $note_image,
                             "imageAspectRatio" => "rectangle",
                             "imageSize" => "cover",
                             "imageBackgroundColor" => "#FFFFFF",
-                            "title" => $note['title'],
-                            "text" => $note['content'],
+                            "title" => $note_title,
+                            "text" => $note_content,
                             "defaultAction" => [
                                 "type" => "uri",
                                 "label" => "See note",
