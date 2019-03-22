@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SearchFormRequest;
 use App\Usecases\Note\SearchNoteUsecase;
+use App\Facades\Line;
+use App\Facades\Slack;
 
 class NotesController extends Controller
 {

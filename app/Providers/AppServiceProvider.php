@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         app()->singleton('slack', 'App\Slack');
+        app()->singleton('line', 'App\Line');
     }
 }
