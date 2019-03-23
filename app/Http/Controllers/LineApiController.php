@@ -75,20 +75,20 @@ class LineApiController extends Controller
                             "body" => [
                                 "type" => "box",
                                 "layout" => "vertical",
-                                "spacing" => "md",
+                                "spacing" => "sm",
                                 "contents" => [
                                 [
                                     "type" => "text",
                                     "text" => $note_title,
-                                    "size" => "lg",
+                                    "size" => "md",
                                     "weight" => "bold",
                                     "wrap" => true,
-                                    "color" => "#333333"
+                                    "color" => "#555555"
                                 ],
                                 [
                                     "type" => "text",
                                     "text" => $note_author,
-                                    "size" => "md",
+                                    "size" => "sm",
                                     "weight" => "bold",
                                     "wrap" => true
                                 ],
