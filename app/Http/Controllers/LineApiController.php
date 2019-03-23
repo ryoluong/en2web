@@ -90,7 +90,8 @@ class LineApiController extends Controller
                                     "text" => $note_author,
                                     "size" => "sm",
                                     "weight" => "bold",
-                                    "wrap" => true
+                                    "wrap" => true,
+                                    "color" => "#555555"
                                 ],
                                 [
                                     "type" => "text",
