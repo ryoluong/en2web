@@ -5,7 +5,7 @@
     </head>
     <body>
         @include('layouts.web.header')
-        <div id="showNotes">
+        <div id="app">
             <div class="content_head with_border">
                 <a class="icon" href="/notes">
                     <img src="/img/top_note.png" alt="">
@@ -25,6 +25,11 @@
                 <img class="category_icon" src="/img/categories/best.png" alt="bestnotes">
                 <p class="category_name">Best Notes</p>
             </div>    
+            @elseif($flag == 'like')
+            <div class="category_wrapper">
+                <img class="category_icon" src="/img/categories/like.png" alt="heart">
+                <p class="category_name">Liked Notes</p>
+            </div>
             @elseif($flag == 'category')
             <div class="category_wrapper">
                 <img class="category_icon" src="/img/categories/category.png" alt="category">

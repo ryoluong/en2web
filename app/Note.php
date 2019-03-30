@@ -33,4 +33,9 @@ class Note extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
+    public function favUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
 }

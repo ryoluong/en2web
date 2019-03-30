@@ -11,4 +11,5 @@
     </ul>
     @endguest
     <p class="copyright">© 2019 En2. All rights reserved.</p>
+    <script src=" {{ mix('js/app.js') }} "></script>
 </footer>

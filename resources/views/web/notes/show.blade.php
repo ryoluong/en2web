@@ -5,7 +5,7 @@
     </head>
     <body>
         @include('layouts.web.header')
-        <div class="note_show">
+        <div id="app" class="note_show">
             <div class="content_head">
                 <a class="icon" href="/notes">
                     <img src="/img/top_note.png" alt="note">
@@ -22,12 +22,7 @@
             </div>   
             <div
                 class="top_photo {{ $note->isBest == 1 ? 'best_note' : ''}}"
-                style="background-image:url(
-                @if($note->photos->count())
-                {{ $note->photos->first()->path }}
-                @else
-                {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }}
-                @endif);"
+                style="background-image:url(@if($note->photos->count()) {{ $note->photos->first()->path }} @else {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }} @endif);"
             >
                 <div class="textbox">
                     <div class="title_country_wrapper">
@@ -47,6 +42,7 @@
                     <a class="edit" href="/notes/{{ $note->id }}/edit"><img src="/img/note_edit.png" alt=""></a>
                     @endif
                     <a class="note_category" href="/categories/{{ $note->category->id }}/notes">{{ $note->category->name }}</a>
+                    <fav-button class="fav-button" :note_id="{{ $note->id }}" :is_fav="{{ auth()->user()->favNotes()->where('note_id', $note->id)->count() }}" :num_of_fav="{{ $note->favUsers()->count() }}"></fav-button>
                 </div>
             </div>
             <div class="author_and_date">
@@ -69,6 +65,9 @@
             <p class="content">
             {!! $note->content !!}
             </p>
+            @if(!auth()->user()->favNotes()->where('note_id', $note->id)->count())
+            <div class="fav-button-wrapper"><p class="text">Like this note!</p><fav-button class="fav-button" :note_id="{{ $note->id }}" :is_fav="{{ auth()->user()->favNotes()->where('note_id', $note->id)->count() }}" :num_of_fav="{{ $note->favUsers()->count() }}"></fav-button></div>
+            @endif
         </div>
         @include('layouts.web.footer')
     </body>

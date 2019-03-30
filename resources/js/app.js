@@ -36,15 +36,8 @@ Vue.component(
   require("./components/UserContainerComponent.vue")
 );
 Vue.component("user-item", require("./components/UserItemComponent.vue"));
+Vue.component("fav-button", require("./components/FavNoteComponent.vue"));
+Vue.prototype.$http = axios;
 new Vue({
-  el: "#app",
-  data: {
-    search: "",
-    displayContainer: true
-  }
-  //   computed: {
-  //     displayContainer: function() {
-  //       return ;
-  //     }
-  //   }
+  el: "#app"
 });

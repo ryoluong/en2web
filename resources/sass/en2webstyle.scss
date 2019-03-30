@@ -106,6 +106,7 @@ strong {
 @import "home";
 @import "footer";
 @import "calendar";
+@import "note";
 
 /*****************
  *               *
@@ -538,21 +539,32 @@ strong {
           }
         }
         .bestnote_icon {
+          display: block;
           font-size: 14px;
           background-color: #ee9922;
           margin: 0 12px 10px 0;
-          padding: 4px 8px;
+          padding: 1.5px 6px;
           border-radius: 5px;
           position: absolute;
           bottom: 0;
           right: 0;
           font-weight: bold;
           @include pc {
-            padding: 5px 6px;
+            padding: 2px 8px;
             font-size: 15px;
           }
-          &:hover {
-            text-decoration: underline;
+        }
+        .fav-button {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-bottom: 11.5px;
+          margin-left: 12px;
+          i {
+            font-size: 18px;
+            span {
+              font-size: 15px;
+            }
           }
         }
       }
@@ -1690,10 +1702,14 @@ strong {
     margin-left: 2px;
     margin-top: 7px;
     margin-bottom: 3px;
+    text-decoration: none;
     @include pc {
       font-size: 24px;
       line-height: 40px;
     }
+  }
+  a.category_name:hover {
+    text-decoration: underline;
   }
   .link {
     color: #00aaca;
@@ -2081,6 +2097,13 @@ strong {
       margin-left: 5px;
     }
   }
+  .fav-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 10px;
+    margin-left: 12px;
+  }
   h6 {
     max-width: 980px;
     display: flex;
@@ -2088,7 +2111,7 @@ strong {
     //flex-direction: row-reverse;
     width: 95%;
     font-weight: inherit;
-    margin: 10px auto 12px auto;
+    margin: 10px auto 5px auto;
     line-height: 20px;
     .tag {
       font-size: 15px;
@@ -2152,6 +2175,29 @@ strong {
     .escaped_link {
       display: inline;
       color: #00aaca;
+    }
+  }
+  .fav-button-wrapper {
+    max-width: 768px;
+    width: 92.5%;
+    margin: 15px auto;
+    .text {
+      font-size: 16px;
+      display: inline;
+      color: #e65;
+      line-height: 26px;
+      font-weight: bold;
+    }
+    .fav-button {
+      display: inline;
+      position: relative;
+      vertical-align: middle;
+      i {
+        color: #ddd;
+        span {
+          color: #ddd;
+        }
+      }
     }
   }
 }

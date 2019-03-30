@@ -30,10 +30,11 @@ class UserController extends Controller
     public function showMyPage() {
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
+        $favNotes = $user->favNotes()->orderBy('date', 'desc')->take(6)->get();
         $flag = 'mypage';
         $user->university = $user->getEscapedStringWithBr();
         $user->profile = $user->getEscapedProfileWithHeader();
-        return view('web.mypage', compact(['user', 'notes', 'flag']));
+        return view('web.mypage', compact(['user', 'notes', 'favNotes', 'flag']));
     }
 
     public function editMyPage() {

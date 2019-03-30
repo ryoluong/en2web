@@ -136,17 +136,19 @@
             </div>      
             <div class="note_wrapper">
                 <div class="category_wrapper">
-                    <img class="category_icon" src="/img/top_note.png" alt="">
-                    @if($flag == 'mypage')
-                    <p class="category_name">My Notes</p>
-                    @else
-                    <p class="category_name">
-                        <?php
-                            $name = preg_split('/\s/', $user->name, -1, PREG_SPLIT_NO_EMPTY);
-                            echo htmlspecialchars($name[0], ENT_QUOTES, 'UTF-8')."'s Notes";
-                        ?>
-                    </p>
-                    @endif
+                    <a class="href" href="/users/{{ $user->id }}/notes">
+                        <img class="category_icon" src="/img/top_note.png" alt="">
+                        @if($flag == 'mypage')
+                        <p class="category_name">My Notes</p>
+                        @else
+                        <p class="category_name">
+                            <?php
+                                $name = preg_split('/\s/', $user->name, -1, PREG_SPLIT_NO_EMPTY);
+                                echo htmlspecialchars($name[0], ENT_QUOTES, 'UTF-8')."'s Notes";
+                            ?>
+                        </p>
+                        @endif
+                    </a>
                 </div>
                 @if($user->notes->count())
                 <ul class="note_list">
@@ -155,7 +157,7 @@
                     @endforeach
                     @if($user->notes()->count() > 6)
                     <li class="note_item small">
-                        <a class="see_more" href="/users/{{ $user->id }}/notes"><p>See more</p></a>
+                        <a class="see_more" href="/users/{{ $user->id }}/notes"><p class="see-more-text">See more</p></a>
                     </li>
                     @endif
                 </ul>
@@ -163,6 +165,30 @@
                 <p class="no_note">ノートがまだありません。</p>
                 @endif
             </div>
+            @if($flag == 'mypage')
+            <div class="note_wrapper">
+                <div class="category_wrapper">
+                    <a class="href" href="/notes/like">
+                        <img class="category_icon" src="/img/categories/like.png" alt="">
+                        <p class="category_name">Liked Notes</p>
+                    </a>
+                </div>
+                @if($favNotes->count())
+                <ul class="note_list">
+                    @foreach($favNotes as $note)
+                    @include('layouts.web.notes')
+                    @endforeach
+                    @if($user->favNotes()->count() > 6)
+                    <li class="note_item small">
+                        <a class="see_more" href="/notes/like"><p class="see-more-text">See more</p></a>
+                    </li>
+                    @endif
+                </ul>
+                @else
+                <p class="no_note">ノートがまだありません。</p>
+                @endif
+            </div>
+            @endif
         </div>
         @include('layouts.web.footer')
     </body>

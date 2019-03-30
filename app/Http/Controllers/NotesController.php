@@ -49,6 +49,15 @@ class NotesController extends Controller
         return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
     }
 
+    public function showLike()
+    {
+        $notes_obj = auth()->user()->favNotes();
+        $notes = $notes_obj->paginate(6);
+        $flag = 'like';
+        $count = auth()->user()->favNotes()->count();
+        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+    }
+
     public function showByTag(Tag $tag)
     {
         $notes = $tag->notes()->orderBy('date', 'desc')->paginate(6);
@@ -383,5 +392,14 @@ class NotesController extends Controller
         $count = $notes_tmp->count();
         $notes = $notes_tmp->orderBy('date','desc')->paginate(6);
         return view('web.notes.paginate', compact(['notes', 'count', 'flag']));
+    }
+
+    public function fav()
+    {
+        $user = auth()->user();
+        $note_id = request()->note_id;
+        $user->favNotes()->toggle([$note_id]);
+        
+        return redirect("/notes/$note_id");
     }
 }

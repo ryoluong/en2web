@@ -5,7 +5,7 @@
     </head>
     <body>
         @include('layouts.web.header')
-        <div id="showNotes">
+        <div id="app">
             <div class="content_head with_border">
                 <a class="icon" href="/notes">
                     <img src="/img/top_note.png" alt="note">
