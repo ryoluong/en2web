@@ -5,41 +5,151 @@
  ********************/
 header {
   #web_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    height: 50px;
-    padding: 5px 20px;
+    box-shadow: 0 1px 5px 1px #ddd;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 5px;
+    padding-top: 2.5px;
     @include pc {
+      box-shadow: none;
       height: 75px;
       padding: 7px 20px;
     }
-
-    .logo {
-      display: block;
-      height: 40px;
-
-      @include pc {
-        height: 65px;
+    .header-upper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 10px 20px;
+      .element {
+        display: block;
+        width: 26px;
+        height: 26px;
+        @include pc {
+          width: 30px;
+          height: 30px;
+          margin-right: 50px;
+        }
+      }
+      .avater {
+        .icon {
+          height: 28px;
+          width: 28px;
+          display: inline-block;
+          border-radius: 5px;
+          object-fit: cover;
+          position: relative;
+          z-index: 3;
+        }
+        &::before {
+          @include icon_deco_before;
+          width: 29px;
+          height: 29px;
+          position: absolute;
+          z-index: 1;
+          right: 17.5px;
+        }
+        &::after {
+          @include icon_deco_after;
+          width: 29px;
+          height: 29px;
+          position: absolute;
+          z-index: 2;
+          right: 17.5px;
+          top: 19.5px;
+        }
+      }
+      .burger-button {
+        height: 19px;
+        width: 23px;
+        margin: 1.5px;
+        .el {
+          border-radius: 2px;
+          width: 100%;
+          height: 5px;
+        }
+        .colored {
+          height: 3px;
+          background-color: #557;
+        }
+      }
+      .logo {
+        display: block;
+        height: 40px;
+        @include pc {
+          height: 65px;
+        }
       }
     }
-    .elements {
-      display: block;
-      padding-top: 3px;
-      width: 22px;
-      height: 22px;
-      @include pc {
-        width: 30px;
-        height: 30px;
-        margin-right: 50px;
+    $slide_menu_height: 171px;
+    .slide-menu {
+      display: none;
+      height: $slide_menu_height;
+      width: 100%;
+      background-color: #fff;
+      overflow: hidden;
+      &.show {
+        display: block;
+      }
+      .menu-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        width: 90%;
+        margin: auto;
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        .menu-content {
+          width: 30.33%;
+          margin: 3% 1.5%;
+          .link {
+            display: block;
+            padding-top: 3px;
+            text-decoration: none;
+            width: 75%;
+            margin: auto;
+            .link_text {
+              color: #557;
+              font-weight: bold;
+              font-size: 13px;
+            }
+            .link_img {
+              width: 35px;
+              height: 35px;
+            }
+          }
+        }
+      }
+    }
+    .slide {
+      &-enter-active {
+        animation: show 0.5s;
+      }
+      &-leave-active {
+        animation: hide 0.5s;
+      }
+    }
+    @keyframes show {
+      0% {
+        height: 0px;
+      }
+      100% {
+        height: $slide_menu_height;
+      }
+    }
+    @keyframes hide {
+      0% {
+        height: $slide_menu_height;
+      }
+      100% {
+        height: 0px;
       }
     }
   }
   .dammy_menu {
     width: 100%;
     height: 3px;
-    background-color: #777799;
+    background-color: #779;
   }
   .menu {
     width: 100%;

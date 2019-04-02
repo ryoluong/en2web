@@ -36,8 +36,32 @@ Vue.component(
   require("./components/UserContainerComponent.vue")
 );
 Vue.component("user-item", require("./components/UserItemComponent.vue"));
+Vue.component("show-note", require("./components/ShowNoteComponent.vue"));
 Vue.component("fav-button", require("./components/FavNoteComponent.vue"));
+Vue.component(
+  "fav-button-show-note",
+  require("./components/FavNoteComponentForShowNote.vue")
+);
 Vue.prototype.$http = axios;
 new Vue({
-  el: "#app"
+  el: "#app",
+  data() {
+    return {
+      loading: true,
+      showMenu: false,
+      showUserMenu: false
+    };
+  },
+  mounted() {
+    this.loading = false;
+  },
+  methods: {
+    toggleShowMenu: function() {
+      this.showMenu = !this.showMenu;
+      document.body.classList.toggle("scroll-lock");
+    },
+    toggleShowUserMenu: function() {
+      this.showUserMenu = !this.showUserMenu;
+    }
+  }
 });

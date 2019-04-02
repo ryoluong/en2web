@@ -1,22 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-        <script>
-            function departmentSwitch() {
-                var eles = document.getElementsByClassName('switch');
-                for(var ele of eles) {
-                    if(ele.disabled == true) {
-                        ele.disabled = false;
-                    } else {
-                        ele.disabled = true;
-                    }
-                }
-            }
-        </script>
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Register')
+@section('content')
         <div id="registration_page">
             <form name="register_form" class="form-horizontal" method="POST" action="{{ route('register.main.confirm') }}">
                 {{ csrf_field() }}
@@ -221,5 +205,4 @@
                 </div>
             </form>  
         </div>
-    </body>
-</html>
+@endsection

@@ -1,16 +1,12 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Reset Password')
+@section('content')
         <div id="registered_page">
             <div class="border_card">
                 <div class="title">
                     <div class="table_view">
                         <div class="text">
-                            <p>Password Reset Link has been sent.</p>
+                            <p>Password reset link has been sent.</p>
                         </div>
                         <div class="link"></div>
                     </div>
@@ -24,5 +20,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection

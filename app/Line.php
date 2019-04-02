@@ -10,32 +10,17 @@ class Line extends Model
     public function notice(string $str)
     {
         $url = 'https://api.line.me/v2/bot/message/push';
-        $channelToken = 'sv/RKt1C3qskQg0Uh5Xdll9aXWvy42rty+y9gdYtQjzQ5AOMMKOgPPU6yTAuxkoRsTXsWVSmv648F5wXHJzpvWPCkUSnfdjuxj91YZIr7Np4rGPlgFFbsAFeyuL6I8nUFSYZCQvvEZkfHngYPfAtUgdB04t89/1O/w1cDnyilFU=';
+        $channelToken = config('const.LINE_CHANNEL_TOKEN');
         $headers = [
             'Authorization: Bearer ' . $channelToken,
             'Content-Type: application/json; charset=utf-8',
         ];
         $content = json_encode([
-            'to' => 'C41cf84a10b0bb1c546d925d74e295b60',
+            'to' => config('const.LINE_MY_USER_ID'),
             'messages' => [
                 [
-                    'type' => 'flex', 
-                    'altText' => 'thi is a flex message',
-                    'contents' => [
-                        'type' => 'bubble',
-                        'body' => [
-                            'type' => 'box',
-                            'layout' => 'vertical',
-                            'contents' => [
-                                'type' => 'text',
-                                'text' => 'hello',
-                            ],
-                            [
-                                'type' => 'text',
-                                'text' => 'world',
-                            ],
-                        ],
-                    ],
+                    'type' => 'text', 
+                    'text' => $str,
                 ],
             ]
         ]);

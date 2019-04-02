@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
-        <div id="app" class="note_show">
+@extends('layouts.app')
+@section('title', ' - Notes【'.$note->title.'】')
+@section('content')
+        <div class="note_show">
             <div class="content_head">
                 <a class="icon" href="/notes">
                     <img src="/img/top_note.png" alt="note">
@@ -19,8 +15,22 @@
                 <a class="link" href="/notes/create">
                     <img src="/img/note_create.png" alt="">
                 </a>
-            </div>   
-            <div
+            </div>
+            <div class="loading-wrapper" v-show="loading">
+                <div class="loading"></div>
+            </div>
+            <show-note 
+            :user="{{ auth()->user() }}"
+            :note="{{ $note }}"
+            :author="{{ $note->user }}"
+            :photos="{{ $note->photos }}"
+            :category="{{ $note->category }}"
+            :countries="{{ $note->countries }}"
+            :tags="{{ $note->tags }}"
+            :is_fav="{{ auth()->user()->favNotes()->where('note_id', $note->id)->count() }}"
+            :num_of_fav="{{ $note->favUsers()->count() }}"
+            ></show-note>
+            <!-- <div
                 class="top_photo {{ $note->isBest == 1 ? 'best_note' : ''}}"
                 style="background-image:url(@if($note->photos->count()) {{ $note->photos->first()->path }} @else {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }} @endif);"
             >
@@ -67,8 +77,6 @@
             </p>
             @if(!auth()->user()->favNotes()->where('note_id', $note->id)->count())
             <div class="fav-button-wrapper"><p class="text">Like this note!</p><fav-button class="fav-button" :note_id="{{ $note->id }}" :is_fav="{{ auth()->user()->favNotes()->where('note_id', $note->id)->count() }}" :num_of_fav="{{ $note->favUsers()->count() }}"></fav-button></div>
-            @endif
+            @endif -->
         </div>
-        @include('layouts.web.footer')
-    </body>
-</html>
+@endsection

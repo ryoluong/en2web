@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slack extends Model
 {
-    private $url = 'https://hooks.slack.com/services/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';
-    
     public function notice(string $str) {
+        $url = config('const.SLACK_WEBHOOK_URI');
         $content = json_encode(array('text' => $str));
         $options = array (
             'http' => array (
@@ -23,7 +22,7 @@ class Slack extends Model
                 'verify_peer_name' => false
                 )
             );
-        $response = file_get_contents($this->url, false, stream_context_create($options));
+        $response = file_get_contents($url, false, stream_context_create($options));
         return $response;
     }
 }

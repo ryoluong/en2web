@@ -45,8 +45,9 @@ class NotesController extends Controller
     {
         $notes = Note::where('isBest', true)->orderBy('date', 'desc')->paginate(6);
         $flag = 'isBest';
+        $title = 'Best Notes';
         $count = Note::where('isBest', true)->count();
-        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
     }
 
     public function showLike()
@@ -54,40 +55,45 @@ class NotesController extends Controller
         $notes_obj = auth()->user()->favNotes();
         $notes = $notes_obj->paginate(6);
         $flag = 'like';
+        $title = 'Liked Notes';
         $count = auth()->user()->favNotes()->count();
-        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
     }
 
     public function showByTag(Tag $tag)
     {
         $notes = $tag->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'tag';
+        $title = 'Notes【Tag: '.$tag->name.'】';
         $count = $tag->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'tag', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'tag', 'flag', 'title', 'count']));
     }
 
     public function showByCategory(Category $category)
     {
         $notes = Note::where('category_id', $category->id)->orderBy('date', 'desc')->paginate(6);
         $flag = 'category';
+        $title = 'Notes【Category: '.$category->name.'】';
         $count = Note::where('category_id', $category->id)->count();
-        return view('web.notes.paginate', compact(['notes', 'category', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'category', 'flag', 'title', 'count']));
     }
 
     public function showByAuthor(User $user)
     {
         $notes = $user->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'author';
+        $title = 'Notes【Author: '.$user->name.'】';
         $count = $user->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'user', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'user', 'flag', 'title', 'count']));
     }
 
     public function showByCountry(Country $country)
     {
         $notes = $country->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'country';
+        $title = 'Notes【Country: '.$country->name.'】';
         $count = $country->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'title', 'count']));
     }
 
     /**

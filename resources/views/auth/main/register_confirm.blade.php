@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Confirm')
+@section('content')
         <div id="registration_conf_page">
             <form class="form-horizontal" method="POST" action="{{ route('register.main.registered') }}" onsubmit="disableButton()">
                 {{ csrf_field() }}
@@ -82,5 +78,4 @@
                 </div>
             </form>
         </div>
-    </body>
-</html>
+@endsection

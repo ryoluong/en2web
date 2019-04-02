@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Registered')
+@section('content')
         <div id="registered_page">
             <div class="border_card">
                 <div class="title">
@@ -23,5 +19,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection

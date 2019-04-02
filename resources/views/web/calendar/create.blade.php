@@ -1,22 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-        <script>
-            function disableInputs() {
-                var eles = document.getElementsByClassName('input_time');
-                for(var ele of eles) {
-                    if(ele.disabled == false) {
-                        ele.disabled = true;
-                    } else {
-                        ele.disabled = false;
-                    }
-                }
-            }
-        </script>
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Add a New Event')
+@section('content')
         <div id="create_event">
             <form method="POST" action="/calendar" onsubmit="disableButton()">
             {{ csrf_field() }} 
@@ -105,5 +89,4 @@
                 </div>
             </form>
         </div>
-    </body>
-</html>
+@endsection

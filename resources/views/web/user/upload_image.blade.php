@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Upload User Photo')
+@section('content')
         <div id="upload">
             <div class="border_card">
                 <div class="title">
@@ -44,5 +40,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection

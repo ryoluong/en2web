@@ -54,6 +54,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic,
     "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo,
     sans-serif;
+  &.scroll-lock {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
 }
 p {
   line-height: 1.5em;
@@ -68,35 +73,16 @@ strong {
   color: #ff1155;
 }
 
-.pc {
-  display: none !important;
-
-  @include pc {
-    display: inline !important;
-  }
-}
 .sp {
-  display: inline !important;
-
-  @include pc {
+  @media (min-width: 768px) {
     display: none !important;
   }
 }
-.pc_block {
-  display: none !important;
-
-  @include pc {
-    display: block !important;
-  }
-}
-.sp_block {
-  display: block !important;
-
-  @include pc {
+.pc {
+  @media (max-width: 767px) {
     display: none !important;
   }
 }
-
 /**
  *
  *  Imports
@@ -163,10 +149,6 @@ strong {
     transition: background-color 0.3s;
   }
 }
-.passreset {
-  width: 200px;
-}
-
 #disable_button {
   .button_text {
     background-color: #7777bb;
@@ -354,6 +336,74 @@ strong {
       height: 1rem;
     }
   }
+}
+.user-menu {
+  display: none;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
+  margin: 0;
+  margin-top: 58px;
+  margin-right: 18px;
+  width: 150px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 1px 1px 2px 1px #ddd;
+  border-radius: 5px;
+  z-index: 5;
+  &.show {
+    display: block;
+  }
+  .list {
+    height: 20%;
+    .user-name {
+      display: block;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+    .link {
+      display: inline-block;
+      text-decoration: none;
+      line-height: 30px;
+      font-size: 16px;
+      min-width: 80%;
+    }
+  }
+}
+.fade {
+  &-enter-active {
+    animation: fadein 0.25s;
+  }
+  &-leave-active {
+    animation: fadeout 0.25s;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.below_slide_menu {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1;
 }
 /**************************************************
  *                                                *
@@ -1642,7 +1692,7 @@ strong {
 .deletebtn {
   width: 200px;
   text-align: center;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 15px auto;
 }
 /***********************************************************
  *                                                         *
@@ -1769,8 +1819,8 @@ strong {
 }
 .country_wrapper {
   height: 50px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   @include pc {
     height: 60px;
   }
@@ -2538,7 +2588,7 @@ form {
     }
   }
   .no_note {
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
     @include pc {
       font-size: 17px;
     }
@@ -2623,6 +2673,95 @@ form {
       height: 50px;
       font-size: 24px;
       line-height: 50px;
+    }
+  }
+}
+.loading-wrapper {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  .loading {
+    position: absolute;
+    font-size: 10px;
+    margin: 25vh auto;
+    text-indent: -9999em;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    background: #9999bb;
+    background: -moz-linear-gradient(
+      left,
+      #9999bb 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    background: -webkit-linear-gradient(
+      left,
+      #9999bb 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    background: -o-linear-gradient(
+      left,
+      #9999bb 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    background: -ms-linear-gradient(
+      left,
+      #9999bb 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    background: linear-gradient(
+      to right,
+      #9999bb 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    position: relative;
+    -webkit-animation: load3 1.4s infinite linear;
+    animation: load3 1.4s infinite linear;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  .loading:before {
+    width: 50%;
+    height: 50%;
+    background: #9999bb;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+  }
+  .loading:after {
+    background: #fff;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: "";
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  @-webkit-keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
     }
   }
 }

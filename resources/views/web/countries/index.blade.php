@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.app')
+@section('title', ' - Countries')
+@section('content')
         <div id="showCountries">
             <div class="content_head with_border">
                 <a class="icon" href="/countries">
@@ -25,6 +21,4 @@
                 </div>
             </div>
         </div>
-        @include('layouts.web.footer')
-    </body>
-</html>
+@endsection

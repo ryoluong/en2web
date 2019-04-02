@@ -13,4 +13,7 @@ return [
         'MAIL_AUTHED' => '2',
         'DEACTIVE' => '9',
     ],
+    'LINE_CHANNEL_TOKEN' => env('LINE_CHANNEL_TOKEN'),
+    'LINE_MY_USER_ID' => env('LINE_MY_USER_ID'),
+    'SLACK_WEBHOOK_URI' => env('SLACK_WEBHOOK_URI')
 ];

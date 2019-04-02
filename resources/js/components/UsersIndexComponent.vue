@@ -1,13 +1,5 @@
 <template>
   <div id="showMembers">
-    <div class="content_head with_border">
-      <div class="icon">
-        <img src="img/top_members.png" alt="members">
-      </div>
-      <div class="text">
-        <p>Members</p>
-      </div>
-    </div>
     <div class="search_wrapper">
       <input type="text" v-model="search" class="input_text" placeholder="Search members">
     </div>

@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
-        <div id="country_show">
+@extends('layouts.app')
+@section('title', ' - '.$country->name)
+@section('content')
+        <div id="country-show">
             <div class="content_head with_border">
                 <a class="icon" href="/countries">
                     <img src="/img/top_world.png" alt="note">
@@ -63,6 +59,4 @@
                 @endif
             </div>
         </div>
-        @include('layouts.web.footer')
-    </body>
-</html>
+@endsection
