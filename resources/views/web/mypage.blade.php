@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', ' - Mypage')
 @section('content')
 <div id="mypage">
     <div class="content_head">
