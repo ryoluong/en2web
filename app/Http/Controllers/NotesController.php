@@ -37,8 +37,9 @@ class NotesController extends Controller
     {
         $notes = Note::orderBy('date', 'desc')->paginate(6);
         $flag = 'all';
+        $title = 'All Notes';
         $count = Note::all()->count();
-        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
     }
 
     public function showBest()
