@@ -21,15 +21,17 @@ class LineApiController extends Controller
             $message = 'LINE Bot joined group! groupID: `'.$event['source']['groupId'].'`';
             Log::info($message);
             Slack::notice($message);
-        } elseif ($event['type'] == 'message') {
+        } 
+        elseif ($event['type'] == 'message') {
             $url = 'https://api.line.me/v2/bot/message/reply';
             $channelToken = config('const.LINE_CHANNEL_TOKEN');
             $headers = [
                 'Authorization: Bearer ' . $channelToken,
                 'Content-Type: application/json; charset=utf-8',
             ];
-            $note = Note::all()->first();
-            $note_content = mb_substr($note->content, 0, 50);
+            $note = Note::where('id', '12')->first();
+            $str = mb_substr($note->content, 0, 75).'......';
+            $note_content = preg_replace('/[\n\r\t]/', ' ', $str);
             if($note->photos->count()) {
                 $note_image = 'https://en2ynu.com' . $note->photos->first()->path;
             } else {
@@ -41,6 +43,10 @@ class LineApiController extends Controller
             $content = json_encode([
                 'replyToken' => $event['replyToken'],
                 'messages' => [
+                    // [
+                    //     "type" => "text",
+                    //     "text" => '新しいノートが投稿されました！'
+                    // ],
                     [
                         "type" => "flex",
                         "altText" => "New note posted!",
@@ -48,72 +54,73 @@ class LineApiController extends Controller
                             "type" => "bubble",
                             "header" => [
                                 "type" => "box",
-                                "layout" => "horizontal",
+                                "layout" => "baseline",
                                 "contents" => [
-                                [
-                                    "type" => "text",
-                                    "text" => "New Note Posted!",
-                                    "weight" => "bold",
-                                    "color" => "#777799",
-                                    "size" => "md"
-                                ]
+                                    [
+                                        "type" => "text",
+                                        "text" => "New Note Posted!",
+                                        "weight" => "bold",
+                                        "color" => "#777799",
+                                        "size" => "md"
+                                    ]
                                 ]
                             ],
                             "hero" => [
                                 "type" => "image",
+                                "margin" => "none",
                                 "url" => $note_image,
                                 "size" => "full",
-                                "aspectRatio" => "20:10",
+                                "aspectRatio" => "2000:1000",
                                 "aspectMode" => "cover",
                                 "action" => [
-                                "type" => "uri",
-                                "uri" => $note_link
+                                    "type" => "uri",
+                                    "uri" => $note_link
                                 ]
                             ],
                             "body" => [
                                 "type" => "box",
                                 "layout" => "vertical",
-                                "spacing" => "sm",
+                                "spacing" => "md",
                                 "contents" => [
-                                [
-                                    "type" => "text",
-                                    "text" => $note_title,
-                                    "size" => "md",
-                                    "weight" => "bold",
-                                    "wrap" => true,
-                                    "color" => "#555555"
-                                ],
-                                [
-                                    "type" => "text",
-                                    "text" => $note_author,
-                                    "size" => "sm",
-                                    "weight" => "bold",
-                                    "wrap" => true,
-                                    "color" => "#555555"
-                                ],
-                                [
-                                    "type" => "text",
-                                    "text" => $note_content,
-                                    "size" => "xs",
-                                    "wrap" => true,
-                                    "color" => "#555555"
-                                ]
+                                    [
+                                        "type" => "text",
+                                        "text" => $note_title,
+                                        "size" => "md",
+                                        "weight" => "bold",
+                                        "wrap" => true,
+                                        "color" => "#555555",
+                                    ],
+                                    [
+                                        "type" => "text",
+                                        "text" => $note_author,
+                                        "size" => "sm",
+                                        "weight" => "bold",
+                                        "wrap" => true,
+                                        "color" => "#555555",
+                                    ],
+                                    [
+                                        "type" => "text",
+                                        "text" => $note_content,
+                                        "size" => "xs",
+                                        "wrap" => true,
+                                        "color" => "#555555"
+                                    ]
                                 ]
                             ],
                             "footer" => [
                                 "type" => "box",
                                 "layout" => "horizontal",
                                 "contents" => [
-                                [
-                                    "type" => "button",
-                                    "action" => [
-                                    "type" => "uri",
-                                    "label" => "See more",
-                                    "uri" => $note_link
-                                    ],
-                                    "height" => "sm",
-                                    "color" => "#777799"
-                                ]
+                                    [
+                                        "type" => "button",
+                                        "action" => [
+                                            "type" => "uri",
+                                            "label" => "See more",
+                                            "uri" => $note_link
+                                        ],
+                                        "height" => "sm",
+                                        "color" => "#777799",
+                                    ]
                                 ]
                             ],
                             "styles" => [
