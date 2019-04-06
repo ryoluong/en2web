@@ -23,9 +23,9 @@ class LineApiController extends Controller
             Slack::notice($message);
         } elseif ($event['type'] == 'message') {
             $url = 'https://api.line.me/v2/bot/message/reply';
-            $channelToken = env('LINE_CHANNEL_TOKEN');
+            $channelToken = config('const.LINE_CHANNEL_TOKEN');
             $headers = [
-                'Authorization: Bearer ' . $this->channelToken,
+                'Authorization: Bearer ' . $channelToken,
                 'Content-Type: application/json; charset=utf-8',
             ];
             $note = Note::all()->first();
