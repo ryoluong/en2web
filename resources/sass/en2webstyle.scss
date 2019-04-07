@@ -212,7 +212,12 @@ strong {
     }
   }
 }
-
+.line-send {
+  height: 24px;
+  @include pc {
+    height: 28px;
+  }
+}
 /********************
  *                  *
  * Radio Button     *
@@ -343,11 +348,11 @@ strong {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 0;
   margin: 0;
   margin-top: 58px;
   margin-right: 18px;
-  width: 150px;
+  width: 180px;
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 1px 1px 2px 1px #ddd;
   border-radius: 5px;
@@ -363,14 +368,16 @@ strong {
       font-weight: bold;
       text-decoration: none;
       padding-top: 2px;
-      padding-bottom: 2px;
+      padding-bottom: 0;
+      padding-left: 10px;
     }
     .link {
       display: inline-block;
       text-decoration: none;
-      line-height: 30px;
+      line-height: 32px;
       font-size: 16px;
-      min-width: 80%;
+      width: 100%;
+      padding-left: 10px;
     }
   }
 }
@@ -416,7 +423,7 @@ strong {
   flex-wrap: wrap;
   padding: 0;
   width: 85%;
-  margin: 3px auto;
+  margin: 6px auto;
   justify-content: center;
   li {
     width: 30px;
@@ -1708,6 +1715,7 @@ strong {
   align-items: center;
   margin-left: 5%;
   max-width: 1000px;
+  margin-top: 5px;
   @include pc {
     height: 50px;
     margin: auto;
@@ -1766,6 +1774,7 @@ strong {
     height: 15px;
     font-size: 15px;
     margin: 5px;
+    margin-top: 7.5px;
     @include pc {
       margin: 0;
       line-height: 45px;
@@ -1922,331 +1931,367 @@ strong {
  *                        *
  **************************/
 .note_show {
-  .no_border_card {
-    margin-bottom: 0;
-    @include pc {
-      margin-bottom: 25px;
-    }
-    .title {
-      border: none;
-      margin-bottom: 2px;
-      @include pc {
-        margin-bottom: 0;
-        border-bottom: 1px solid #9999aa;
-      }
-    }
-  }
-  a {
-    text-decoration: none;
-    color: #fff;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .top_photo {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center center;
-    position: relative;
+  .note_show_vue {
     max-width: 980px;
-    margin: auto;
-    @include pc {
-      height: 340px;
-    }
-    .textbox {
-      position: absolute;
-      height: 100%;
-      width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    .no_border_card {
+      margin-bottom: 0;
       @include pc {
-        right: 0;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        height: 70%;
-        width: 60%;
-        margin: auto;
+        margin-bottom: 25px;
       }
-      &::before {
-        background-color: rgba(0, 0, 0, 0.5);
+      .title {
+        border: none;
+        margin-bottom: 2px;
+        @include pc {
+          margin-bottom: 0;
+          border-bottom: 1px solid #9999aa;
+        }
+      }
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .top_photo {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center center;
+      position: relative;
+      margin: auto;
+      @include pc {
+        height: 340px;
+      }
+      .textbox {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
         height: 100%;
         width: 100%;
-        content: "";
         @include pc {
-          border-radius: 1px;
-          background-color: rgba(0, 0, 0, 0.7);
+          right: 0;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          height: 70%;
+          width: 60%;
+          margin: auto;
+        }
+        &::before {
+          background-color: rgba(0, 0, 0, 0.5);
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          content: "";
+          @include pc {
+            border-radius: 1px;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin: auto;
+          }
+        }
+      }
+      .note_category {
+        position: absolute;
+        display: block;
+        font-weight: inherit;
+        color: #fff;
+        font-size: 18px;
+        margin: 0;
+        padding: 6px 30px 5px 5px;
+        border-bottom: 1px solid #fff;
+        &::before {
+          //background-color: #00aaca;
+          background-image: url("/img/note_category.png");
+          background-size: cover;
+          display: block;
+          height: 18px;
+          width: 18px;
+          margin: 5px 6px 5px 5px;
+          content: "";
+          float: left;
+        }
+      }
+      .title_country_wrapper {
+        padding-top: 50px;
+        position: absolute;
+        text-align: center;
+        width: 95%;
+        font-weight: inherit;
+        margin: auto;
+        right: 0;
+        left: 0;
+        .note_title {
+          font-weight: inherit;
+          margin: 0 auto;
+          color: #fff;
+          font-size: 23px;
+        }
+        .note_countries {
+          margin: 5px auto;
+          text-align: center;
+          .note_country {
+            text-align: center;
+            font-weight: inherit;
+            color: #fff;
+            font-size: 17px;
+          }
+        }
+      }
+    }
+    .best_note {
+      border-top: 7px solid #ffbb55;
+      border-bottom: 7px solid #ffbb55;
+      @include pc {
+        border-width: 8px;
+      }
+    }
+    .best_icon {
+      background-color: #ee9922;
+      color: #ffffff;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 4px 8px;
+      border-radius: 5px;
+      margin-bottom: 12px;
+      margin-right: 14px;
+      font-weight: bold;
+      @include pc {
+        font-size: 17px;
+        padding: 4px 8px;
+      }
+    }
+    .edit {
+      display: block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-top: 10px;
+      margin-right: 12px;
+      img {
+        width: 24px;
+        height: 24px;
+        margin: 0;
+      }
+    }
+    .author_and_date {
+      display: block;
+      margin: 12px auto 0 auto;
+      @include pc {
+        margin-left: 18px;
+        margin-top: 20px;
+      }
+      .note_author {
+        display: inline-block;
+        height: 40px;
+        margin-left: 12px;
+        position: relative;
+        img {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 20%;
+          margin-right: 7px;
+          position: relative;
+          z-index: 2;
+          box-shadow: 0 0 4px 1px #ddd;
+        }
+        p {
+          color: #333;
+          font-weight: bold;
+          display: inline-block;
+          height: 40px;
+          line-height: 40px;
+          vertical-align: top;
+          margin: 0;
+          font-size: 20px;
+          @include pc {
+            font-size: 22px;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &:before {
+          content: "";
+          display: inline-block;
+          width: 41px;
+          height: 41px;
+          background-color: #00aaca;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: -0.05em;
+          background-color: rgba(100, 100, 230, 0.3);
+          border-radius: 10%;
+          transform: rotate(8deg);
+          z-index: 1;
+        }
+        &:after {
+          content: "";
+          display: inline-block;
+          width: 42px;
+          height: 42px;
+          background-color: #00aaca;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: -0.1em;
+          background-color: rgba(0, 170, 230, 0.2);
+          border-radius: 10%;
+          transform: rotate(18deg);
+          z-index: 0;
+        }
+      }
+      .note_date {
+        display: inline-block;
+        height: 40px;
+        line-height: 42px;
+        vertical-align: top;
+        margin-left: 5px;
+        @include pc {
+          margin-left: 10px;
+          font-size: 18px;
+        }
+      }
+    }
+    .fav-and-share {
+      display: flex;
+      .fav-button-wrapper {
+        width: fit-content;
+        margin: 10px 12px 5px 12px;
+        @include pc {
+          margin-left: 25px;
+        }
+      }
+      .line-send-wrapper {
+        flex-grow: 1;
+        margin-top: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+        @include pc {
+          margin-top: 7.5px;
+          flex-grow: 0;
+          margin-left: 20px;
+        }
+        .line-send {
+          display: block;
           margin: auto;
         }
       }
     }
-    .note_category {
-      position: absolute;
-      display: block;
-      font-weight: inherit;
-      color: #fff;
-      font-size: 18px;
-      margin: 0;
-      padding: 6px 30px 5px 5px;
-      border-bottom: 1px solid #fff;
-      &::before {
-        //background-color: #00aaca;
-        background-image: url("/img/note_category.png");
-        background-size: cover;
-        display: block;
-        height: 18px;
-        width: 18px;
-        margin: 5px 6px 5px 5px;
-        content: "";
-        float: left;
-      }
-    }
-    .title_country_wrapper {
-      padding-top: 50px;
-      position: absolute;
-      text-align: center;
+    h6 {
+      display: flex;
+      flex-wrap: wrap;
+      //flex-direction: row-reverse;
       width: 95%;
       font-weight: inherit;
-      margin: auto;
-      right: 0;
-      left: 0;
-      .note_title {
-        font-weight: inherit;
-        margin: 0 auto;
-        color: #fff;
-        font-size: 23px;
+      margin: 10px auto 5px auto;
+      line-height: 20px;
+      @include pc {
+        margin: 20px auto 10px auto;
       }
-      .note_countries {
-        margin: 5px auto;
-        text-align: center;
-        .note_country {
-          text-align: center;
-          font-weight: inherit;
-          color: #fff;
+      .tag {
+        font-size: 15px;
+        flex: 0 0 auto;
+        padding: 1px 3px;
+        line-height: 21px;
+        color: #00aaca;
+        border: none;
+        @include pc {
           font-size: 17px;
         }
       }
     }
-  }
-  .best_note {
-    border-top: 7px solid #ffbb55;
-    border-bottom: 7px solid #ffbb55;
-    @include pc {
-      border-width: 8px;
-    }
-  }
-  .best_icon {
-    background-color: #ee9922;
-    color: #ffffff;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 4px 8px;
-    border-radius: 5px;
-    margin-bottom: 12px;
-    margin-right: 14px;
-    font-weight: bold;
-    @include pc {
-      font-size: 17px;
-      padding: 4px 8px;
-    }
-  }
-  .edit {
-    display: block;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 12px;
-    img {
-      width: 24px;
-      height: 24px;
-      margin: 0;
-    }
-  }
-  .author_and_date {
-    display: block;
-    max-width: 980px;
-    margin: 12px auto 0 auto;
-    .note_author {
-      display: inline-block;
-      height: 40px;
-      margin-left: 12px;
-      position: relative;
-      img {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        object-fit: cover;
-        border-radius: 20%;
-        margin-right: 7px;
-        position: relative;
-        z-index: 2;
-        box-shadow: 0 0 4px 1px #ddd;
-      }
-      p {
-        color: #333;
-        font-weight: bold;
-        display: inline-block;
-        height: 40px;
-        line-height: 40px;
-        vertical-align: top;
-        margin: 0;
-        font-size: 20px;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      &:before {
-        content: "";
-        display: inline-block;
-        width: 41px;
-        height: 41px;
-        background-color: #00aaca;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: -0.05em;
-        background-color: rgba(100, 100, 230, 0.3);
-        border-radius: 10%;
-        transform: rotate(8deg);
-        z-index: 1;
-      }
-      &:after {
-        content: "";
-        display: inline-block;
-        width: 42px;
-        height: 42px;
-        background-color: #00aaca;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: -0.1em;
-        background-color: rgba(0, 170, 230, 0.2);
-        border-radius: 10%;
-        transform: rotate(18deg);
-        z-index: 0;
-      }
-    }
-    .note_date {
-      display: inline-block;
-      height: 40px;
-      line-height: 42px;
-      vertical-align: top;
-      margin-left: 5px;
-    }
-  }
-  .fav-button {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-bottom: 10px;
-    margin-left: 12px;
-  }
-  h6 {
-    max-width: 980px;
-    display: flex;
-    flex-wrap: wrap;
-    //flex-direction: row-reverse;
-    width: 95%;
-    font-weight: inherit;
-    margin: 10px auto 5px auto;
-    line-height: 20px;
-    .tag {
-      font-size: 15px;
-      flex: 0 0 auto;
-      padding: 1px 3px;
-      line-height: 21px;
-      color: #00aaca;
-      border: none;
-      @include pc {
-        font-size: 17px;
-      }
-    }
-  }
-  .photos_wrapper {
-    overflow-x: auto;
-    white-space: nowrap;
-    background-color: #f0f0f0;
-    box-shadow: 0 0 9px 1px #ccc;
-    align-items: center;
-    width: 100vw;
-    padding: 15px 0;
-    margin: 10px 0;
-    @include pc {
-      max-width: 980px;
-      margin: 20px auto;
+    .photos_wrapper {
+      overflow-x: auto;
+      white-space: nowrap;
       background-color: #f0f0f0;
-      box-shadow: none;
-    }
-    .photo {
-      display: inline-block;
-      margin: 5px 10px;
-      img {
-        height: 200px;
-        box-shadow: 2px 2px 5px 1px #aaa;
-      }
-      &:first-child {
-        margin-left: 20px;
-      }
-      &:last-child {
-        margin-right: 20px;
-      }
+      box-shadow: 0 0 9px 1px #ccc;
+      align-items: center;
+      width: 100vw;
+      padding: 15px 0;
+      margin: 15px 0 20px 0;
       @include pc {
-        margin: 10px 20px;
+        max-width: 980px;
+        margin: 20px auto;
+        background-color: #f0f0f0;
+        box-shadow: none;
+      }
+      .photo {
+        display: inline-block;
+        margin: 5px 10px;
         img {
-          height: 300px;
+          height: 200px;
+          box-shadow: 2px 2px 5px 1px #aaa;
+        }
+        &:first-child {
+          margin-left: 20px;
+        }
+        &:last-child {
+          margin-right: 20px;
+        }
+        @include pc {
+          margin: 10px 20px;
+          img {
+            height: 300px;
+          }
         }
       }
     }
-  }
-  .content {
-    color: #444;
-    max-width: 768px;
-    width: 92.5%;
-    line-height: 1.9em;
-    font-size: 15.5px;
-    margin: 15px auto;
-    word-wrap: break-word;
-    @include pc {
-      font-size: 18px;
+    .content {
+      color: #444;
+      max-width: 768px;
+      width: 92.5%;
+      line-height: 1.9em;
+      font-size: 15.5px;
+      margin: 15px auto 15px auto;
+      word-wrap: break-word;
+      @include pc {
+        font-size: 18px;
+        margin-top: 25px;
+      }
+      .escaped_link {
+        display: inline;
+        color: #00aaca;
+      }
     }
-    .escaped_link {
-      display: inline;
-      color: #00aaca;
-    }
-  }
-  .fav-button-wrapper {
-    max-width: 768px;
-    width: 92.5%;
-    margin: 15px auto;
-    .text {
-      font-size: 16px;
-      display: inline;
-      color: #e65;
-      line-height: 26px;
-      font-weight: bold;
-    }
-    .fav-button {
-      display: inline;
-      position: relative;
-      vertical-align: middle;
-      i {
-        color: #ddd;
-        span {
-          color: #ddd;
+    .fav-button-wrapper {
+      max-width: 768px;
+      width: 92.5%;
+      margin: 15px auto;
+      .text {
+        display: inline-block;
+        font-size: 17px;
+        width: 120px;
+        text-align: center;
+        line-height: 26px;
+        font-weight: bold;
+        margin-right: 2.5px;
+        @include pc {
+          font-size: 19px;
+          width: 140px;
         }
+      }
+      .fav-button {
+        display: inline;
+        position: relative;
+        vertical-align: middle;
       }
     }
   }

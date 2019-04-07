@@ -174,8 +174,9 @@ class NotesController extends Controller
                 movePhotosFromTempDirToNoteDir($request->paths, $note);
             }
 
-            //Push通知
-            // $this->LineNotice($note);
+            if(request('line_notice')) {
+                Line::note($note, 'New note posted!');
+            }
             
             return redirect('/notes/'.$note->id);
 
@@ -187,19 +188,6 @@ class NotesController extends Controller
             return redirect()->action('NotesController@create')->withInput($input);
         }
     }
-
-//     public function LineNotice(Note $note) {
-//         $token = "sv/RKt1C3qskQg0Uh5Xdll9aXWvy42rty+y9gdYtQjzQ5AOMMKOgPPU6yTAuxkoRsTXsWVSmv648F5wXHJzpvWPCkUSnfdjuxj91YZIr7Np4rGPlgFFbsAFeyuL6I8nUFSYZCQvvEZkfHngYPfAtUgdB04t89/1O/w1cDnyilFU=
-// ";
-//         $content = "Note has been posted by $user->author";
-//         $options = [
-//             'http' => [
-//                 'method' => 'POST',
-//                 'header' => ['Content-type: application/json', 'Authorization: Bearer '.$token]
-//                 'to' => 
-//             ]
-//         ]
-//     }
 
     /**
      * Display the specified resource.
@@ -214,6 +202,12 @@ class NotesController extends Controller
         $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
         $note->content = preg_replace($pattern, $replacement, $escapedString);
         return view('web.notes.show', compact(['note']));
+    }
+
+    public function share(Note $note)
+    {
+        $message = auth()->user()->name. ' shared a note.';
+        Line::note($note, $message);
     }
 
     /**
@@ -397,8 +391,9 @@ class NotesController extends Controller
             $request->to_month
         );
         $count = $notes_tmp->count();
+        $title = 'Search Notes';
         $notes = $notes_tmp->orderBy('date','desc')->paginate(6);
-        return view('web.notes.paginate', compact(['notes', 'count', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'count', 'title', 'flag']));
     }
 
     public function fav()

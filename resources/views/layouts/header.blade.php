@@ -2,12 +2,12 @@
     <div id="web_header">
         <div class="header-upper">
             @auth
-            <div class="element burger-button sp" @click="toggleShowMenu">
-                <div class="el colored"></div>
+            <div class="element burger-button sp" @click="toggleShowMenu" v-bind:class="{ showMenu : showMenu }">
+                <div class="el colored" id="menu_bar_top"></div>
                 <div class="el"></div>
-                <div class="el colored"></div>
+                <div class="el colored" id="menu_bar_middle"></div>
                 <div class="el"></div>
-                <div class="el colored"></div>
+                <div class="el colored" id="menu_bar_bottom"></div>
             </div>
             <div class="element pc"></div>
             <a href="/home">

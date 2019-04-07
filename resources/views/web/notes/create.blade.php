@@ -131,6 +131,19 @@
                     </div>
                 </div>
                 <div class="form_view">
+                    <div class="property"><p>LINE Notification</p></div>
+                    <div class="value">
+                        <div class="cp_ipcheck">
+                            <label for="line_notice"><input id="line_notice" class="checkbox_simple" type="checkbox" name="line_notice" value="1" {{ old('line_notice') == 1 ? 'checked' : '' }}>【学びの共有】に通知を送る</label>
+                        </div>
+                    @if ($errors->has('line_notice'))
+                    <div class="help-box">
+                        <strong>{{ $errors->first('line_notice') }}</strong>
+                    </div>
+                    @endif
+                    </div>
+                </div>                
+                <div class="form_view">
                     <div class="button_wrapper">
                         <button type="submit" class="bluebtn" id="disable_button">
                             <p class="button_text">Next</p>

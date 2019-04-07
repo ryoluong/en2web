@@ -4,6 +4,12 @@
     color: #fff;
     font-size: 22px;
     transition: 0.5s;
+    @include pc {
+      font-size: 24px;
+      span {
+        font-size: 20px;
+      }
+    }
     span {
       color: #fff;
       vertical-align: middle;
@@ -15,14 +21,14 @@
   &:hover {
     cursor: pointer;
   }
-  &.favNote i {
+  &favNote i {
     color: #e65 !important;
     span {
       color: #e65 !important;
     }
   }
-  &.favAnime i {
-    animation: fav 0.5s linear 0s;
+  &favAnime i {
+    animation: fav 0.5s linear 0s !important;
     span {
       animation: fav 0.5s linear 0s !important;
     }
@@ -40,5 +46,25 @@
     100% {
       color: #e65;
     }
+  }
+}
+.fav-button-wrapper {
+  i,
+  p,
+  span {
+    color: #ccc !important;
+  }
+  &.favNote {
+    i,
+    p,
+    span {
+      color: #e65 !important;
+    }
+  }
+}
+.note_item .fav-button.favNote {
+  i,
+  span {
+    color: #e65;
   }
 }

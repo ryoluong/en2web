@@ -72,8 +72,6 @@ Route::middleware(['auth'])->group(function () {
     //search
     Route::get('/notes/search', 'NotesController@showSearchForm');
     Route::get('/notes/search/result', 'NotesController@search');
-    //fav
-    Route::post('/notes/fav', 'NotesController@fav');
 
     /**
      * Calendar
@@ -96,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('/notes/fav', 'NotesController@fav');
+        //LINE share
+        Route::post('/notes/{note}/share', 'NotesController@share');
     });
 });
 

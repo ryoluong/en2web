@@ -64,6 +64,13 @@
                         <input type="hidden" class="input_text" name="isBest" value="{{ isset($isBest) ? 1 : 0 }}">
                     </div>
                 </div>
+                <div class="form_view">
+                    <div class="property"><p>LINE Notification：</p></div>
+                    <div class="value">
+                        <p>{{ isset($line_notice) ? "Yes" : "No" }}</p>
+                        <input type="hidden" class="input_text" name="line_notice" value="{{ isset($line_notice) ? 1 : 0 }}">
+                    </div>
+                </div>                
                 <div class="form_view jcenter">
                     @foreach($paths as $path)
 

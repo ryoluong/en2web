@@ -21,14 +21,6 @@
           class="note_category"
           :href="'/categories/' + category.id  + '/notes'"
         >{{ category.name }}</a>
-        <fav-button-show-note
-          class="fav-button"
-          :note_id="note.id"
-          :is_fav="isFav"
-          :num_of_fav="numOfFav"
-          @click-fav="onClickFav"
-          v-bind:class="{ favNote: isFav, favAnime: isFavAnime }"
-        ></fav-button-show-note>
       </div>
     </div>
     <div class="author_and_date">
@@ -49,21 +41,37 @@
         :href="'/tags/' + tag.id + '/notes'"
       >#{{ tag.name }}</a>
     </h6>
+    <div class="fav-and-share">
+      <div class="fav-button-wrapper" v-bind:class="{ favNote: isFav, favAnime: isFavAnime }">
+        <p class="text">{{ isFav ? "You\'ve liked!" : 'Like this Note!'}}</p>
+        <fav-button-show-note
+          class="fav-button"
+          :is_fav="isFav"
+          :num_of_fav="numOfFav"
+          :note_id="note.id"
+          @click-fav="onClickFav"
+          v-bind:class="{ favNote: isFav, favAnime: isFavAnime }"
+        ></fav-button-show-note>
+      </div>
+      <div class="line-send-wrapper">
+        <img @click="confirm" class="line-send" src="/img/line_send.png" alt="line">
+      </div>
+    </div>
+
     <ul v-if="photos.length !== 0" class="photos_wrapper">
       <li v-for="photo in photos" :key="photo.id" class="photo">
         <img :src="photo.path" alt>
       </li>
     </ul>
     <p v-html="note.content" class="content"></p>
-    <div class="fav-button-wrapper">
-      <p class="text">{{ isFav ? 'Thank you!' : 'Like this Note!'}}</p>
+    <div class="fav-button-wrapper" v-bind:class="{ favNote: isFav, favAnime: isFavAnime }">
+      <p class="text">{{ isFav ? "You\'ve liked!" : 'Like this Note!' }}</p>
       <fav-button-show-note
         class="fav-button"
         :is_fav="isFav"
         :num_of_fav="numOfFav"
         :note_id="note.id"
         @click-fav="onClickFav"
-        v-bind:class="{ favNote: isFav, favAnime: isFavAnime }"
       ></fav-button-show-note>
     </div>
   </div>
@@ -127,6 +135,18 @@ export default {
         this.numOfFav++;
         this.isFavAnime = true;
       }
+    },
+    confirm: function() {
+      if (window.confirm("【学びの共有】にシェアしますか？")) {
+        this.share();
+      }
+    },
+    share: function() {
+      this.$http
+        .post("/ajax/notes/" + this.note.id + "/share")
+        .then(function() {})
+        .catch(function() {});
+      console.log("it works!");
     }
   },
   computed: {
