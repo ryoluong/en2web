@@ -51,7 +51,7 @@ class Line extends Model
             'Authorization: Bearer ' . $channelToken,
             'Content-Type: application/json; charset=utf-8',
         ];
-        $tmp = mb_substr($note->content, 0, 75).'......';
+        $tmp = mb_substr($note->content, 0, 50).'......';
         $note_content = preg_replace('/[\n\r\t]/', ' ', $tmp);
         if($note->photos->count()) {
             $note_image = 'https://en2ynu.com' . $note->photos->first()->path;
@@ -60,7 +60,7 @@ class Line extends Model
         }
         $note_title = $note->title;
         $note_author = $note->user->name;
-        $note_link = "https://en2ynu.com/notes/" . $note->id;
+        $note_link = "https://en2ynu.com/notes/" . $note->id . '?openExternalBrowser=1';
         $content = json_encode([
             'to' => config('const.LINE_EN2_KYOYU_GROUP_ID'),
             'messages' => [
