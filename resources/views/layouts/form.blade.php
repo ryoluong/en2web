@@ -38,17 +38,8 @@
                 ele.disabled = !ele.disabled;
             }
         }
-        function departmentSwitch() {
-            var eles = document.getElementsByClassName('switch');
-            for(var ele of eles) {
-                if(ele.disabled == true) {
-                    ele.disabled = false;
-                } else {
-                    ele.disabled = true;
-                }
-            }
-        }
     </script>
+    @yield('script')
 </head>
 <body>
     <div id="app">

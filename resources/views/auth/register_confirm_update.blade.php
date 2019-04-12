@@ -13,6 +13,7 @@
                         </div>
                     </div>
                     <div class="content">
+                        @if($user->name !== null)
                         <div class="form_view">
                             <div class="property"><p class="prof_head">Name:</p></div>
                             <div class="value">
@@ -21,8 +22,8 @@
                                     <p>*ご自身の名前であることを必ず確認してください。</p>
                                 </div>
                             </div>
-                            
                         </div>
+                        @endif
                         <div class="form_view">
                             <div class="property"><p class="prof_head">E-Mail Address:</p></div>
                             <div class="value"><p>{{ $email }}</p></div>
