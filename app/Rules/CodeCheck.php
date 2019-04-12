@@ -26,9 +26,9 @@ class CodeCheck implements Rule
      */
     public function passes($attribute, $value)
     {
-        if(strlen($value) === 12 && DB::table('users')->where('identification_code', $value)->exists()) {
+        if(DB::table('users')->where('identification_code', $value)->exists()) {
             return true;
-        } elseif (strlen($value) === 12 && DB::table('codes')->where('code', $value)->exists()) {
+        } elseif (DB::table('codes')->where('code', $value)->exists()) {
             return true;
         } else {
             return false;

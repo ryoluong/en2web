@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasMany(Note::class);
     }
 
+    public function favNotes()
+    {
+        return $this->belongsToMany(Note::class, 'favorites');
+    }
+
     /**
      * ユーザーの「プロフィール」のエスケープをした上で、
      * %%で囲まれた部分をヘッダー(span)に置き換える

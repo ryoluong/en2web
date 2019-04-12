@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="jp">
-<head>
-    @include('layouts.web.head')
-</head>
-<body>
-    @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Reset Password')
+@section('content')
     <div id="passreset_page">
-        <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+        <form class="form-horizontal" method="POST" action="{{ route('password.email') }}" onsubmit="disableButton()">
             {{ csrf_field() }}
             <div class="border_card">
                 <div class="title">
@@ -31,8 +27,9 @@
                     </div>
                     <div class="form_view">
                         <div class="button_wrapper">
-                            <button type="submit" class="bluebtn passreset">
-                                    Send Link
+                            <button type="submit" class="bluebtn" id="disable_button">
+                                <p class="button_text">Next</p>
+                                <div class="loader">Loading</div>
                             </button>
                         </div>
                     </div>
@@ -40,5 +37,4 @@
             </div>
         </form>
     </div>
-</body>
-</html>
+@endsection

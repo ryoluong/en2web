@@ -1,12 +1,6 @@
 <li class="note_item  {{ $note->isBest == 1 ? 'bestnote' : '' }}">
     <a href="/notes/{{ $note->id }}" class="note">
-        <div class="image_holder" style="background-image:url(
-            @if($note->photos->count())
-            {{ $note->photos->first()->path }}
-            @else
-            {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }}
-            @endif
-        );">
+        <div class="image_holder" style="background-image:url(@if($note->photos->count()) {{ $note->photos->first()->path }} @else {{ '/img/note_cover_photo/'.$note->category_id.'.jpg' }} @endif);">
             <div class="textbox">
                 <object><a class="note_category" href="/categories/{{ $note->category_id }}/notes">{{ $note->category->name }}</a></object>
                 @if(auth()->user()->isAdmin === 1 || auth()->user()->id === $note->user_id)
@@ -17,8 +11,11 @@
                 <object><a class="note_country" href="/countries/{{ $country->id }}/notes">＠{{ $country->name }}</a></object>
                 @endforeach
                 @if($note->isBest == 1) 
-                <object><a class="bestnote_icon" href="/notes/best">Best Note</a></object>
+                <object><p class="bestnote_icon" href="/notes/best">Best Note</p></object>
                 @endif
+                <div class="fav-button {{ auth()->user()->favNotes()->where('note_id', $note->id)->count() ? 'favNote' : '' }}">
+                    <i class="fas fa-heart"><span>{{ $note->favUsers()->count() }}</span></i>
+                </div>
             </div>
         </div>
         <div class="text_holder">

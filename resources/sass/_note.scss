@@ -1,0 +1,70 @@
+.fav-button {
+  i {
+    display: inline;
+    color: #fff;
+    font-size: 22px;
+    transition: 0.5s;
+    @include pc {
+      font-size: 24px;
+      span {
+        font-size: 20px;
+      }
+    }
+    span {
+      color: #fff;
+      vertical-align: middle;
+      font-size: 18px;
+      transition: 0.5s;
+      padding-left: 7.5px;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &favNote i {
+    color: #e65 !important;
+    span {
+      color: #e65 !important;
+    }
+  }
+  &favAnime i {
+    animation: fav 0.5s linear 0s !important;
+    span {
+      animation: fav 0.5s linear 0s !important;
+    }
+  }
+  @keyframes fav {
+    0% {
+      color: #ddd;
+    }
+    50% {
+      color: #e54;
+    }
+    55% {
+      color: #e54;
+    }
+    100% {
+      color: #e65;
+    }
+  }
+}
+.fav-button-wrapper {
+  i,
+  p,
+  span {
+    color: #ccc !important;
+  }
+  &.favNote {
+    i,
+    p,
+    span {
+      color: #e65 !important;
+    }
+  }
+}
+.note_item .fav-button.favNote {
+  i,
+  span {
+    color: #e65;
+  }
+}

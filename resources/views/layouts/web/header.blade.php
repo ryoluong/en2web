@@ -1,9 +1,7 @@
 <header>
     <div id="web_header">
         <div>
-            <a class="elements">
-                <!--blank-->
-            </a>
+            <a class="elements"></a>
         </div>
         <a href="/home">
             <img class="logo" src="/img/top_logo.png" alt="header_logo">

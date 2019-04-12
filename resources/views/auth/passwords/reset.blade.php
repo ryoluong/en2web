@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="jp">
-<head>
-    @include('layouts.web.head')
-</head>
-<body>
-    @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Reset Password')
+@section('content')
     <div id="passreset_page">
         <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
             {{ csrf_field() }}
@@ -68,9 +64,7 @@
             </div>
         </form>
     </div>
-</body>
-</html>
-
+@endsection
 
 
 

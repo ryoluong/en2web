@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
     //show
     Route::get('/notes/all', 'NotesController@showAll');
     Route::get('/notes/best', 'NotesController@showBest');
+    Route::get('/notes/like', 'NotesController@showLike');
     Route::get('/categories/{category}/notes', 'NotesController@showByCategory');
     Route::get('/tags/{tag}/notes', 'NotesController@showByTag');
     Route::get('/users/{user}/notes', 'NotesController@showByAuthor');
@@ -87,6 +88,15 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/support', 'UserController@support');
     Route::post('/support', 'UserController@sendMail');
+
+    /**
+     * Ajax
+     */
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::post('/notes/fav', 'NotesController@fav');
+        //LINE share
+        Route::post('/notes/{note}/share', 'NotesController@share');
+    });
 });
 
 /**

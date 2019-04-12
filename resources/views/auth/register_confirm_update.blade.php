@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')          
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Confirm')
+@section('content')
         <div id="registration_conf_page">
             <form class="form-horizontal" method="POST" action="{{ route('register.existing.user') }}" onsubmit="disableButton()">
                 {{ csrf_field() }}
@@ -17,6 +13,7 @@
                         </div>
                     </div>
                     <div class="content">
+                        @if($user->name !== null)
                         <div class="form_view">
                             <div class="property"><p class="prof_head">Name:</p></div>
                             <div class="value">
@@ -25,8 +22,8 @@
                                     <p>*ご自身の名前であることを必ず確認してください。</p>
                                 </div>
                             </div>
-                            
                         </div>
+                        @endif
                         <div class="form_view">
                             <div class="property"><p class="prof_head">E-Mail Address:</p></div>
                             <div class="value"><p>{{ $email }}</p></div>
@@ -57,5 +54,4 @@
                 </div>
             </form>
         </div>
-    </body>
-</html>
+@endsection

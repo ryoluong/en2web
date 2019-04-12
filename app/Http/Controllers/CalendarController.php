@@ -77,7 +77,7 @@ class CalendarController extends Controller
         // Print the next 10 events on the user's calendar.
         $calendarId = 'ok6ivv4869iegdf6fihbljum1o@group.calendar.google.com';
         $optParams = array(
-        'maxResults' => 8,
+        'maxResults' => 26,
         'orderBy' => 'startTime',
         'singleEvents' => true,
         'timeMin' => date('c'),

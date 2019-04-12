@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang=jp">
-    <head>
-        @include('layouts.web.head')
-    </head>
-    <body>
-        @include('layouts.web.header')
+@extends('layouts.form')
+@section('title', ' - Support')
+@section('content')
         <div id="support">
             <div class="content_head with_border">
                 <div class="icon">
@@ -47,5 +43,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection

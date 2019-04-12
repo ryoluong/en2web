@@ -14,6 +14,7 @@ use App\User;
 use App\Country;
 use App\Tag;
 use App\Category;
+use App\Facades\Slack;
 
 class UserController extends Controller
 {
@@ -30,10 +31,11 @@ class UserController extends Controller
     public function showMyPage() {
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
+        $favNotes = $user->favNotes()->orderBy('date', 'desc')->take(6)->get();
         $flag = 'mypage';
         $user->university = $user->getEscapedStringWithBr();
         $user->profile = $user->getEscapedProfileWithHeader();
-        return view('web.mypage', compact(['user', 'notes', 'flag']));
+        return view('web.mypage', compact(['user', 'notes', 'favNotes', 'flag']));
     }
 
     public function editMyPage() {
@@ -175,6 +177,7 @@ class UserController extends Controller
         ]);
         $email = new SupportFormMessage(request('message'));
         Mail::to('admin@en2ynu.com')->send($email);
+        Slack::notice("問い合わせフォームにメッセージがありました：\n".request('message'));
         return view('web.support.sent');
     }
 }

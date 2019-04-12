@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SearchFormRequest;
 use App\Usecases\Note\SearchNoteUsecase;
+use App\Facades\Line;
+use App\Facades\Slack;
 
 class NotesController extends Controller
 {
@@ -35,48 +37,64 @@ class NotesController extends Controller
     {
         $notes = Note::orderBy('date', 'desc')->paginate(6);
         $flag = 'all';
+        $title = 'All Notes';
         $count = Note::all()->count();
-        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
     }
 
     public function showBest()
     {
         $notes = Note::where('isBest', true)->orderBy('date', 'desc')->paginate(6);
         $flag = 'isBest';
+        $title = 'Best Notes';
         $count = Note::where('isBest', true)->count();
-        return view('web.notes.paginate', compact(['notes', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
+    }
+
+    public function showLike()
+    {
+        $notes_obj = auth()->user()->favNotes();
+        $notes = $notes_obj->paginate(6);
+        $flag = 'like';
+        $title = 'Liked Notes';
+        $count = auth()->user()->favNotes()->count();
+        return view('web.notes.paginate', compact(['notes', 'flag', 'title', 'count']));
     }
 
     public function showByTag(Tag $tag)
     {
         $notes = $tag->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'tag';
+        $title = 'Notes【Tag: '.$tag->name.'】';
         $count = $tag->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'tag', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'tag', 'flag', 'title', 'count']));
     }
 
     public function showByCategory(Category $category)
     {
         $notes = Note::where('category_id', $category->id)->orderBy('date', 'desc')->paginate(6);
         $flag = 'category';
+        $title = 'Notes【Category: '.$category->name.'】';
         $count = Note::where('category_id', $category->id)->count();
-        return view('web.notes.paginate', compact(['notes', 'category', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'category', 'flag', 'title', 'count']));
     }
 
     public function showByAuthor(User $user)
     {
         $notes = $user->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'author';
+        $title = 'Notes【Author: '.$user->name.'】';
         $count = $user->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'user', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'user', 'flag', 'title', 'count']));
     }
 
     public function showByCountry(Country $country)
     {
         $notes = $country->notes()->orderBy('date', 'desc')->paginate(6);
         $flag = 'country';
+        $title = 'Notes【Country: '.$country->name.'】';
         $count = $country->notes()->count();
-        return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'count']));
+        return view('web.notes.paginate', compact(['notes', 'country', 'flag', 'title', 'count']));
     }
 
     /**
@@ -156,6 +174,10 @@ class NotesController extends Controller
                 movePhotosFromTempDirToNoteDir($request->paths, $note);
             }
 
+            if(request('line_notice')) {
+                Line::note($note, 'New note posted!');
+            }
+            
             return redirect('/notes/'.$note->id);
 
         } else {
@@ -180,6 +202,12 @@ class NotesController extends Controller
         $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
         $note->content = preg_replace($pattern, $replacement, $escapedString);
         return view('web.notes.show', compact(['note']));
+    }
+
+    public function share(Note $note)
+    {
+        $message = auth()->user()->name. ' shared a note.';
+        Line::note($note, $message);
     }
 
     /**
@@ -363,7 +391,17 @@ class NotesController extends Controller
             $request->to_month
         );
         $count = $notes_tmp->count();
+        $title = 'Search Notes';
         $notes = $notes_tmp->orderBy('date','desc')->paginate(6);
-        return view('web.notes.paginate', compact(['notes', 'count', 'flag']));
+        return view('web.notes.paginate', compact(['notes', 'count', 'title', 'flag']));
+    }
+
+    public function fav()
+    {
+        $user = auth()->user();
+        $note_id = request()->note_id;
+        $user->favNotes()->toggle([$note_id]);
+        
+        return redirect("/notes/$note_id");
     }
 }
