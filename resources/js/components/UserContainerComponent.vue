@@ -2,7 +2,7 @@
   <div class="flex_container" v-if="hasActiveUser">
     <div class="subtitle">
       <p v-if="showBy == 'generation'">{{ formattedNumber }}</p>
-      <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? '未分類' : 'Group' + index }}</p>
+      <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? '未分類' : 'Group ' + index }}</p>
     </div>
     <user-item v-for="user in users" :user="user" :key="user.id" :search="search"></user-item>
   </div>
