@@ -1,0 +1,24 @@
+#attendance-manager {
+  .notification {
+    text-align: center;
+    margin: 5px auto;
+  }
+  .toggle-btn,
+  .complete-btn,
+  .cancel-btn {
+    margin: 5px auto;
+    max-width: 400px;
+    width: 90%;
+    height: 40px;
+    font-size: 18px;
+  }
+  .cancel-wrapper {
+    width: 100%;
+    text-align: center;
+    .cancel-btn {
+      font-size: 15px;
+      max-width: 350px;
+      width: 50%;
+    }
+  }
+}

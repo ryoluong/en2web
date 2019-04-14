@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Note::class, 'favorites');
     }
 
+    public function meetings()
+    {
+        return $this->belongsToMany(Meeting::class, 'attendances');
+    }
+
     /**
      * ユーザーの「プロフィール」のエスケープをした上で、
      * %%で囲まれた部分をヘッダー(span)に置き換える

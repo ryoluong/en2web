@@ -89,6 +89,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/support', 'UserController@support');
     Route::post('/support', 'UserController@sendMail');
 
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/attendance', 'AttendanceController@index');
+        Route::post('/meeting/add', 'AttendanceController@addMeeting');
+        Route::post('/meeting/{meeting}/toggle', 'AttendanceController@toggleMeeting');
+        Route::post('/meeting/{meeting}/complete', 'AttendanceController@completeMeeting');
+        Route::post('/meeting/{meeting}/cancel', 'AttendanceController@cancelMeeting');
+    });
+
     /**
      * Ajax
      */

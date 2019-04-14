@@ -14,6 +14,7 @@ use App\User;
 use App\Country;
 use App\Tag;
 use App\Category;
+use App\Meeting;
 use App\Facades\Slack;
 
 class UserController extends Controller
@@ -25,7 +26,8 @@ class UserController extends Controller
         } else {
             $user_country = "noCountry";
         }
-        return view('web.home', compact(['user', 'user_country']));
+        $has_active_meeting = Meeting::where('status', '=', 'active')->exists();
+        return view('web.home', compact('user', 'user_country', 'has_active_meeting'));
     }
 
     public function showMyPage() {

@@ -7,7 +7,10 @@
         alt="user_icon"
       >
     </a>
-    <a class="user_name" :href="'/users/'+user.id">{{ user.name }}</a>
+    <a
+      class="user_name"
+      :href="'/users/' + user.id + '?showBy=' + showBy + [ search ? '?q=' + search : '']"
+    >{{ user.name }}</a>
   </div>
 </template>
 <script>
