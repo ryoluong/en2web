@@ -40,7 +40,7 @@
           :showBy="showBy"
         ></user-container>
         <user-container :index="0" :users="where(users, 0)" :search="search" :showBy="showBy"></user-container>
-        <user-container :index="-1" :users="where(users, 0)" :search="search" :showBy="showBy"></user-container>
+        <user-container :index="-1" :users="where(users, -1)" :search="search" :showBy="showBy"></user-container>
       </div>
       <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
     </div>
