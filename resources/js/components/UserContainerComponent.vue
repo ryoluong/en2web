@@ -1,7 +1,8 @@
 <template>
   <div class="flex_container" v-if="hasActiveUser">
     <div class="subtitle">
-      <p>{{ formattedNumber }}</p>
+      <p v-if="showBy == 'generation'">{{ formattedNumber }}</p>
+      <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? '未分類' : 'Group' + index }}</p>
     </div>
     <user-item v-for="user in users" :user="user" :key="user.id" :search="search"></user-item>
   </div>
@@ -9,7 +10,7 @@
 <script>
 export default {
   props: {
-    generation: {
+    index: {
       type: Number,
       required: true
     },
@@ -18,6 +19,10 @@ export default {
       required: true
     },
     search: {
+      type: String,
+      required: true
+    },
+    showBy: {
       type: String,
       required: true
     }
@@ -36,7 +41,7 @@ export default {
       return false;
     },
     formattedNumber: function() {
-      var num = this.generation % 10;
+      var num = this.index % 10;
       if (num == 1) {
         return num + "st";
       } else if (num == 2) {

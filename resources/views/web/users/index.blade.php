@@ -11,5 +11,5 @@
 <div class="loading-wrapper" v-show="loading">
     <div class="loading"></div>
 </div>
-<users-index :users="{{ $users }}" :max="{{ $max }}" v-show="!loading"></users-index>
+<users-index :users="{{ $users }}" v-show="!loading"></users-index>
 @endsection
