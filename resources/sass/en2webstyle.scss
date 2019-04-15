@@ -2812,15 +2812,39 @@ form {
   }
 }
 
-.radio_wrapper {
-  max-width: 300px;
-  margin: 25px auto;
+// .radio_wrapper {
+//   max-width: 300px;
+//   margin: 25px auto;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-around;
+//   label {
+//     @include pc {
+//       font-size: 18px;
+//     }
+//   }
+// }
+.radio-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  width: 80%;
+  max-width: 500px;
+  margin: 25px auto;
   justify-content: space-around;
-  label {
-    @include pc {
-      font-size: 18px;
+  .input-radio {
+    display: none;
+    & + .label-radio {
+      border: 1.5px solid #aaa;
+      padding: 5px 12px;
+      border-radius: 5px;
+      color: #aaa;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    &:checked + .label-radio {
+      border-color: #99d;
+      background-color: #99d;
+      color: #fff;
+      transition: 0.3s;
     }
   }
 }

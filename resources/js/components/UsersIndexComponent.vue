@@ -3,21 +3,17 @@
     <div class="search_wrapper">
       <input type="text" v-model="search" class="input_text" placeholder="Search members">
     </div>
-    <div class="radio_wrapper">
-      <div class="radio">
-        <input
-          class="radio_button"
-          type="radio"
-          v-model="showBy"
-          id="showByGeneration"
-          value="generation"
-        >
-        <label for="showByGeneration">入会期別</label>
-      </div>
-      <div class="radio">
-        <input class="radio_button" type="radio" v-model="showBy" id="showByGroup" value="group">
-        <label for="showByGroup">グループ別</label>
-      </div>
+    <div class="radio-wrapper">
+      <input
+        class="input-radio"
+        type="radio"
+        v-model="showBy"
+        id="showByGeneration"
+        value="generation"
+      >
+      <label class="label-radio" for="showByGeneration">入会期別</label>
+      <input class="input-radio" type="radio" v-model="showBy" id="showByGroup" value="group">
+      <label class="label-radio" for="showByGroup">グループ別</label>
     </div>
     <div class="no_border_card">
       <div v-if="showBy == 'generation'">
