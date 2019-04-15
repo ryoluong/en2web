@@ -69,6 +69,16 @@ export default {
       }
     }
   },
+  mounted() {
+    if (localStorage.showBy) {
+      this.showBy = localStorage.showBy;
+    }
+  },
+  watch: {
+    showBy(newShowBy) {
+      localStorage.showBy = newShowBy;
+    }
+  },
   computed: {
     hasActiveUser: function() {
       for (var i = 0; i < this.users.length; i++) {
