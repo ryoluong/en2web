@@ -17,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::where('status', '1')->orWhere('status', '3')->get();
+        $users = User::where('status', '1')->orWhere('status', '3')->select('id', 'name', 'avater_path', 'generation', 'group_id')->get();
         $max = User::max('generation');
         return view('web.users.index', compact(['users', 'max']));
     }
