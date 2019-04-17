@@ -1,6 +1,6 @@
 <template>
   <div class="flex_view" v-if="displayUser">
-    <a :href="'/users/'+user.id">
+    <a :href="'/users/'+user.id+'?showBy='+showBy">
       <img
         class="user_icon"
         :src="[ user.avater_path ? user.avater_path : '/img/categories/user.png']"
@@ -21,6 +21,10 @@ export default {
       required: true
     },
     search: {
+      type: String,
+      required: false
+    },
+    showBy: {
       type: String,
       required: false
     }

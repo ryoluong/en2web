@@ -4,7 +4,7 @@
       <p v-if="showBy == 'generation'">{{ formattedNumber }}</p>
       <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? '未分類' : 'Group ' + index }}</p>
     </div>
-    <user-item v-for="user in users" :user="user" :key="user.id" :search="search"></user-item>
+    <user-item v-for="user in users" :user="user" :key="user.id" :search="search" :showBy="showBy"></user-item>
   </div>
 </template>
 <script>

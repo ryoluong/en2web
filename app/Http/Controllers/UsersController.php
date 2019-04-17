@@ -32,11 +32,20 @@ class UsersController extends Controller
     {
         $id_previous = -1;
         $id_next = -1;
-        if(User::whereIn('status', [1,3])->where('id', '>', $user->id)->exists()) {
-            $id_next = User::whereIn('status', [1,3])->where('id', '>', $user->id)->min('id');
-        }
-        if(User::whereIn('status', [1,3])->where('id', '<', $user->id)->exists()) {
-            $id_previous = User::whereIn('status', [1,3])->where('id', '<', $user->id)->max('id');
+        if(request('showBy') == 'generation') {
+            if(User::whereIn('status', [1,3])->where('id', '>', $user->id)->exists()) {
+                $id_next = User::whereIn('status', [1,3])->where('id', '>', $user->id)->min('id');
+            }
+            if(User::whereIn('status', [1,3])->where('id', '<', $user->id)->exists()) {
+                $id_previous = User::whereIn('status', [1,3])->where('id', '<', $user->id)->max('id');
+            }
+        } else {
+            if(User::whereIn('status', [1,3])->where('id', '>', $user->id)->exists()) {
+                $id_next = User::whereIn('status', [1,3])->where('id', '>', $user->id)->min('id');
+            }
+            if(User::whereIn('status', [1,3])->where('id', '<', $user->id)->exists()) {
+                $id_previous = User::whereIn('status', [1,3])->where('id', '<', $user->id)->max('id');
+            }
         }
         $flag = 'user';
         $user->university = $user->getEscapedStringWithBr();

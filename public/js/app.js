@@ -43787,7 +43787,7 @@ var render = function() {
           _vm._l(_vm.users, function(user) {
             return _c("user-item", {
               key: user.id,
-              attrs: { user: user, search: _vm.search }
+              attrs: { user: user, search: _vm.search, showBy: _vm.showBy }
             })
           })
         ],
@@ -43883,6 +43883,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     search: {
       type: String,
       required: false
+    },
+    showBy: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -43906,19 +43910,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.displayUser
     ? _c("div", { staticClass: "flex_view" }, [
-        _c("a", { attrs: { href: "/users/" + _vm.user.id } }, [
-          _c("img", {
-            staticClass: "user_icon",
-            attrs: {
-              src: [
-                _vm.user.avater_path
-                  ? _vm.user.avater_path
-                  : "/img/categories/user.png"
-              ],
-              alt: "user_icon"
-            }
-          })
-        ]),
+        _c(
+          "a",
+          {
+            attrs: { href: "/users/" + _vm.user.id + "?showBy=" + _vm.showBy }
+          },
+          [
+            _c("img", {
+              staticClass: "user_icon",
+              attrs: {
+                src: [
+                  _vm.user.avater_path
+                    ? _vm.user.avater_path
+                    : "/img/categories/user.png"
+                ],
+                alt: "user_icon"
+              }
+            })
+          ]
+        ),
         _vm._v(" "),
         _c(
           "a",

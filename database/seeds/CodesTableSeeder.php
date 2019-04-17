@@ -13,7 +13,7 @@ class CodesTableSeeder extends Seeder
     {
         for ($i = 0; $i < 100; $i++) {
             $code = [
-                'code' => str_random(12),
+                'code' => str_random(15),
             ];
             DB::table('codes')->insert($code);
         }

@@ -89,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/support', 'UserController@support');
     Route::post('/support', 'UserController@sendMail');
 
+    /**
+     * 出席関連
+     */
     Route::middleware(['admin'])->group(function () {
         Route::get('/attendance', 'AttendanceController@index');
         Route::post('/meeting/add', 'AttendanceController@addMeeting');
@@ -96,6 +99,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/meeting/{meeting}/complete', 'AttendanceController@completeMeeting');
         Route::post('/meeting/{meeting}/cancel', 'AttendanceController@cancelMeeting');
     });
+    Route::post('/attend', 'AttendanceController@attend');
+    Route::get('/attend', 'AttendanceController@showResults');
 
     /**
      * Ajax

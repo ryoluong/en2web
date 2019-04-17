@@ -48,6 +48,15 @@ class AttendanceController extends Controller
 
     public function completeMeeting(Meeting $meeting)
     {
+        $users = User::where('isOB', 0)->where('isOverseas', 0)->get();
+        foreach($users as $user) {
+            Attendance::firstOrCreate([
+                'user_id' => $user->id,
+                'meeting_id' => $meeting->id,
+            ],[
+                'status' => 'absent'
+            ]);
+        }
         $meeting->status = 'completed';
         $meeting->save();
         return redirect('/attendance');
@@ -57,5 +66,27 @@ class AttendanceController extends Controller
     {
         $meeting->delete();
         return redirect('/attendance');
+    }
+
+    public function attend(Request $req)
+    {
+        $mtg_id = Meeting::where('status', 'active')->first()->id;
+        $user_id = auth()->user()->id;
+        Attendance::updateOrCreate([
+            'user_id' => $user_id,
+            'meeting_id' => $mtg_id,
+        ],[
+            'status' => request('status')
+        ]);
+        return redirect('/home');
+    }
+
+    public function showResults()
+    {
+        $users = User::where('isOB', 0)->where('isOverseas', 0)->orderBy('group_id')->get();
+        // $users = User::orderBy('group_id')->get();
+        $meetings = Meeting::all();
+        $attendances = Attendance::all();
+        return view('web.attendance.show', compact('users', 'meetings', 'attendances'));
     }
 }

@@ -15,6 +15,7 @@ use App\Country;
 use App\Tag;
 use App\Category;
 use App\Meeting;
+use App\Attendance;
 use App\Facades\Slack;
 
 class UserController extends Controller
@@ -26,8 +27,12 @@ class UserController extends Controller
         } else {
             $user_country = "noCountry";
         }
-        $has_active_meeting = Meeting::where('status', '=', 'active')->exists();
-        return view('web.home', compact('user', 'user_country', 'has_active_meeting'));
+        if($active_meeting = Meeting::where('status', 'active')->first()) {
+            $show_attendance_button = !Attendance::where('meeting_id', $active_meeting->id)->where('user_id', auth()->user()->id)->exists();
+        } else {
+            $show_attendance_button = false;
+        }
+        return view('web.home', compact('user', 'user_country', 'show_attendance_button'));
     }
 
     public function showMyPage() {

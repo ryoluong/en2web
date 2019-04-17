@@ -83,14 +83,16 @@
                     {{ csrf_field() }}
                 </form>
             </a>
-            @if($has_active_meeting)
+            @if($show_attendance_button)
                 <div class="attendance_notice">
                     <form method="POST" action="/attend" onsubmit="disableButton();">
                         @csrf
-                        <input id="attend" type="radio" name="status" value="attend"><label for="attend">出席</label>
-                        <input id="late" type="radio" name="status" value="late"><label for="late">遅刻</label>
-                        <input id="early" type="radio" name="status" value="early"><label for="early">早退</label>
-                        <button class="" type="submit">送信</button>
+                        <div class="radio-wrapper">
+                            <input class="input-radio" id="attend" type="radio" name="status" value="attend" checked><label class="label-radio" for="attend">出席</label>
+                            <input class="input-radio" id="late" type="radio" name="status" value="late"><label class="label-radio" for="late">遅刻</label>
+                            <input class="input-radio" id="early" type="radio" name="status" value="early"><label class="label-radio" for="early">早退</label>
+                        </div>
+                        <button class="bluebtn" type="submit">送信</button>
                     </form>
                 </div>
             @endif
