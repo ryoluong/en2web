@@ -1,3 +1,5 @@
+/app/Calendar/credentials.json
+/app/Calendar/token.json
 /node_modules
 /public/hot
 /public/img/note/*.*
@@ -12,4 +14,3 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
-.vscode
