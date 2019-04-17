@@ -1,9 +1,8 @@
 /node_modules
 /public/hot
-/public/storage
-/public/img/note
-/public/img/user
-/public/img/tmp
+/public/img/note/*
+/public/img/user/*
+/public/img/tmp/*
 /storage/*.key
 /vendor
 /.idea
