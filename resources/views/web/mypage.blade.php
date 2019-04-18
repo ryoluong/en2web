@@ -71,61 +71,85 @@
             @if($user->department !== null)
             <p class="user_department">{{ $user->department.' '.$user->major }}</p>
             @endif
-            <div class="prof_view">
+            <!-- <p class="user-generation-and-year">{{ $user->year }}年度入学</p> -->
+            <!-- <div class="prof_view">
                 <div class="property"><p class="prof_head">入学年度</p></div>
                 <div class="value"><p>{{ $user->year }}</p></div>
             </div>
             <div class="prof_view">
             <div class="property"><p class="prof_head">入会時期</p></div>
                 <div class="value"><p>{{ $user->generation }}期生</p></div>
-            </div>
-            <div class="prof_view">
-                <div class="property"><p class="prof_head">留学先国</p></div>
-                <div class="value" style="display:block;">
-                        @if($user->countries()->get() === null)
-                        <p>{{ "(入力されていません)" }}</p>
-                        @else
-                        @foreach($user->countries()->get() as $country)
-                        <p>{{ $country->name }}</p>
-                        @endforeach
-                        @endif
+            </div> -->
+            <!-- <div class="user-profile">
+                <div class="property"><i class="fas fa-sign-in-alt"></i></div>
+                <div class="value">
+                    <p class="value-text">
+                        {{ $user->year }}
+                    </p>
+                </div>
+            </div> -->
+            <div class="user-profile">
+                <div class="property"><i class="fas fa-user-friends"></i></div>
+                <div class="value">
+                    <p class="value-text">
+                        {{ empty($user->year) ? '' : $user->year . '年入学・' }}{{ $user->generation }}期生
                     </p>
                 </div>
             </div>
-            <div class="prof_view">
-                <div class="property"><p class="prof_head">留学先</p></div>
+            @if($user->countries->count())
+            <div class="user-profile">
+                <div class="property"><i class="fas fa-globe-asia"></i></div>
                 <div class="value">
-                    <p>
-                        @if($user->status == 1)
+                    <p class="value-text">
+                    @foreach($user->countries()->get() as $country)
+                        {{ $country->name.' ' }}
+                    @endforeach
+                    </p>
+                </div>
+            </div>
+            @endif
+            @if(!empty($user->university))
+            <div class="user-profile">
+                <div class="property"><i class="fas fa-graduation-cap"></i></div>
+                <div class="value">
+                    <p class="value-text">
                         {!! $user->university !!}
-                        @else
-                        @endif
                     </p>
                 </div>
             </div>
-            <div class="prof_view">
-                <div class="property"><p class="prof_head">就職・進路</p></div>
+            @endif
+            @if(!empty($user->job))
+            <div class="user-profile">
+                <div class="property"><i class="fas fa-briefcase"></i></div>
                 <div class="value">
-                    <p>
-                        @if($user->status == 1)
+                    <p class="value-text">
                         {{ $user->job }}
-                        @else
-                        {{ "" }}
-                        @endif
                     </p>
                 </div>
             </div>
-            <div class="prof_view">
-                <div class="line"></div>
-                    <div class="profile_text_value">
-                        <p>
-                        @if (!empty($user->profile))
-                        {!! $user->profile !!}
-                        @else
-                        {{ "（プロフィールが入力されていません）" }}
-                        @endif
-                        </p>
+            @endif
+            @if ($flag == 'mypage')
+            <button onclick="location.href='/mypage/edit'" class="edit-link bluebtn">プロフィールを編集する</button>
+            @else
+            <div class="line"></div>
+            @endif
+            <div class="user-profile">
+                <div class="profile-long-text">
+                    @if ($flag == 'mypage' && empty($user->avater_path))
+                    <div class="prof-alert">
+                        <i class="fas fa-exclamation"></i><p class="text">アイコンが設定されていません</p>
                     </div>
+                    @endif
+                    @if (!empty($user->profile))
+                    <p class="text">{!! $user->profile !!}</p>
+                    @elseif ($flag == 'mypage')
+                    <div class="prof-alert">
+                        <i class="fas fa-exclamation"></i><p class="text">プロフィールが入力されていません</p>
+                    </div>
+                    @else
+                    <p class="no-text">{{ "（プロフィールが未記入です）" }}</p>
+                    @endif
+                    </p>
                 </div>
             </div>
         </div>

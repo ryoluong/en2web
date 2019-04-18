@@ -69,7 +69,7 @@
                         <div class="form_view">
                             <div class="property"><p>Profile</p></div>
                             <div class="value">
-                                <textarea name="profile" class="input_textarea" placeholder="例)３年次に、交換留学で１年間ハノイ貿易大学へ行っていました。現在はIT開発やその勉強に取り組んでいます！">{{ old('profile') !== null ? old('profile') : $user->profile }}</textarea>
+                                <textarea name="profile" class="input_textarea" placeholder="">{{ old('profile') !== null ? old('profile') : $user->profile }}</textarea>
                                 <div class="help-box">
                                     <p>* %%見出し%%と入力すると<span>見出し</span>になります。</p>
                                 </div>

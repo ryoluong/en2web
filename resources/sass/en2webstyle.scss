@@ -965,8 +965,8 @@ strong {
  ******************************************************************************/
 .no_border_card {
   border: none;
-  width: 95%;
-  margin: 5px auto 5px auto;
+  width: 93%;
+  margin: 5px auto;
   @include pc {
     margin: 15px auto;
     width: 95%;
@@ -987,8 +987,7 @@ strong {
       font-weight: bold;
       color: #333;
       margin-top: 10px;
-      margin-left: 5px;
-      margin-bottom: 1px;
+      margin-bottom: 5px;
       @include pc {
         font-size: 32px;
         margin-bottom: 3px;
@@ -996,7 +995,6 @@ strong {
     }
     .user_department {
       color: #333;
-      margin-left: 5px;
       font-size: 16px;
       margin-bottom: 6px;
       @include pc {
@@ -1055,16 +1053,97 @@ strong {
         }
       }
     }
-    .prof_view {
-      padding-right: 5px;
-      padding-left: 5px;
+    .user-profile {
+      display: flex;
+      margin: 20px 0;
       .property {
-        flex: 0 0 30%;
-        max-width: 150px;
-        p {
-          background-color: #7777bb;
-          color: #fff;
+        width: 32px;
+        text-align: center;
+        .fas {
+          color: #555577;
+          font-size: 24px;
+        }
+      }
+      .value {
+        flex-grow: 1;
+        margin-left: 12px;
+        .value-text {
+          line-height: 24px;
+        }
+      }
+      .profile-long-text {
+        flex: 0 0 100%;
+        padding-bottom: 20px;
+        @include pc {
+          font-size: 18px;
+          max-width: 980px;
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+        .text span {
+          font-weight: bold;
+          display: inline-block;
+          font-size: 16px;
+          color: #7777bb;
+          //border: 1px solid #7777bb;
+          border-left: 8px solid #7777bb;
+          padding: 6px 8px;
+          margin-bottom: 8px;
+          margin-top: 8px;
+          @include pc {
+            font-size: 19px;
+            padding: 6px;
+            margin-bottom: 6px;
+            margin-top: 10px;
+          }
+        }
+
+        .prof-alert {
+          background-color: #fff;
+          display: flex;
+          width: fit-content;
+          margin: auto;
+          padding: 7.5px 15px;
+          border-bottom: 3px solid #f15;
+          margin-bottom: 20px;
+          .fas {
+            font-size: 20px;
+            color: #f15;
+          }
+          .text {
+            font-weight: bold;
+            margin-left: 10px;
+            color: #f15;
+            line-height: 20px;
+            font-size: 16px;
+          }
+        }
+        .no-text {
           width: 100%;
+          text-align: center;
+        }
+      }
+    }
+    .edit-link {
+      display: block;
+      width: 65%;
+      margin: 25px auto;
+    }
+    .line {
+      height: 1px;
+      width: 75%;
+      margin: 5px auto;
+      background-color: #9999aa;
+      @include pc {
+        margin: 15px auto 20px auto;
+      }
+    }
+    .prof_view {
+      .property {
+        width: 30px;
+        i {
+          color: #557;
+          font-size: 24px;
           text-align: right;
           height: 25px;
           line-height: 25px;
@@ -1114,14 +1193,13 @@ strong {
           }
         }
       }
-      .line {
-        height: 1px;
-        width: 75%;
-        margin: 10px auto 4px auto;
-        background-color: #9999aa;
-        @include pc {
-          margin: 15px auto 20px auto;
-        }
+      .prof-header {
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #555577;
+        color: #ffffff;
+        padding: 2px 10px;
+        border-radius: 5px;
       }
     }
     .users {
@@ -2318,7 +2396,7 @@ strong {
     height: 125px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 0px 5px 2px #ddd;
+    // box-shadow: 0px 0px 5px 2px #ddd;
     @include pc {
       height: 235px;
       box-shadow: none;
@@ -2544,7 +2622,7 @@ form {
   background-color: #f5f5f5;
   padding-top: 5px;
   margin: 5px 0 35px 0;
-  box-shadow: 0 0 9px 1px #ccc;
+  box-shadow: 0 1px 6px 1px #ddd;
   @include pc {
     background-color: #fff;
     width: 95%;
