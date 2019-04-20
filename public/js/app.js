@@ -43443,12 +43443,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       search: "",
-      showBy: "generation"
+      orderBy: "generation"
     };
   },
   methods: {
     where: function where(users, i) {
-      if (this.showBy == "generation") {
+      if (this.orderBy == "generation") {
         return users.filter(function (user) {
           return user.generation === i;
         });
@@ -43460,14 +43460,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    if (localStorage.showBy) {
-      this.showBy = localStorage.showBy;
+    if (localStorage.orderBy) {
+      this.orderBy = localStorage.orderBy;
+    }
+    if (localStorage.search) {
+      this.search = localStorage.search;
     }
   },
 
   watch: {
-    showBy: function showBy(newShowBy) {
-      localStorage.showBy = newShowBy;
+    orderBy: function orderBy(newOrderBy) {
+      localStorage.orderBy = newOrderBy;
+    },
+    search: function search(newSearch) {
+      localStorage.search = newSearch;
     }
   },
   computed: {
@@ -43533,23 +43539,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.showBy,
-            expression: "showBy"
+            value: _vm.orderBy,
+            expression: "orderBy"
           }
         ],
         staticClass: "input-radio",
-        attrs: { type: "radio", id: "showByGeneration", value: "generation" },
-        domProps: { checked: _vm._q(_vm.showBy, "generation") },
+        attrs: { type: "radio", id: "orderByGeneration", value: "generation" },
+        domProps: { checked: _vm._q(_vm.orderBy, "generation") },
         on: {
           change: function($event) {
-            _vm.showBy = "generation"
+            _vm.orderBy = "generation"
           }
         }
       }),
       _vm._v(" "),
       _c(
         "label",
-        { staticClass: "label-radio", attrs: { for: "showByGeneration" } },
+        { staticClass: "label-radio", attrs: { for: "orderByGeneration" } },
         [_vm._v("入会期別")]
       ),
       _vm._v(" "),
@@ -43558,29 +43564,29 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.showBy,
-            expression: "showBy"
+            value: _vm.orderBy,
+            expression: "orderBy"
           }
         ],
         staticClass: "input-radio",
-        attrs: { type: "radio", id: "showByGroup", value: "group" },
-        domProps: { checked: _vm._q(_vm.showBy, "group") },
+        attrs: { type: "radio", id: "orderByGroup", value: "group_id" },
+        domProps: { checked: _vm._q(_vm.orderBy, "group_id") },
         on: {
           change: function($event) {
-            _vm.showBy = "group"
+            _vm.orderBy = "group_id"
           }
         }
       }),
       _vm._v(" "),
       _c(
         "label",
-        { staticClass: "label-radio", attrs: { for: "showByGroup" } },
+        { staticClass: "label-radio", attrs: { for: "orderByGroup" } },
         [_vm._v("グループ別")]
       )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "no_border_card" }, [
-      _vm.showBy == "generation"
+      _vm.orderBy == "generation"
         ? _c(
             "div",
             _vm._l(_vm.maxGeneration, function(i) {
@@ -43590,7 +43596,7 @@ var render = function() {
                   index: i,
                   users: _vm.where(_vm.users, i),
                   search: _vm.search,
-                  showBy: _vm.showBy
+                  orderBy: _vm.orderBy
                 }
               })
             })
@@ -43605,7 +43611,7 @@ var render = function() {
                     index: i,
                     users: _vm.where(_vm.users, i),
                     search: _vm.search,
-                    showBy: _vm.showBy
+                    orderBy: _vm.orderBy
                   }
                 })
               }),
@@ -43615,7 +43621,7 @@ var render = function() {
                   index: 0,
                   users: _vm.where(_vm.users, 0),
                   search: _vm.search,
-                  showBy: _vm.showBy
+                  orderBy: _vm.orderBy
                 }
               }),
               _vm._v(" "),
@@ -43624,7 +43630,7 @@ var render = function() {
                   index: -1,
                   users: _vm.where(_vm.users, -1),
                   search: _vm.search,
-                  showBy: _vm.showBy
+                  orderBy: _vm.orderBy
                 }
               })
             ],
@@ -43711,6 +43717,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -43726,7 +43738,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: String,
       required: true
     },
-    showBy: {
+    orderBy: {
       type: String,
       required: true
     }
@@ -43769,7 +43781,7 @@ var render = function() {
         { staticClass: "flex_container" },
         [
           _c("div", { staticClass: "subtitle" }, [
-            _vm.showBy == "generation"
+            _vm.orderBy == "generation"
               ? _c("p", [_vm._v(_vm._s(_vm.formattedNumber))])
               : _c("p", [
                   _vm._v(
@@ -43777,7 +43789,7 @@ var render = function() {
                       _vm.index == -1
                         ? "OB・OG"
                         : _vm.index == 0
-                        ? "未分類"
+                        ? "No Group"
                         : "Group " + _vm.index
                     )
                   )
@@ -43787,7 +43799,7 @@ var render = function() {
           _vm._l(_vm.users, function(user) {
             return _c("user-item", {
               key: user.id,
-              attrs: { user: user, search: _vm.search, showBy: _vm.showBy }
+              attrs: { user: user, search: _vm.search, orderBy: _vm.orderBy }
             })
           })
         ],
@@ -43870,9 +43882,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -43884,7 +43893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: String,
       required: false
     },
-    showBy: {
+    orderBy: {
       type: String,
       required: false
     }
@@ -43896,6 +43905,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         return false;
       }
+    },
+    userPageUrl: function userPageUrl() {
+      return "/users/" + this.user.id + "?orderBy=" + this.orderBy + [this.search ? "&q=" + this.search : ""];
     }
   }
 });
@@ -43910,39 +43922,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.displayUser
     ? _c("div", { staticClass: "flex_view" }, [
-        _c(
-          "a",
-          {
-            attrs: { href: "/users/" + _vm.user.id + "?showBy=" + _vm.showBy }
-          },
-          [
-            _c("img", {
-              staticClass: "user_icon",
-              attrs: {
-                src: [
-                  _vm.user.avater_path
-                    ? _vm.user.avater_path
-                    : "/img/categories/user.png"
-                ],
-                alt: "user_icon"
-              }
-            })
-          ]
-        ),
+        _c("a", { attrs: { href: _vm.userPageUrl } }, [
+          _c("img", {
+            staticClass: "user_icon",
+            attrs: {
+              src: [
+                _vm.user.avater_path
+                  ? _vm.user.avater_path
+                  : "/img/categories/user.png"
+              ],
+              alt: "user_icon"
+            }
+          })
+        ]),
         _vm._v(" "),
         _c(
           "a",
-          {
-            staticClass: "user_name",
-            attrs: {
-              href:
-                "/users/" +
-                _vm.user.id +
-                "?showBy=" +
-                _vm.showBy +
-                [_vm.search ? "?q=" + _vm.search : ""]
-            }
-          },
+          { staticClass: "user_name", attrs: { href: _vm.userPageUrl } },
           [_vm._v(_vm._s(_vm.user.name))]
         )
       ])

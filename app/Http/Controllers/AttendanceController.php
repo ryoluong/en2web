@@ -32,7 +32,7 @@ class AttendanceController extends Controller
                 ]);
             }
         }
-        return redirect('/attendance');
+        return redirect('/attendance/manager');
     }
 
     public function toggleMeeting(Meeting $meeting)
@@ -43,7 +43,7 @@ class AttendanceController extends Controller
             $meeting->status = 'await';
         }
         $meeting->save();
-        return redirect('/attendance');
+        return redirect('/attendance/manager');
     }
 
     public function completeMeeting(Meeting $meeting)
@@ -65,7 +65,7 @@ class AttendanceController extends Controller
     public function cancelMeeting(Meeting $meeting)
     {
         $meeting->delete();
-        return redirect('/attendance');
+        return redirect('/attendance/manager');
     }
 
     public function attend(Request $req)
@@ -78,7 +78,7 @@ class AttendanceController extends Controller
         ],[
             'status' => request('status')
         ]);
-        return redirect('/home');
+        return redirect('/attendance');
     }
 
     public function showResults()
@@ -87,6 +87,17 @@ class AttendanceController extends Controller
         // $users = User::orderBy('group_id')->get();
         $meetings = Meeting::all();
         $attendances = Attendance::all();
+        foreach($meetings as $mtg) {
+            if($mtg->status == 'completed') {
+                $attends = $attendances->where('meeting_id', $mtg->id);
+                $numActiveUser = $attends->where('status', '!=', 'overseas')->count();
+                $numAttendUser = $attends->where('status', '=', 'attend')->count();
+                $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
+                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * 0.5) / $numActiveUser * 100, 1);
+            } else {
+                $mtg->attend_rate = '';
+            }
+        }
         return view('web.attendance.show', compact('users', 'meetings', 'attendances'));
     }
 }

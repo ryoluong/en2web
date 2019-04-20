@@ -93,14 +93,14 @@ Route::middleware(['auth'])->group(function () {
      * 出席関連
      */
     Route::middleware(['admin'])->group(function () {
-        Route::get('/attendance', 'AttendanceController@index');
+        Route::get('/attendance/manager', 'AttendanceController@index');
         Route::post('/meeting/add', 'AttendanceController@addMeeting');
         Route::post('/meeting/{meeting}/toggle', 'AttendanceController@toggleMeeting');
         Route::post('/meeting/{meeting}/complete', 'AttendanceController@completeMeeting');
         Route::post('/meeting/{meeting}/cancel', 'AttendanceController@cancelMeeting');
     });
     Route::post('/attend', 'AttendanceController@attend');
-    Route::get('/attend', 'AttendanceController@showResults');
+    Route::get('/attendance', 'AttendanceController@showResults');
 
     /**
      * Ajax

@@ -1,16 +1,13 @@
 <template>
   <div class="flex_view" v-if="displayUser">
-    <a :href="'/users/'+user.id+'?showBy='+showBy">
+    <a :href="userPageUrl">
       <img
         class="user_icon"
         :src="[ user.avater_path ? user.avater_path : '/img/categories/user.png']"
         alt="user_icon"
       >
     </a>
-    <a
-      class="user_name"
-      :href="'/users/' + user.id + '?showBy=' + showBy + [ search ? '?q=' + search : '']"
-    >{{ user.name }}</a>
+    <a class="user_name" :href="userPageUrl">{{ user.name }}</a>
   </div>
 </template>
 <script>
@@ -24,7 +21,7 @@ export default {
       type: String,
       required: false
     },
-    showBy: {
+    orderBy: {
       type: String,
       required: false
     }
@@ -39,6 +36,15 @@ export default {
       } else {
         return false;
       }
+    },
+    userPageUrl() {
+      return (
+        "/users/" +
+        this.user.id +
+        "?orderBy=" +
+        this.orderBy +
+        [this.search ? "&q=" + this.search : ""]
+      );
     }
   }
 };

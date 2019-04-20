@@ -22,3 +22,49 @@
     }
   }
 }
+
+#showAttendances {
+  .main {
+    display: flex;
+    flex-wrap: nowrap;
+    @include pc {
+      margin: auto;
+      width: fit-content;
+    }
+  }
+  .scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .table {
+    .tr {
+      .th {
+        height: 75px;
+        .title {
+          font-size: 18px;
+          color: #77b;
+          line-height: 22px;
+        }
+        .mtg-name {
+          width: 70px;
+          white-space: normal;
+        }
+      }
+      .rate {
+        font-weight: bold;
+      }
+      .td {
+        height: 24px;
+        text-align: center;
+      }
+      .name {
+        text-align: left;
+        white-space: nowrap;
+      }
+      .group {
+      }
+      .mtg {
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@
                 <form method="POST" action="/meeting/{{ $mtg->id }}/toggle">
                     @csrf
                     <div class="form_view">
-                        <button type="submit" class="toggle-btn bluebtn">出席ボタンの表示を開始</button>
+                        <button type="submit" class="toggle-btn bluebtn">出席ボタンを表示する</button>
                     </div>
                 </form>
                 <form method="POST" action="/meeting/{{ $mtg->id }}/complete">
@@ -53,7 +53,7 @@
                 <form method="POST" action="/meeting/{{ $mtg->id }}/toggle">
                     @csrf
                     <div class="form_view">
-                        <button type="submit" class="toggle-btn bluebtn">出席ボタンの表示を終了</button>
+                        <button type="submit" class="toggle-btn bluebtn">出席ボタンを非表示にする</button>
                     </div>
                 </form>
                 @endif

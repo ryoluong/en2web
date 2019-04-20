@@ -3,35 +3,41 @@
 @section('content')
 <div id="mypage">
     <div class="content_head">
-        <div class="icon">
-            @if($flag == 'mypage')
+        @if($flag == 'mypage')
+        <div class="icon">    
             <img src="/img/top_mypage.png" alt="">
-            @else
-            <img src="/img/top_members.png" alt="">
-            @endif
         </div>
+        @else
+        <a href="/users" class="icon">    
+            <img src="/img/top_members.png" alt="">
+        </a>
+        @endif
         <div class="text">
             @if($flag == 'mypage')
             <p>Mypage</p>
             @else
-            <p>Members</p>
+            <a href="/users">Members</a>
             @endif
         </div>
-        @if($flag == 'mypage')
-        <a class="link" href="/mypage/edit">
-            <img src="/img/mypage_edit.png" alt="edit">
-        </a>
-        @else
-        <a class="link" href="/users/{{ $id_previous }}">
+            @if($flag == 'mypage')
+            <a class="link" href="/mypage/edit">
+                <img src="/img/mypage_edit.png" alt="edit">
+            </a>
+            @else
             @if($id_previous !== -1)
-            <img class="arrow" src="/img/back.png" alt="back">
+            <a class="link" href="/users/{{ $id_previous }}{{ $queries ? $queries : '' }}">
+                <img class="arrow" src="/img/back.png" alt="back">
+            </a>
+            @else
+            <p class="link"></p>
             @endif
-        </a>
-        <a class="link" href="/users/{{ $id_next }}">
             @if($id_next !== -1)
-            <img class="arrow" src="/img/next.png" alt="next">
+            <a class="link" href="/users/{{ $id_next }}{{ $queries ? $queries : '' }}">
+                <img class="arrow" src="/img/next.png" alt="next">
+            </a>
+            @else
+            <p class="link"></p>
             @endif
-        </a>
         @endif
     </div>
     <div class="prof_top">
@@ -71,23 +77,6 @@
             @if($user->department !== null)
             <p class="user_department">{{ $user->department.' '.$user->major }}</p>
             @endif
-            <!-- <p class="user-generation-and-year">{{ $user->year }}年度入学</p> -->
-            <!-- <div class="prof_view">
-                <div class="property"><p class="prof_head">入学年度</p></div>
-                <div class="value"><p>{{ $user->year }}</p></div>
-            </div>
-            <div class="prof_view">
-            <div class="property"><p class="prof_head">入会時期</p></div>
-                <div class="value"><p>{{ $user->generation }}期生</p></div>
-            </div> -->
-            <!-- <div class="user-profile">
-                <div class="property"><i class="fas fa-sign-in-alt"></i></div>
-                <div class="value">
-                    <p class="value-text">
-                        {{ $user->year }}
-                    </p>
-                </div>
-            </div> -->
             <div class="user-profile">
                 <div class="property"><i class="fas fa-user-friends"></i></div>
                 <div class="value">
@@ -144,7 +133,7 @@
                     <p class="text">{!! $user->profile !!}</p>
                     @elseif ($flag == 'mypage')
                     <div class="prof-alert">
-                        <i class="fas fa-exclamation"></i><p class="text">プロフィールが入力されていません</p>
+                        <i class="fas fa-exclamation"></i><p class="text">自己紹介文が入力されていません</p>
                     </div>
                     @else
                     <p class="no-text">{{ "（プロフィールが未記入です）" }}</p>

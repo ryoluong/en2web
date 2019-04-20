@@ -1322,6 +1322,57 @@ iframe {
   width: 50%;
 }
 
+#showAttendances .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+@media (min-width: 768px) {
+  #showAttendances .main {
+    margin: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+
+#showAttendances .scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#showAttendances .table .tr .th {
+  height: 75px;
+}
+
+#showAttendances .table .tr .th .title {
+  font-size: 18px;
+  color: #77b;
+  line-height: 22px;
+}
+
+#showAttendances .table .tr .th .mtg-name {
+  width: 70px;
+  white-space: normal;
+}
+
+#showAttendances .table .tr .rate {
+  font-weight: bold;
+}
+
+#showAttendances .table .tr .td {
+  height: 24px;
+  text-align: center;
+}
+
+#showAttendances .table .tr .name {
+  text-align: left;
+  white-space: nowrap;
+}
+
 /*****************
  *               *
  *  button       *
@@ -1560,10 +1611,10 @@ iframe {
 .checkbox_wrapper .checkbox_simple::before {
   position: absolute;
   z-index: 1;
-  top: 0.22rem;
-  left: 0.08rem;
-  width: 0.62rem;
-  height: 0.3rem;
+  top: 0.125rem;
+  left: 0.02rem;
+  width: 0.75rem;
+  height: 0.375rem;
   content: "";
   -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
   transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
@@ -1612,7 +1663,7 @@ iframe {
 .cp_ipcheck .checkbox_simple::after,
 .checkbox_wrapper .checkbox_simple::after {
   border: 1px solid #ccc;
-  top: -0.05rem;
+  top: -0.1rem;
   left: -0.1rem;
   width: 1rem;
   height: 1rem;
@@ -2481,7 +2532,7 @@ iframe {
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 
@@ -2616,7 +2667,7 @@ iframe {
 
 .no_border_card .content .user-profile .property .fas {
   color: #555577;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .no_border_card .content .user-profile .value {
@@ -2686,7 +2737,7 @@ iframe {
 }
 
 .no_border_card .content .user-profile .profile-long-text .prof-alert .fas {
-  font-size: 20px;
+  font-size: 19px;
   color: #f15;
 }
 
@@ -2695,7 +2746,7 @@ iframe {
   margin-left: 10px;
   color: #f15;
   line-height: 20px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .no_border_card .content .user-profile .profile-long-text .no-text {
@@ -3616,7 +3667,7 @@ iframe {
           align-items: center;
   margin-left: 5%;
   max-width: 1000px;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 @media (min-width: 768px) {
@@ -4399,17 +4450,10 @@ iframe {
  *********************************/
 
 .prof_top {
-  height: 170px;
   position: relative;
   max-width: 1000px;
   margin: auto;
   margin-top: 1px;
-}
-
-@media (min-width: 768px) {
-  .prof_top {
-    height: 320px;
-  }
 }
 
 .prof_top .cover {
@@ -4431,7 +4475,8 @@ iframe {
 
 .prof_top .user_icon_holder {
   position: absolute;
-  bottom: 0;
+  top: 0;
+  margin-top: 75px;
   width: 90px;
   height: 90px;
   margin-left: 10px;
@@ -4440,6 +4485,7 @@ iframe {
 
 @media (min-width: 768px) {
   .prof_top .user_icon_holder {
+    margin-top: 140px;
     width: 170px;
     height: 170px;
     margin-left: 20px;
@@ -4517,10 +4563,8 @@ iframe {
 }
 
 .prof_top .country_holder {
-  position: absolute;
-  bottom: 0;
   margin-left: 105px;
-  height: 45px;
+  min-height: 45px;
 }
 
 @media (min-width: 768px) {
@@ -4563,6 +4607,7 @@ iframe {
 .prof_top .country_holder .status {
   display: inline-block;
   height: 25px;
+  line-height: 25px;
   margin: 10px 5px;
   vertical-align: bottom;
   background-color: #7777bb;
@@ -4577,6 +4622,7 @@ iframe {
 @media (min-width: 768px) {
   .prof_top .country_holder .status {
     height: 35px;
+    line-height: 35px;
     margin: 25px 5px;
     padding: 0 10px;
     font-size: 20px;
@@ -5076,7 +5122,7 @@ form {
 
 .radio-wrapper .input-radio + .label-radio {
   border: 1.5px solid #aaa;
-  padding: 5px 12px;
+  padding: 4px 12px 5px 12px;
   border-radius: 5px;
   color: #aaa;
   font-size: 16px;

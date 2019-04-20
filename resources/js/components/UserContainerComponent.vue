@@ -1,10 +1,16 @@
 <template>
   <div class="flex_container" v-if="hasActiveUser">
     <div class="subtitle">
-      <p v-if="showBy == 'generation'">{{ formattedNumber }}</p>
-      <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? '未分類' : 'Group ' + index }}</p>
+      <p v-if="orderBy == 'generation'">{{ formattedNumber }}</p>
+      <p v-else>{{ index == -1 ? 'OB・OG' : index == 0 ? 'No Group' : 'Group ' + index }}</p>
     </div>
-    <user-item v-for="user in users" :user="user" :key="user.id" :search="search" :showBy="showBy"></user-item>
+    <user-item
+      v-for="user in users"
+      :user="user"
+      :key="user.id"
+      :search="search"
+      :orderBy="orderBy"
+    ></user-item>
   </div>
 </template>
 <script>
@@ -22,7 +28,7 @@ export default {
       type: String,
       required: true
     },
-    showBy: {
+    orderBy: {
       type: String,
       required: true
     }

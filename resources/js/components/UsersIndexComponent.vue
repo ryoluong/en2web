@@ -7,23 +7,23 @@
       <input
         class="input-radio"
         type="radio"
-        v-model="showBy"
-        id="showByGeneration"
+        v-model="orderBy"
+        id="orderByGeneration"
         value="generation"
       >
-      <label class="label-radio" for="showByGeneration">入会期別</label>
-      <input class="input-radio" type="radio" v-model="showBy" id="showByGroup" value="group">
-      <label class="label-radio" for="showByGroup">グループ別</label>
+      <label class="label-radio" for="orderByGeneration">入会期別</label>
+      <input class="input-radio" type="radio" v-model="orderBy" id="orderByGroup" value="group_id">
+      <label class="label-radio" for="orderByGroup">グループ別</label>
     </div>
     <div class="no_border_card">
-      <div v-if="showBy == 'generation'">
+      <div v-if="orderBy == 'generation'">
         <user-container
           v-for="i in maxGeneration"
           :key="i"
           :index="i"
           :users="where(users, i)"
           :search="search"
-          :showBy="showBy"
+          :orderBy="orderBy"
         ></user-container>
       </div>
       <div v-else>
@@ -33,10 +33,10 @@
           :index="i"
           :users="where(users, i)"
           :search="search"
-          :showBy="showBy"
+          :orderBy="orderBy"
         ></user-container>
-        <user-container :index="0" :users="where(users, 0)" :search="search" :showBy="showBy"></user-container>
-        <user-container :index="-1" :users="where(users, -1)" :search="search" :showBy="showBy"></user-container>
+        <user-container :index="0" :users="where(users, 0)" :search="search" :orderBy="orderBy"></user-container>
+        <user-container :index="-1" :users="where(users, -1)" :search="search" :orderBy="orderBy"></user-container>
       </div>
       <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
     </div>
@@ -53,12 +53,12 @@ export default {
   data: function() {
     return {
       search: "",
-      showBy: "generation"
+      orderBy: "generation"
     };
   },
   methods: {
     where: function(users, i) {
-      if (this.showBy == "generation") {
+      if (this.orderBy == "generation") {
         return users.filter(user => user.generation === i);
       } else {
         return users.filter(user => user.group_id === i);
@@ -66,13 +66,19 @@ export default {
     }
   },
   mounted() {
-    if (localStorage.showBy) {
-      this.showBy = localStorage.showBy;
+    if (localStorage.orderBy) {
+      this.orderBy = localStorage.orderBy;
+    }
+    if (localStorage.search) {
+      this.search = localStorage.search;
     }
   },
   watch: {
-    showBy(newShowBy) {
-      localStorage.showBy = newShowBy;
+    orderBy(newOrderBy) {
+      localStorage.orderBy = newOrderBy;
+    },
+    search(newSearch) {
+      localStorage.search = newSearch;
     }
   },
   computed: {
