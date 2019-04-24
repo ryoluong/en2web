@@ -9,11 +9,13 @@
     @content;
   }
 }
+
 @mixin pc_wide {
   @media (min-width: 1024px) {
     @content;
   }
 }
+
 @mixin absolute_center {
   position: absolute;
   top: 0;
@@ -22,6 +24,7 @@
   left: 0;
   margin: auto;
 }
+
 @mixin icon_deco_before {
   content: "";
   width: 30px;
@@ -32,6 +35,7 @@
   transform: rotate(10deg);
   z-index: -2;
 }
+
 @mixin icon_deco_after {
   content: "";
   width: 30px;
@@ -54,20 +58,24 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic,
     "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo,
     sans-serif;
+
   &.scroll-lock {
     overflow: hidden;
     position: fixed;
     width: 100%;
   }
 }
+
 p {
   line-height: 1.5em;
   margin: 0;
   padding: 0;
 }
+
 input::placeholder {
   color: #888;
 }
+
 strong {
   font-size: 13px;
   color: #ff1155;
@@ -78,11 +86,13 @@ strong {
     display: none !important;
   }
 }
+
 .pc {
   @media (max-width: 767px) {
     display: none !important;
   }
 }
+
 /**
  *
  *  Imports
@@ -115,47 +125,57 @@ strong {
   vertical-align: middle;
   transition: background-color 0.3s;
 }
+
 .graybtn {
   background-color: #ddd;
   color: #444;
+
   &:hover {
     background-color: #bbb;
     transition: background-color 0.3s;
   }
 }
+
 .bluebtn {
   background-color: #7777bb;
   color: #fff;
+
   &:hover {
     background-color: #555577;
     transition: background-color 0.3s;
   }
 }
+
 .redbtn {
   font-size: 17px;
   width: 120px;
   height: 40px;
   background-color: #ff1155;
   color: #fff;
+
   &:hover {
     background-color: #990033;
     transition: background-color 0.3s;
   }
 }
+
 .purplebtn {
   background-color: #777799;
   color: #fff;
+
   &:hover {
     background-color: #555577;
     transition: background-color 0.3s;
   }
 }
+
 #disable_button {
   .button_text {
     background-color: #7777bb;
     color: #fff;
     transition: 0.3s;
   }
+
   .loader {
     display: none;
   }
@@ -166,10 +186,12 @@ strong {
     }
   }
 }
+
 #disable_button:disabled {
   .button_text {
     display: none;
   }
+
   .loader,
   .loader::after {
     display: inline-block;
@@ -177,6 +199,7 @@ strong {
     width: 16px;
     height: 16px;
   }
+
   .loader {
     padding: 0;
     margin: 0;
@@ -192,33 +215,40 @@ strong {
     -webkit-animation: load8 1.1s infinite linear;
     animation: load8 1.1s infinite linear;
   }
+
   @-webkit-keyframes load8 {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
+
   @keyframes load8 {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
 }
+
 .line-send {
   height: 24px;
+
   @include pc {
     height: 28px;
   }
 }
+
 /********************
  *                  *
  * Radio Button     *
@@ -232,10 +262,12 @@ strong {
     font-size: 14px;
     position: relative;
     line-height: 1rem;
+
     @include pc {
       font-size: 15px;
     }
   }
+
   .radio_button {
     position: relative;
     margin: 0 8px 0 0;
@@ -252,9 +284,11 @@ strong {
       background-color: #fff;
       border-radius: 100%;
     }
+
     &:checked::before {
       background-color: #00aaca;
     }
+
     &::after {
       position: absolute;
       top: -0.125rem;
@@ -283,10 +317,12 @@ strong {
     position: relative;
     line-height: 1rem;
     vertical-align: middle;
+
     @include pc {
       font-size: 15px;
     }
   }
+
   .checkbox,
   .checkbox_simple {
     position: relative;
@@ -300,8 +336,7 @@ strong {
       width: 0.75rem;
       height: 0.375rem;
       content: "";
-      -webkit-transition: -webkit-transform 0.4s
-        cubic-bezier(0.45, 1.8, 0.5, 0.75);
+      -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
       transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
       -webkit-transform: rotate(-45deg) scale(0, 0);
       transform: rotate(-45deg) scale(0, 0);
@@ -309,10 +344,12 @@ strong {
       border-top-style: none;
       border-right-style: none;
     }
+
     &:checked::before {
       -webkit-transform: rotate(-45deg) scale(1, 1);
       transform: rotate(-45deg) scale(1, 1);
     }
+
     &::after {
       display: inline-block;
       position: absolute;
@@ -326,6 +363,7 @@ strong {
       background: #ffffff;
     }
   }
+
   .checkbox_simple {
     &::before {
       border-color: #00aaca;
@@ -334,6 +372,7 @@ strong {
       width: 0.75rem;
       height: 0.375rem;
     }
+
     &::after {
       border: 1px solid #ccc;
       top: -0.1rem;
@@ -343,6 +382,7 @@ strong {
     }
   }
 }
+
 .user-menu {
   display: none;
   list-style: none;
@@ -358,11 +398,14 @@ strong {
   box-shadow: 1px 1px 2px 1px #ddd;
   border-radius: 5px;
   z-index: 5;
+
   &.show {
     display: block;
   }
+
   .list {
     height: 20%;
+
     .user-name {
       display: block;
       font-size: 18px;
@@ -372,6 +415,7 @@ strong {
       padding-bottom: 0;
       padding-left: 10px;
     }
+
     .link {
       display: inline-block;
       text-decoration: none;
@@ -382,30 +426,37 @@ strong {
     }
   }
 }
+
 .fade {
   &-enter-active {
     animation: fadein 0.25s;
   }
+
   &-leave-active {
     animation: fadeout 0.25s;
   }
 }
+
 @keyframes fadein {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 @keyframes fadeout {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
+
 .below_slide_menu {
   position: absolute;
   height: 100vh;
@@ -413,6 +464,7 @@ strong {
   background-color: rgba(0, 0, 0, 0);
   z-index: 1;
 }
+
 /**************************************************
  *                                                *
  *            Pagination                          *
@@ -426,6 +478,7 @@ strong {
   width: 85%;
   margin: 6px auto;
   justify-content: center;
+
   li {
     width: 30px;
     height: 30px;
@@ -433,6 +486,7 @@ strong {
     border-radius: 100%;
     text-align: center;
     vertical-align: middle;
+
     a,
     span {
       text-decoration: none;
@@ -441,10 +495,12 @@ strong {
       font-size: 15px;
       line-height: 30px;
     }
+
     @include pc {
       width: 36px;
       height: 36px;
       margin: 4px;
+
       a,
       span {
         font-size: 17px;
@@ -452,19 +508,24 @@ strong {
       }
     }
   }
+
   .active {
     background-color: #6666bb;
+
     span {
       color: #fff;
     }
   }
+
   .disabled {
     border-color: #777;
+
     span {
       color: #555;
     }
   }
 }
+
 /**************************************************
  *                                                *
  *            ノート個別アイテム                  *
@@ -480,31 +541,39 @@ strong {
   margin-left: 10px;
   background-color: #fff;
   position: relative;
+
   &:first-child {
     margin-left: 20px;
   }
+
   &:last-child {
     margin-right: 20px;
   }
+
   @include pc {
     display: block;
     flex: 0 0 40%;
     margin: 15px auto;
+
     &:first-child {
       margin-left: auto;
     }
+
     &:last-child {
       margin-right: auto;
     }
   }
+
   @include pc_wide {
     display: block;
     flex: 0 0 31%;
     margin: 15px auto;
   }
+
   a {
     text-decoration: none;
   }
+
   .note {
     .image_holder {
       background-size: cover;
@@ -513,9 +582,11 @@ strong {
       border-top-left-radius: 1%;
       border-top-right-radius: 1%;
       position: relative;
+
       @include pc {
         height: 220px;
       }
+
       &::before {
         background-color: rgba(0, 0, 0, 0.6);
         position: absolute;
@@ -528,25 +599,30 @@ strong {
         border-top-right-radius: 1%;
         transition: 0.3s;
       }
+
       .textbox {
         width: 100%;
         height: 100%;
         position: relative;
+
         p,
         a {
           color: #fff;
         }
+
         object .note_category {
           display: block;
           width: 60%;
           margin: 0;
           padding: 6px 0 3px 7.5px;
           border-bottom: 1px solid white;
+
           @include pc {
             padding: 6px 0 6px 8px;
             width: 70%;
             font-size: 17px;
           }
+
           &::before {
             background-image: url("/img/note_category.png");
             background-size: cover;
@@ -558,44 +634,54 @@ strong {
             margin-right: 5px;
             margin-top: 4px;
             content: "";
+
             @include pc {
               height: 17px;
               width: 17px;
             }
           }
+
           &:hover {
             color: #fff;
             text-decoration: underline;
           }
         }
+
         .edit_icon {
           position: absolute;
           right: 0;
           top: 0;
+
           .edit_icon_image {
             margin-right: 10px;
             margin-top: 6px;
             width: 22px;
           }
         }
+
         .note_title {
           padding: 7px 5px 1px 7.5px;
           font-size: 20px;
           white-space: normal;
+
           @include pc {
             font-size: 22px;
           }
         }
+
         object .note_country {
           display: inline;
           padding: 0 0 0 7.5px;
+
           @include pc {
             font-size: 18px;
           }
+
           &:hover {
             text-decoration: underline;
           }
         }
+
         .bestnote_icon {
           display: block;
           font-size: 14px;
@@ -607,19 +693,23 @@ strong {
           bottom: 0;
           right: 0;
           font-weight: bold;
+
           @include pc {
             padding: 2px 8px;
             font-size: 15px;
           }
         }
+
         .fav-button {
           position: absolute;
           bottom: 0;
           left: 0;
           margin-bottom: 11.5px;
           margin-left: 12px;
+
           i {
             font-size: 18px;
+
             span {
               font-size: 15px;
             }
@@ -627,17 +717,21 @@ strong {
         }
       }
     }
+
     &:hover {
       .image_holder::before {
         background-color: rgba(0, 0, 0, 0.2);
       }
+
       .text_holder {
         background-color: #fff;
       }
     }
+
     .text_holder {
       padding: 1px 0 2px 0;
       background-color: #fdfdfd;
+
       .note_author {
         margin-left: 2px;
         padding: 0 2px;
@@ -645,6 +739,7 @@ strong {
         height: 40px;
         display: inline-block;
         float: left;
+
         .author_icon {
           display: inline-block;
           width: 30px;
@@ -657,6 +752,7 @@ strong {
           z-index: 2;
           background-color: #eee;
         }
+
         .author_name {
           display: inline-block;
           line-height: 30px;
@@ -665,9 +761,11 @@ strong {
           font-size: 17px;
           color: #333;
         }
+
         &:hover p {
           text-decoration: underline;
         }
+
         &:before {
           content: "";
           display: inline-block;
@@ -686,6 +784,7 @@ strong {
           transform: rotate(10deg);
           z-index: 1;
         }
+
         &:after {
           content: "";
           display: inline-block;
@@ -706,11 +805,13 @@ strong {
           z-index: 0;
         }
       }
+
       .note_date {
         line-height: 33px;
         padding: 7px 0 3px 0;
         font-size: 13px;
       }
+
       .description {
         width: 100%;
         position: relative;
@@ -718,31 +819,38 @@ strong {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+
         @include pc {
           height: 150px;
         }
+
         .note_content {
           white-space: normal;
           width: 95%;
           margin-right: auto;
           margin-left: auto;
           font-size: 12px;
+
           object a {
             display: inline;
+
             span {
               color: #00aaff;
             }
+
             &:hover {
               text-decoration: underline;
               color: #00aaff;
             }
           }
+
           @include pc {
             width: 93%;
             font-size: 14px;
           }
         }
       }
+
       &:hover {
         .image_holder::before {
           background-color: rgba(0, 0, 0, 0.2);
@@ -751,6 +859,7 @@ strong {
       }
     }
   }
+
   .see_more {
     position: absolute;
     display: block;
@@ -760,27 +869,33 @@ strong {
     bottom: 0;
     left: 0;
     text-align: center;
+
     p {
       font-size: 20px;
       line-height: 50px;
       color: #fff;
+
       @include pc {
         font-size: 24px;
       }
     }
   }
 }
+
 .category_item {
   width: 220px;
   height: 210px;
   border-radius: 1%;
+
   .link_wrapper {
     width: 220px;
     height: 210px;
+
     &:hover .image_wrapper::before {
       background-color: rgba(0, 0, 0, 0.2);
       transition: 0.3s;
     }
+
     .image_wrapper {
       border-top-left-radius: 1%;
       border-top-right-radius: 1%;
@@ -789,6 +904,7 @@ strong {
       background-size: cover;
       background-position: center center;
       position: relative;
+
       &::before {
         background-color: rgba(0, 0, 0, 0.6);
         position: absolute;
@@ -801,6 +917,7 @@ strong {
         border-top-right-radius: 1%;
         transition: 0.3s;
       }
+
       .category_name {
         line-height: 150px;
         width: 100%;
@@ -808,13 +925,16 @@ strong {
         text-align: center;
         font-size: 22px;
         position: absolute;
+
         @include pc {
           font-size: 24px;
         }
       }
     }
+
     .detail_wrapper {
       width: 100%;
+
       .category_detail {
         width: 95%;
         margin: auto;
@@ -824,6 +944,7 @@ strong {
         padding: 10px 0;
         font-size: 13px;
         white-space: normal;
+
         @include pc {
           font-size: 15px;
           line-height: 22px;
@@ -833,35 +954,44 @@ strong {
     }
   }
 }
+
 .small {
   background-color: #7777bb;
   height: 50px;
   width: 150px;
   transition: 0.3s;
+
   &:hover {
     background-color: #555577;
     transition: 0.3s;
   }
 }
+
 .small_yellow {
   background-color: #ee9922;
   transition: 0.3s;
   height: 50px;
   width: 150px;
+
   &:hover {
     transition: 0.3s;
     background-color: #cc7700;
   }
 }
+
 .bestnote {
   border: 5px solid #ffbb55;
+
   .note {
     border-radius: 0%;
+
     .image_holder {
       border-radius: 0%;
+
       &::before {
         border-radius: 0%;
       }
+
       .textbox {
         border-radius: 0%;
       }
@@ -877,11 +1007,13 @@ strong {
 .with_border {
   border-bottom: 1px solid #9999aa;
 }
+
 .with_border_pc {
   @include pc {
     border-bottom: 1px solid #9999aa;
   }
 }
+
 .content_head {
   width: 95%;
   display: flex;
@@ -890,67 +1022,83 @@ strong {
   padding: 3px 0;
   height: 50px;
   align-items: center;
+
   @include pc {
     padding: 10px;
     height: 60px;
     max-width: 980px;
   }
+
   .icon {
     position: relative;
     width: 50px;
     height: 50px;
+
     @include pc {
       width: 60px;
       height: 60px;
     }
+
     img {
       @include absolute_center();
       width: 28px;
+
       @include pc {
         width: 40px;
       }
     }
   }
+
   .text {
     height: 50px;
     flex-grow: 1;
+
     @include pc {
       height: 60px;
     }
+
     p,
     a {
       text-decoration: none;
       line-height: 50px;
       font-size: 20px;
       color: #333;
+
       @include pc {
         margin-left: 5px;
         font-size: 24px;
         line-height: 60px;
       }
     }
+
     a:hover {
       text-decoration: underline;
     }
   }
+
   .link {
     position: relative;
     height: 40px;
     width: 40px;
+
     @include pc {
       width: 50px;
       height: 50px;
       margin: 0 5px;
     }
+
     img {
       @include absolute_center();
       width: 24px;
+
       @include pc {
         width: 30px;
       }
     }
+
     .arrow {
       width: 20px;
+
       @include pc {
         height: 24px;
         width: 24px;
@@ -968,67 +1116,83 @@ strong {
   border: none;
   width: 93%;
   margin: 5px auto;
+
   @include pc {
     margin: 15px auto;
     width: 95%;
     max-width: 1000px;
   }
+
   .border_none {
     border-bottom: none;
   }
+
   .content {
     padding-top: 8px;
     padding-bottom: 8px;
+
     @include pc {
       padding-top: 10px;
       padding-bottom: 10px;
     }
+
     .user_name {
       font-size: 24px;
       font-weight: bold;
       color: #333;
       margin-top: 5px;
       margin-bottom: 5px;
+
       @include pc {
         font-size: 32px;
         margin-bottom: 3px;
       }
     }
+
     .user_department {
       color: #333;
       font-size: 16px;
       margin-bottom: 6px;
+
       @include pc {
         font-size: 20px;
       }
     }
+
     .details_link {
       margin-left: 10px;
       color: #00aaca;
       font-size: 15px;
+
       @include pc {
         margin-left: 12px;
         font-size: 18px;
       }
     }
+
     .form_view,
     .prof_view {
       display: flex;
       flex-wrap: wrap;
       margin: 12px 0;
+
       @include pc {
         padding: 0px;
       }
+
       .property {
         display: flex;
         flex: 0 0 100%;
+
         p {
           color: #333;
         }
+
         @include pc {
           padding: 10px;
           margin-right: 0;
           flex: 0 0 30%;
+
           p {
             line-height: 1.5em;
             font-size: 18px;
@@ -1037,54 +1201,67 @@ strong {
           }
         }
       }
+
       .value {
         margin-left: 18px;
         display: flex;
         flex: 0 0 100%;
+
         @include pc {
           margin-left: 0;
           flex: 0 0 55%;
           padding: 10px;
         }
+
         p {
           line-height: 1.5em;
+
           @include pc {
             font-size: 18px;
           }
         }
       }
     }
+
     .user-profile {
       display: flex;
       margin: 20px 0;
+
       .property {
         width: 32px;
         text-align: center;
+
         .fas {
           color: #555577;
           font-size: 22px;
         }
       }
+
       .value {
         flex-grow: 1;
         margin-left: 12px;
+
         .value-text {
           line-height: 24px;
         }
       }
+
       .profile-long-text {
         flex: 0 0 100%;
         padding-bottom: 20px;
+
         @include pc {
           font-size: 18px;
           max-width: 980px;
           margin-right: 10px;
           margin-left: 10px;
         }
+
         .text {
           line-height: 1.65;
           font-size: 15.5px;
         }
+
         .text span {
           font-weight: bold;
           display: inline-block;
@@ -1095,6 +1272,7 @@ strong {
           padding: 6px 8px;
           margin-bottom: 8px;
           margin-top: 8px;
+
           @include pc {
             font-size: 19px;
             padding: 6px;
@@ -1111,10 +1289,12 @@ strong {
           padding: 7.5px 15px;
           border-bottom: 3px solid #f15;
           margin-bottom: 20px;
+
           .fas {
             font-size: 19px;
             color: #f15;
           }
+
           .text {
             font-weight: bold;
             margin-left: 10px;
@@ -1123,29 +1303,35 @@ strong {
             font-size: 15px;
           }
         }
+
         .no-text {
           width: 100%;
           text-align: center;
         }
       }
     }
+
     .edit-link {
       display: block;
       width: 65%;
       margin: 25px auto;
     }
+
     .line {
       height: 1px;
       width: 75%;
       margin: 5px auto;
       background-color: #9999aa;
+
       @include pc {
         margin: 15px auto 20px auto;
       }
     }
+
     .prof_view {
       .property {
         width: 30px;
+
         i {
           color: #557;
           font-size: 24px;
@@ -1156,30 +1342,37 @@ strong {
           border-radius: 5px;
           margin-right: 10px;
           padding: 1px 0;
+
           @include pc {
             padding: 2px 0;
           }
         }
       }
+
       .value {
         margin-left: 0px;
         flex: 0 0 70%;
+
         p {
           line-height: 27px;
+
           @include pc {
             line-height: 29px;
           }
         }
       }
+
       .profile_text_value {
         flex: 0 0 100%;
         margin: 5px auto 15px auto;
+
         @include pc {
           font-size: 18px;
           max-width: 980px;
           margin-right: 10px;
           margin-left: 10px;
         }
+
         p span {
           font-weight: bold;
           display: inline-block;
@@ -1190,6 +1383,7 @@ strong {
           padding: 4px 6px;
           margin-bottom: 4px;
           margin-top: 8px;
+
           @include pc {
             font-size: 19px;
             padding: 6px;
@@ -1198,6 +1392,7 @@ strong {
           }
         }
       }
+
       .prof-header {
         font-size: 18px;
         font-weight: bold;
@@ -1207,6 +1402,7 @@ strong {
         border-radius: 5px;
       }
     }
+
     .users {
       .form_view {
         .property {
@@ -1215,60 +1411,74 @@ strong {
             font-size: 20px;
             text-decoration: none;
             color: #333;
+
             @include pc {
               margin-bottom: 0;
               margin-left: 30%;
               font-size: 22px;
               margin-top: 2px;
             }
+
             &:hover {
               text-decoration: underline;
             }
           }
         }
+
         .value {
           font-size: 15px;
+
           @include pc {
             font-size: 18px;
           }
         }
+
         @include pc {
           margin: 7px auto 7px auto;
         }
       }
+
       .icon {
         height: 24px;
       }
+
       .members {
         display: inline;
         font-size: 20px;
       }
     }
   }
+
   .not-found {
     margin-top: 20px;
     font-size: 15px;
     text-align: center;
+
     @include pc {
       font-size: 18px;
     }
   }
+
   .flex_container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 8px 15px;
+
     @include pc {
       padding: 15px 30px;
       font-size: 18px;
     }
+
     .subtitle {
       flex: 0 0 100%;
       position: relative;
       margin-bottom: 5px;
+
       @include pc {
         margin-bottom: 9px;
       }
+
       p {
         text-align: center;
         width: 120px;
@@ -1278,6 +1488,7 @@ strong {
         background-color: #7777cc;
         padding: 2px 0;
         border-radius: 5px;
+
         @include pc {
           margin: 8px 0;
           font-size: 20px;
@@ -1285,6 +1496,7 @@ strong {
           height: 30px;
         }
       }
+
       &::before {
         display: block;
         content: "";
@@ -1298,11 +1510,13 @@ strong {
         left: 0;
         margin-top: 1px;
         margin-left: -4px;
+
         @include pc {
           width: 150px;
           margin-left: -8px;
         }
       }
+
       &::after {
         display: block;
         content: "";
@@ -1316,23 +1530,27 @@ strong {
         left: 0;
         margin-bottom: 1px;
         margin-left: 55px;
+
         @include pc {
           width: 150px;
           margin-left: 59px;
         }
       }
     }
+
     .flex_view {
       position: relative;
       flex: 0 0 50%;
       max-width: 50%;
       margin: 20px 0;
       text-align: center;
+
       @include pc {
         flex: 0 0 33.3%;
         max-width: 33.3%;
         margin: 20px 0;
       }
+
       &::before {
         display: block;
         content: "";
@@ -1349,12 +1567,14 @@ strong {
         margin-left: auto;
         margin-right: auto;
         margin-top: 0.24em;
+
         @include pc {
           width: 65px;
           height: 65px;
           margin-top: 0.38em;
         }
       }
+
       &::after {
         display: block;
         content: "";
@@ -1371,12 +1591,14 @@ strong {
         margin-left: auto;
         margin-right: auto;
         margin-top: 0.25em;
+
         @include pc {
           width: 65px;
           height: 65px;
           margin-top: 0.4em;
         }
       }
+
       .user_icon {
         display: block;
         margin: auto;
@@ -1386,22 +1608,27 @@ strong {
         margin: 5px auto 7px auto;
         object-fit: cover;
         box-shadow: 0 0 1px 0.5px #ddd;
+
         @include pc {
           width: 60px;
           height: 60px;
           margin: 10px auto 15px auto;
         }
       }
+
       .user_name {
         font-size: 17px;
         text-decoration: none;
+
         @include pc {
           font-size: 20px;
         }
+
         &:hover {
           text-decoration: underline;
         }
       }
+
       .country_flag {
         display: block;
         margin: 0 auto;
@@ -1410,40 +1637,49 @@ strong {
         margin-bottom: 5px;
         box-shadow: 1px 2px 8px 2px #eaeaea;
         border-radius: 100%;
+
         @include pc {
           width: 70px;
           height: 70px;
           margin-bottom: 10px;
         }
+
         img {
           width: 42px;
           height: 42px;
+
           @include pc {
             width: 70px;
             height: 70px;
           }
         }
       }
+
       .country_name {
         display: inline-block;
         text-decoration: none;
         margin: auto;
+
         @include pc {
           font-size: 20px;
         }
+
         &:hover {
           text-decoration: underline;
         }
       }
     }
   }
+
   .button_wrapper {
     @include pc {
       margin-left: 33%;
     }
+
     button {
       font-size: 16px;
       margin: 5px 10px;
+
       @include pc {
         margin-left: 10px 15px;
         font-size: 18px;
@@ -1453,16 +1689,19 @@ strong {
     }
   }
 }
+
 #showCountries {
   .no_border_card {
     .flex_container {
       padding-right: 5px;
       padding-left: 5px;
       text-align: center;
+
       .flex_view {
         &::before {
           display: none;
         }
+
         &::after {
           display: none;
         }
@@ -1470,6 +1709,7 @@ strong {
     }
   }
 }
+
 /*****************************
 
     border_card
@@ -1480,38 +1720,46 @@ strong {
   width: 95%;
   margin: 15px auto;
   background-color: #fbfbff;
+
   @include pc {
     margin: 30px auto;
     width: 95%;
     max-width: 1000px;
   }
+
   .title {
     width: 100%;
     border: none;
     background-color: #7777bb !important;
     border-top-right-radius: 1%;
     border-top-left-radius: 1%;
+
     .table_view {
       display: table;
       table-layout: fixed;
       width: 100%;
+
       .text {
         width: 75%;
         display: table-cell;
+
         p {
           color: #fff;
           font-size: 18px;
           margin: 12px 0px 12px 20px;
+
           @include pc {
             font-size: 22px;
             margin-left: 50px;
           }
         }
       }
+
       .link {
         width: 25%;
         position: relative;
         display: table-cell;
+
         a {
           display: block;
           position: absolute;
@@ -1522,13 +1770,16 @@ strong {
           bottom: 0;
           height: 22px;
           width: 22px;
+
           @include pc {
             height: 24px;
             width: 24px;
           }
+
           img {
             height: 22px;
             width: 22px;
+
             @include pc {
               height: 24px;
               width: 24px;
@@ -1538,33 +1789,41 @@ strong {
       }
     }
   }
+
   .content {
     padding-top: 5px;
     padding-bottom: 5px;
+
     @include pc {
       width: 90%;
       margin: auto;
       padding-top: 8px;
       padding-bottom: 8px;
     }
+
     .jcenter {
       justify-content: center;
     }
+
     .form_view {
       display: flex;
       flex-wrap: wrap;
       padding: 5px 10px;
+
       .property {
         padding: 5px;
         display: flex;
         flex: 0 0 100%;
+
         p {
           color: #333;
         }
+
         @include pc {
           padding: 10px;
           margin-right: 15px;
           flex: 0 0 25%;
+
           p {
             line-height: 36px;
             font-size: 17px;
@@ -1573,30 +1832,36 @@ strong {
           }
         }
       }
+
       .value {
         padding: 5px;
         display: flex;
         flex-wrap: wrap;
         flex: 0 0 100%;
+
         @include pc {
           flex: 0 0 65%;
           padding: 10px;
         }
+
         p,
         input,
         select,
         textarea,
         button {
           font-size: 15px;
+
           @include pc {
             font-size: 17px;
           }
         }
+
         .input_text {
           border: 1px solid #ccc;
           width: 80%;
           height: 20px;
           padding: 5px 9px;
+
           @include pc {
             padding: 2px 12px;
             height: 30px;
@@ -1604,96 +1869,118 @@ strong {
             max-width: 300px;
           }
         }
+
         .input_select {
           background-color: #ffffff;
           border: 1px solid #ccc;
           width: 65%;
           height: 32px;
           padding: 0px 5px;
+
           @include pc {
             padding: 0 8px;
             height: 35px;
             width: 300px;
           }
+
           &:disabled {
             display: none;
           }
         }
+
         .input_time {
           width: 100px;
         }
+
         .fromto {
           width: 25px;
           text-align: center;
           margin: 0 5px;
         }
+
         .year_month {
           width: 100%;
           margin-bottom: 5px;
+
           @include pc {
             margin-bottom: 10px;
           }
+
           .from_to {
             margin: 0;
             width: 50px;
             display: inline-block;
           }
+
           .year {
             width: 100px;
             margin-right: 5px;
           }
+
           .month {
             width: 100px;
           }
         }
+
         .cp_ipcheck {
           margin: auto 0;
         }
+
         .input_textarea {
           width: 95%;
           height: 250px;
           border: 1px solid #ccc;
           padding: 5px;
+
           @include pc {
             height: 300px;
           }
         }
+
         .input_file {
           padding-top: 2.5px;
         }
+
         p {
           margin-left: 25px;
           line-height: 36px;
+
           @include pc {
             margin-left: 0;
           }
         }
+
         .checkbox_wrapper,
         .radio_wrapper {
           width: 50%;
           margin: 6px 0;
+
           @include pc {
             margin: 8px 0;
             width: 33%;
           }
         }
       }
+
       .help-box {
         padding: 5px;
         display: flex;
         flex: 0 0 90%;
         margin-top: 5px;
+
         p {
           line-height: 18px;
           margin-left: 0;
           font-size: 12px;
           margin-top: 5px;
+
           @include pc {
             margin-top: 5px;
             margin-left: 0;
             font-size: 15px;
           }
         }
+
         span {
           font-weight: bold;
           display: inline-block;
@@ -1702,19 +1989,23 @@ strong {
           border-left: 8px solid #7777bb;
           padding: 2px 4px;
           margin: 0 3px;
+
           @include pc {
             padding: 6px;
             margin: 0 5px;
           }
         }
       }
+
       .button_wrapper {
         @include pc {
           margin-left: 29.5%;
         }
+
         button {
           font-size: 16px;
           margin: 5px 10px;
+
           @include pc {
             margin-left: 10px 15px;
             font-size: 18px;
@@ -1723,6 +2014,7 @@ strong {
           }
         }
       }
+
       .image_wrapper {
         display: block;
         width: 32%;
@@ -1730,20 +2022,25 @@ strong {
         background-size: cover;
         background-position: center center;
         margin: 5px;
+
         img {
           width: 100%;
         }
+
         .image_delete {
           margin: 5px 10px;
         }
       }
+
       .cover_image {
         height: 120px;
         width: 100%;
+
         @include pc {
           height: 160px;
         }
       }
+
       .long_text {
         display: block;
         background-color: #ffffff;
@@ -1753,15 +2050,18 @@ strong {
         padding: 5px 8px;
         max-height: 300px;
         overflow: scroll;
+
         @include pc {
           padding: 8px 10px;
           max-height: 500px;
         }
       }
     }
+
     .text_view {
       p {
         padding: 5px 10px;
+
         @include pc {
           padding: 5px 40px;
         }
@@ -1769,21 +2069,25 @@ strong {
     }
   }
 }
+
 #edit_note,
 #delete_note {
   h2 {
     text-align: center;
     font-size: 15px;
+
     @include pc {
       font-size: 20px;
     }
   }
 }
+
 .deletebtn {
   width: 200px;
   text-align: center;
   margin: 0 auto 15px auto;
 }
+
 /***********************************************************
  *                                                         *
  *                   category_wrapper                      *
@@ -1799,21 +2103,26 @@ strong {
   margin-left: 5%;
   max-width: 1000px;
   margin-bottom: 5px;
+
   @include pc {
     height: 50px;
     margin: auto;
   }
+
   .href {
     display: flex;
     text-decoration: none;
+
     &:hover {
       text-decoration: underline;
     }
   }
+
   .category_icon {
     height: 30px;
     width: 30px;
     margin: 5px;
+
     @include pc {
       height: 35px;
       width: 35px;
@@ -1821,6 +2130,7 @@ strong {
       margin-left: 17px;
     }
   }
+
   .user_icon {
     display: inline-block;
     height: 30px;
@@ -1829,6 +2139,7 @@ strong {
     border-radius: 20%;
     object-fit: cover;
     position: relative;
+
     @include pc {
       height: 35px;
       width: 35px;
@@ -1836,6 +2147,7 @@ strong {
       margin-left: 17px;
     }
   }
+
   .category_name {
     font-weight: bold;
     color: #444;
@@ -1844,20 +2156,24 @@ strong {
     margin-top: 7px;
     margin-bottom: 3px;
     text-decoration: none;
+
     @include pc {
       font-size: 24px;
       line-height: 40px;
     }
   }
+
   a.category_name:hover {
     text-decoration: underline;
   }
+
   .link {
     color: #00aaca;
     height: 15px;
     font-size: 15px;
     margin: 5px;
     margin-top: 7.5px;
+
     @include pc {
       margin: 0;
       line-height: 45px;
@@ -1868,9 +2184,11 @@ strong {
     }
   }
 }
+
 .icon_decoration {
   z-index: 1;
   position: relative;
+
   &:before {
     content: "";
     display: inline-block;
@@ -1883,12 +2201,14 @@ strong {
     border-radius: 10%;
     transform: rotate(8deg);
     z-index: -1;
+
     @include pc {
       margin-left: 0.83em;
       width: 36px;
       height: 36px;
     }
   }
+
   &:after {
     content: "";
     display: inline-block;
@@ -1902,6 +2222,7 @@ strong {
     border-radius: 10%;
     transform: rotate(18deg);
     z-index: -2;
+
     @include pc {
       margin-left: 0.83em;
       width: 36px;
@@ -1909,28 +2230,34 @@ strong {
     }
   }
 }
+
 .country_wrapper {
   height: 50px;
   margin-top: 10px;
   margin-bottom: 20px;
+
   @include pc {
     height: 60px;
   }
+
   .category_icon {
     position: relative;
     width: 36px;
     height: 36px;
     box-shadow: 0 0 5px 1px #ddd;
     border-radius: 100%;
+
     @include pc {
       width: 42px;
       height: 42px;
       margin-left: 15px;
     }
   }
+
   .category_name {
     font-size: 22px;
     margin-left: 4px;
+
     @include pc {
       font-size: 26px;
     }
@@ -1946,63 +2273,76 @@ strong {
   border-left: 5vw solid #7777bb;
   margin-top: 5px;
   margin-bottom: 10px;
+
   @include pc {
     border-left-width: 50px;
     padding: 8px 0;
     margin-bottom: 20px;
     margin-top: 10px;
   }
+
   .conditions_title {
     font-size: 18px;
     color: #fff;
     background-color: #7777bb;
   }
+
   .conditions_wrapper {
     display: flex;
     flex-wrap: wrap;
     padding: 3px 0;
+
     @include pc {
       font-size: 18px;
       padding: 6px 0;
     }
+
     .property {
       display: block;
       width: 25%;
       text-align: right;
       color: #333350;
       font-weight: bold;
+
       @include pc {
         width: 15%;
       }
     }
+
     .value {
       display: block;
       width: 70%;
       padding-left: 10px;
       color: #333333;
+
       @include pc {
         padding-left: 20px;
       }
     }
   }
 }
+
 .numOfNotes {
   font-size: 17px;
   padding: 2px 0;
   max-width: 1000px;
+
   @include pc {
     padding: 3px 0;
     margin: auto;
     font-size: 20px;
   }
+
   p {
     color: #333333;
     padding-left: 25px;
+
     @include pc {
       padding-left: 20px;
     }
   }
 }
+
 .not_found {
   display: block;
   font-size: 18px;
@@ -2018,27 +2358,34 @@ strong {
     max-width: 980px;
     margin-right: auto;
     margin-left: auto;
+
     .no_border_card {
       margin-bottom: 0;
+
       @include pc {
         margin-bottom: 25px;
       }
+
       .title {
         border: none;
         margin-bottom: 2px;
+
         @include pc {
           margin-bottom: 0;
           border-bottom: 1px solid #9999aa;
         }
       }
     }
+
     a {
       text-decoration: none;
       color: #fff;
+
       &:hover {
         text-decoration: underline;
       }
     }
+
     .top_photo {
       width: 100%;
       height: 200px;
@@ -2046,13 +2393,16 @@ strong {
       background-position: center center;
       position: relative;
       margin: auto;
+
       @include pc {
         height: 340px;
       }
+
       .textbox {
         position: absolute;
         height: 100%;
         width: 100%;
+
         @include pc {
           right: 0;
           top: 0;
@@ -2062,6 +2412,7 @@ strong {
           width: 60%;
           margin: auto;
         }
+
         &::before {
           background-color: rgba(0, 0, 0, 0.5);
           position: absolute;
@@ -2072,6 +2423,7 @@ strong {
           height: 100%;
           width: 100%;
           content: "";
+
           @include pc {
             border-radius: 1px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -2079,6 +2431,7 @@ strong {
           }
         }
       }
+
       .note_category {
         position: absolute;
         display: block;
@@ -2088,6 +2441,7 @@ strong {
         margin: 0;
         padding: 6px 30px 5px 5px;
         border-bottom: 1px solid #fff;
+
         &::before {
           //background-color: #00aaca;
           background-image: url("/img/note_category.png");
@@ -2100,6 +2454,7 @@ strong {
           float: left;
         }
       }
+
       .title_country_wrapper {
         padding-top: 50px;
         position: absolute;
@@ -2109,15 +2464,18 @@ strong {
         margin: auto;
         right: 0;
         left: 0;
+
         .note_title {
           font-weight: inherit;
           margin: 0 auto;
           color: #fff;
           font-size: 23px;
         }
+
         .note_countries {
           margin: 5px auto;
           text-align: center;
+
           .note_country {
             text-align: center;
             font-weight: inherit;
@@ -2127,13 +2485,16 @@ strong {
         }
       }
     }
+
     .best_note {
       border-top: 7px solid #ffbb55;
       border-bottom: 7px solid #ffbb55;
+
       @include pc {
         border-width: 8px;
       }
     }
+
     .best_icon {
       background-color: #ee9922;
       color: #ffffff;
@@ -2145,11 +2506,13 @@ strong {
       margin-bottom: 12px;
       margin-right: 14px;
       font-weight: bold;
+
       @include pc {
         font-size: 17px;
         padding: 4px 8px;
       }
     }
+
     .edit {
       display: block;
       width: 24px;
@@ -2159,24 +2522,29 @@ strong {
       right: 0;
       margin-top: 10px;
       margin-right: 12px;
+
       img {
         width: 24px;
         height: 24px;
         margin: 0;
       }
     }
+
     .author_and_date {
       display: block;
       margin: 12px auto 0 auto;
+
       @include pc {
         margin-left: 18px;
         margin-top: 20px;
       }
+
       .note_author {
         display: inline-block;
         height: 40px;
         margin-left: 12px;
         position: relative;
+
         img {
           display: inline-block;
           width: 40px;
@@ -2188,6 +2556,7 @@ strong {
           z-index: 2;
           box-shadow: 0 0 4px 1px #ddd;
         }
+
         p {
           color: #333;
           font-weight: bold;
@@ -2197,13 +2566,16 @@ strong {
           vertical-align: top;
           margin: 0;
           font-size: 20px;
+
           @include pc {
             font-size: 22px;
           }
+
           &:hover {
             text-decoration: underline;
           }
         }
+
         &:before {
           content: "";
           display: inline-block;
@@ -2221,6 +2593,7 @@ strong {
           transform: rotate(8deg);
           z-index: 1;
         }
+
         &:after {
           content: "";
           display: inline-block;
@@ -2240,44 +2613,54 @@ strong {
           z-index: 0;
         }
       }
+
       .note_date {
         display: inline-block;
         height: 40px;
         line-height: 42px;
         vertical-align: top;
         margin-left: 5px;
+
         @include pc {
           margin-left: 10px;
           font-size: 18px;
         }
       }
     }
+
     .fav-and-share {
       display: flex;
+
       .fav-button-wrapper {
         width: fit-content;
         margin: 10px 12px 5px 12px;
+
         @include pc {
           margin-left: 25px;
         }
       }
+
       .line-send-wrapper {
         flex-grow: 1;
         margin-top: 10px;
+
         &:hover {
           cursor: pointer;
         }
+
         @include pc {
           margin-top: 7.5px;
           flex-grow: 0;
           margin-left: 20px;
         }
+
         .line-send {
           display: block;
           margin: auto;
         }
       }
     }
+
     h6 {
       display: flex;
       flex-wrap: wrap;
@@ -2286,9 +2669,11 @@ strong {
       font-weight: inherit;
       margin: 10px auto 5px auto;
       line-height: 20px;
+
       @include pc {
         margin: 20px auto 10px auto;
       }
+
       .tag {
         font-size: 15px;
         flex: 0 0 auto;
@@ -2296,11 +2681,13 @@ strong {
         line-height: 21px;
         color: #00aaca;
         border: none;
+
         @include pc {
           font-size: 17px;
         }
       }
     }
+
     .photos_wrapper {
       overflow-x: auto;
       white-space: nowrap;
@@ -2310,33 +2697,41 @@ strong {
       width: 100vw;
       padding: 15px 0;
       margin: 15px 0 20px 0;
+
       @include pc {
         max-width: 980px;
         margin: 20px auto;
         background-color: #f0f0f0;
         box-shadow: none;
       }
+
       .photo {
         display: inline-block;
         margin: 5px 10px;
+
         img {
           height: 200px;
           box-shadow: 2px 2px 5px 1px #aaa;
         }
+
         &:first-child {
           margin-left: 20px;
         }
+
         &:last-child {
           margin-right: 20px;
         }
+
         @include pc {
           margin: 10px 20px;
+
           img {
             height: 300px;
           }
         }
       }
     }
+
     .content {
       color: #444;
       max-width: 768px;
@@ -2345,19 +2740,23 @@ strong {
       font-size: 15.5px;
       margin: 15px auto 15px auto;
       word-wrap: break-word;
+
       @include pc {
         font-size: 18px;
         margin-top: 25px;
       }
+
       .escaped_link {
         display: inline;
         color: #00aaca;
       }
     }
+
     .fav-button-wrapper {
       max-width: 768px;
       width: 92.5%;
       margin: 15px auto;
+
       .text {
         display: inline-block;
         font-size: 17px;
@@ -2366,11 +2765,13 @@ strong {
         line-height: 26px;
         font-weight: bold;
         margin-right: 2.5px;
+
         @include pc {
           font-size: 19px;
           width: 140px;
         }
       }
+
       .fav-button {
         display: inline;
         position: relative;
@@ -2379,6 +2780,7 @@ strong {
     }
   }
 }
+
 /*********************************
  *
  *  Mypage
@@ -2391,9 +2793,11 @@ strong {
   max-width: 1000px;
   margin: auto;
   margin-top: 1px;
+
   @include pc {
     // height: 320px;
   }
+
   .cover {
     display: block;
     width: 100%;
@@ -2401,12 +2805,14 @@ strong {
     height: 125px;
     background-size: cover;
     background-position: center;
+
     // box-shadow: 0px 0px 5px 2px #ddd;
     @include pc {
       height: 235px;
       box-shadow: none;
     }
   }
+
   .user_icon_holder {
     position: absolute;
     top: 0;
@@ -2415,12 +2821,14 @@ strong {
     height: 90px;
     margin-left: 10px;
     z-index: 0;
+
     @include pc {
       margin-top: 140px;
       width: 170px;
       height: 170px;
       margin-left: 20px;
     }
+
     img {
       width: 80px;
       height: 80px;
@@ -2428,11 +2836,13 @@ strong {
       border-radius: 20%;
       margin: 5px;
       box-shadow: 0 0 4px 0px #ddd;
+
       @include pc {
         width: 150px;
         height: 150px;
       }
     }
+
     &::before {
       content: "";
       display: block;
@@ -2448,12 +2858,14 @@ strong {
       margin-top: auto;
       margin-bottom: auto;
       margin-left: 0.3em;
+
       @include pc {
         margin-top: 0.15em;
         width: 155px;
         height: 155px;
       }
     }
+
     &::after {
       content: "";
       display: block;
@@ -2469,6 +2881,7 @@ strong {
       margin-top: auto;
       margin-bottom: auto;
       margin-left: 0.3em;
+
       @include pc {
         margin-top: 0.15em;
         width: 160px;
@@ -2476,34 +2889,41 @@ strong {
       }
     }
   }
+
   .country_holder {
     margin-left: 105px;
     min-height: 45px;
+
     @include pc {
       height: 85px;
       margin-left: 200px;
     }
+
     .user_country {
       display: inline-block;
       width: 30px;
       height: 30px;
       margin: 7.5px 4px;
+
       @include pc {
         width: 50px;
         height: 50px;
         margin: 17.5px 10px;
       }
+
       .country_icon {
         width: 30px;
         height: 30px;
         box-shadow: 0px 0.5px 4px 1px #eaeaea;
         border-radius: 100%;
+
         @include pc {
           width: 50px;
           height: 50px;
         }
       }
     }
+
     .status {
       display: inline-block;
       height: 25px;
@@ -2516,6 +2936,7 @@ strong {
       padding: 0 5px;
       text-align: center;
       box-shadow: 0 0 5px 2px #eaeaea;
+
       @include pc {
         height: 35px;
         line-height: 35px;
@@ -2526,14 +2947,17 @@ strong {
     }
   }
 }
+
 #mypage {
   .no_border_card {
     margin-bottom: 2px;
+
     .content {
       padding: 0;
     }
   }
 }
+
 /********************************
  *                              *
  *      Note Paginate           *
@@ -2549,27 +2973,33 @@ strong {
   background-color: #fff;
   box-shadow: none;
   max-width: 1000px;
+
   .note_item {
     box-shadow: 1px 1px 10px 2px #ccc;
     display: block;
     width: 305px;
     margin: 10px auto;
+
     @include pc {
       margin: 10px 38.4px;
     }
+
     @include pc_wide {
       margin: 10px 11.6px;
     }
   }
+
   .bestnote {
     @include pc {
       margin: 10px 33.4px !important;
     }
+
     @include pc_wide {
       margin: 10px 6.6px !important;
     }
   }
 }
+
 /********************************
  *                              *
  *      Note Index(Slide)       *
@@ -2585,9 +3015,11 @@ form {
   width: 95%;
   display: flex;
   max-width: 700px;
+
   @include pc {
     margin: 25px auto 20px auto;
   }
+
   .input_text {
     width: 60%;
     margin: auto;
@@ -2595,6 +3027,7 @@ form {
     height: 20px;
     padding: 6px 8px;
     font-size: 16px;
+
     @include pc {
       width: 70%;
       font-size: 17px;
@@ -2602,6 +3035,7 @@ form {
       height: 20px;
     }
   }
+
   .search_button {
     color: #fff;
     background-color: #7777bb;
@@ -2613,10 +3047,12 @@ form {
     font-size: 16px;
     transition: 0.3s;
     max-width: 125px;
+
     @include pc {
       font-size: 18px;
       height: 35px;
     }
+
     &:hover {
       cursor: hand;
       cursor: pointer;
@@ -2625,11 +3061,13 @@ form {
     }
   }
 }
+
 .note_wrapper {
   background-color: #f5f5f5;
   padding-top: 5px;
   margin: 5px 0 35px 0;
   box-shadow: 0 1px 6px 1px #ddd;
+
   @include pc {
     background-color: #fff;
     width: 95%;
@@ -2639,6 +3077,7 @@ form {
     padding-bottom: 12px;
     box-shadow: none;
   }
+
   .note_list {
     overflow-x: auto;
     white-space: nowrap;
@@ -2646,6 +3085,7 @@ form {
     width: 100vw;
     padding: 7px 0 30px 0;
     margin: 0;
+
     @include pc {
       display: flex;
       flex-wrap: wrap;
@@ -2660,12 +3100,15 @@ form {
       box-shadow: none;
     }
   }
+
   .tag_list_wrapper {
     overflow-x: scroll;
     padding: 0 15px;
+
     @include pc {
       overflow-x: unset;
     }
+
     .tag_list {
       padding-top: 0px;
       padding-bottom: 20px;
@@ -2674,10 +3117,12 @@ form {
       display: flex;
       flex-wrap: wrap;
       white-space: nowrap;
+
       @include pc {
         padding-top: 10px;
         width: 95%;
       }
+
       .tag_item {
         display: block;
         text-decoration: none;
@@ -2687,15 +3132,18 @@ form {
         box-shadow: 2px 2px 5px 1px #ccc;
         border-radius: 1%;
         transition: 0.3s;
+
         @include pc {
           margin: 10px 7.5px;
           display: inline-block;
           height: 40px;
         }
+
         &:hover {
           background-color: #777799;
           transition: 0.3s;
         }
+
         a {
           display: block;
           text-decoration: none;
@@ -2703,27 +3151,33 @@ form {
           color: #fff;
           font-size: 12px;
           padding: 2px 9px;
+
           @include pc {
             padding: 5px 10px;
             line-height: 30px;
             font-size: 18px;
           }
         }
+
         &:first-child {
           margin-left: 5px;
         }
+
         &:last-child {
           margin-right: 5px;
         }
       }
     }
   }
+
   .no_note {
     padding: 10px 20px 20px 20px;
+
     @include pc {
       font-size: 17px;
     }
   }
+
   .member_list {
     display: flex;
     flex-wrap: wrap;
@@ -2732,9 +3186,11 @@ form {
     // padding: 0;
     margin: 0;
     padding: 7px 0 25px 0;
+
     @include pc {
       background-color: #fff;
     }
+
     .member_item {
       background-color: #fff;
       margin: 10px auto;
@@ -2745,26 +3201,33 @@ form {
       //padding: 10px 0;
       justify-content: flex-start;
       border-left: 25px solid #555577;
+
       @include pc {
         flex: 0 0 44%;
         margin: 10px 1%;
       }
+
       &:first-child {
         margin-top: 5px;
+
         @include pc {
           margin-top: 10px;
         }
       }
+
       &:last-child {
         margin-bottom: 5px;
+
         @include pc {
           margin-bottom: 10px;
         }
       }
+
       .linker {
         display: block;
         text-decoration: none;
         padding: 6px 0;
+
         .user_name {
           display: inline-block;
           width: 75%;
@@ -2774,6 +3237,7 @@ form {
           text-align: left;
           background-color: #fff;
         }
+
         .user_university {
           padding: 2px 20px;
         }
@@ -2781,10 +3245,12 @@ form {
     }
   }
 }
+
 .buttons {
   margin: 0 auto 35px auto;
   display: flex;
   max-width: 600px;
+
   .seeall {
     border-radius: 1px;
     flex: 0 0 40%;
@@ -2798,6 +3264,7 @@ form {
     font-size: 19px;
     color: #fff;
     line-height: 40px;
+
     @include pc {
       margin: 10px auto;
       margin-bottom: 30px;
@@ -2807,10 +3274,12 @@ form {
     }
   }
 }
+
 .loading-wrapper {
   height: 100vh;
   position: relative;
   overflow: hidden;
+
   .loading {
     position: absolute;
     font-size: 10px;
@@ -2820,31 +3289,21 @@ form {
     height: 10vh;
     border-radius: 50%;
     background: #9999bb;
-    background: -moz-linear-gradient(
-      left,
+    background: -moz-linear-gradient(left,
       #9999bb 10%,
-      rgba(255, 255, 255, 0) 42%
-    );
-    background: -webkit-linear-gradient(
-      left,
+      rgba(255, 255, 255, 0) 42%);
+    background: -webkit-linear-gradient(left,
       #9999bb 10%,
-      rgba(255, 255, 255, 0) 42%
-    );
-    background: -o-linear-gradient(
-      left,
+      rgba(255, 255, 255, 0) 42%);
+    background: -o-linear-gradient(left,
       #9999bb 10%,
-      rgba(255, 255, 255, 0) 42%
-    );
-    background: -ms-linear-gradient(
-      left,
+      rgba(255, 255, 255, 0) 42%);
+    background: -ms-linear-gradient(left,
       #9999bb 10%,
-      rgba(255, 255, 255, 0) 42%
-    );
-    background: linear-gradient(
-      to right,
+      rgba(255, 255, 255, 0) 42%);
+    background: linear-gradient(to right,
       #9999bb 10%,
-      rgba(255, 255, 255, 0) 42%
-    );
+      rgba(255, 255, 255, 0) 42%);
     position: relative;
     -webkit-animation: load3 1.4s infinite linear;
     animation: load3 1.4s infinite linear;
@@ -2852,6 +3311,7 @@ form {
     -ms-transform: translateZ(0);
     transform: translateZ(0);
   }
+
   .loading:before {
     width: 50%;
     height: 50%;
@@ -2862,6 +3322,7 @@ form {
     left: 0;
     content: "";
   }
+
   .loading:after {
     background: #fff;
     width: 75%;
@@ -2875,21 +3336,25 @@ form {
     bottom: 0;
     right: 0;
   }
+
   @-webkit-keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
+
   @keyframes load3 {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
@@ -2897,27 +3362,17 @@ form {
   }
 }
 
-// .radio_wrapper {
-//   max-width: 300px;
-//   margin: 25px auto;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-around;
-//   label {
-//     @include pc {
-//       font-size: 18px;
-//     }
-//   }
-// }
 .radio-wrapper {
   display: flex;
-  width: 80%;
+  width: 95%;
   max-width: 500px;
   margin: 25px auto;
   justify-content: space-around;
+
   .input-radio {
     display: none;
-    & + .label-radio {
+
+    &+.label-radio {
       border: 1.5px solid #aaa;
       padding: 4px 12px 5px 12px;
       border-radius: 5px;
@@ -2925,7 +3380,8 @@ form {
       font-size: 16px;
       transition: 0.3s;
     }
-    &:checked + .label-radio {
+
+    &:checked+.label-radio {
       border-color: #99d;
       background-color: #99d;
       color: #fff;

@@ -32,6 +32,7 @@
                             <div class="property"><p class="prof_head">学部：</p></div>
                             <div class="value"><p>{{ $user->department }}</p></div>
                             <input type="hidden" class="input_text" name="department" value="{{ $user->department }}" required>
+                            <input type="hidden" name="department_id" value="{{ $user->department_id }}" required>
                         </div>
                         <div class="form_view">
                             <div class="property"><p class="prof_head">学科：</p></div>

@@ -17,7 +17,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::whereIn('status', [1,3])->orderBy('id')->orderBy('generation')->select('id', 'name', 'avater_path', 'generation', 'group_id', 'isOB')->get();
+        $users = User::whereIn('status', [1,3])->orderBy('id')->orderBy('generation')->select(
+            'id', 'name', 'avater_path', 'generation', 'group_id', 'isOB', 'department_id'
+            )->get();
         return view('web.users.index', compact('users'));
     }
 
@@ -40,6 +42,9 @@ class UsersController extends Controller
                 }
                 $custom_order .= '0,-1),id';
                 return $query->orderByRaw($custom_order);
+            })
+            ->when($orderBy == 'department_id', function($query) use ($orderBy) {
+                return $query->orderByRaw('department_id,id');
             }, function($query) {
                 return $query->orderByRaw('generation,id');
             })

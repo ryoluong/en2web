@@ -42,6 +42,21 @@ Vue.component(
   "fav-button-show-note",
   require("./components/FavNoteComponentForShowNote.vue")
 );
+Vue.component(
+  "register-department",
+  require("./components/RegisterDepartmentComponent.vue")
+);
+Vue.component(
+  "input-vue",
+  require("./components/Inputs/InputVueComponent.vue")
+);
+Vue.component(
+  "select-enroll-year",
+  require("./components/Inputs/SelectEnrollYearComponent.vue")
+);
+Vue.component(
+  "select-generation", require("./components/Inputs/SelectGenerationComponent.vue")
+);
 Vue.prototype.$http = axios;
 new Vue({
   el: "#app",
@@ -56,11 +71,11 @@ new Vue({
     this.loading = false;
   },
   methods: {
-    toggleShowMenu: function() {
+    toggleShowMenu: function () {
       this.showMenu = !this.showMenu;
       document.body.classList.toggle("scroll-lock");
     },
-    toggleShowUserMenu: function() {
+    toggleShowUserMenu: function () {
       this.showUserMenu = !this.showUserMenu;
     }
   }

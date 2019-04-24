@@ -183,6 +183,7 @@ class RegisterController extends Controller
         $user->year = $request->year;
         $user->department = $request->department;
         $user->major = $request->major;
+        $user->department_id = $request->department_id;
         $user->generation = $request->generation;
         $user->university = $request->university;
         $user->isOB = $request->input('isOB', 0);
@@ -200,6 +201,7 @@ class RegisterController extends Controller
         $user->identification_code = null;
         $user->year = $request->year;
         $user->department = $request->department;
+        $user->department_id = $request->department_id;
         $user->major = $request->major;
         $user->generation = $request->generation;
         
