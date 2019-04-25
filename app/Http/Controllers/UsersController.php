@@ -44,7 +44,7 @@ class UsersController extends Controller
                 return $query->orderByRaw($custom_order);
             })
             ->when($orderBy == 'department_id', function($query) use ($orderBy) {
-                return $query->orderByRaw('department_id,id');
+                return $query->where('department_id', '!=', 0)->orderByRaw('department_id,id');
             }, function($query) {
                 return $query->orderByRaw('generation,id');
             })
