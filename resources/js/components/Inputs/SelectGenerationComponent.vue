@@ -7,7 +7,7 @@
 export default {
   data() {
     return {
-      generation: 0
+      generation: 1
     };
   },
   mounted() {

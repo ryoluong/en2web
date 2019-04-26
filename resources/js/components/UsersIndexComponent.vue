@@ -23,40 +23,43 @@
       >
       <label for="orderByDepartment" class="label-radio">学部別</label>
     </div>
+    <div class="radio-wrapper">
+      <input class="input-checkbox" id="showOB" type="checkbox" v-model="showOB">
+      <label for="showOB">OB・OGを表示する</label>
+    </div>
     <div class="no_border_card">
-      <div v-if="orderBy == 'generation'">
-        <user-container
-          v-for="i in maxGeneration"
-          :key="i"
-          :index="i"
-          :users="where(users, i)"
-          :search="search"
-          :orderBy="orderBy"
-        ></user-container>
-      </div>
-      <div v-else-if="orderBy == 'group_id'">
-        <user-container
-          v-for="i in maxGroupId"
-          :key="i"
-          :index="i"
-          :users="where(users, i)"
-          :search="search"
-          :orderBy="orderBy"
-        ></user-container>
-        <user-container :index="0" :users="where(users, 0)" :search="search" :orderBy="orderBy"></user-container>
-        <user-container :index="-1" :users="where(users, -1)" :search="search" :orderBy="orderBy"></user-container>
-      </div>
-      <div v-else>
-        <user-container
-          v-for="i in maxDepartmentId"
-          :key="i"
-          :index="i"
-          :users="where(users,i)"
-          :search="search"
-          :orderBy="orderBy"
-        ></user-container>
-      </div>
-      <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
+      <transition name="fade-no-slide">
+        <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
+      </transition>
+      <transition name="fade" mode="out-in">
+        <div v-if="orderBy == 'generation'" key="generation">
+          <user-container
+            v-for="i in maxGeneration"
+            :key="i"
+            :index="i"
+            :users="where(users, i)"
+            :orderBy="orderBy"
+          ></user-container>
+        </div>
+        <div v-else-if="orderBy == 'group_id'" key="group_id">
+          <user-container
+            v-for="i in groupIdArray"
+            :key="i"
+            :index="i"
+            :users="where(users, i)"
+            :orderBy="orderBy"
+          ></user-container>
+        </div>
+        <div v-else key="department_id">
+          <user-container
+            v-for="i in maxDepartmentId"
+            :key="i"
+            :index="i"
+            :users="where(users,i)"
+            :orderBy="orderBy"
+          ></user-container>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -71,11 +74,21 @@ export default {
   data: function() {
     return {
       search: "",
-      orderBy: "generation"
+      orderBy: sessionStorage.orderBy ? sessionStorage.orderBy : "generation",
+      showOB: false
     };
   },
   methods: {
     where: function(users, i) {
+      if (!this.showOB) {
+        users = users.filter(user => user.isOB === 0);
+      }
+      if (this.search !== "") {
+        users = users.filter(
+          user =>
+            user.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+        );
+      }
       if (this.orderBy == "generation") {
         return users.filter(user => user.generation === i);
       } else if (this.orderBy == "group_id") {
@@ -103,16 +116,27 @@ export default {
   },
   computed: {
     hasActiveUser: function() {
-      for (var i = 0; i < this.users.length; i++) {
+      var users = this.users;
+      if (!this.showOB) {
+        users = users.filter(user => user.isOB === 0);
+      }
+      for (var i = 0; i < users.length; i++) {
         if (
-          this.users[i].name
-            .toLowerCase()
-            .indexOf(this.search.toLowerCase()) !== -1
+          users[i].name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
         ) {
           return true;
         }
       }
       return false;
+    },
+    groupIdArray: function() {
+      var array1 = [-1];
+      var array2 = [];
+      var array3 = [0];
+      for (var i = 1; i <= this.maxGroupId; i++) {
+        array2.push(i);
+      }
+      return array1.concat(array2.concat(array3));
     },
     maxGroupId: function() {
       var groupId = this.users.map(function(user) {

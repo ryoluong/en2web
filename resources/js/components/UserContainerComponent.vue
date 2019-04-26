@@ -1,20 +1,18 @@
 <template>
-  <div class="flex_container" v-if="hasActiveUser">
-    <div class="subtitle">
-      <p v-if="orderBy == 'generation'">{{ formattedNumber }}</p>
-      <p
-        v-else-if="orderBy == 'group_id'"
-      >{{ index == -1 ? 'OB・OG' : index == 0 ? 'No Group' : 'Group ' + index }}</p>
-      <p v-else>{{ departments[index - 1] }}</p>
+  <transition name="fade-no-slide" mode="in-out" style="position:relative;">
+    <div class="flex_container" v-if="hasActiveUser">
+      <div class="subtitle">
+        <p v-if="orderBy == 'generation'">{{ formattedNumber }}</p>
+        <p
+          v-else-if="orderBy == 'group_id'"
+        >{{ index == -1 ? 'OB・OG' : index == 0 ? 'No Group' : 'Group ' + index }}</p>
+        <p v-else>{{ departments[index - 1] }}</p>
+      </div>
+      <transition-group name="flip" tag="div" style="width: 100%; display:flex; flex-wrap:wrap;">
+        <user-item v-for="user in users" :user="user" :key="user.id" :orderBy="orderBy"></user-item>
+      </transition-group>
     </div>
-    <user-item
-      v-for="user in users"
-      :user="user"
-      :key="user.id"
-      :search="search"
-      :orderBy="orderBy"
-    ></user-item>
-  </div>
+  </transition>
 </template>
 <script>
 export default {
@@ -25,10 +23,6 @@ export default {
     },
     users: {
       type: Array,
-      required: true
-    },
-    search: {
-      type: String,
       required: true
     },
     orderBy: {
@@ -49,16 +43,7 @@ export default {
   },
   computed: {
     hasActiveUser: function() {
-      for (var i = 0; i < this.users.length; i++) {
-        if (
-          this.users[i].name
-            .toLowerCase()
-            .indexOf(this.search.toLowerCase()) !== -1
-        ) {
-          return true;
-        }
-      }
-      return false;
+      return this.users.length !== 0;
     },
     formattedNumber: function() {
       var num = this.index % 10;

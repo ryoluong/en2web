@@ -1,5 +1,5 @@
 <template>
-  <div class="flex_view" v-if="displayUser">
+  <div class="flex_view">
     <a :href="userPageUrl">
       <img
         class="user_icon"
@@ -17,26 +17,12 @@ export default {
       type: Object,
       required: true
     },
-    search: {
-      type: String,
-      required: false
-    },
     orderBy: {
       type: String,
       required: false
     }
   },
   computed: {
-    displayUser: function() {
-      if (
-        this.search == "" ||
-        this.user.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     userPageUrl() {
       return (
         "/users/" +

@@ -1,0 +1,54 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.fade-enter-active {
+  transition: margin-right 0.3s;
+}
+
+.fade-leave-active {
+  transition: margin-left 0.3s;
+}
+
+.fade-enter {
+  opacity: 0;
+  margin-right: 80%;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  margin-left: 80%;
+}
+
+.fade-no-slide-enter-active,
+.fade-no-slide-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-no-slide-enter, .fade-no-slide-leave-to
+/* .component-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
+.flip {
+  &-move {
+    transition: transform 0.3s;
+  }
+  &-enter {
+    &-active {
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    &-to {
+      opacity: 1;
+    }
+  }
+
+  &-leave {
+    &-active {
+      position: absolute !important;
+      display: none;
+    }
+  }
+}
