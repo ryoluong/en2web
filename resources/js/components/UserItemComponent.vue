@@ -19,7 +19,11 @@ export default {
     },
     orderBy: {
       type: String,
-      required: false
+      required: true
+    },
+    showOB: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
@@ -29,7 +33,8 @@ export default {
         this.user.id +
         "?orderBy=" +
         this.orderBy +
-        [this.search ? "&q=" + this.search : ""]
+        "&showOB=" +
+        [this.showOB ? 1 : 0]
       );
     }
   }

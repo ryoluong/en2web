@@ -8,9 +8,26 @@
         >{{ index == -1 ? 'OB・OG' : index == 0 ? 'No Group' : 'Group ' + index }}</p>
         <p v-else>{{ departments[index - 1] }}</p>
       </div>
-      <transition-group name="flip" tag="div" style="width: 100%; display:flex; flex-wrap:wrap;">
-        <user-item v-for="user in users" :user="user" :key="user.id" :orderBy="orderBy"></user-item>
+      <div class="toggle-display" @click="toggleDisplay" :class="{ rotate180: !display}">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <!-- <transition name="fade-no-slide"> -->
+      <transition-group
+        class="user-items-wrapper"
+        name="flip"
+        tag="div"
+        v-if="display"
+        style="width: 100%; display:flex; flex-wrap:wrap;"
+      >
+        <user-item
+          v-for="user in users"
+          :user="user"
+          :key="user.id"
+          :orderBy="orderBy"
+          :showOB="showOB"
+        ></user-item>
       </transition-group>
+      <!-- </transition> -->
     </div>
   </transition>
 </template>
@@ -28,6 +45,10 @@ export default {
     orderBy: {
       type: String,
       required: true
+    },
+    showOB: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -38,7 +59,8 @@ export default {
         "教育学部",
         "都市科学部",
         "理工学部"
-      ]
+      ],
+      display: true
     };
   },
   computed: {
@@ -56,6 +78,11 @@ export default {
       } else {
         return num + "th";
       }
+    }
+  },
+  methods: {
+    toggleDisplay() {
+      this.display = !this.display;
     }
   }
 };

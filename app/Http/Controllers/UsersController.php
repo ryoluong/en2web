@@ -31,8 +31,8 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $orderBy = request('orderBy');
-        $q = request('q');
+        $orderBy = request('orderBy', 'generation');
+        $showOB = request('showOB', 1);
 
         $user_ids = User::whereIn('status', [1,3])
             ->when($orderBy == 'group_id', function ($query) use ($orderBy) {
@@ -48,8 +48,8 @@ class UsersController extends Controller
             }, function($query) {
                 return $query->orderByRaw('generation,id');
             })
-            ->when(!is_null($q), function ($query) use ($q) {
-                return $query->where('name', 'LIKE', "%$q%");
+            ->when(!$showOB, function ($query) use ($showOB) {
+                return $query->where('isOB', 0);
             })
             ->pluck('id');
         
@@ -66,9 +66,7 @@ class UsersController extends Controller
         $user->university = $user->getEscapedStringWithBr();
         $user->profile = $user->getEscapedProfileWithHeader();
         $notes = $user->notes()->orderBy('date', 'desc')->take(5)->get();
-        $queries = '';
-        ($orderBy) ? $queries .= "?orderBy=$orderBy" : '';
-        ($q) ? $queries .= "&q=$q" : '';
+        $queries = "?orderBy=$orderBy&showOB=$showOB";
         return view('web.mypage', compact('user', 'id_next','id_previous', 'notes', 'flag', 'queries'));
     }
 

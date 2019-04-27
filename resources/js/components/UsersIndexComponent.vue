@@ -24,7 +24,7 @@
       <label for="orderByDepartment" class="label-radio">学部別</label>
     </div>
     <div class="radio-wrapper">
-      <input class="input-checkbox" id="showOB" type="checkbox" v-model="showOB">
+      <input class="input-checkbox" id="showOB" type="checkbox" v-model="showOB" value="1">
       <label for="showOB">OB・OGを表示する</label>
     </div>
     <div class="no_border_card">
@@ -39,6 +39,7 @@
             :index="i"
             :users="where(users, i)"
             :orderBy="orderBy"
+            :showOB="showOB"
           ></user-container>
         </div>
         <div v-else-if="orderBy == 'group_id'" key="group_id">
@@ -48,6 +49,7 @@
             :index="i"
             :users="where(users, i)"
             :orderBy="orderBy"
+            :showOB="showOB"
           ></user-container>
         </div>
         <div v-else key="department_id">
@@ -57,6 +59,7 @@
             :index="i"
             :users="where(users,i)"
             :orderBy="orderBy"
+            :showOB="showOB"
           ></user-container>
         </div>
       </transition>
@@ -105,6 +108,9 @@ export default {
     if (sessionStorage.search) {
       this.search = sessionStorage.search;
     }
+    if (sessionStorage.showOB) {
+      this.showOB = sessionStorage.showOB == "true" ? true : false;
+    }
   },
   watch: {
     orderBy(newOrderBy) {
@@ -112,6 +118,9 @@ export default {
     },
     search(newSearch) {
       sessionStorage.search = newSearch;
+    },
+    showOB(newShowOB) {
+      sessionStorage.showOB = newShowOB;
     }
   },
   computed: {

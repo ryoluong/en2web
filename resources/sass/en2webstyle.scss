@@ -1469,14 +1469,13 @@ strong {
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 8px 15px;
-
     @include pc {
       padding: 15px 30px;
       font-size: 18px;
     }
 
     .subtitle {
-      flex: 0 0 100%;
+      width: fit-content;
       position: relative;
       margin-bottom: 5px;
 
@@ -1542,7 +1541,23 @@ strong {
         }
       }
     }
-
+    .toggle-display {
+      margin-left: 20px;
+      flex-grow: 1;
+      .fas {
+        transition: 0.2s;
+        line-height: 46px;
+        vertical-align: middle;
+        font-size: 25px;
+        color: #779;
+      }
+      &.rotate180 {
+        .fas {
+          transition: 0.2s;
+          transform: rotate(-180deg);
+        }
+      }
+    }
     .flex_view {
       position: relative;
       flex: 0 0 50%;
