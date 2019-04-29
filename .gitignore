@@ -1,5 +1,6 @@
 /app/Calendar/credentials.json
 /app/Calendar/token.json
+/app/Calendar/calendar_id.txt
 /node_modules
 /public/hot
 /public/img/note/*.*

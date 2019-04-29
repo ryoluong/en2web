@@ -19,7 +19,7 @@ class CalendarController extends Controller
     {
         $this->setClient();
         $this->service = new \Google_Service_Calendar($this->client);
-        $this->calendarId = 'ok6ivv4869iegdf6fihbljum1o@group.calendar.google.com';
+        $this->calendarId = config('const.GOOGLE_CALENDAR_ID');
     }
 
     /**
@@ -74,15 +74,13 @@ class CalendarController extends Controller
 
     public function index()
     {
-        // Print the next 10 events on the user's calendar.
-        $calendarId = 'ok6ivv4869iegdf6fihbljum1o@group.calendar.google.com';
         $optParams = array(
         'maxResults' => 26,
         'orderBy' => 'startTime',
         'singleEvents' => true,
         'timeMin' => date('c'),
         );
-        $results = $this->service->events->listEvents($calendarId, $optParams);
+        $results = $this->service->events->listEvents($this->calendarId, $optParams);
         $events = $results->getItems();
         if(!empty($events)) {
             $weeks = array("日", "月", "火", "水", "木", "金", "土");
