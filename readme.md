@@ -1,6 +1,6 @@
-<a href="https://en2ynu.com" align="center"><img src="https://en2ynu.com/img/top_logo.png" width="250px"></a>
+<p align="center"><img src="https://en2ynu.com/img/top_logo.png" width="250px"></p>
 
-## About En2::Web
+## About [En2::Web](https://en2ynu.com)
 
 En2::Web is a web application for En2 members, which is a student organizaion of Yokohama National University. This application is designed for efficient information sharing in daily activities and accumulating knowledge of each users. It also provides user-friendly services by high integration with other applications, like Google API, Slack API, and LINE Messenging API. En2::Web mainly has following functions:
 
