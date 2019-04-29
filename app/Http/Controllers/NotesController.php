@@ -131,7 +131,7 @@ class NotesController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        if($request->file('files') !== null) {
+        if ($request->file('files') !== null) {
             $paths = resizeAndSavePhotosToTempDir($request->file('files'), 800);
         } else {
             $paths = [];
@@ -150,8 +150,7 @@ class NotesController extends Controller
         $action = request('action');
         $input = request()->except('action');
 
-        if($action === 'create')
-        {
+        if ($action === 'create') {
             $user_id = DB::table('users')->where('name', $request->author)->first()->id;
 
             $note = Note::create(
@@ -162,27 +161,23 @@ class NotesController extends Controller
             $note->tags()->sync(request('tag_ids'));
 
             //国の処理
-            if(request('country') !== null)
-            {
+            if (request('country') !== null) {
                 $country_ids = getCountryIdsFromRequest(request('country'));
                 $note->countries()->sync($country_ids);
             }
             
             //画像の移動
-            if($request->paths !== null)
-            {
+            if ($request->paths !== null) {
                 movePhotosFromTempDirToNoteDir($request->paths, $note);
             }
 
-            if(request('line_notice')) {
+            if (request('line_notice')) {
                 Line::note($note, 'New note posted!');
             }
             
             return redirect('/notes/'.$note->id);
-
         } else {
-            if ($request->paths !== null)
-            {
+            if ($request->paths !== null) {
                 Storage::disk('public')->delete($request->paths);
             }
             return redirect()->action('NotesController@create')->withInput($input);
@@ -219,13 +214,11 @@ class NotesController extends Controller
     public function edit(Note $note)
     {
         $country_name = '';
-        foreach($note->countries as $country)
-        {
+        foreach ($note->countries as $country) {
             $country_name .= $country->name.' ';
         }
         $note_tags = [];
-        foreach($note->tags as $tag)
-        {
+        foreach ($note->tags as $tag) {
             $note_tags[] = $tag->id;
         }
         $categories = Category::all();
@@ -241,18 +234,16 @@ class NotesController extends Controller
         $tags = Tag::all();
 
         $paths = [];
-        if($request->file('files') !== null) {
-            foreach ($request->file('files') as $index => $e)
-            {
-            $filename = uniqid('photo_').'.'.$e['photo']->guessExtension();
-            $path = \Image::make(file_get_contents($e['photo']->getRealPath()));
-            $path
-                ->resize(800, null, function($constraint)
-                    {
-                        $constraint->aspectRatio();
-                    })
+        if ($request->file('files') !== null) {
+            foreach ($request->file('files') as $index => $e) {
+                $filename = uniqid('photo_').'.'.$e['photo']->guessExtension();
+                $path = \Image::make(file_get_contents($e['photo']->getRealPath()));
+                $path
+                ->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
-            $paths[] = '/img/tmp/'.$filename;
+                $paths[] = '/img/tmp/'.$filename;
             }
         }
         return view('web.notes.edit_confirm', compact(['note', 'categories', 'tags', 'paths']))->with($bridge_request);
@@ -268,8 +259,7 @@ class NotesController extends Controller
     {
         $action = request('action');
         $input = $request->except('action');
-        if($action == 'update')
-        {
+        if ($action == 'update') {
             $user_id = DB::table('users')->where('name', $request->author)->first()->id;
 
             $note->title = $request->title;
@@ -282,11 +272,9 @@ class NotesController extends Controller
             $note->save();
 
             //タグの処理
-            if($request->tag_ids !== null) 
-            {
+            if ($request->tag_ids !== null) {
                 $tag_ids[] = $request->tag_ids;
-                foreach ($tag_ids as $tag_id)
-                {
+                foreach ($tag_ids as $tag_id) {
                     $note->tags()->sync($tag_id);
                 }
             } else {
@@ -307,23 +295,19 @@ class NotesController extends Controller
             $note->countries()->sync($country_ids);
 
             //画像の処理
-            if($request->paths !== null)
-            {
+            if ($request->paths !== null) {
                 $current_index = $note->photos->count();
-                foreach ($request->paths as $index => $path) 
-                {
+                foreach ($request->paths as $index => $path) {
                     $newindex = $index + $current_index;
                     $filename = 'photo_'.$note->id.'_'.$newindex.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
                     Storage::disk('public')->move($path, '/img/note/'.$filename);
                     $note->photos()->create(['path' => '/img/note/'.$filename]);
                 }
             }
-            if($request->delete_paths !== null)
-            {
-                foreach ($request->delete_paths as $path)
-                {
+            if ($request->delete_paths !== null) {
+                foreach ($request->delete_paths as $path) {
                     Photo::where('path', $path)->first()->delete();
-                    if(app()->isLocal()) {
+                    if (app()->isLocal()) {
                         unlink(public_path().$path);
                     } else {
                         unlink(public_path('storage').$path);
@@ -331,22 +315,20 @@ class NotesController extends Controller
                 }
             }
             return redirect('/notes/'.$note->id);
-
         } else {
-            if (isset($request->paths))
-            {
+            if (isset($request->paths)) {
                 Storage::disk('public')->delete($request->paths);
             }
             return redirect()->action('NotesController@edit', $note)->withInput($input);
         }
     }
 
-    public function deleteConfirm(Note $note) 
+    public function deleteConfirm(Note $note)
     {
         $note_id = $note->id;
-        $notes = []; 
+        $notes = [];
         $notes[] = $note;
-        return view('web.notes.delete_confirm', compact(['notes', 'note_id']));    
+        return view('web.notes.delete_confirm', compact(['notes', 'note_id']));
     }
     /**
      * Remove the specified resource from storage.
@@ -356,9 +338,8 @@ class NotesController extends Controller
      */
     public function destroy(Note $note)
     {
-        foreach($note->photos as $photo)
-        {
-            if(app()->isLocal()) {
+        foreach ($note->photos as $photo) {
+            if (app()->isLocal()) {
                 unlink(public_path().$photo->path);
             } else {
                 unlink(public_path('storage').$photo->path);
@@ -380,8 +361,8 @@ class NotesController extends Controller
         $flag = 'search';
         $notes_tmp = $usecase(
             $request->keywords,
-            $request->category_id, 
-            $request->tag_ids, 
+            $request->category_id,
+            $request->tag_ids,
             $request->author,
             $request->country,
             $request->isBest,
@@ -392,7 +373,7 @@ class NotesController extends Controller
         );
         $count = $notes_tmp->count();
         $title = 'Search Notes';
-        $notes = $notes_tmp->orderBy('date','desc')->paginate(6);
+        $notes = $notes_tmp->orderBy('date', 'desc')->paginate(6);
         return view('web.notes.paginate', compact(['notes', 'count', 'title', 'flag']));
     }
 
@@ -401,7 +382,5 @@ class NotesController extends Controller
         $user = auth()->user();
         $note_id = request()->note_id;
         $user->favNotes()->toggle([$note_id]);
-        
-        return redirect("/notes/$note_id");
     }
 }

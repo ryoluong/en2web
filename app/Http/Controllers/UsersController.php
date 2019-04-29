@@ -18,7 +18,13 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::whereIn('status', [1,3])->orderBy('id')->orderBy('generation')->select(
-            'id', 'name', 'avater_path', 'generation', 'group_id', 'isOB', 'department_id'
+            'id',
+            'name',
+            'avater_path',
+            'generation',
+            'group_id',
+            'isOB',
+            'department_id'
             )->get();
         return view('web.users.index', compact('users'));
     }
@@ -37,15 +43,15 @@ class UsersController extends Controller
         $user_ids = User::whereIn('status', [1,3])
             ->when($orderBy == 'group_id', function ($query) use ($orderBy) {
                 $custom_order = 'field(group_id,';
-                for($i = 1; $i <= User::max('group_id'); $i++) {
+                for ($i = 1; $i <= User::max('group_id'); $i++) {
                     $custom_order .= "$i,";
                 }
                 $custom_order .= '0,-1),id';
                 return $query->orderByRaw($custom_order);
             })
-            ->when($orderBy == 'department_id', function($query) use ($orderBy) {
+            ->when($orderBy == 'department_id', function ($query) use ($orderBy) {
                 return $query->where('department_id', '!=', 0)->orderByRaw('department_id,id');
-            }, function($query) {
+            }, function ($query) {
                 return $query->orderByRaw('generation,id');
             })
             ->when(!$showOB, function ($query) use ($showOB) {
@@ -56,10 +62,10 @@ class UsersController extends Controller
         $id_previous = -1;
         $id_next = -1;
         $index = $user_ids->search($user->id);
-        if($index != 0) {
+        if ($index != 0) {
             $id_previous = $user_ids[$index - 1];
         }
-        if($index != count($user_ids) - 1) {
+        if ($index != count($user_ids) - 1) {
             $id_next = $user_ids[$index + 1];
         }
         $flag = 'user';
@@ -67,7 +73,7 @@ class UsersController extends Controller
         $user->profile = $user->getEscapedProfileWithHeader();
         $notes = $user->notes()->orderBy('date', 'desc')->take(5)->get();
         $queries = "?orderBy=$orderBy&showOB=$showOB";
-        return view('web.mypage', compact('user', 'id_next','id_previous', 'notes', 'flag', 'queries'));
+        return view('web.mypage', compact('user', 'id_next', 'id_previous', 'notes', 'flag', 'queries'));
     }
 
     /**

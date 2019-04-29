@@ -2,7 +2,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link type="text/css" rel="stylesheet" href="{{ mix('css/en2webstyle.css') }}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
@@ -58,7 +59,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
 
   gtag('config', 'UA-131467484-2');
@@ -66,13 +70,14 @@
 @endif
 <!-- Disable Button -->
 <script>
-    function disableButton() {
-        document.getElementById("disable_button").disabled = true;
+  function disableButton() {
+    document.getElementById("disable_button").disabled = true;
+  }
+
+  function disableInputs() {
+    var eles = document.getElementsByClassName('input_time');
+    for (var ele of eles) {
+      ele.disabled = !ele.disabled;
     }
-    function disableInputs() {
-      var eles = document.getElementsByClassName('input_time');
-      for(var ele of eles) {
-          ele.disabled = !ele.disabled;
-      }
-    }
+  }
 </script>

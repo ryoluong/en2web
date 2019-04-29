@@ -14,9 +14,15 @@
 /**
  * En2 HomePage
  */
-Route::get('/', function () { return view('auth.login'); });//return view('hp.index'); });
-Route::get('/login', function() { return view('auth.login'); });
-Route::get('/index', function() {return view('hp.index'); });
+Route::get('/', function () {
+    return view('auth.login');
+});//return view('hp.index'); });
+Route::get('/login', function () {
+    return view('auth.login');
+});
+Route::get('/index', function () {
+    return view('hp.index');
+});
 // Route::get('/about_us', function () { return view('hp.about_us'); });
 // Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
 // Route::get('/activities', function () { return view('hp.activities'); });
@@ -99,16 +105,24 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/meeting/{meeting}/complete', 'AttendanceController@completeMeeting');
         Route::post('/meeting/{meeting}/cancel', 'AttendanceController@cancelMeeting');
     });
-    Route::post('/attend', 'AttendanceController@attend');
+    Route::post('/ajax/attend', 'AttendanceController@attend');
     Route::get('/attendance', 'AttendanceController@showResults');
 
     /**
-     * Ajax
+     * NoteのAjax
      */
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('/notes/fav', 'NotesController@fav');
         //LINE share
         Route::post('/notes/{note}/share', 'NotesController@share');
+    });
+
+    /**
+     * 他アプリのURL Scheme
+     */
+    Route::group(['prefix' => 'open'], function () {
+        Route::get('/twitter/{id}', 'UrlSchemeController@twitter');
+        Route::get('/instagram/{id}', 'UrlSchemeController@instagram');
     });
 });
 

@@ -19,11 +19,6 @@ window.Vue = require("vue");
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component(
-  "example-component",
-  require("./components/ExampleComponent.vue").default
-);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -55,7 +50,12 @@ Vue.component(
   require("./components/Inputs/SelectEnrollYearComponent.vue")
 );
 Vue.component(
-  "select-generation", require("./components/Inputs/SelectGenerationComponent.vue")
+  "select-generation",
+  require("./components/Inputs/SelectGenerationComponent.vue")
+);
+Vue.component(
+  "attendance-form",
+  require("./components/AttendanceFormComponent.vue")
 );
 Vue.prototype.$http = axios;
 new Vue({
@@ -71,11 +71,11 @@ new Vue({
     this.loading = false;
   },
   methods: {
-    toggleShowMenu: function () {
+    toggleShowMenu: function() {
       this.showMenu = !this.showMenu;
       document.body.classList.toggle("scroll-lock");
     },
-    toggleShowUserMenu: function () {
+    toggleShowUserMenu: function() {
       this.showUserMenu = !this.showUserMenu;
     }
   }

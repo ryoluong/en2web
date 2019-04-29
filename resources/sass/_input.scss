@@ -1,9 +1,9 @@
 /*Checkboxes styles*/
-input[type="checkbox"].input-checkbox {
+.input-checkbox {
   display: none;
 }
 
-input[type="checkbox"].input-checkbox + label {
+.input-checkbox + .label-checkbox {
   display: block;
   position: relative;
   padding-left: 30px;
@@ -16,11 +16,11 @@ input[type="checkbox"].input-checkbox + label {
   -ms-user-select: none;
 }
 
-input[type="checkbox"].input-checkbox + label:last-child {
+.input-checkbox + .label-checkbox:last-child {
   margin-bottom: 0;
 }
 
-input[type="checkbox"].input-checkbox + label:before {
+.input-checkbox + .label-checkbox:before {
   content: "";
   box-sizing: border-box;
   display: block;
@@ -34,10 +34,10 @@ input[type="checkbox"].input-checkbox + label:before {
   -webkit-transition: all 0.12s, border-color 0.08s;
   transition: all 0.12s, border-color 0.08s;
 }
-input[type="checkbox"].input-checkbox:checked + label {
+.input-checkbox:checked + .label-checkbox {
   color: #555;
 }
-input[type="checkbox"].input-checkbox:checked + label:before {
+.input-checkbox:checked + .label-checkbox:before {
   border-color: #77b;
   width: 10px;
   top: -5px;
@@ -49,4 +49,32 @@ input[type="checkbox"].input-checkbox:checked + label:before {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   transition: 0.3s;
+}
+
+.radio-wrapper {
+  display: flex;
+  width: 95%;
+  max-width: 500px;
+  margin: 25px auto;
+  justify-content: space-around;
+}
+.input-radio {
+  display: none;
+  & + .label-radio {
+    border: 1.5px solid #aaa;
+    padding: 4px 12px 5px 12px;
+    border-radius: 5px;
+    color: #aaa;
+    font-size: 16px;
+    transition: 0.3s;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &:checked + .label-radio {
+    border-color: #99d;
+    background-color: #99d;
+    color: #fff;
+    transition: 0.3s;
+  }
 }

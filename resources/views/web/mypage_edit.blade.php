@@ -14,6 +14,35 @@
                     {{ method_field('PATCH') }}
                     {{ csrf_field() }}
                         <div class="form_view">
+                            <div class="property">
+                                <p>Instagram ID</p>
+                            </div>
+                            <div class="value">
+                                <input name="instagram_id" type="text" class="input_text" value="{{ old('instagram_id') ? old('instagram_id') : $user->instagram_id }}">
+                            </div>
+                            @if ($errors->has('instagram_id'))
+                            <div class="help-box">
+                                    <strong>{{ $errors->first('instagram_id') }}</strong>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="form_view">
+                            <div class="property">
+                                <p>Twitter ID</p>
+                            </div>
+                            <div class="value">
+                                <input name="twitter_id" type="text" class="input_text" value="{{ old('twitter_id') ? old('twitter_id') : $user->twitter_id }}">
+                            </div>
+                            <div class="help-box">
+                                <p>*「＠」は無しでご入力ください。</p>
+                            </div>
+                            @if ($errors->has('twitter_id'))
+                            <div class="help-box">
+                                    <strong>{{ $errors->first('twitter_id') }}</strong>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="form_view">
                             <div class="property"><p>留学先国・地域</p></div>
                             <div class="value">
                                 <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.' ' }}@endforeach">

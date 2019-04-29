@@ -20,22 +20,24 @@ use App\Facades\Slack;
 
 class UserController extends Controller
 {
-    public function showHome () {
+    public function showHome()
+    {
         $user = auth()->user();
-        if(isset($user->countries()->first()->name)) {
+        if (isset($user->countries()->first()->name)) {
             $user_country = $user->countries()->first()->name;
         } else {
             $user_country = "noCountry";
         }
-        if($active_meeting = Meeting::where('status', 'active')->first()) {
-            $show_attendance_button = !Attendance::where('meeting_id', $active_meeting->id)->where('user_id', auth()->user()->id)->exists();
+        if ($active_meeting = Meeting::where('status', 'active')->first()) {
+            $show_attendance_button = true;
         } else {
             $show_attendance_button = false;
         }
-        return view('web.home', compact('user', 'user_country', 'show_attendance_button'));
+        return view('web.home', compact('user', 'user_country', 'active_meeting', 'show_attendance_button'));
     }
 
-    public function showMyPage() {
+    public function showMyPage()
+    {
         $user = auth()->user();
         $notes = $user->notes()->orderBy('date', 'desc')->take(6)->get();
         $favNotes = $user->favNotes()->orderBy('date', 'desc')->take(6)->get();
@@ -45,14 +47,18 @@ class UserController extends Controller
         return view('web.mypage', compact(['user', 'notes', 'favNotes', 'flag']));
     }
 
-    public function editMyPage() {
+    public function editMyPage()
+    {
         $user = auth()->user();
         return view('web.mypage_edit', compact(['user']));
     }
 
-    public function updateMyPage() {
+    public function updateMyPage()
+    {
         $user = auth()->user();
         request()->validate([
+            'instagram_id' => ['nullable', 'string', 'max:50', 'alpha_dash'],
+            'twitter_id' => ['nullable', 'string', 'max:50', 'alpha_dash'],
             'countries' => ['nullable', 'string', 'max:255'],
             'university' => ['nullable', 'string', 'max:255'],
             'isOB' => ['nullable', 'in:1'],
@@ -60,6 +66,8 @@ class UserController extends Controller
             'job' => ['nullable', 'string', 'max:255'],
             'profile' => ['nullable', 'max:2000'],
         ]);
+        $user->twitter_id = request('twitter_id');
+        $user->instagram_id = request('instagram_id');
         $user->university = request('university');
         $user->isOB = request('isOB', 0);
         $user->isOverseas = request('isOverseas', 0);
@@ -73,29 +81,29 @@ class UserController extends Controller
         return redirect('/mypage');
     }
 
-    public function uploadAvater() {
+    public function uploadAvater()
+    {
         $flag = 'avater';
         return view('web.user.upload_image', compact(['flag']));
     }
 
-    public function uploadAvater_confirm(Request $request) {
+    public function uploadAvater_confirm(Request $request)
+    {
         $photo = $request->file('file');
         $filename = uniqid('image_').'.'.$photo->guessExtension();
         $image = \Image::make(file_get_contents($photo->getRealPath()));
         $image = getOrientatedImage($image, $photo);
-        if($image->width() >= $image->height()) {
+        if ($image->width() >= $image->height()) {
             $image
-                ->resize(null, 500, function($constraint)
-                    {
-                        $constraint->aspectRatio();
-                    })
+                ->resize(null, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         } else {
             $image
-                ->resize(500, null, function($constraint)
-                    {
-                        $constraint->aspectRatio();
-                    })
+                ->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         }
         $path = '/img/tmp/'.$filename;
@@ -103,18 +111,16 @@ class UserController extends Controller
         return view('web.avater_upload_confirm', compact(['path']));
     }
 
-    public function uploadAvater_save(Request $request) 
+    public function uploadAvater_save(Request $request)
     {
         $action = $request->get('action', 'update');
         $input = $request->except('action');
         $path = $request->path;
-        if($action == 'update')
-        {
+        if ($action == 'update') {
             $user = auth()->user();
             $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/img/user/'.$filename);
-            if($user->avater_path !== null)
-            {
+            if ($user->avater_path !== null) {
                 unlink(public_path('storage').$user->avater_path);
             }
             $user->update(['avater_path' => '/img/user/'.$filename]);
@@ -126,42 +132,41 @@ class UserController extends Controller
     }
 
     /**
-     * 
+     *
      * Upload Cover Image
-     * 
+     *
      */
-    public function uploadCoverimg() {
+    public function uploadCoverimg()
+    {
         $flag = 'coverimg';
         return view('web.user.upload_image', compact(['flag']));
     }
 
-    public function uploadCoverimg_confirm(Request $request) {
+    public function uploadCoverimg_confirm(Request $request)
+    {
         $photo = $request->file('file');
         $filename = uniqid('image_').'.'.$photo->guessExtension();
         $image = \Image::make(file_get_contents($photo->getRealPath()));
         $image = getOrientatedImage($image, $photo);
         $image
-            ->resize(null, 900, function($constraint)
-                {
-                    $constraint->aspectRatio();
-                })
+            ->resize(null, 900, function ($constraint) {
+                $constraint->aspectRatio();
+            })
             ->save(public_path().'/storage/img/tmp/'.$filename);
         $path = '/img/tmp/'.$filename;
         return view('web.user.upload_coverimg_confirm', compact(['path']));
     }
 
-    public function uploadCoverimg_save(Request $request) 
+    public function uploadCoverimg_save(Request $request)
     {
         $action = $request->get('action', 'update');
         $input = $request->except('action');
         $path = $request->path;
-        if($action === 'update')
-        {
+        if ($action === 'update') {
             $user = auth()->user();
             $filename = 'coverimg_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/img/user/'.$filename);
-            if($user->coverimg_path !== null)
-            {
+            if ($user->coverimg_path !== null) {
                 unlink(public_path('storage').$user->coverimg_path);
             }
             $user->update(['coverimg_path' => '/img/user/'.$filename]);

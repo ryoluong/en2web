@@ -47,6 +47,8 @@
   z-index: -1;
 }
 
+$theme-color-red: #f15;
+
 * {
   color: #555;
 }
@@ -112,7 +114,69 @@ strong {
  *  button       *
  *               *
  ****************/
+#disable_button {
+  .button_text {
+    color: #ffffff;
+    line-height: 100%;
+  }
+  .loader {
+    display: none;
+  }
+}
 
+#disable_button:disabled {
+  .button_text {
+    display: none;
+  }
+
+  .loader,
+  .loader::after {
+    display: inline-block;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+  }
+
+  .loader {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    text-indent: -9999em;
+    border-top: 4px solid rgba(255, 255, 255, 0.2);
+    border-right: 4px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #ffffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+  }
+
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+}
 .graybtn,
 .bluebtn,
 .redbtn,
@@ -168,78 +232,6 @@ strong {
   &:hover {
     background-color: #555577;
     transition: background-color 0.3s;
-  }
-}
-
-#disable_button {
-  .button_text {
-    background-color: #7777bb;
-    color: #fff;
-    transition: 0.3s;
-  }
-
-  .loader {
-    display: none;
-  }
-
-  &:hover {
-    .button_text {
-      background-color: #555577;
-    }
-  }
-}
-
-#disable_button:disabled {
-  .button_text {
-    display: none;
-  }
-
-  .loader,
-  .loader::after {
-    display: inline-block;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-  }
-
-  .loader {
-    padding: 0;
-    margin: 0;
-    font-size: 16px;
-    text-indent: -9999em;
-    border-top: 4px solid rgba(255, 255, 255, 0.2);
-    border-right: 4px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 4px solid rgba(255, 255, 255, 0.2);
-    border-left: 4px solid #ffffff;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: load8 1.1s infinite linear;
-    animation: load8 1.1s infinite linear;
-  }
-
-  @-webkit-keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
   }
 }
 
@@ -1160,6 +1152,17 @@ strong {
 
       @include pc {
         font-size: 20px;
+      }
+    }
+
+    .sns-links {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      .sns-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 15px;
       }
     }
 
@@ -3388,34 +3391,6 @@ form {
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
-    }
-  }
-}
-
-.radio-wrapper {
-  display: flex;
-  width: 95%;
-  max-width: 500px;
-  margin: 25px auto;
-  justify-content: space-around;
-
-  .input-radio {
-    display: none;
-
-    & + .label-radio {
-      border: 1.5px solid #aaa;
-      padding: 4px 12px 5px 12px;
-      border-radius: 5px;
-      color: #aaa;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-
-    &:checked + .label-radio {
-      border-color: #99d;
-      background-color: #99d;
-      color: #fff;
-      transition: 0.3s;
     }
   }
 }

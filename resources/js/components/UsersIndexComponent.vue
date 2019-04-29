@@ -25,7 +25,7 @@
     </div>
     <div class="radio-wrapper">
       <input class="input-checkbox" id="showOB" type="checkbox" v-model="showOB" value="1">
-      <label for="showOB">OB・OGを表示する</label>
+      <label class="label-checkbox" for="showOB">OB・OGを表示する</label>
     </div>
     <div class="no_border_card">
       <transition name="fade-no-slide">

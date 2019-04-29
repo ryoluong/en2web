@@ -323,3 +323,32 @@
     }
   }
 }
+.attendance-form {
+  margin-top: 30px;
+  .mtg-name {
+    font-size: 18px;
+    text-align: center;
+    color: #f15;
+    font-weight: bold;
+    width: fit-content;
+    margin: auto;
+    border-bottom: 2px solid #f15;
+    padding: 2px 15px;
+    .fas::before {
+      color: #f15;
+      margin-right: 7.5px;
+    }
+  }
+  .radio-wrapper {
+    margin: 20px auto;
+  }
+  .button-wrapper {
+    margin: 20px auto;
+    text-align: center;
+  }
+  .comment {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+  }
+}

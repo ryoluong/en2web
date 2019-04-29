@@ -17,17 +17,17 @@ class AttendanceController extends Controller
 
     public function addMeeting(Request $req)
     {
-        if(!Meeting::where('status', '!=', 'completed')->count()) {
+        if (!Meeting::where('status', '!=', 'completed')->count()) {
             $mtg = Meeting::create([
                 'name' => request('name'),
                 'status' => 'await'
             ]);
             $overseasUsers = User::where('isOverseas', 1)->get();
-            foreach($overseasUsers as $user) {
+            foreach ($overseasUsers as $user) {
                 Attendance::updateOrCreate([
                     'user_id' => $user->id,
                     'meeting_id' => $mtg->id,
-                ],[
+                ], [
                     'status' => 'overseas'
                 ]);
             }
@@ -37,7 +37,7 @@ class AttendanceController extends Controller
 
     public function toggleMeeting(Meeting $meeting)
     {
-        if($meeting->status == 'await') {
+        if ($meeting->status == 'await') {
             $meeting->status = 'active';
         } else {
             $meeting->status = 'await';
@@ -49,11 +49,11 @@ class AttendanceController extends Controller
     public function completeMeeting(Meeting $meeting)
     {
         $users = User::where('isOB', 0)->where('isOverseas', 0)->get();
-        foreach($users as $user) {
+        foreach ($users as $user) {
             Attendance::firstOrCreate([
                 'user_id' => $user->id,
                 'meeting_id' => $meeting->id,
-            ],[
+            ], [
                 'status' => 'absent'
             ]);
         }
@@ -75,29 +75,54 @@ class AttendanceController extends Controller
         Attendance::updateOrCreate([
             'user_id' => $user_id,
             'meeting_id' => $mtg_id,
-        ],[
+        ], [
             'status' => request('status')
         ]);
-        return redirect('/attendance');
     }
 
     public function showResults()
     {
         $users = User::where('isOB', 0)->where('isOverseas', 0)->orderBy('group_id')->get();
-        // $users = User::orderBy('group_id')->get();
         $meetings = Meeting::all();
         $attendances = Attendance::all();
-        foreach($meetings as $mtg) {
-            if($mtg->status == 'completed') {
+        $lateEarlyWeight = 1; // 遅刻・早退の比重
+
+        foreach ($users as $user) {
+            if ($attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count()) {
+                $user->attendanceRate =
+                    round(($attendances->where('user_id', $user->id)->where('status', 'attend')->count() +
+                    $attendances->where('user_id', $user->id)->whereIn('status', ['late', 'early'])->count() * $lateEarlyWeight) /
+                    $attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count() * 100, 1);
+            }
+        }
+
+        foreach ($meetings as $mtg) {
+            if ($mtg->status == 'completed') {
                 $attends = $attendances->where('meeting_id', $mtg->id);
                 $numActiveUser = $attends->where('status', '!=', 'overseas')->count();
                 $numAttendUser = $attends->where('status', '=', 'attend')->count();
                 $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
-                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * 0.5) / $numActiveUser * 100, 1);
+                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
             } else {
-                $mtg->attend_rate = '';
+                $attends = $attendances->where('meeting_id', $mtg->id);
+                $numActiveUser = $users->count();
+                $numAttendUser = $attends->where('status', '=', 'attend')->count();
+                $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
+                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
             }
         }
-        return view('web.attendance.show', compact('users', 'meetings', 'attendances'));
+
+        if ($attendances->where('status', '!=', 'overseas')->count() && !$meetings->whereIn('status', ['active','await'])->count()) {
+            $totalAttendanceRate = round(
+                ($attendances->where('status', 'attend')->count() +
+                 $attendances->whereIn('status', ['late', 'early'])->count() * $lateEarlyWeight) /
+                 $attendances->where('status', '!=', 'overseas')->count() * 100,
+                1
+                );
+        } else {
+            $totalAttendanceRate = '';
+        }
+
+        return view('web.attendance.show', compact('users', 'meetings', 'attendances', 'totalAttendanceRate'));
     }
 }
