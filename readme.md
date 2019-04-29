@@ -13,7 +13,7 @@ Notes and Users are associated with countries. For example, when you check a pag
 ### Calendar
 Calendar is integrated with Google Calendar API and LINE Messaging API. Members can easily add upcoming events and use automatic reminder provided by LINE Bot.  
 ### Attendance Manager
-When we hold a meeting, we can easily record who attends and is absent by attendance manager. Users only need to login and tap a attend button!
+When we hold a meeting, we can easily record who attends and is absent by attendance manager. Users only need to login and tap an attendance button!
 
 ***
 
