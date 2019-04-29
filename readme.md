@@ -2,7 +2,7 @@
 
 ## About [En2::Web](https://en2ynu.com)
 
-En2::Web is a web application based on Laravel and Vue.js. This application is designed for efficient information sharing in daily activities and accumulating knowledge of En2 members, which is a student organizaion of Yokohama National University. It also provides user-friendly services by high integration with other common web applications, like Google API, Slack API, and LINE Messenging API. En2::Web mainly has following functions:
+En2::Web is a web groupware based on Laravel and Vue.js. This application is designed for efficient information sharing in daily activities and accumulating knowledge of En2 members, which is a student organizaion of Yokohama National University. It also provides user-friendly services by high integration with other common web applications, such as Google API, Slack API, and LINE Messenging API. En2::Web mainly has following functions:
 
 ### Notes
 En2 users can freely read and post notes about their activities. We have plenty of reports for studying abroad because most of En2 members go overseas to study and get international experience.
