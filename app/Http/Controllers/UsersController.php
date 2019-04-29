@@ -70,7 +70,7 @@ class UsersController extends Controller
         }
         $flag = 'user';
         $user->university = $user->getEscapedStringWithBr();
-        $user->profile = $user->getEscapedProfileWithHeader();
+        $user->profile = $user->getEscapedProfile();
         $notes = $user->notes()->orderBy('date', 'desc')->take(5)->get();
         $queries = "?orderBy=$orderBy&showOB=$showOB";
         return view('web.mypage', compact('user', 'id_next', 'id_previous', 'notes', 'flag', 'queries'));

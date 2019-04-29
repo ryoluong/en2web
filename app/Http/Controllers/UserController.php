@@ -43,7 +43,7 @@ class UserController extends Controller
         $favNotes = $user->favNotes()->orderBy('date', 'desc')->take(6)->get();
         $flag = 'mypage';
         $user->university = $user->getEscapedStringWithBr();
-        $user->profile = $user->getEscapedProfileWithHeader();
+        $user->profile = $user->getEscapedProfile();
         return view('web.mypage', compact(['user', 'notes', 'favNotes', 'flag']));
     }
 
