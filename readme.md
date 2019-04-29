@@ -14,5 +14,7 @@ Notes and Users are associated with countries. For example, when you check a pag
 Calendar is integrated with Google Calendar API and LINE Messaging API. Members can easily add upcoming events and use automatic reminder provided by LINE Bot.  
 ### Attendance Manager
 When we hold a meeting, we can easily record who attends and is absent by attendance manager. Users only need to login and tap a attend button!
----
+
+***
+
 I'm so sorry but En2::Web is a web service ONLY FOR En2 members. If you want to use this groupware or take a look how it works, please feel free to contact me!
