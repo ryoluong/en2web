@@ -5,6 +5,7 @@
 /public/img/note/*.*
 /public/img/user/*.*
 /public/img/tmp/*.*
+/public/storage/*
 /storage/*.key
 /vendor
 /.idea
