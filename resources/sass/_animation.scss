@@ -1,27 +1,69 @@
 /* fade */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-  overflow: hidden;
+.fade {
+  &-enter-active {
+    animation: fadein 0.25s;
+  }
+
+  &-leave-active {
+    animation: fadeout 0.25s;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-user-container-enter-active {
+  animation: fadeuserin 0.3s;
   white-space: nowrap;
+  overflow: hidden;
+  .flex_container {
+    flex-wrap: nowrap;
+  }
 }
-
-.fade-enter-active {
-  transition: margin-right 0.3s;
+.fade-user-container-leave-active {
+  animation: fadeuserout 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  .flex_container {
+    flex-wrap: nowrap;
+  }
 }
-
-.fade-leave-active {
-  transition: margin-left 0.3s;
+@keyframes fadeuserin {
+  0% {
+    opacity: 0;
+    margin-right: 90%;
+  }
+  100% {
+    opacity: 1;
+    margin-right: 0%;
+  }
 }
-
-.fade-enter {
-  opacity: 0;
-  margin-right: 80%;
-}
-
-.fade-leave-to {
-  opacity: 0;
-  margin-left: 80%;
+@keyframes fadeuserout {
+  0% {
+    opacity: 1;
+    margin-left: 0%;
+  }
+  100% {
+    opacity: 0;
+    margin-left: 90%;
+  }
 }
 
 /* fade-no-slide */

@@ -422,36 +422,6 @@ strong {
   }
 }
 
-.fade {
-  &-enter-active {
-    animation: fadein 0.25s;
-  }
-
-  &-leave-active {
-    animation: fadeout 0.25s;
-  }
-}
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
 .below_slide_menu {
   position: absolute;
   height: 100vh;

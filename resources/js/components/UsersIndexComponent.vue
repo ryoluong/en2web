@@ -31,7 +31,7 @@
       <transition name="fade-no-slide">
         <p v-if="!hasActiveUser" class="not-found">一致するユーザーは見つかりませんでした。</p>
       </transition>
-      <transition name="fade" mode="out-in">
+      <transition name="fade-user-container" mode="out-in">
         <div v-if="orderBy == 'generation'" key="generation">
           <user-container
             v-for="i in maxGeneration"
