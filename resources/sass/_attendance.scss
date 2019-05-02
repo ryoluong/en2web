@@ -37,17 +37,28 @@
     white-space: nowrap;
   }
   .table {
+    font-size: 12px;
+    @include pc {
+      font-size: 15px;
+    }
     .tr {
       .th {
         height: 75px;
         .title {
-          font-size: 18px;
+          font-size: 15px;
           color: #77b;
-          line-height: 22px;
+          line-height: 20px;
+          @include pc {
+            font-size: 18px;
+            line-height: 22px;
+          }
         }
         .mtg-name {
-          width: 70px;
+          width: 50px;
           white-space: normal;
+          @include pc {
+            width: 70px;
+          }
         }
       }
       .rate {
@@ -56,6 +67,9 @@
       .td {
         height: 26px;
         text-align: center;
+        @include pc {
+          height: 32px;
+        }
       }
       .name {
         text-align: left;

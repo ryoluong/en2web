@@ -46,14 +46,6 @@
                 </div>
             </form>
             @else
-            @if($mtg->status == 'await')
-            <p class="notification">現在、出席ボタンは表示されていません。</p>
-            <form method="POST" action="/meeting/{{ $mtg->id }}/toggle">
-                @csrf
-                <div class="form_view">
-                    <button type="submit" class="toggle-btn bluebtn">出席ボタンを表示する</button>
-                </div>
-            </form>
             <form method="POST" action="/meeting/{{ $mtg->id }}/complete" onsubmit="disableButton()">
                 @csrf
                 <div class="form_view">
@@ -63,19 +55,10 @@
                     </button>
                 </div>
             </form>
-            @else
-            <p class="notification">現在、出席ボタンを表示中です。</p>
-            <form method="POST" action="/meeting/{{ $mtg->id }}/toggle">
-                @csrf
-                <div class="form_view">
-                    <button type="submit" class="toggle-btn bluebtn">出席ボタンを非表示にする</button>
-                </div>
-            </form>
-            @endif
             @endif
         </div>
     </div>
-    @if(!is_null($mtg) && $mtg->status == 'await')
+    @if($mtg)
     <div class="cancel-wrapper">
         <button class="cancel-btn graybtn" onclick="confirmCancel()">出席管理をキャンセル</button>
     </div>

@@ -2,6 +2,12 @@
 @section('title', ' - Attendance')
 @section('content')
 <div id="showAttendances">
+    <div class="loading-wrapper" v-show="loading">
+        <div class="loading"></div>
+    </div>
+    @if($activeMeeting && !auth()->user()->isOverseas && !auth()->user()->isOB)
+        <attendance-form :active_meeting="{{ $activeMeeting }}" default_answer="{{ $answer }}" v-show="!loading"></attendance-form>
+    @endif
     <div class="main">
         <div class="fix">
             <table class="table table-username">
@@ -57,13 +63,13 @@
                     <td style="color: #ccc" class="td mtg absent">欠席</td>
                     @break
                     @case('late')
-                    <td style="color: #77b" class="td mtg late">遅刻</td>
+                    <td style="color: #779" class="td mtg late">遅刻</td>
                     @break
                     @case('early')
-                    <td style="color: #77b" class="td mtg early">早退</td>
+                    <td style="color: #779" class="td mtg early">早退</td>
                     @break
                     @case('overseas')
-                    <td style="color: #0ac" class="td mtg overseas">留学</td>
+                    <td style="color: #bdf" class="td mtg overseas">留学</td>
                     @break
                     @endswitch
                     @else

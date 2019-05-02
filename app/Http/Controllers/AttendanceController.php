@@ -20,7 +20,7 @@ class AttendanceController extends Controller
         if (!Meeting::where('status', '!=', 'completed')->count()) {
             $mtg = Meeting::create([
                 'name' => request('name'),
-                'status' => 'await'
+                'status' => 'active'
             ]);
             $overseasUsers = User::where('isOverseas', 1)->get();
             foreach ($overseasUsers as $user) {
@@ -35,16 +35,16 @@ class AttendanceController extends Controller
         return redirect('/attendance/manager');
     }
 
-    public function toggleMeeting(Meeting $meeting)
-    {
-        if ($meeting->status == 'await') {
-            $meeting->status = 'active';
-        } else {
-            $meeting->status = 'await';
-        }
-        $meeting->save();
-        return redirect('/attendance/manager');
-    }
+    // public function toggleMeeting(Meeting $meeting)
+    // {
+    //     if ($meeting->status == 'await') {
+    //         $meeting->status = 'active';
+    //     } else {
+    //         $meeting->status = 'await';
+    //     }
+    //     $meeting->save();
+    //     return redirect('/attendance/manager');
+    // }
 
     public function completeMeeting(Meeting $meeting)
     {
@@ -82,10 +82,14 @@ class AttendanceController extends Controller
 
     public function showResults()
     {
-        $users = User::where('isOB', 0)->where('isOverseas', 0)->orderBy('group_id')->get();
+        $users = User::where('isOB', 0)->orderBy('group_id')->get();
         $meetings = Meeting::all();
         $attendances = Attendance::all();
         $lateEarlyWeight = 1; // 遅刻・早退の比重
+        $activeMeeting = $meetings->where('status', 'active')->first();
+        $answer = $activeMeeting && $attendances->where('meeting_id', $activeMeeting->id)->where('user_id', auth()->user()->id)->first()
+                    ? $attendances->where('meeting_id', $activeMeeting->id)->where('user_id', auth()->user()->id)->first()->status
+                    : 'none';
 
         foreach ($users as $user) {
             if ($attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count()) {
@@ -123,6 +127,6 @@ class AttendanceController extends Controller
             $totalAttendanceRate = '';
         }
 
-        return view('web.attendance.show', compact('users', 'meetings', 'attendances', 'totalAttendanceRate'));
+        return view('web.attendance.show', compact('users', 'meetings', 'activeMeeting', 'attendances', 'answer', 'totalAttendanceRate'));
     }
 }

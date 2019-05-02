@@ -28,12 +28,16 @@ class UserController extends Controller
         } else {
             $user_country = "noCountry";
         }
-        if ($active_meeting = Meeting::where('status', 'active')->first()) {
+        $active_meeting = Meeting::where('status', 'active')->first();
+        if (!$user->isOB && !$user->isOverseas && $active_meeting && !Attendance::where('meeting_id', $active_meeting->id)->where('user_id', auth()->user()->id)->exists()) {
             $show_attendance_button = true;
         } else {
             $show_attendance_button = false;
         }
-        return view('web.home', compact('user', 'user_country', 'active_meeting', 'show_attendance_button'));
+        $answer = $active_meeting && Attendance::where('meeting_id', $active_meeting->id)->where('user_id', auth()->user()->id)->first()
+                    ? Attendance::where('meeting_id', $active_meeting->id)->where('user_id', auth()->user()->id)->first()->status
+                    : 'none';
+        return view('web.home', compact('user', 'user_country', 'active_meeting', 'answer', 'show_attendance_button'));
     }
 
     public function showMyPage()

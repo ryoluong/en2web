@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="form_view">
-                            <div class="property"><p>留学先国・地域</p></div>
+                            <div class="property"><p>留学先国名または地域名</p></div>
                             <div class="value">
                                 <input name="countries" type="text" class="input_text" value="@foreach($user->countries()->get() as $country){{ $country->name.' ' }}@endforeach">
                                 <div class="help-box">

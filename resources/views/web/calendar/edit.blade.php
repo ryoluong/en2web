@@ -73,7 +73,29 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="form_view">
+                            <div class="property">
+                                <p>Auto-Remind</p>
+                            </div>
+                            <div class="value">
+                                <div class="checkbox_wrapper">
+                                    <label for="oneMonthBefore"><input id="oneMonthBefore" class="checkbox_simple" type="checkbox" name="oneMonthBefore" value="1" {{ $eventDb->one_month_before == 1 ? 'checked' : ''}}>１ヶ月前</label>
+                                </div>
+                                <div class="checkbox_wrapper">
+                                    <label for="twoWeeksBefore"><input id="twoWeeksBefore" class="checkbox_simple" type="checkbox" name="twoWeeksBefore" value="1" {{ $eventDb->two_weekd_before == 1 ? 'checked' : ''}}>２週間前</label>
+                                </div>
+                                <div class="checkbox_wrapper">
+                                    <label for="oneWeekBefore"><input id="oneWeekBefore" class="checkbox_simple" type="checkbox" name="oneWeekBefore" value="1" {{ $eventDb->one_week_before == 1 ? 'checked' : ''}}>１週間前</label>
+                                </div>
+                                <div class="checkbox_wrapper">
+                                    <label for="theDayBefore"><input id="theDayBefore" class="checkbox_simple" type="checkbox" name="theDayBefore" value="1" {{ $eventDb->the_day_before == 1 ? 'checked' : ''}}>前日夜</label>
+                                </div>
+                                <div class="checkbox_wrapper">
+                                    <label for="theDay"><input id="theDay" class="checkbox_simple" type="checkbox" name="theDay" value="1" {{ $eventDb->the_day == 1 ? 'checked' : ''}}>当日朝</label>
+                                </div>
+                            </div>
+                        </div>                    
                         <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">

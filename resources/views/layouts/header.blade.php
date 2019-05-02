@@ -65,9 +65,9 @@
                         </a>
                     </li>
                     <li class="menu-content">
-                        <a class="link" href="/support">
-                            <img class="link_img" src="/img/top_support.png" alt="">
-                            <p class="link_text">Support</p>
+                        <a class="link" href="/attendance">
+                            <img class="link_img" src="/img/top_attendance.png" alt="">
+                            <p class="link_text">Meeting</p>
                         </a>
                     </li>
                 </ul>

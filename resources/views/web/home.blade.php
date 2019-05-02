@@ -73,9 +73,9 @@
                         </a>
                     </td>
                     <td class="icon_td">
-                        <a href="/support">
-                            <img src="/img/top_support.png" alt="support">
-                            <p>Support</p>
+                        <a href="/attendance">
+                            <img src="/img/top_attendance.png" alt="attendance">
+                            <p>Meeting</p>
                         </a>
                     </td>
                 </tr>
@@ -90,7 +90,7 @@
             </a>
             <div id="app">
                 @if($show_attendance_button)
-                <attendance-form :active_meeting="{{ $active_meeting }}" v-show="!loading"></attendance-form>
+                <attendance-form :active_meeting="{{ $active_meeting }}" default_answer="{{ $answer }}" v-show="!loading"></attendance-form>
                 @endif
             </div>
         </div>

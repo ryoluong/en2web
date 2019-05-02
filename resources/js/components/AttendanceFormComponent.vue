@@ -4,6 +4,10 @@
       <i class="fas fa-exclamation"></i>
       出席管理中：{{ active_meeting.name }}
     </p>
+    <p
+      class="answer-status"
+      v-if="default_answer != 'none'"
+    >{{ "「" + answerLabel[default_answer] + "」で回答されています。" }}</p>
     <div class="radio-wrapper">
       <input
         class="input-radio"
@@ -25,10 +29,21 @@
         value="early"
       >
       <label class="label-radio" for="early">早退</label>
+      <input
+        id="absent"
+        type="radio"
+        class="input-radio"
+        name="status"
+        v-model="answer"
+        value="absent"
+      >
+      <label for="absent" class="label-radio">欠席</label>
     </div>
-    <p class="comment">*欠席の場合は回答不要です。</p>
     <div class="button-wrapper">
-      <button class="submit-btn bluebtn" @click="confirm">送信</button>
+      <button
+        class="submit-btn bluebtn widebtn"
+        @click="confirm"
+      >{{ default_answer != 'none' ? '回答を更新' : '送信'}}</button>
     </div>
   </div>
 </template>
@@ -38,15 +53,21 @@ export default {
     active_meeting: {
       type: Object,
       required: true
+    },
+    default_answer: {
+      type: String,
+      required: false
     }
   },
   data() {
     return {
-      answer: "attend",
+      answer: this.default_answer,
       answerLabel: {
         attend: "出席",
         early: "早退",
-        late: "遅刻"
+        late: "遅刻",
+        absent: "欠席",
+        overseas: "留学中"
       }
     };
   },
@@ -57,14 +78,20 @@ export default {
   },
   methods: {
     confirm() {
-      if (
-        window.confirm(
-          '"' +
-            this.answerLabel[this.answer] +
-            '" で回答を送信します。\nよろしいですか？'
-        )
-      ) {
-        this.sendAnswer();
+      if (this.answer != "none") {
+        if (
+          window.confirm(
+            "｢" +
+              this.answerLabel[this.answer] +
+              (this.default_answer == "none"
+                ? "｣ で回答を送信します。\nよろしいですか？"
+                : "｣ で回答を更新します。\nよろしいですか？")
+          )
+        ) {
+          this.sendAnswer();
+        }
+      } else {
+        alert("回答を選択してください");
       }
     },
     sendAnswer() {

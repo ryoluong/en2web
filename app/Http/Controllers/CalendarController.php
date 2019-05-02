@@ -158,9 +158,9 @@ class CalendarController extends Controller
             $start = null;
             $end = null;
         }
-
+        $eventDb = Event::where('id', $eventId)->first();
         $location = $event->getLocation();
-        return view('web.calendar.edit', compact(['title', 'date', 'start', 'end', 'location', 'eventId']));
+        return view('web.calendar.edit', compact(['title', 'date', 'start', 'end', 'location', 'eventId', 'eventDb']));
     }
 
     public function update($eventId, SaveEventRequest $request, SaveEventUsecase $usecase)
@@ -195,6 +195,7 @@ class CalendarController extends Controller
     public function destroy($eventId)
     {
         $this->service->events->delete($this->calendarId, $eventId);
+        Event::where('id', $eventId)->first()->delete();
         return redirect('/calendar');
     }
 

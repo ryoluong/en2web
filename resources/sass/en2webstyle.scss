@@ -3,6 +3,7 @@
  *      Setting          *
  *                       *
  ************************/
+// @import "normalize";
 
 @mixin pc {
   @media (min-width: 768px) {
@@ -190,6 +191,10 @@ strong {
   height: 35px;
   vertical-align: middle;
   transition: background-color 0.3s;
+}
+
+.widebtn {
+  width: 200px;
 }
 
 .graybtn {
