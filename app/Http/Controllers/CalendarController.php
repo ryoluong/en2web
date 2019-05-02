@@ -6,6 +6,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 use Illuminate\Http\Request;
 use App\Google;
+use App\Event;
 use App\Http\Requests\SaveEventRequest;
 use App\Usecases\Calendar\SaveEventUsecase;
 
@@ -114,6 +115,7 @@ class CalendarController extends Controller
 
     public function store(SaveEventRequest $request, SaveEventUsecase $usecase)
     {
+        // Google Calendarに追加する処理
         $event = $usecase(
             $request->title,
             $request->date,
@@ -122,7 +124,23 @@ class CalendarController extends Controller
             $request->time_to,
             $request->location
         );
-        $this->service->events->insert($this->calendarId, $event);
+        $createdEvent = $this->service->events->insert($this->calendarId, $event);
+
+        // 自データベースにイベントを保存する処理（LINE通知用）
+        $id = $createdEvent->getId();
+        Event::create([
+            'id' => $id,
+            'title' => request('title'),
+            'date' =>  request('date'),
+            'start_time' => request('time_from'),
+            'end_time' => request('time_to'),
+            'location' => request('location'),
+            'one_month_before' => request('oneMonthBefore', 0),
+            'two_weeks_before' => request('twoWeeksBefore', 0),                        
+            'one_week_before' => request('oneWeekBefore', 0),                    
+            'the_day_before' => request('theDayBefore', 0),                    
+            'the_day' => request('the_day', 0)
+        ]);
         return redirect('/calendar');
     }
     
@@ -155,7 +173,22 @@ class CalendarController extends Controller
             $request->time_to,
             $request->location
         );
-        $this->service->events->update($this->calendarId, $eventId, $event);
+        $createdEvent = $this->service->events->update($this->calendarId, $eventId, $event);
+        $id = $createdEvent->getId();
+        Event::updateOrCreate([
+            'id' => $id,
+        ],[
+            'title' => request('title'),
+            'date' =>  request('date'),
+            'start_time' => request('time_from'),
+            'end_time' => request('time_to'),
+            'location' => request('location'),
+            'one_month_before' => request('oneMonthBefore', 0),
+            'two_weeks_before' => request('twoWeeksBefore', 0),                        
+            'one_week_before' => request('oneWeekBefore', 0),                    
+            'the_day_before' => request('theDayBefore', 0),                    
+            'the_day' => request('the_day', 0)
+        ]);
         return redirect('/calendar');
     }
 
