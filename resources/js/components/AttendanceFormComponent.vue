@@ -41,7 +41,8 @@
     </div>
     <div class="button-wrapper">
       <button
-        class="submit-btn bluebtn widebtn"
+        class="submit-btn bluebtn"
+        :class="[default_answer != 'none' ? 'widebtn' : '']"
         @click="confirm"
       >{{ default_answer != 'none' ? '回答を更新' : '送信'}}</button>
     </div>
