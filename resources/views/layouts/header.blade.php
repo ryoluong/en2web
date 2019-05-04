@@ -10,7 +10,7 @@
                 <div class="el colored" id="menu_bar_bottom"></div>
             </div>
             <div class="element pc"></div>
-            <a href="/home">
+            <a href="/">
                 <img class="logo" src="/img/top_logo.png" alt="header_logo">
             </a>
             <div class="element avater sp" @click="toggleShowUserMenu">
@@ -24,7 +24,7 @@
             </a>
             @else
             <div class="element"></div>
-            <a href="/home">
+            <a href="/">
                 <img class="logo" src="/img/top_logo.png" alt="header_logo">
             </a>
             <div class="element"></div>
