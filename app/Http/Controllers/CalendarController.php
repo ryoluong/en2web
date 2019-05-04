@@ -158,8 +158,17 @@ class CalendarController extends Controller
             $start = null;
             $end = null;
         }
-        $eventDb = Event::where('id', $eventId)->first();
         $location = $event->getLocation();
+        $eventDb = Event::updateOrCreate([
+            'id' => $eventId
+        ],[
+            'title' => $title,
+            'date' => $date,
+            'start_time' => $start,
+            'end_time' => $end,
+            'location' => $location
+        ]);
+        
         return view('web.calendar.edit', compact(['title', 'date', 'start', 'end', 'location', 'eventId', 'eventDb']));
     }
 
@@ -187,7 +196,7 @@ class CalendarController extends Controller
             'two_weeks_before' => request('twoWeeksBefore', 0),                        
             'one_week_before' => request('oneWeekBefore', 0),                    
             'the_day_before' => request('theDayBefore', 0),                    
-            'the_day' => request('the_day', 0)
+            'the_day' => request('theDay', 0)
         ]);
         return redirect('/calendar');
     }

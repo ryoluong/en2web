@@ -14,15 +14,12 @@
 /**
  * En2 HomePage
  */
-Route::get('/', function () {
-    return view('auth.login');
-});//return view('hp.index'); });
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/index', function () {
-    return view('hp.index');
-});
+// Route::get('/index', function () {
+//     return view('hp.index');
+// });
 // Route::get('/about_us', function () { return view('hp.about_us'); });
 // Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
 // Route::get('/activities', function () { return view('hp.activities'); });
@@ -30,7 +27,7 @@ Route::get('/index', function () {
 // Route::get('/join_contact', function () { return view('hp.join_contact'); });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', 'UserController@showHome');
+    Route::get('/', 'UserController@showHome');
 
     /**
      * Mypage
