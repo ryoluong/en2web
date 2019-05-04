@@ -109,7 +109,7 @@ class AttendanceController extends Controller
                 $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
             } else {
                 $attends = $attendances->where('meeting_id', $mtg->id);
-                $numActiveUser = $users->count();
+                $numActiveUser = $users->where('isOverseas', 0)->count();
                 $numAttendUser = $attends->where('status', '=', 'attend')->count();
                 $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
                 $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
