@@ -114,7 +114,6 @@ class Line extends Model
                                 [
                                     "type" => "button",
                                     "style" => "primary",
-                                    "color" => "#555577",
                                     "height" => "sm",
                                     "action" => [
                                         "type" => "uri",
