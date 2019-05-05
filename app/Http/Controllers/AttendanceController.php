@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Facades\Line;
 use App\Meeting;
 use App\User;
 use App\Attendance;
@@ -17,10 +18,14 @@ class AttendanceController extends Controller
 
     public function addMeeting(Request $req)
     {
+        $req->validate([
+            'name' => ['max:20'],
+        ]);
         if (!Meeting::where('status', '!=', 'completed')->count()) {
             $mtg = Meeting::create([
                 'name' => request('name'),
-                'status' => 'active'
+                'status' => 'active',
+                'deadline' => request('deadline', null)
             ]);
             $overseasUsers = User::where('isOverseas', 1)->get();
             foreach ($overseasUsers as $user) {
@@ -31,20 +36,12 @@ class AttendanceController extends Controller
                     'status' => 'overseas'
                 ]);
             }
+            if (request('line_notice')) {
+                Line::attendance($mtg, 'start');
+            }
         }
         return redirect('/attendance/manager');
     }
-
-    // public function toggleMeeting(Meeting $meeting)
-    // {
-    //     if ($meeting->status == 'await') {
-    //         $meeting->status = 'active';
-    //     } else {
-    //         $meeting->status = 'await';
-    //     }
-    //     $meeting->save();
-    //     return redirect('/attendance/manager');
-    // }
 
     public function completeMeeting(Meeting $meeting)
     {

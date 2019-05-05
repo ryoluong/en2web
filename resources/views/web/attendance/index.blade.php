@@ -7,6 +7,9 @@
             document.cancelForm.submit();
         }
     }
+    function disableDateInput() {
+        document.getElementById('deadline').disabled = !document.getElementById('deadline').disabled;
+    }
 </script>
 @endsection
 @section('content')
@@ -16,7 +19,7 @@
             <div class="table_view">
                 <div class="text">
                     @if(is_null($mtg))
-                    <p>出席管理するイベントを追加</p>
+                    <p>出席管理するイベントを作成</p>
                     @else
                     <p>出席管理中：{{ $mtg->name }}</p>
                     @endif
@@ -29,11 +32,42 @@
                 {{ csrf_field() }}
                 <div class="form_view">
                     <div class="property">
-                        <p>Event Title</p>
+                        <p>タイトル</p>
                     </div>
                     <div class="value">
-                        <input name="name" class="input_text" placeholder="Ex) {{ Carbon\Carbon::now()->month }}月全体MTG"
-                            required>
+                        <input name="name" type="text" class="input_text" placeholder="Ex) {{ Carbon\Carbon::now()->month }}月全体MTG" required>
+                        @if ($errors->has('name'))
+                        <div class="help-box">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form_view">
+                    <div class="property"><p>LINE通知</p></div>
+                    <div class="value">
+                        <div class="cp_ipcheck">
+                            <label for="line_notice"><input onchange="disableDateInput();" id="line_notice" class="checkbox_simple" type="checkbox" name="line_notice" value="1" checked>グループに通知を送る (推奨)</label>
+                        </div>
+                        <div class="help-box">
+                            <p>*このイベント作成時および回答期限の日にLINE通知がいきます。</p>
+                        </div>
+                        @if ($errors->has('line_notice'))
+                        <div class="help-box">
+                            <strong>{{ $errors->first('line_notice') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                </div>                 
+                <div class="form_view">
+                    <div class="property">
+                        <p>回答期限</p>
+                    </div>
+                    <div class="value">
+                        <input name="deadline" id="deadline" type="date" class="input_text" value="{{ Carbon\Carbon::today()->toDateString() }}">
+                        <div class="help-box">
+                            <p>*通知を送る場合、入力が必要です。</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form_view">

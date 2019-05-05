@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\RemindTodaysEvents::class,
-        Commands\RemindUpcomingEvents::class
+        Commands\RemindUpcomingEvents::class,
+        Commands\NoticeAttendanceDeadline::class
     ];
 
     /**
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('command:remindtodaysevents')->dailyAt('10:00');
         $schedule->command('command:remindupcomingevents')->dailyAt('20:00');
+        $schedule->command('command:noticeattendancedeadline')->dailyAt('12:30');
     }
 
     /**

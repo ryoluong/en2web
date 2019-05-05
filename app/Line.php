@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use App\Note;
 use App\Event;
+use App\Meeting;
 
 class Line extends Model
 {
@@ -53,6 +54,83 @@ class Line extends Model
         ]);
         $this->setOptionContent($content);
         $response = file_get_contents($this->url, false, stream_context_create($this->options));
+        return $response;
+    }
+
+    public function attendance(Meeting $mtg, string $type)
+    {
+        $name = $mtg->name;
+        $deadline = $mtg->deadline;
+        $content = json_encode([
+            'to' => config('const.LINE_EN2_GROUP_ID'),
+            'messages' => [
+                [
+                    "type" => "flex",
+                    "altText" => $type == 'start' ? "出席管理が開始されました！回答してください！" : "【{$name}】本日、回答締め切り日です！",
+                    "contents" => [
+                        "type" => "bubble",
+                        "body" => [
+                            "type" => "box",
+                            "layout" => "vertical",
+                            "margin" => "sm",
+                            "contents" => [
+                            [
+                                "type" => "text",
+                                "text" => $type == 'start' ? '出席管理が開始されました！' : '本日、回答締め切り日です！',
+                                "weight" => "bold",
+                                "color" => "#ff1155",
+                                "size" => "sm",
+                                "wrap" => true
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => $name,
+                                "weight" => "bold",
+                                "size" => "lg",
+                                "margin" => "md",
+                                "color" => "#333333"
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "回答期限: {$deadline}",
+                                "size" => "sm",
+                                "margin" => "md",
+                                "color" => "#555555"
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "留学中の方は回答不要です。",
+                                "size" => "xxs",
+                                "margin" => "md",
+                                "wrap" => true,
+                                "color" => "#999999"
+                            ]
+                            ]
+                        ],
+                        "footer" => [
+                            "type" => "box",
+                            "layout" => "vertical",
+                            "contents" => [
+                                [
+                                    "type" => "button",
+                                    "style" => "primary",
+                                    "color" => "#555577",
+                                    "height" => "sm",
+                                    "action" => [
+                                        "type" => "uri",
+                                        "label" => "回答する",
+                                        "uri" => "https://en2ynu.com/attendance?openExternalBrowser=1"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]                
+            ]
+        ]);
+        $this->setOptionContent($content);
+        $response = file_get_contents($this->url, false, stream_context_create($this->options));
+        Log::info($response);
         return $response;
     }
 

@@ -1927,6 +1927,10 @@ strong {
 
         .cp_ipcheck {
           margin: auto 0;
+          @include pc {
+            padding-top: 9px;
+            padding-bottom: 3px;
+          }
         }
 
         .input_textarea {
