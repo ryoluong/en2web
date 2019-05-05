@@ -9,15 +9,39 @@ use App\Event;
 
 class Line extends Model
 {
+    private $headers;
+    private $url;
+    private $options;
+
+    public function __construct()
+    {
+        $this->headers = [
+            'Authorization: Bearer ' . config('const.LINE_CHANNEL_TOKEN'),
+            'Content-Type: application/json; charset=utf-8',
+        ];
+        $this->url = 'https://api.line.me/v2/bot/message/push';
+        $this->options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => $this->headers,
+                'content' => 'here must be filled',
+                'ignore_errors' => true,
+                'protocol_version' => '1.1'
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            ]
+        ];
+    }
+    
+    private function setOptionContent(string $content)
+    {
+        $this->options['http']['content'] = $content;
+    }
 
     public function notice(string $str)
     {
-        $url = 'https://api.line.me/v2/bot/message/push';
-        $channelToken = config('const.LINE_CHANNEL_TOKEN');
-        $headers = [
-            'Authorization: Bearer ' . $channelToken,
-            'Content-Type: application/json; charset=utf-8',
-        ];
         $content = json_encode([
             'to' => config('const.LINE_EN2_KYOYU_GROUP_ID'),
             'messages' => [
@@ -27,108 +51,97 @@ class Line extends Model
                 ],
             ]
         ]);
-        $options = array (
-            'http' => array (
-                'method' => 'POST',
-                'header' => $headers,
-                'content' => $content,
-                'ignore_errors' => true,
-                'protocol_version' => '1.1'
-                ),
-            'ssl' => array (
-                'verify_peer' => false,
-                'verify_peer_name' => false
-                )
-            );
-        $response = file_get_contents($url, false, stream_context_create($options));
+        $this->setOptionContent($content);
+        $response = file_get_contents($this->url, false, stream_context_create($this->options));
         return $response;
     }
 
-    public function remindEvent(Event $event)
+    public function remindEvent(Event $event, string $term)
     {
-        $url = 'https://api.line.me/v2/bot/message/push';
-        $channelToken = config('const.LINE_CHANNEL_TOKEN');
-        $headers = [
-            'Authorization: Bearer ' . $channelToken,
-            'Content-Type: application/json; charset=utf-8',
-        ];
         $event_title = $event->title;
-        $event_date = $event->date;
-        $event_time = preg_replace('/:[0-9]+$/', '', $event->start_time) .'~'. preg_replace('/:[0-9]+$/', '', $event->end_time);
+        $weeks = ["日", "月", "火", "水", "木", "金", "土"];
+        $date = date_create($event->date);
+        $week = $weeks[$date->format('w')];
+        $month = $date->format('n');
+        $day = $date->format('j');
+        $event_timedate = "{$month}月{$day}日 ({$week})";
+        if($event->start_time && $event->end_time) {
+            $event_timedate .= '  '. preg_replace('/:[0-9]+$/', '', $event->start_time) . '~' . preg_replace('/:[0-9]+$/', '', $event->end_time);
+        }
         $event_location = $event->location;
+        $alt_text = $term == '明日' || $term == '今日' ? "\u{1F4E3}\u{1F4E3} {$event_title}は{$term}です！" : "\u{1F4E3}\u{1F4E3} {$event_title}まであと{$term}です！";
+        $box_content_header = [
+            "type" => "text",
+            "text" => $term == '明日' || $term == '今日' ? "\u{1F4E3}\u{1F4E3} {$term}です！\u{1F4E3}\u{1F4E3}" : "\u{1F4E3} あと{$term}です！\u{1F4E3}",
+            "size" => "xs",
+            "wrap" => true,
+            "weight" => "bold",
+            "color" => "#555555",    
+        ];
+        $box_content_title = [
+            "type" => "text",
+            "text" => $event_title,
+            "color" => "#333333",
+            "size" => "md",
+            "weight" => "bold",
+            "wrap" => true,
+            "margin" => "md"            
+        ];
+        $box_content_separator = [
+            "type" => "separator",
+            "color" => "#aaaaaa",
+            "margin" => "md"
+        ];
+        $box_content_timedate = [
+            "type" => "text",
+            "text" => "\u{1F5D3}  " . $event_timedate,
+            "size" => "xs",
+            "margin" => "md",
+            "wrap" => true,
+            "flex" => 1,
+            "color" => "#555555"
+        ];
+        $box_content_location = [
+            "type" => "text",
+            "text" => "\u{1F4CC}  " . $event_location,
+            "size" => "xs",
+            "margin" => "sm",
+            "wrap" => true,
+            "color" => "#555555",
+        ];
+        $box_contents = [
+            $box_content_header, 
+            $box_content_title, 
+            $box_content_separator, 
+            $box_content_timedate,
+        ];
+        if ($event->location) {
+            $box_contents[] = $box_content_location;
+        }
         $content = json_encode([
-            'to' => config('const.LINE_EN2_KYOYU_GROUP_ID'),
+            'to' => config('const.LINE_EN2_GROUP_ID'),
             'messages' => [
                 [
                     "type" => "flex",
-                    "altText" => 'リマインド',
+                    "altText" => $alt_text,
                     "contents" => [
                         "type" => "bubble",
                         "body" => [
                             "type" => "box",
                             "layout" => "vertical",
-                            "contents" => [
-                                [
-                                    "type" => "text",
-                                    "text" => $event_title,
-                                    "size" => "md",
-                                    "weight" => "bold",
-                                    "wrap" => true,
-                                    "color" => "#555555",
-                                ],
-                                [
-                                    "type" => "text",
-                                    "text" => $event_date,
-                                    "size" => "sm",
-                                    "weight" => "bold",
-                                    "wrap" => true,
-                                    "color" => "#555555",
-                                ],
-                                [
-                                    "type" => "text",
-                                    "text" => $event_time,
-                                    "size" => "sm",
-                                    "wrap" => true,
-                                    "color" => "#555555",
-                                ],                                
-                                [
-                                    "type" => "text",
-                                    "text" => $event_location,
-                                    "size" => "xs",
-                                    "wrap" => true,
-                                    "color" => "#555555",
-                                ]
-                            ]
+                            "contents" => $box_contents
                         ],
                     ]
                 ],
             ],
         ]);
-        $options = array (
-            'http' => array (
-                'method' => 'POST',
-                'header' => $headers,
-                'content' => $content,
-                'ignore_errors' => true,
-                'protocol_version' => '1.1'
-                ),
-            'ssl' => array (
-                'verify_peer' => false,
-                'verify_peer_name' => false
-                )
-            );
-        $response = file_get_contents($url, false, stream_context_create($options));
-        Log::info($response); 
+        $this->setOptionContent($content);
+        $response = file_get_contents($this->url, false, stream_context_create($this->options));
+        Log::info($response);
     }
 
     public function note(Note $note, $header_text = 'Notification') 
     {
-        $url = 'https://api.line.me/v2/bot/message/push';
-        $channelToken = config('const.LINE_CHANNEL_TOKEN');
-        $headers = [
-            'Authorization: Bearer ' . $channelToken,
-            'Content-Type: application/json; charset=utf-8',
-        ];
         $tmp = mb_substr($note->content, 0, 50).'......';
         $note_content = preg_replace('/[\n\r\t]/', ' ', $tmp);
         if($note->photos->count()) {
@@ -224,20 +237,8 @@ class Line extends Model
                 ],
             ],
         ]);
-        $options = array (
-            'http' => array (
-                'method' => 'POST',
-                'header' => $headers,
-                'content' => $content,
-                'ignore_errors' => true,
-                'protocol_version' => '1.1'
-                ),
-            'ssl' => array (
-                'verify_peer' => false,
-                'verify_peer_name' => false
-                )
-            );
-        $response = file_get_contents($url, false, stream_context_create($options));
+        $this->setOptionContent($content);
+        $response = file_get_contents($this->url, false, stream_context_create($this->options));
         Log::info($response);
     }
 }

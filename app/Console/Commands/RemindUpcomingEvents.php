@@ -45,16 +45,16 @@ class RemindUpcomingEvents extends Command
         $one_week_after = Carbon::today()->addWeeks(1)->toDateString();
         $tomorrow = Carbon::today()->addDay()->toDateString();
         foreach(Event::where('date', $one_month_after)->where('one_month_before', true)->get() as $event) {
-            Line::remindEvent($event);
+            Line::remindEvent($event, '1ヶ月');
         }
         foreach(Event::where('date', $two_weeks_after)->where('two_weeks_before', true)->get() as $event) {
-            Line::remindEvent($event);
+            Line::remindEvent($event, '2週間');
         }
         foreach(Event::where('date', $one_week_after)->where('one_week_before', true)->get() as $event) {
-            Line::remindEvent($event);
+            Line::remindEvent($event, '1週間');
         }
         foreach(Event::where('date', $tomorrow)->where('the_day_before', true)->get() as $event) {
-            Line::remindEvent($event);
+            Line::remindEvent($event, '明日');
         }
     }
 }

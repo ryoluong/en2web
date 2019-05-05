@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\RemindTodaysEvents::class,
+        Commands\RemindUpcomingEvents::class
     ];
 
     /**
@@ -24,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('command:remindtodaysevents')->dailyAt('10:00');
+        $schedule->command('command:remindupcomingevents')->dailyAt('20:00');
     }
 
     /**

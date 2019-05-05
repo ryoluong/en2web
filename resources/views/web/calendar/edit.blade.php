@@ -83,7 +83,7 @@
                                     <label for="oneMonthBefore"><input id="oneMonthBefore" class="checkbox_simple" type="checkbox" name="oneMonthBefore" value="1" {{ $eventDb->one_month_before == 1 ? 'checked' : ''}}>１ヶ月前</label>
                                 </div>
                                 <div class="checkbox_wrapper">
-                                    <label for="twoWeeksBefore"><input id="twoWeeksBefore" class="checkbox_simple" type="checkbox" name="twoWeeksBefore" value="1" {{ $eventDb->two_weekd_before == 1 ? 'checked' : ''}}>２週間前</label>
+                                    <label for="twoWeeksBefore"><input id="twoWeeksBefore" class="checkbox_simple" type="checkbox" name="twoWeeksBefore" value="1" {{ $eventDb->two_weeks_before == 1 ? 'checked' : ''}}>２週間前</label>
                                 </div>
                                 <div class="checkbox_wrapper">
                                     <label for="oneWeekBefore"><input id="oneWeekBefore" class="checkbox_simple" type="checkbox" name="oneWeekBefore" value="1" {{ $eventDb->one_week_before == 1 ? 'checked' : ''}}>１週間前</label>
