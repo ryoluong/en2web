@@ -17,14 +17,13 @@
 Route::get('/login', function () {
     return view('auth.login');
 });
-// Route::get('/index', function () {
-//     return view('hp.index');
-// });
-// Route::get('/about_us', function () { return view('hp.about_us'); });
-// Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
-// Route::get('/activities', function () { return view('hp.activities'); });
-// Route::get('/achievements', function () { return view('hp.achievements'); });
-// Route::get('/join_contact', function () { return view('hp.join_contact'); });
+
+Route::get('/index', function () { return view('hp.index'); });
+Route::get('/about_us', function () { return view('hp.about_us'); });
+Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
+Route::get('/activities', function () { return view('hp.activities'); });
+Route::get('/achievements', function () { return view('hp.achievements'); });
+Route::get('/join_contact', function () { return view('hp.join_contact'); });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'UserController@showHome');

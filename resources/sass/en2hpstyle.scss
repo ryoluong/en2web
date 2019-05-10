@@ -1,40 +1,53 @@
-
 * {
   margin: 0px;
   padding: 0px;
 }
 html {
-  overflow-y: scroll; /*ページが短くても常にスクロールバーを表示*/
+  overflow-y: scroll;
 }
 body {
-  font-family: sans-serif;
-  max-width: 1260px; /*表示の最大幅の設定*/
+  max-width: 1260px;
   margin: 0 auto;
-  /*　marginの省略記法について
-  margin: a b;
-    a: topとbottomの値
-    b: rightとleftの値
-  margin: top right bottom border-left
-    上記のように個別にまとめて設定もできる　*/
-  background-color: #fff;
+  font-family: sans-serif;
 }
+@mixin sp {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 /*ヘッダー*/
 .headerTop {
   display: flex;
   justify-content: space-between;
   height: 80px;
   line-height: 80px;
-  padding: 0 20px;
+  padding: 3px 20px;
   background-color: #fefefe;
+  border-bottom: 5px solid #00aaca;
+  @include sp {
+    height: 60px;
+    // padding-bottom: 500px;
+  }
 }
 .headerTop .blank {
   width: 150px;
 }
 .headerTop .logo {
   padding-top: 9px;
-}　
+  @include sp {
+    width: 100%;
+    padding-top: 5px;
+    img {
+      height: 40px;
+    }
+  }
+}
 .headerTop .btn {
   width: 150px;
+  @include sp {
+    display: none;
+  }
 }
 .headerTop .btn a {
   width: 150px;
@@ -47,7 +60,8 @@ body {
   padding: 10px;
   transition: 0.3s; /*こっちにもtransitionを記述すると、戻りもゆっくりになる*/
 }
-.headerTop .btn a:hover { /*hoverはカーソルが載ったときの設定*/
+.headerTop .btn a:hover {
+  /*hoverはカーソルが載ったときの設定*/
   transition: 0.3s;
   text-decoration: none;
   background-color: #ddd;
@@ -108,98 +122,156 @@ body {
   display: flex;
   width: 100%;
   height: 590px;
+  background-image: url("/img/hp/landing_1.jpg");
+  @include sp {
+    height: 500px;
+  }
 }
 .landing h1 {
   text-align: left;
-  font-family: 'Yu Mincho', "游明朝", YuMincho, "游明朝体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3",
+    "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
   font-weight: 100;
   line-height: 1.1;
   color: white;
   font-size: 115px;
   padding: 300px 0px 0px 40px;
-  display: none;
+  @include sp {
+    line-height: 1.3;
+    font-size: 44px;
+    width: 100%;
+    padding: 250px 0 0 15px;
+  }
 }
 /*-----------------------------
 index.html
 ----------------------------------*/
 .main {
-  display: table;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   padding-top: 60px;
   background-color: #fefefe;
+  @include sp {
+    padding-top: 0;
+  }
 }
-.main .about_us,.achievements,.activities,.andmore {
-  width: 33.3%;
-  display: table-cell;
+.main .about_us,
+.achievements,
+.activities,
+.andmore {
+  box-sizing: border-box;
+  flex: 0 0 33.3%;
   background-color: #00aaca;
   color: #fff;
   font-size: 22px;
   vertical-align: top;
-  box-shadow: 2.5px 2.5px 2px -2px gray;
+  box-shadow: 2.5px 2.5px 2px -2px #aaa;
   letter-spacing: 0.075em;
+  position: relative;
+  background-size: cover;
+  @include sp {
+    flex: 0 0 100%;
+    height: 200px;
+    box-shadow: 0px 2.5px 2px 0px #aaa;
   }
+}
 .main .about_us {
-  background-image: url("../img/about_us.jpg");
+  background-image: url("/img/hp/about_us.jpg");
   background-position: bottom center;
 }
 .main .achievements {
-  background-image: url("../img/achievements.jpg");
+  background-image: url("/img/hp/achievements.jpg");
   background-position: bottom center;
 }
 .main .activities {
-  background-image: url("../img/activities.jpg");
+  background-image: url("/img/hp/activities.jpg");
   background-position: bottom center;
 }
 .main .andmore {
-  background-image: url("../img/and_more.jpg");
+  background-image: url("/img/hp/and_more.jpg");
   background-position: bottom right;
 }
 .main h1 {
   padding-left: 30px;
   line-height: 72px;
+  @include sp {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    font-size: 30px;
+    margin-top: 60px;
+  }
 }
 .main h1 span {
   font-size: 85px;
+  @include sp {
+    font-size: 40px;
+  }
 }
 .description {
-  width: 66.7%;
+  box-sizing: border-box;
+  flex: 0 0 66.6%;
   color: #484848;
   text-align: center;
-  display: table-cell;
   vertical-align: top;
   padding-top: 5px;
   padding-bottom: 15px;
+  @include sp {
+    flex: 0 0 100%;
+    line-height: 1.3;
+    p {
+      text-align: left;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+  }
 }
 .description h2 {
   font-size: 30px;
   letter-spacing: 0.075em;
+  @include sp {
+    padding-top: 10px;
+    font-size: 17px;
+    text-align: center;
+  }
 }
 .description h2::after {
-  /*この::afterは少し難しい。追加要素と呼ばれる機能。
-  これを使ってグラデーションをつけた罫線を擬似的に再現している。*/
   content: "";
   display: block;
   height: 3px;
   width: 100%;
-  /*ここから下３つは全てグラデーションの記述。
-  ブラウザごと（chrome, firefox, safariなど）
-  に仕様が違うので複数書いておく必要がある*/
-  background: -moz-linear-gradient(left, #00aaca, #ddd);
-  background: -webkit-linear-gradient(left, #00aaca, #ddd);
   background: linear-gradient(to right, #00aaca, #ddd);
   margin-top: 10px;
   margin-bottom: 10px;
+  @include sp {
+    height: 2px;
+  }
 }
 .description h2 span {
-  color: #0090b0
+  color: #0090b0;
 }
 .description p {
   font-size: 23px;
   line-height: 1.3;
   margin-top: 10px;
+  @include sp {
+    width: 95%;
+    margin: auto;
+    font-size: 15px;
+  }
 }
 .countries {
   text-align: left;
+  .icon .icon-td {
+    padding-bottom: 15px;
+    .icon-img {
+      @include sp {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
 }
 .description table {
   margin-top: 10px;
@@ -211,11 +283,13 @@ index.html
 }
 .description .countries {
   text-align: center;
-  padding:  0px 20px;
 }
 .description .countries .name {
   font-size: 20px;
   height: 40px;
+  @include sp {
+    font-size: 13px;
+  }
 }
 .button {
   background-color: #eee;
@@ -274,7 +348,6 @@ index.html
   box-shadow: none;
   color: white;
   border-bottom: none;
-  background-image: url("../img/info.jpg");
   border-radius: 5px 5px 0px 0px;
 }
 .description .link2 {
@@ -287,13 +360,16 @@ index.html
   box-shadow: none;
   color: white;
   border-bottom: none;
-  background-image: url("../img/join.jpg");
   border-radius: 5px 5px 0px 0px;
+}
+.icon .icon-td .icon-img {
+  width: 50px;
+  height: 50px;
 }
 
 /*index.html以外のページ*/
 .title {
-  width:100%;
+  width: 100%;
   background-color: gray;
   background-size: cover;
   height: 100px;
@@ -301,23 +377,18 @@ index.html
   align-items: center;
 }
 .title_about {
-  background-image: url("../img/title_about_us.jpg");
   background-position: center center;
 }
 .title_achievements {
-  background-image: url("../img/");
   background-position: center bottom;
 }
 .title_studyabroad {
-  background-image: url("../img/title_study_abroad.jpg");
   background-position: center center;
 }
 .title_activities {
-  background-image: url("../img/");
   background-position: center center;
 }
 .title_join {
-  background-image: url("../img/");
   background-position: center center;
 }
 .title h1 {
@@ -352,7 +423,6 @@ index.html
   margin-left: 100px;
 }
 
-
 .container .description {
   margin: 0 50px;
 }
@@ -367,6 +437,53 @@ index.html
   font-size: 18px;
   line-height: inherit;
 }
+.form {
+  width: 100%;
+  @include sp {
+    margin-top: 20px;
+  }
+  p,
+  input,
+  textarea,
+  button {
+    width: 80%;
+    box-sizing: border-box;
+    display: block;
+    margin: auto;
+  }
+  textarea,
+  input {
+    font-size: 16px;
+    padding: 2px 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: none;
+  }
+  p {
+    text-align: left;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  input {
+    height: 28px;
+  }
+  button {
+    width: 50%;
+    height: 40px;
+    background-color: #09b;
+    transition: 0.3s;
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    &:hover {
+      background-color: #057;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  }
+}
 
 /*フッター*/
 footer {
@@ -375,6 +492,10 @@ footer {
   position: relative;
   background-color: #101525;
   margin-top: 60px;
+  @include sp {
+    height: 75px;
+    margin-top: 20px;
+  }
 }
 .footer-menu {
   display: table;
