@@ -101,7 +101,7 @@ class RegisterController extends Controller
             'email_verify_token' => base64_encode($data['email']),
         ]);
 
-        Code::where('code', $request->code)->delete();
+        Code::where('code', $data['code'])->delete();
 
         Slack::notice('Pre-Registered: '.$user->email);
         $email = new EmailVerification($user);
