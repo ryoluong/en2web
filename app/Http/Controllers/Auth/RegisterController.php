@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use DB;
 use App\User;
 use App\Country;
+use App\Code;
 use App\Facades\Slack;
 use App\Http\Controllers\Controller;
 use App\Mail\EmailVerification;
@@ -100,9 +101,16 @@ class RegisterController extends Controller
             'email_verify_token' => base64_encode($data['email']),
         ]);
 
-        $email = new EmailVerification($user);
-        Mail::to($user->email)->send($email);
+        Code::where('code', $request->code)->delete();
+
         Slack::notice('Pre-Registered: '.$user->email);
+        $email = new EmailVerification($user);
+        try {
+            Mail::to($user->email)->send($email);
+        } catch (Exception $e) {
+            $message = "メールの送信に失敗しました。メールアドレスが間違っている可能性があります。もう一度仮登録の手続きをしてください。（Registration Codeは同一のものが使えます。）\n入力されたEmail: {$user->email}";
+            return view('auth.error', compact('message'));
+        }
     }
 
     public function confirm(Request $request)
@@ -123,7 +131,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         event(new Registered($user = $this->create($request->all())));
-        DB::table('codes')->where('code', $request->code)->delete();
+        
         return view('auth.registered');
     }
 
