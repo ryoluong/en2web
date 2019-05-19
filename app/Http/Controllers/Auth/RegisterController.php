@@ -151,10 +151,6 @@ class RegisterController extends Controller
             'department' => ['required'],
             'major' => ['required'],
             'generation' => ['required', new GenerationVali],
-            'countries' => ['nullable', 'string', 'max:255'],
-            'university' => ['nullable', 'string', 'max:255'],
-            'isOB' => ['nullable', 'in:1'],
-            'job' => ['nullable', 'string', 'max:255'],
         ]);
 
         $email_token = $request->email_token;
@@ -167,9 +163,6 @@ class RegisterController extends Controller
         $user->major = $request->major;
         $user->department_id = $request->department_id;
         $user->generation = $request->generation;
-        $user->university = $request->university;
-        $user->isOB = $request->input('isOB', 0);
-        $user->job = $request->job;
         
         return view('auth.main.register_confirm', compact(['user', 'email_token', 'countries']));
     }
@@ -186,31 +179,8 @@ class RegisterController extends Controller
         $user->department_id = $request->department_id;
         $user->major = $request->major;
         $user->generation = $request->generation;
-        
-        if($request->university !== null)
-        {
-            $uni_temp = mb_convert_kana($request->university, 's');
-            $unis = preg_split('/[\s,]+/', $uni_temp, -1, PREG_SPLIT_NO_EMPTY);
-            $university = '';
-            foreach($unis as $u)
-            {
-                $university .= $u.' ';
-            }
-            $user->university = $university;
-        } else {
-            $user->university = $request->university;
-        }
-
-        $user->isOB = $request->isOB;
-        $user->job = $request->job;
         $user->save();
         
-        if($request->countries !== null)
-        {
-            $country_ids = getCountryIdsFromRequest($request->countries);
-            $user->Countries()->sync($country_ids);
-        }
-
         Mail::to($user->email)->send(new RegisterNotification($user));
         Slack::notice("Register Completed: {$user->email}\nName: {$user->name}");
         return view('auth.main.registered');

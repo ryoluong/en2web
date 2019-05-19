@@ -45,26 +45,6 @@
                             <input type="hidden" class="input_text" name="generation" value="{{ $user->generation }}" required>
                         </div>
                         <div class="form_view">
-                            <div class="property"><p class="prof_head">留学先国：</p></div>
-                            <div class="value"><p>{{ $countries }}</p></div>
-                            <input type="hidden" class="input_text" name="countries" value="{{ $countries }}" >
-                        </div>
-                        <div class="form_view">
-                            <div class="property"><p class="prof_head">留学先大学・機関：</p></div>
-                            <div class="value"><p>{{ $user->university }}</p></div>
-                            <input type="hidden" class="input_text" name="university" value="{{ $user->university }}" >
-                        </div>
-                        <div class="form_view">
-                            <div class="property"><p class="prof_head">OB・OG：</p></div>
-                            <div class="value"><p>{{ $user->isOB == 1 ? "Yes" : "No" }}</p></div>
-                            <input type="hidden" class="input_text" name="isOB" value="{{ $user->isOB }}" >
-                        </div>
-                        <div class="form_view">
-                            <div class="property"><p class="prof_head">進路等：</p></div>
-                            <div class="value"><p>{{ $user->job }}</p></div>
-                            <input type="hidden" class="input_text" name="job" value="{{ $user->job }}" >
-                        </div>
-                        <div class="form_view">
                             <div class="button_wrapper">
                                 <button type="submit" class="bluebtn" id="disable_button">
                                     <p class="button_text">Register</p>
