@@ -105,12 +105,7 @@ class RegisterController extends Controller
 
         Slack::notice('Pre-Registered: '.$user->email);
         $email = new EmailVerification($user);
-        try {
-            Mail::to($user->email)->send($email);
-        } catch (Exception $e) {
-            $message = "メールの送信に失敗しました。メールアドレスが間違っている可能性があります。もう一度仮登録の手続きをしてください。（Registration Codeは同一のものが使えます。）\n入力されたEmail: {$user->email}";
-            return view('auth.error', compact('message'));
-        }
+        Mail::to($user->email)->send($email);
     }
 
     public function confirm(Request $request)
@@ -130,8 +125,12 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        event(new Registered($user = $this->create($request->all())));
-        
+        try {
+            event(new Registered($user = $this->create($request->all())));
+        } catch (Exception $e) {
+            $message = "メールの送信に失敗しました。メールアドレスが間違っている可能性があります。もう一度仮登録の手続きをしてください。（Registration Codeは同一のものが使えます。）\n入力されたEmail: {$user->email}";
+            return view('auth.error', compact('message'));
+        }
         return view('auth.registered');
     }
 
