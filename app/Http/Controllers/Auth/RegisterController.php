@@ -15,7 +15,6 @@ use App\Rules\CodeCheck;
 use App\Rules\GenerationVali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
@@ -231,7 +230,6 @@ class RegisterController extends Controller
         }
 
         Mail::to($user->email)->send(new RegisterNotification($user));
-        Log::info('Registered: '.$user->email);
         Slack::notice("Register Completed: {$user->email}\nName: {$user->name}");
         return view('auth.main.registered');
     }
