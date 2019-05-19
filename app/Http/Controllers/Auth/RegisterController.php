@@ -115,39 +115,14 @@ class RegisterController extends Controller
         $bridge_request = $request->all();
         $bridge_request['password_mask'] = '********';
         $bridge_request['code_mask'] = '********';
-        // if (DB::table('codes')->where('code', $request->code)->exists()) {
         return view('auth.register_confirm_create')->with($bridge_request);
-        // } else {
-        //     $user = User::where('identification_code', $request->code)->first();
-        //     return view('auth.register_confirm_update', compact('user'))->with($bridge_request);
-        // }
     }
 
     public function register(Request $request)
     {
-        try {
-            event(new Registered($user = $this->create($request->all())));
-        } catch (Exception $e) {
-            $message = "メールの送信に失敗しました。メールアドレスが間違っている可能性があります。もう一度仮登録の手続きをしてください。（Registration Codeは同一のものが使えます。）\n入力されたEmail: {$user->email}";
-            return view('auth.error', compact('message'));
-        }
+        event(new Registered($user = $this->create($request->all())));
         return view('auth.registered');
     }
-
-    // public function registerExistingUser(Request $request)
-    // {
-    //     $user = User::where('identification_code', $request->code)->first();
-    //     $user->update([
-    //         'email' => $request->email,
-    //         'password' => bcrypt($request->password),
-    //         'email_verify_token' => base64_encode($request->email),
-    //     ]);
-    //     $email = new EmailVerification($user);
-    //     Mail::to($user->email)->send($email);
-    //     Log::info('Pre-Registered: '.$user->email);
-    //     Slack::notice('Pre-Registered: '.$user->email);
-    //     return view('auth.registered');
-    // }
 
     public function showForm(string $email_token) {
         if(!User::where('email_verify_token', $email_token)->exists()) {
