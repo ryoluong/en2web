@@ -103,7 +103,6 @@ class RegisterController extends Controller
 
         $email = new EmailVerification($user);
         Mail::to($user->email)->send($email);
-        Log::info('Pre-Registered: '.$user->email);
         Slack::notice('Pre-Registered: '.$user->email);
     }
 
