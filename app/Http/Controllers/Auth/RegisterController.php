@@ -92,11 +92,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $user = User::updateOrCreate([
+            'identification_code' => $data['code'],
+        ],
+        [
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'email_verify_token' => base64_encode($data['email']),
-            'identification_code' => $data['code'],
         ]);
 
         $email = new EmailVerification($user);
@@ -112,12 +114,12 @@ class RegisterController extends Controller
         $bridge_request = $request->all();
         $bridge_request['password_mask'] = '********';
         $bridge_request['code_mask'] = '********';
-        if (DB::table('codes')->where('code', $request->code)->exists()) {
-            return view('auth.register_confirm_create')->with($bridge_request);
-        } else {
-            $user = User::where('identification_code', $request->code)->first();
-            return view('auth.register_confirm_update', compact('user'))->with($bridge_request);
-        }
+        // if (DB::table('codes')->where('code', $request->code)->exists()) {
+        return view('auth.register_confirm_create')->with($bridge_request);
+        // } else {
+        //     $user = User::where('identification_code', $request->code)->first();
+        //     return view('auth.register_confirm_update', compact('user'))->with($bridge_request);
+        // }
     }
 
     public function register(Request $request)
@@ -127,20 +129,20 @@ class RegisterController extends Controller
         return view('auth.registered');
     }
 
-    public function registerExistingUser(Request $request)
-    {
-        $user = User::where('identification_code', $request->code)->first();
-        $user->update([
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'email_verify_token' => base64_encode($request->email),
-        ]);
-        $email = new EmailVerification($user);
-        Mail::to($user->email)->send($email);
-        Log::info('Pre-Registered: '.$user->email);
-        Slack::notice('Pre-Registered: '.$user->email);
-        return view('auth.registered');
-    }
+    // public function registerExistingUser(Request $request)
+    // {
+    //     $user = User::where('identification_code', $request->code)->first();
+    //     $user->update([
+    //         'email' => $request->email,
+    //         'password' => bcrypt($request->password),
+    //         'email_verify_token' => base64_encode($request->email),
+    //     ]);
+    //     $email = new EmailVerification($user);
+    //     Mail::to($user->email)->send($email);
+    //     Log::info('Pre-Registered: '.$user->email);
+    //     Slack::notice('Pre-Registered: '.$user->email);
+    //     return view('auth.registered');
+    // }
 
     public function showForm(string $email_token) {
         if(!User::where('email_verify_token', $email_token)->exists()) {
