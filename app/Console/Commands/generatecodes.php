@@ -39,13 +39,17 @@ class generatecodes extends Command
     public function handle()
     {
         $num = $this->argument('num');
-        for($i = 0; $i < $num; $i++) {
-            $code = Code::create([
-                'code' => $this->getRandomString(12)
-            ]);
-            $this->line($code->code);
+        if($num > 100) {
+            $this->error('Number of codes generate should be less than 100.');
+        } else {
+            for($i = 0; $i < $num; $i++) {
+                $code = Code::create([
+                    'code' => $this->getRandomString(12)
+                ]);
+                $this->line($code->code);
+            }
+            $this->info("{$num} codes successfully generated.");
         }
-        $this->info("{$num} codes successfully generated.");
     }
     private function getRandomString($num)
     {
