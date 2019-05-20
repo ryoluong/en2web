@@ -1,0 +1,38 @@
+.how-to-register {
+  width: 95%;
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 35px;
+  .img {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 35px;
+  }
+  h1 {
+    font-size: 24px;
+    color: #555;
+    border-left: 10px solid #77b;
+    padding: 7.5px 10px;
+  }
+  h2 {
+    font-size: 18px;
+    a {
+      color: #0ac;
+    }
+  }
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+  h4 {
+    margin: 12px auto;
+  }
+  strong {
+    font-size: 18px;
+    border-bottom: 2px solid #f15;
+    padding-right: 5px;
+    padding-bottom: 3px;
+  }
+}

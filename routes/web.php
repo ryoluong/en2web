@@ -11,20 +11,24 @@
 |
 */
 
-/**
- * En2 HomePage
- */
-Route::get('/login', function () {
-    return view('auth.login');
+// /**
+//  * En2 HomePage
+//  */
+// Route::get('/login', function () {
+//     return view('auth.login');
+// });
+
+// Route::get('/index', function () { return view('hp.index'); });
+// Route::get('/about_us', function () { return view('hp.about_us'); });
+// Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
+// Route::get('/activities', function () { return view('hp.activities'); });
+// Route::get('/achievements', function () { return view('hp.achievements'); });
+// Route::get('/join_contact', function () { return view('hp.join_contact'); });
+
+Route::get('/how-to-register', function(){
+    return view('web.how_to_register');
 });
-
-Route::get('/index', function () { return view('hp.index'); });
-Route::get('/about_us', function () { return view('hp.about_us'); });
-Route::get('/study_abroad', function () { return view('hp.study_abroad'); });
-Route::get('/activities', function () { return view('hp.activities'); });
-Route::get('/achievements', function () { return view('hp.achievements'); });
-Route::get('/join_contact', function () { return view('hp.join_contact'); });
-
+// 会員のみ
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'UserController@showHome');
 
