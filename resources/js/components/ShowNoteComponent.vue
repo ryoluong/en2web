@@ -44,14 +44,14 @@
     <div class="fav-and-share">
       <div class="fav-button-wrapper" v-bind:class="{ favNote: isFav, favAnime: isFavAnime }">
         <p class="text">{{ isFav ? "You\'ve liked!" : 'Like this Note!'}}</p>
-        <fav-button-show-note
+        <fav-button
           class="fav-button"
           :is_fav="isFav"
           :num_of_fav="numOfFav"
           :note_id="note.id"
           @click-fav="onClickFav"
           v-bind:class="{ favNote: isFav, favAnime: isFavAnime }"
-        ></fav-button-show-note>
+        ></fav-button>
       </div>
       <div class="line-send-wrapper">
         <img @click="confirm" class="line-send" src="/img/line_send.png" alt="line">
@@ -66,13 +66,13 @@
     <p v-html="note.content" class="content"></p>
     <div class="fav-button-wrapper" v-bind:class="{ favNote: isFav, favAnime: isFavAnime }">
       <p class="text">{{ isFav ? "You\'ve liked!" : 'Like this Note!' }}</p>
-      <fav-button-show-note
+      <fav-button
         class="fav-button"
         :is_fav="isFav"
         :num_of_fav="numOfFav"
         :note_id="note.id"
         @click-fav="onClickFav"
-      ></fav-button-show-note>
+      ></fav-button>
     </div>
   </div>
 </template>

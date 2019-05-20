@@ -35,10 +35,6 @@ Vue.component("user-item", require("./components/UserItemComponent.vue"));
 Vue.component("show-note", require("./components/ShowNoteComponent.vue"));
 Vue.component("fav-button", require("./components/FavNoteComponent.vue"));
 Vue.component(
-  "fav-button-show-note",
-  require("./components/FavNoteComponentForShowNote.vue")
-);
-Vue.component(
   "register-department",
   require("./components/RegisterDepartmentComponent.vue")
 );
