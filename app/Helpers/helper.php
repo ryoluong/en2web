@@ -72,13 +72,3 @@ function getOrientatedImage($image, $photo)
     }
     return $image;
 }
-
-function getRandomString($num)
-{
-    $chars = '123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
-    $randomString = '';
-    for($i = 0; $i < $num; $i++) {
-        $randomString .= $chars[random_int(0, strlen($chars) - 1)];
-    }
-    return $randomString;
-}
