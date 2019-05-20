@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="how-to-register">
+    <h5>En2::WebはEn2メンバー専用のWebサイトです。メンバー以外の登録・ログインはできません。</h5>
     <h1>登録方法</h1>
     <h2>1. <a href="/login" target="_blank">en2ynu.com</a>にアクセス</h2>
     <h2>2. Sign upをクリック</h2>
@@ -19,6 +20,5 @@
     <h4>- 上記同様、メールアドレスに間違いがあった可能性があります。再登録してください。</h4>
     <h4>- 迷惑メールボックスを確認してください。en2ynu.comドメインのメールがフィルターに引っかかることがあります。</h4>
     <h4>- YNUアドレスでメールが届かない場合は、Gmailなど他のアドレスで登録を行ってみてください。</h4>
-
 </div>
 @endsection
