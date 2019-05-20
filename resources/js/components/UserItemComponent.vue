@@ -1,11 +1,7 @@
 <template>
   <div class="flex_view">
     <a :href="userPageUrl">
-      <img
-        class="user_icon"
-        :src="[ user.avater_path ? user.avater_path : '/img/categories/user.png']"
-        alt="user_icon"
-      >
+      <v-lazy-image class="user_icon" :src="srcUrl" alt="user_icon"/>
     </a>
     <a class="user_name" :href="userPageUrl">{{ user.name }}</a>
   </div>
@@ -36,6 +32,13 @@ export default {
         "&showOB=" +
         [this.showOB ? 1 : 0]
       );
+    },
+    srcUrl() {
+      if (this.user.avater_path) {
+        return this.user.avater_path;
+      } else {
+        return "/img/categories/user.png";
+      }
     }
   }
 };
