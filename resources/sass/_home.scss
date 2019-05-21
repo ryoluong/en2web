@@ -327,6 +327,11 @@
     margin: 20px auto;
     width: fit-content;
     padding: 0 5px;
+    transition: 0.3s;
+    &:hover {
+      color: #888;
+      transition: 0.3s;
+    }
   }
 }
 .attendance-form {

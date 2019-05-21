@@ -49,6 +49,15 @@
                 </div>
                 <register-department></register-department>
                 <div class="form_view">
+                    <div class="property"><p>編入生</p></div>
+                    <div class="value">
+                        <div class="cp_ipcheck">
+                            <input name="isHennyu" id="isHennyu" type="checkbox" class="checkbox_simple" value="1" {{ old('isHennyu') ? ' checked' : '' }}>
+                            <label for="isHennyu">編入生の場合はチェックを入れてください。</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_view">
                     <div class="property">
                         <p>入会時期（必須）</p>
                     </div>

@@ -110,7 +110,14 @@
                 <div class="property"><i class="fas fa-user-friends"></i></div>
                 <div class="value">
                     <p class="value-text">
-                        {{ empty($user->year) ? '' : $user->year . '年入学・' }}{{ $user->generation }}期生
+                        @if(!empty($user->year))
+                            @if(!$user->isHennyu)
+                            {{ $user->year . '年入学'}}
+                            @else
+                            {{ $user->year . '年編入'}}
+                            @endif
+                        @endif
+                        {{ $user->generation }}期生
                     </p>
                 </div>
             </div>

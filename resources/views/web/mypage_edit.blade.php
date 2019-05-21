@@ -98,7 +98,9 @@
                         <div class="form_view">
                             <div class="property"><p>Profile</p></div>
                             <div class="value">
-                                <textarea name="profile" class="input_textarea" placeholder="">{{ old('profile') !== null ? old('profile') : $user->profile }}</textarea>
+                                <textarea name="profile" class="input_textarea" placeholder="{{
+                                    'ヒント：好きなこと、趣味、興味関心のある分野、この先やってみたいこと、En2での活動、留学先・もしくは希望する留学先などを記入してみましょう！' 
+                                }}">{{ old('profile') !== null ? old('profile') : $user->profile }}</textarea>
                                 <div class="help-box">
                                     <p>* %%見出し%%と入力すると<span>見出し</span>になります。</p>
                                 </div>

@@ -151,6 +151,7 @@ class RegisterController extends Controller
             'department' => ['required'],
             'major' => ['required'],
             'generation' => ['required', new GenerationVali],
+            'isHennyu' => ['nullable'],
         ]);
 
         $email_token = $request->email_token;
@@ -161,6 +162,7 @@ class RegisterController extends Controller
         $user->year = $request->year;
         $user->department = $request->department;
         $user->major = $request->major;
+        $user->isHennyu = request('isHennyu', 0);
         $user->department_id = $request->department_id;
         $user->generation = $request->generation;
         
@@ -178,6 +180,7 @@ class RegisterController extends Controller
         $user->department = $request->department;
         $user->department_id = $request->department_id;
         $user->major = $request->major;
+        $user->isHennyu = $request->isHennyu;
         $user->generation = $request->generation;
         $user->save();
         

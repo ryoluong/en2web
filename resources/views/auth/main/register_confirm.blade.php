@@ -40,6 +40,11 @@
                             <input type="hidden" class="input_text" name="major" value="{{ $user->major }}" required>
                         </div>
                         <div class="form_view">
+                            <div class="property"><p class="prof_head">編入生：</p></div>
+                            <div class="value"><p>{{ $user->isHennyu ? 'YES' : 'NO' }}</p></div>
+                            <input type="hidden" class="input_text" name="isHennyu" value="{{ $user->isHennyu }}" required>
+                        </div>
+                        <div class="form_view">
                             <div class="property"><p class="prof_head">入会時期：</p></div>
                             <div class="value"><p>{{ $user->generation."期生" }}</p></div>
                             <input type="hidden" class="input_text" name="generation" value="{{ $user->generation }}" required>
