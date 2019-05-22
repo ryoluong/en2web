@@ -14,7 +14,7 @@
                 <div class="flex_container">
                     @foreach($countries as $country)
                     <div class="flex_view">
-                        <a class="country_flag" href="/countries/{{ $country->country_id }}"><img src="/img/flags/{{ $country->english_name }}.png" alt=""></a>
+                        <a class="country_flag" href="/countries/{{ $country->country_id }}"><v-lazy-image src="/img/flags/{{ $country->english_name }}.png" alt="" /></a>
                         <a class="country_name" href="/countries/{{ $country->country_id }}">{{ $country->name }}</a>
                     </div>
                     @endforeach
