@@ -40,19 +40,19 @@ class ResizeUserAvater extends Command
         $users = \App\User::all();
         foreach($users as $user) {
             if($user->avater_path) {
-                $image = \Image::make(public_path() . $user->avater_path);
+                $image = \Image::make(public_path('storage') . $user->avater_path);
                 if ($image->width() >= $image->height()) {
                     $image
                         ->resize(null, 250, function ($constraint) {
                             $constraint->aspectRatio();
                         })
-                        ->save(public_path() . $user->avater_path);
+                        ->save(public_path('storage') . $user->avater_path);
                 } else {
                     $image
                         ->resize(250, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })
-                        ->save(public_path() . $user->avater_path);
+                        ->save(public_path('storage') . $user->avater_path);
                 }
                 $this->line("{$user->name}'s avater resized.");
             }
