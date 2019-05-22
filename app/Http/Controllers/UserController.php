@@ -99,13 +99,13 @@ class UserController extends Controller
         $image = getOrientatedImage($image, $photo);
         if ($image->width() >= $image->height()) {
             $image
-                ->resize(null, 500, function ($constraint) {
+                ->resize(null, 250, function ($constraint) {
                     $constraint->aspectRatio();
                 })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         } else {
             $image
-                ->resize(500, null, function ($constraint) {
+                ->resize(250, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
@@ -153,7 +153,7 @@ class UserController extends Controller
         $image = \Image::make(file_get_contents($photo->getRealPath()));
         $image = getOrientatedImage($image, $photo);
         $image
-            ->resize(null, 900, function ($constraint) {
+            ->resize(null, 500, function ($constraint) {
                 $constraint->aspectRatio();
             })
             ->save(public_path().'/storage/img/tmp/'.$filename);
