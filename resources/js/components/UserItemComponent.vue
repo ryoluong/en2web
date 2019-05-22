@@ -35,7 +35,7 @@ export default {
     },
     srcUrl() {
       if (this.user.avater_path) {
-        return this.user.avater_path;
+        return this.user.avater_path + "?id=20190523";
       } else {
         return "/img/categories/user.png";
       }
