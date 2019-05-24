@@ -79,7 +79,7 @@ class AttendanceController extends Controller
 
     public function showResults()
     {
-        $users = User::where('isOB', 0)->orderBy('group_id')->get();
+        $users = User::where('isOB', 0)->whereIn('status', [1,3])->orderBy('group_id')->get();
         $meetings = Meeting::all();
         $attendances = Attendance::all();
         $lateEarlyWeight = 1; // 遅刻・早退の比重
