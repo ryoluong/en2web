@@ -19,7 +19,7 @@
             <div class="table_view">
                 <div class="text">
                     @if(is_null($mtg))
-                    <p>出席管理するイベントを作成</p>
+                    <p>出席管理を開始する</p>
                     @else
                     <p>出席管理中：{{ $mtg->name }}</p>
                     @endif
@@ -35,10 +35,36 @@
                         <p>タイトル</p>
                     </div>
                     <div class="value">
-                        <input name="name" type="text" class="input_text" placeholder="Ex) {{ Carbon\Carbon::now()->month }}月全体MTG" required>
+                        <input name="name" type="text" class="input_text" placeholder="Ex) {{ Carbon\Carbon::now()->month }}月全体MTG" value="{{ old('name') }}" required>
                         @if ($errors->has('name'))
                         <div class="help-box">
                             <strong>{{ $errors->first('name') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form_view">
+                    <div class="property">
+                        <p>開催日</p>
+                    </div>
+                    <div class="value">
+                        <input name="date" type="date" class="input_text" value="{{ old('time') ? old('time') : Carbon\Carbon::today()->toDateString() }}" required>
+                        @if($errors->has('date'))
+                        <div class="help-box">
+                            <strong>{{ $errors->first('date') }}</strong>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form_view">
+                    <div class="property">
+                        <p>開始時間</p>
+                    </div>
+                    <div class="value">
+                        <input name="time" type="time" class="input_text" value="{{ old('time') ? old('time'): '' }}" required>
+                        @if($errors->has('time'))
+                        <div class="help-box">
+                            <strong>{{ $errors->first('time') }}</strong>
                         </div>
                         @endif
                     </div>
@@ -50,7 +76,7 @@
                             <label for="line_notice"><input onchange="disableDateInput();" id="line_notice" class="checkbox_simple" type="checkbox" name="line_notice" value="1" checked>グループに通知を送る (推奨)</label>
                         </div>
                         <div class="help-box">
-                            <p>*このイベント作成時および回答期限の日にLINE通知がいきます。</p>
+                            <p>*出席管理の開始時および回答期限の日にLINE通知がいきます。</p>
                         </div>
                         @if ($errors->has('line_notice'))
                         <div class="help-box">

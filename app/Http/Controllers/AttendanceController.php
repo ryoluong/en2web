@@ -20,10 +20,14 @@ class AttendanceController extends Controller
     {
         $req->validate([
             'name' => ['max:20'],
+            'date' => ['required'],
+            'time' => ['required'],
         ]);
         if (!Meeting::where('status', '!=', 'completed')->count()) {
             $mtg = Meeting::create([
                 'name' => request('name'),
+                'date' => request('date'),
+                'start_time' => request('time'),
                 'status' => 'active',
                 'deadline' => request('deadline', null)
             ]);

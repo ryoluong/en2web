@@ -59,8 +59,10 @@ class Line extends Model
 
     public function attendance(Meeting $mtg, string $type)
     {
+        $week_name = ["日", "月", "火", "水", "木", "金", "土"];
         $name = $mtg->name;
-        $deadline = $mtg->deadline;
+        $date = date("n月j日", strtotime($mtg->date)) . " ({$week_name[date("w", strtotime($mtg->date))]}) " . $mtg->start_time . '~';
+        $deadline = date("n月j日", strtotime($mtg->deadline)) . " ({$week_name[date("w", strtotime($mtg->deadline))]})";;
         $content = json_encode([
             'to' => config('const.LINE_EN2_GROUP_ID'),
             'messages' => [
@@ -84,17 +86,24 @@ class Line extends Model
                             ],
                             [
                                 "type" => "text",
+                                "text" => $date,
+                                "margin" => "md",
+                                "weight" => "bold",
+                                "color" => "#333333"
+                            ],
+                            [
+                                "type" => "text",
                                 "text" => $name,
                                 "weight" => "bold",
                                 "size" => "lg",
-                                "margin" => "md",
+                                "margin" => "sm",
                                 "color" => "#333333"
                             ],
                             [
                                 "type" => "text",
                                 "text" => "回答期限: {$deadline}",
                                 "size" => "sm",
-                                "margin" => "md",
+                                "margin" => "lg",
                                 "color" => "#555555"
                             ],
                             [
