@@ -61,7 +61,7 @@ class Line extends Model
     {
         $week_name = ["日", "月", "火", "水", "木", "金", "土"];
         $name = $mtg->name;
-        $date = date("n月j日", strtotime($mtg->date)) . " ({$week_name[date("w", strtotime($mtg->date))]}) " . $mtg->start_time . '~';
+        $date = date("n月j日", strtotime($mtg->date)) . " ({$week_name[date("w", strtotime($mtg->date))]}) " . substr($mtg->start_time, 0, 5) . '~';
         $deadline = date("n月j日", strtotime($mtg->deadline)) . " ({$week_name[date("w", strtotime($mtg->deadline))]})";;
         $content = json_encode([
             'to' => config('const.LINE_EN2_GROUP_ID'),
