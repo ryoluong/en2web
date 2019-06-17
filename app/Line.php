@@ -376,7 +376,7 @@ class Line extends Model
                             ],
                             [
                                 "type" => "text",
-                                "text" => "ログイン不要です！\nいますぐ回答お願いします。",
+                                "text" => "ログイン不要！\nいますぐ回答お願いします。",
                                 "size" => "sm",
                                 "margin" => "lg",
                                 "color" => "#555555",
