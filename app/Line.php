@@ -327,4 +327,94 @@ class Line extends Model
         $response = file_get_contents($this->url, false, stream_context_create($this->options));
         Log::info($response);
     }
+
+    public function obogAttendance()
+    {
+        $content = json_encode([
+            'to' => config('const.LINE_EN2_GROUP_ID'),
+            'messages' => [
+                [
+                    "type" => "flex",
+                    "altText" => "OBOG会の出欠確認です。回答をお願いします！",
+                    "contents" => [
+                        "type" => "bubble",
+                        "body" => [
+                            "type" => "box",
+                            "layout" => "vertical",
+                            "margin" => "sm",
+                            "contents" => [
+                            [
+                                "type" => "text",
+                                "text" => 'OBOG会の出欠確認です！',
+                                "weight" => "bold",
+                                "color" => "#ff1155",
+                                "size" => "sm",
+                                "wrap" => true
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "7月13日(土)",
+                                "margin" => "md",
+                                "weight" => "bold",
+                                "color" => "#333333",
+                                "wrap" => true
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "1次会 13:00~  2次会 16:00~",
+                                "margin" => "md",
+                                "color" => "#555555",
+                                "wrap" => true
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "第2回\u{1F31F}OBOG会",
+                                "weight" => "bold",
+                                "size" => "lg",
+                                "margin" => "lg",
+                                "color" => "#333333"
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "ログイン不要！\nいますぐ回答お願いします。",
+                                "size" => "sm",
+                                "margin" => "lg",
+                                "color" => "#555555",
+                                "wrap" => true
+                            ],
+                            [
+                                "type" => "text",
+                                "text" => "留学中の方は回答不要です。",
+                                "size" => "xxs",
+                                "margin" => "md",
+                                "wrap" => true,
+                                "color" => "#999999"
+                            ]
+                            ]
+                        ],
+                        "footer" => [
+                            "type" => "box",
+                            "layout" => "vertical",
+                            "contents" => [
+                                [
+                                    "type" => "button",
+                                    "style" => "primary",
+                                    "height" => "sm",
+                                    "action" => [
+                                        "type" => "uri",
+                                        "label" => "回答する",
+                                        "uri" => "https://docs.google.com/forms/d/e/1FAIpQLSflXtcplYx31eChx-vHVY4ZzByTNlyEsXUY7IR8r1OX0YXnOA/viewform?usp=sf_link&openExternalBrowser=1"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]                
+            ]
+        ]);
+        $this->setOptionContent($content);
+        $response = file_get_contents($this->url, false, stream_context_create($this->options));
+        Log::info($response);
+        return $response;
+    }
 }
