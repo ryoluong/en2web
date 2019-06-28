@@ -121,7 +121,8 @@ class NotesController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('web.notes.create', compact(['categories', 'tags']));
+        $users = User::all();
+        return view('web.notes.create', compact(['categories', 'tags', 'users']));
     }
 
     public function confirm(Request $request)

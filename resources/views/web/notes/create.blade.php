@@ -26,7 +26,12 @@
                 <div class="form_view">
                     <div class="property"><p>Author</p></div>
                     <div class="value">
-                        <input type="text" name="author" class="input_text" value="{{ old('author') }}" placeholder="Enter author" required>
+                        <input type="text" name="author" class="input_text" value="{{ old('author') }}" placeholder="Enter author" list="authors" required>
+                        <datalist id="authors">
+                            @foreach($users as $user)
+                            <option value="{{ $user->name }}"></option>
+                            @endforeach 
+                        </datalist>
                         <div class="help-box">
                             <p>*登録されているメンバーの氏名のみ有効です。</p>
                         </div>
