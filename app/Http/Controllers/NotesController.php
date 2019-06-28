@@ -121,7 +121,7 @@ class NotesController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        $users = User::all();
+        $users = User::whereIn('status', [1,3])->get();
         return view('web.notes.create', compact(['categories', 'tags', 'users']));
     }
 
