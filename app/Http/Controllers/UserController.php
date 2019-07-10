@@ -125,7 +125,7 @@ class UserController extends Controller
             $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/storage/img/user/'.$filename);
             if ($user->avater_path !== null) {
-                unlink(public_path('storage').$user->avater_path);
+                unlink(public_path().$user->avater_path);
             }
             $user->update(['avater_path' => '/storage/img/user/'.$filename]);
             return redirect('/mypage');
@@ -171,7 +171,7 @@ class UserController extends Controller
             $filename = 'coverimg_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
             Storage::disk('public')->move($path, '/storage/img/user/'.$filename);
             if ($user->coverimg_path !== null) {
-                unlink(public_path('storage').$user->coverimg_path);
+                unlink(public_path().$user->coverimg_path);
             }
             $user->update(['coverimg_path' => '/storage/img/user/'.$filename]);
             return redirect('/mypage');
