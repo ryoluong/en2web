@@ -110,7 +110,7 @@ class UserController extends Controller
                 })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         }
-        $path = '/public/storage/img/tmp/'.$filename;
+        $path = '/storage/img/tmp/'.$filename;
 
         return view('web.avater_upload_confirm', compact(['path']));
     }
@@ -123,7 +123,7 @@ class UserController extends Controller
         if ($action == 'update') {
             $user = auth()->user();
             $filename = 'avater_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-            Storage::disk('public')->move($path, '/storage/img/user/'.$filename);
+            Storage::disk('public')->move('/public' . $path, '/storage/img/user/'.$filename);
             if ($user->avater_path !== null) {
                 unlink(public_path('storage').$user->avater_path);
             }
@@ -157,7 +157,7 @@ class UserController extends Controller
                 $constraint->aspectRatio();
             })
             ->save(public_path().'/storage/img/tmp/'.$filename);
-        $path = '/public/storage/img/tmp/'.$filename;
+        $path = '/storage/img/tmp/'.$filename;
         return view('web.user.upload_coverimg_confirm', compact(['path']));
     }
 
@@ -169,7 +169,7 @@ class UserController extends Controller
         if ($action === 'update') {
             $user = auth()->user();
             $filename = 'coverimg_'.$user->id.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-            Storage::disk('public')->move($path, '/storage/img/user/'.$filename);
+            Storage::disk('public')->move('/public' . $path, '/storage/img/user/'.$filename);
             if ($user->coverimg_path !== null) {
                 unlink(public_path('storage').$user->coverimg_path);
             }
