@@ -110,7 +110,7 @@ class UserController extends Controller
                 })
                 ->save(public_path().'/storage/img/tmp/'.$filename);
         }
-        $path = public_path() . '/storage/img/tmp/'.$filename;
+        $path = '/storage/img/tmp/'.$filename;
 
         return view('web.avater_upload_confirm', compact(['path']));
     }
@@ -157,7 +157,7 @@ class UserController extends Controller
                 $constraint->aspectRatio();
             })
             ->save(public_path().'/storage/img/tmp/'.$filename);
-        $path = public_path() . '/storage/img/tmp/'.$filename;
+        $path = '/storage/img/tmp/'.$filename;
         return view('web.user.upload_coverimg_confirm', compact(['path']));
     }
 
