@@ -301,18 +301,14 @@ class NotesController extends Controller
                 foreach ($request->paths as $index => $path) {
                     $newindex = $index + $current_index;
                     $filename = 'photo_'.$note->id.'_'.$newindex.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-                    Storage::disk('public')->move($path, '/img/note/'.$filename);
-                    $note->photos()->create(['path' => '/img/note/'.$filename]);
+                    Storage::disk('public')->move($path, '/storage/img/note/'.$filename);
+                    $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
                 }
             }
             if ($request->delete_paths !== null) {
                 foreach ($request->delete_paths as $path) {
                     Photo::where('path', $path)->first()->delete();
-                    if (app()->isLocal()) {
-                        unlink(public_path().$path);
-                    } else {
-                        unlink(public_path('storage').$path);
-                    }
+                    unlink(public_path().$path);
                 }
             }
             return redirect('/notes/'.$note->id);
@@ -340,11 +336,7 @@ class NotesController extends Controller
     public function destroy(Note $note)
     {
         foreach ($note->photos as $photo) {
-            if (app()->isLocal()) {
-                unlink(public_path().$photo->path);
-            } else {
-                unlink(public_path('storage').$photo->path);
-            }
+            unlink(public_path().$photo->path);
         }
         $note->delete();
         return redirect('/notes');
