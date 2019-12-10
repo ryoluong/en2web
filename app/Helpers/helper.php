@@ -30,7 +30,7 @@ function resizeAndSavePhotosToTempDir(array $photos, int $height)
                     $constraint->aspectRatio();
                 })
             ->save(public_path().'/storage/img/tmp/'.$filename);
-        $paths[] = '/img/tmp/'.$filename;
+        $paths[] = '/storage/img/tmp/'.$filename;
     }
     return $paths;
 }
@@ -40,8 +40,8 @@ function movePhotosFromTempDirToNoteDir(array $paths, Note $note)
     foreach ($paths as $index => $path) 
     {
         $filename = 'photo_'.$note->id.'_'.$index.'_'.uniqid().'.'.pathinfo($path, PATHINFO_EXTENSION);
-        Storage::disk('public')->move($path, '/img/note/'.$filename);
-        $note->photos()->create(['path' => '/img/note/'.$filename]);
+        Storage::disk('public')->move($path, '/storage/img/note/'.$filename);
+        $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
     }
 }
 
