@@ -43,7 +43,7 @@
                 </tr>
                 <tr class="tr">
                     <td class="td group rate"> - </td>
-                    <td class="td group rate" style="color: #000000;">
+                    <td class="td group rate" style="color: #000000;"> - </td>
                     @foreach($meetings as $mtg)
                     <td class="td rate">{{ $mtg->attend_rate ? $mtg->attend_rate . '%' : ' - ' }}</td>
                     @endforeach
@@ -53,8 +53,16 @@
                     <td class="td group">{{ $user->group_id }}</td>
                     <td class="td mtg ">{{ $user->attendanceRate ? $user->attendanceRate . '%' : ' - ' }}</td>
                     @foreach($meetings as $mtg)
-                        @if($attend = $attendances->where('user_id', $user->id)->where('meeting_id', $mtg->id)->first())
-                            @switch($attend->status)
+                        @if(
+                            $attendance = current(array_filter(
+                                $attendances,
+                                function($attendance) use ($user, $mtg) {
+                                    return $attendance['user_id'] == $user->id
+                                        && $attendance['meeting_id'] == $mtg->id;
+                                }
+                            ))
+                        )
+                            @switch($attendance['status'])
                             @case('attend')
                             <td style="color: #337" class="td mtg attend">出席</td>
                             @break
