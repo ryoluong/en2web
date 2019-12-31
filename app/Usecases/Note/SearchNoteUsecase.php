@@ -47,22 +47,13 @@ class SearchNoteUsecase
         })->when(!is_null($category_id), function ($query) use ($category_id) {
             return $query->where('notes.category_id', $category_id);
         })->when(!is_null($tag_ids), function ($query) use ($tag_ids) {
-            $array = [];
-            foreach($tag_ids as $index => $tag_id) {
-                $note_ids = DB::table('note_tag')->select('note_id')->where('tag_id', $tag_id)->get();
-                if($index == 0) {
-                    foreach($note_ids as $note_id) {
-                        $array[] = $note_id->note_id;
-                    }
-                } else {
-                    $tmp = [];
-                    foreach($note_ids as $note_id) {
-                        $tmp[] = $note_id->note_id;
-                    }
-                    $array = array_intersect($array, $tmp);
-                }
-            }
-            return $query->whereIn('notes.id', $array);
+            $note_ids = DB::table('note_tag')
+                ->select(DB::raw('note_id, count(note_id) as count'))
+                ->whereIn('tag_id', $tag_ids)
+                ->groupBy('note_id')
+                ->having('count', count($tag_ids))
+                ->pluck('note_id');
+            return $query->whereIn('notes.id', $note_ids);
         })->when(!is_null($author), function ($query) use ($author) {
             $array = [];
             $user_ids = DB::table('users')->select('id')->where('name', 'LIKE', "$author")->orWhere('name', 'LIKE', "$author %")->orWhere('name', 'LIKE', "% $author")->get();
