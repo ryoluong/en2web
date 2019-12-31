@@ -98,6 +98,27 @@ class AttendanceController extends Controller
             ->whereIn('meeting_id', $meetings->pluck('id'))
             ->get()
             ->toArray();
+        foreach($attendances as $i => $a) {
+            switch($a['status']) {
+                case 'attend':
+                    $attendances[$i]['status_jp'] = '出席';
+                    break;
+                case 'absent':
+                    $attendances[$i]['status_jp'] = '欠席';
+                    break;
+                case 'late':
+                    $attendances[$i]['status_jp'] = '遅刻';
+                    break;
+                case 'early':
+                    $attendances[$i]['status_jp'] = '早退';
+                    break;
+                case 'overseas':
+                    $attendances[$i]['status_jp'] = '留学';
+                    break;
+                default:
+                    $attendances[$i]['status_jp'] = '';
+            }
+        }
         $activeMeeting = $meetings->where('status', 'active')->first();
 
         if ($activeMeeting) {

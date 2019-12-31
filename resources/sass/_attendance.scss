@@ -71,6 +71,18 @@
           height: 32px;
         }
       }
+      .attend, .no-data {
+        color: #337;
+      }
+      .absent {
+        color: #ccc;
+      }
+      .late, .early {
+        color: #779;
+      }
+      .overseas {
+        color: #bdf;
+      }
       .name {
         text-align: left;
         white-space: nowrap;

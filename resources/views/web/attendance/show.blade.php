@@ -62,7 +62,10 @@
                                 }
                             ))
                         )
-                            @switch($attendance['status'])
+                            <td class="td mtg {{ $attendance['status']}}">
+                                {{ $attendance['status_jp'] }}
+                            </td>
+                            <!-- @switch($attendance['status'])
                             @case('attend')
                             <td style="color: #337" class="td mtg attend">出席</td>
                             @break
@@ -78,7 +81,7 @@
                             @case('overseas')
                             <td style="color: #bdf" class="td mtg overseas">留学</td>
                             @break
-                            @endswitch
+                            @endswitch -->
                         @else
                             <td style="color: #ccc" class="td mtg no-data"> - </td>
                         @endif
