@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Note::class, 'favorites');
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     public function meetings()
     {
         return $this->belongsToMany(Meeting::class, 'attendances');

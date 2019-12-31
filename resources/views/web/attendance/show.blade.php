@@ -44,7 +44,6 @@
                 <tr class="tr">
                     <td class="td group rate"> - </td>
                     <td class="td group rate" style="color: #000000;">
-                        {{ $totalAttendanceRate ? $totalAttendanceRate.'%' : ' - ' }}</td>
                     @foreach($meetings as $mtg)
                     <td class="td rate">{{ $mtg->attend_rate ? $mtg->attend_rate . '%' : ' - ' }}</td>
                     @endforeach
@@ -54,30 +53,30 @@
                     <td class="td group">{{ $user->group_id }}</td>
                     <td class="td mtg ">{{ $user->attendanceRate ? $user->attendanceRate . '%' : ' - ' }}</td>
                     @foreach($meetings as $mtg)
-                    @if($attend = App\Attendance::where('user_id', $user->id)->where('meeting_id', $mtg->id)->first())
-                    @switch($attend->status)
-                    @case('attend')
-                    <td style="color: #337" class="td mtg attend">出席</td>
-                    @break
-                    @case('absent')
-                    <td style="color: #ccc" class="td mtg absent">欠席</td>
-                    @break
-                    @case('late')
-                    <td style="color: #779" class="td mtg late">遅刻</td>
-                    @break
-                    @case('early')
-                    <td style="color: #779" class="td mtg early">早退</td>
-                    @break
-                    @case('overseas')
-                    <td style="color: #bdf" class="td mtg overseas">留学</td>
-                    @break
-                    @endswitch
-                    @else
-                    <td style="color: #ccc" class="td mtg no-data"> - </td>
-                    @endif
-                    @endforeach
+                        @if($attend = $attendances->where('user_id', $user->id)->where('meeting_id', $mtg->id)->first())
+                            @switch($attend->status)
+                            @case('attend')
+                            <td style="color: #337" class="td mtg attend">出席</td>
+                            @break
+                            @case('absent')
+                            <td style="color: #ccc" class="td mtg absent">欠席</td>
+                            @break
+                            @case('late')
+                            <td style="color: #779" class="td mtg late">遅刻</td>
+                            @break
+                            @case('early')
+                            <td style="color: #779" class="td mtg early">早退</td>
+                            @break
+                            @case('overseas')
+                            <td style="color: #bdf" class="td mtg overseas">留学</td>
+                            @break
+                            @endswitch
+                        @else
+                            <td style="color: #ccc" class="td mtg no-data"> - </td>
+                        @endif
                     @endforeach
                 </tr>
+                @endforeach
             </table>
         </div>
     </div>

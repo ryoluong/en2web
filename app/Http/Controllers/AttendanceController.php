@@ -83,51 +83,50 @@ class AttendanceController extends Controller
 
     public function showResults()
     {
-        $users = User::where('isOB', 0)->whereIn('status', [1,3])->orderBy('group_id')->get();
-        $meetings = Meeting::all();
-        $attendances = Attendance::all();
-        $lateEarlyWeight = 1; // 遅刻・早退の比重
+        $meetings = collect(
+            Meeting::select('id', 'name', 'status')
+                ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get()
+            )->reverse();
+        $users = User::select('id', 'group_id', 'name')
+            ->where('isOB', 0)
+            ->whereIn('status', [1,3])
+            ->orderBy('group_id')
+            ->get();
+        $attendances = Attendance::select('user_id', 'meeting_id', 'status')
+            ->whereIn('meeting_id', $meetings->pluck('id'))
+            ->get();
         $activeMeeting = $meetings->where('status', 'active')->first();
-        $answer = $activeMeeting && $attendances->where('meeting_id', $activeMeeting->id)->where('user_id', auth()->user()->id)->first()
-                    ? $attendances->where('meeting_id', $activeMeeting->id)->where('user_id', auth()->user()->id)->first()->status
-                    : 'none';
 
+        if ($activeMeeting) {
+            $answer = $attendances
+                ->where('user_id', auth()->user()->id)
+                ->where('meeting_id', $activeMeeting->id)
+                ->first()
+                ->status ?: 'none';
+        } else {
+            $answer = 'none';
+        }
+        
         foreach ($users as $user) {
             if ($attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count()) {
-                $user->attendanceRate =
-                    round(($attendances->where('user_id', $user->id)->where('status', 'attend')->count() +
-                    $attendances->where('user_id', $user->id)->whereIn('status', ['late', 'early'])->count() * $lateEarlyWeight) /
-                    $attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count() * 100, 1);
-            }
-        }
-
-        foreach ($meetings as $mtg) {
-            if ($mtg->status == 'completed') {
-                $attends = $attendances->where('meeting_id', $mtg->id);
-                $numActiveUser = $attends->where('status', '!=', 'overseas')->count();
-                $numAttendUser = $attends->where('status', '=', 'attend')->count();
-                $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
-                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
-            } else {
-                $attends = $attendances->where('meeting_id', $mtg->id);
-                $numActiveUser = $users->where('isOverseas', 0)->count();
-                $numAttendUser = $attends->where('status', '=', 'attend')->count();
-                $numLateEarlyUser = $attends->whereIn('status', ['late', 'early'])->count();
-                $mtg->attend_rate = round(($numAttendUser + $numLateEarlyUser * $lateEarlyWeight) / $numActiveUser * 100, 1);
-            }
-        }
-
-        if ($attendances->where('status', '!=', 'overseas')->count() && !$meetings->whereIn('status', ['active','await'])->count()) {
-            $totalAttendanceRate = round(
-                ($attendances->where('status', 'attend')->count() +
-                 $attendances->whereIn('status', ['late', 'early'])->count() * $lateEarlyWeight) /
-                 $attendances->where('status', '!=', 'overseas')->count() * 100,
-                1
+                $user->attendanceRate = round(
+                    $attendances->where('user_id', $user->id)->whereIn('status', ['attend', 'late', 'early'])->count() /
+                    $attendances->where('user_id', $user->id)->where('status', '!=', 'overseas')->count() * 100, 1
                 );
-        } else {
-            $totalAttendanceRate = '';
+            }
+        }
+        
+        foreach ($meetings as $mtg) {
+            $attends = $attendances->where('meeting_id', $mtg->id);
+            $numAttendUser = $attends->whereIn('status', ['attend', 'late', 'early'])->count();
+            $numActiveUser = $mtg->status == 'completed'
+            ? $attends->where('status', '!=', 'overseas')->count()
+            : $users->where('isOverseas', 0)->count();
+            $mtg->attend_rate = round($numAttendUser / $numActiveUser * 100, 1);
         }
 
-        return view('web.attendance.show', compact('users', 'meetings', 'activeMeeting', 'attendances', 'answer', 'totalAttendanceRate'));
+        return view('web.attendance.show', compact('users', 'meetings', 'activeMeeting', 'attendances', 'answer'));
     }
 }
