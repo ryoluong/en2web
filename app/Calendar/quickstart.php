@@ -14,7 +14,7 @@ function getClient()
     $client = new Google_Client();
     $client->setApplicationName('Google Calendar API PHP Quickstart');
     $client->setScopes(Google_Service_Calendar::CALENDAR);
-    $client->setAuthConfig('credentials.json');
+    $client->setAuthConfig(__DIR__ . '/credentials.json');
     $client->setAccessType('offline');
     $client->setPrompt('select_account consent');
 
@@ -22,7 +22,7 @@ function getClient()
     // The file token.json stores the user's access and refresh tokens, and is
     // created automatically when the authorization flow completes for the first
     // time.
-    $tokenPath = 'token.json';
+    $tokenPath = __DIR__ . '/token.json';
     if (file_exists($tokenPath)) {
         $accessToken = json_decode(file_get_contents($tokenPath), true);
         $client->setAccessToken($accessToken);
@@ -63,27 +63,8 @@ function getClient()
 $client = getClient();
 $service = new Google_Service_Calendar($client);
 
-// Print the next 10 events on the user's calendar.
-$calendarId = file_get_contents('calendar_id.txt');
-$optParams = array(
-  'maxResults' => 10,
-  'orderBy' => 'startTime',
-  'singleEvents' => true,
-  'timeMin' => date('c'),
-);
-$results = $service->events->listEvents($calendarId, $optParams);
-$events = $results->getItems();
-
-if (empty($events)) {
-    print "No upcoming events found.\n";
+if ($service) {
+    print "Successfully connect with Google Calendar API!\n";
 } else {
-    print "Upcoming events:\n";
-    foreach ($events as $event) {
-        $start = $event->start->dateTime;
-        if (empty($start)) {
-            $start = $event->start->date;
-        }
-        $id = $event->id;
-        printf("%s (%s) id: %s\n", $event->getSummary(), $start, $id);
-    }
+    print "Failed to connect with Google Calendar API. Something went wrong.\n";
 }
