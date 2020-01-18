@@ -1,4 +1,5 @@
-const mix = require("laravel-mix");
+/* eslint-disable no-undef */
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,10 +12,19 @@ const mix = require("laravel-mix");
  |
  */
 
+mix.webpackConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'resources/js')
+    }
+  }
+});
+
 mix
-  .js("resources/js/app.js", "public/js")
-  .sass("resources/sass/en2webstyle.scss", "public/css");
-// .sass("resources/sass/en2hpstyle.scss", "public/css");
+  // .js("resources/js/v1/app.js", "public/js")
+  // .sass("resources/sass/en2hpstyle.scss", "public/css")
+  // .sass("resources/sass/en2webstyle.scss", "public/css")
+  .js('resources/js/main.js', 'public/js');
 
 if (mix.inProduction()) {
   mix.version();

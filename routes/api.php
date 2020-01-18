@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Facades\Slack;
-use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +12,18 @@ use Illuminate\Support\Facades\Log;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/login', 'Api\Auth\LoginController@login');
+Route::post('/logout', 'Api\Auth\LoginController@logout');
+Route::post('/refresh', 'Api\Auth\LoginController@refresh');
+
+Route::get('/notes', 'Api\NotesController@index');
+
+
+// Route::post('/me', 'Api\Auth\LoginController@me');
+// Route::post('/login', 'Api\Auth\LoginController@login');
+// Route::post('/logout', 'Api\Auth\LoginController@logout');
+// Route::get('/check', 'Api\Auth\LoginController@isLoggedIn');
+
 
 Route::post('/webhook/line', 'LineApiController@response');

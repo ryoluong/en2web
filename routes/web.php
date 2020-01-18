@@ -24,6 +24,9 @@
 // Route::get('/activities', function () { return view('hp.activities'); });
 // Route::get('/achievements', function () { return view('hp.achievements'); });
 // Route::get('/join_contact', function () { return view('hp.join_contact'); });
+Route::get('/{any}', function() {
+    return view('app');
+})->where('any', '.*');
 
 Route::get('/how-to-register', function(){
     return view('web.how_to_register');

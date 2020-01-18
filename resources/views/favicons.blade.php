@@ -1,20 +1,8 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<?php // <!-- <link type="text/css" rel="stylesheet" href="{{ mix('css/en2webstyle.css') }}"> -->?>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-
-<title>En2::Web</title>
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="theme-color" content="#555577">
 <meta name="msapplication-TileColor" content="/img/favicons/#2d88ef">
 <meta name="msapplication-TileImage" content="/img/favicons/mstile-144x144.png">
 <meta property="og:image" content="/img/favicons/ogp.png">
-
 <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/img/favicons/favicon.ico">
 <link rel="icon" type="image/vnd.microsoft.icon" href="/img/favicons/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-touch-icon-57x57.png">
@@ -54,31 +42,3 @@
 <link rel="icon" type="image/png" sizes="24x24" href="/img/favicons/img/favicons/icon-24x24.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/img/favicons/icon-32x32.png">
 <link rel="manifest" href="/img/favicons/manifest.json">
-
-@if(!app()->isLocal())
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131467484-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-
-  gtag('config', 'UA-131467484-2');
-</script>
-@endif
-<!-- Disable Button -->
-<script>
-  function disableButton() {
-    document.getElementById("disable_button").disabled = true;
-  }
-
-  function disableInputs() {
-    var eles = document.getElementsByClassName('input_time');
-    for (var ele of eles) {
-      ele.disabled = !ele.disabled;
-    }
-  }
-</script>

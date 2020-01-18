@@ -1,0 +1,94 @@
+<template>
+  <v-list dense>
+    <v-list-item>
+      <img class="ma-auto" width="80%" src="/img/logo/transparent.png" alt="" />
+    </v-list-item>
+    <v-list-item two-line class="ma-auto">
+      <v-list-item-avatar size="45">
+        <img :src="`${$store.state.auth.user.avater_path}`" />
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-list-item-title class="subtitle-1 font-weight-medium">
+          {{ $store.state.auth.user.name }}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-divider />
+    <v-list-item
+      v-for="i in items"
+      :key="i.name"
+      link
+      :to="i.link"
+      color="indigo"
+    >
+      <v-list-item-action>
+        <v-icon size="28">
+          {{ i.icon }}
+        </v-icon>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title class="subtitle-2">
+          {{ i.name }}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-divider />
+    <v-list-item class="mt-3" @click="logout">
+      <v-list-item-action>
+        <v-icon>
+          mdi-logout-variant
+        </v-icon>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>Logout</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+  </v-list>
+</template>
+<script>
+export default {
+  data: () => ({
+    loading: false,
+  }),
+  computed: {
+    items() {
+      return [
+        {
+          name: 'Home',
+          link: '/',
+          icon: 'mdi-home',
+        },
+        {
+          name: 'Notes',
+          link: '/notes',
+          icon: 'mdi-file-document',
+        },
+        {
+          name: 'Members',
+          link: '/members',
+          icon: 'mdi-account-multiple',
+        },
+        {
+          name: 'Attendance',
+          link: '/attendance',
+          icon: 'mdi-clipboard-check-outline',
+        },
+        {
+          name: 'Schedules',
+          link: '/schedules',
+          icon: 'mdi-calendar',
+        },
+      ];
+    },
+  },
+  methods: {
+    async logout() {
+      if (!this.loading) {
+        this.loading = true;
+        this.$store.dispatch('auth/logout');
+        this.loading = false;
+      }
+    },
+  },
+};
+</script>
