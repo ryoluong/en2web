@@ -1,53 +1,65 @@
 <template>
   <div v-scroll="onScroll">
-    <v-container v-if="!loading" :ref="notes" :style="style" class="px-0">
+    <v-container v-if="!loading" ref="container" :style="style" class="px-0">
       <NoteCard
-        v-for="(n, i) in displayNotes"
-        :key="i"
+        v-for="n in displayNotes"
+        :key="n.id"
         :note="n"
-        class="mx-auto mt-10 my-12"
+        class="mx-auto my-12"
       />
     </v-container>
     <v-container v-if="loading || fetching" class="px-0">
       <v-skeleton-loader
-        v-for="i in 3"
+        v-for="i in 2"
         :key="i"
-        class="mx-auto my-8"
-        type="card-avatar"
-        elevation="4"
+        class="mx-auto my-12"
+        type="list-item-avatar,image,list-item-two-line"
         max-width="500"
       />
     </v-container>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import NoteCard from '@/components/NoteCard.vue';
 export default {
   components: { NoteCard },
   data: () => ({
     loading: true,
-    fetching: true,
+    fetching: false,
     offset: 0,
   }),
   computed: {
-    ...mapState('note', ['notes', 'currentPage', 'lastPage', 'to']),
+    ...mapState('note', [
+      'notes',
+      'currentPage',
+      'lastPage',
+      'to',
+      'savedOffset',
+      'category',
+    ]),
+    categoryIds() {
+      return [0, 6, 2, 4, 3, 5, 1];
+    },
     params() {
       return {
         page: this.currentPage + 1,
+        category_id: this.categoryIds[this.category],
       };
     },
     needFetch() {
       return !this.fetching && this.currentPage != this.lastPage;
     },
-    threshold() {
-      return document.body.clientHeight - this.noteHeight;
-    },
     headerHeight() {
-      return document.getElementById('header').clientHeight + 40; // header + containerのpadding
+      return document.getElementById('header').clientHeight + 48 * 2; // header + containerのpadding
+    },
+    newHeaderHeight() {
+      return this.$refs.container
+        ? 0
+        : this.$refs.container.getBoundingClientRect().top;
     },
     noteHeight() {
-      return 352;
+      return 400;
     },
     firstIndex() {
       const res =
@@ -60,6 +72,7 @@ export default {
     displayNotes() {
       const _this = this;
       return this.notes.filter((n, i) => {
+        n.index = i;
         return i >= _this.firstIndex && i <= _this.lastIndex;
       });
     },
@@ -71,11 +84,26 @@ export default {
       };
     },
   },
+  watch: {
+    category: async function() {
+      this.loading = true;
+      this.clearNotes();
+      this.scrollTop();
+      await this.fetchNotes();
+      this.loading = false;
+    },
+  },
   async created() {
-    await this.fetchNotes();
+    if (this.currentPage === 0) {
+      await this.fetchNotes();
+    }
     this.loading = false;
   },
+  beforeDestroy() {
+    this.saveOffset(this.offset);
+  },
   methods: {
+    ...mapMutations('note', ['saveOffset', 'clearNotes', 'updateCategory']),
     async fetchNotes() {
       this.fetching = true;
       await this.$store.dispatch('note/index', this.params);
@@ -83,9 +111,12 @@ export default {
     },
     onScroll() {
       this.offset = window.pageYOffset;
-      if (this.needFetch && this.lastIndex === this.to) {
+      if (this.needFetch && this.lastIndex >= this.to) {
         this.fetchNotes();
       }
+    },
+    scrollTop() {
+      this.$vuetify.goTo(0, { duration: 0 });
     },
   },
 };

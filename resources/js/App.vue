@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <Header />
     <v-content>
-      <router-view id="main" />
+      <router-view id="main" style="max-width:800px;margin:auto;" />
       <Snackbar class="snackbar" />
     </v-content>
   </v-app>

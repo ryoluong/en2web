@@ -3,7 +3,7 @@
     <v-list-item>
       <img class="ma-auto" width="80%" src="/img/logo/transparent.png" alt="" />
     </v-list-item>
-    <v-list-item two-line class="ma-auto">
+    <v-list-item v-if="$store.state.auth.user" two-line class="ma-auto">
       <v-list-item-avatar size="45">
         <img :src="`${$store.state.auth.user.avater_path}`" />
       </v-list-item-avatar>

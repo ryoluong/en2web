@@ -16,8 +16,11 @@ use Illuminate\Http\Request;
 Route::post('/login', 'Api\Auth\LoginController@login');
 Route::post('/logout', 'Api\Auth\LoginController@logout');
 Route::post('/refresh', 'Api\Auth\LoginController@refresh');
+Route::get('/me', 'Api\Auth\LoginController@me');
 
 Route::get('/notes', 'Api\NotesController@index');
+Route::put('/notes/{note}/fav', 'Api\NotesController@fav');
+Route::get('/notes/{note}', 'Api\NotesController@get');
 
 
 // Route::post('/me', 'Api\Auth\LoginController@me');

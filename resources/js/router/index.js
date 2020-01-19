@@ -9,16 +9,11 @@ const router = new VueRouter({
   mode: 'history',
   routes,
   scrollBehavior(to, from, savedPosition) {
+    if (to.path === '/notes') {
+      return { x: 0, y: store.state.note.savedOffset };
+    }
     if (savedPosition) {
-      if (to.path === '/notes') {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            resolve(savedPosition);
-          }, 500);
-        });
-      } else {
-        return savedPosition;
-      }
+      return savedPosition;
     } else {
       return { x: 0, y: 0 };
     }

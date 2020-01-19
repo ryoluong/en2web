@@ -11,9 +11,9 @@ const actions = {
       .post('/login', payload)
       .then(res => {
         commit('authenticated');
-        commit('setUser', res.data.user);
         localStorage.setItem('access_token', res.data.access_token);
         router.push('/notes');
+        dispatch('me');
         dispatch(
           'snackbar/show',
           { message: 'ログインしました' },
@@ -21,38 +21,43 @@ const actions = {
         );
       })
       .catch(err => {
-        if (err.response.status === 401) {
-          dispatch(
-            'snackbar/show',
-            {
-              message: 'メールアドレスまたはパスワードが違います',
-              type: 'error',
-            },
-            { root: true },
-          );
-        } else {
-          dispatch(
-            'snackbar/show',
-            {
-              message: 'エラーが発生しました',
-              type: 'error',
-            },
-            { root: true },
-          );
+        let message;
+        switch (err.response.status) {
+          case 401:
+            message = 'メールアドレスまたはパスワードが違います';
+            break;
+          case 429:
+            message = `一定回数以上ログインに失敗しました。${err.response.data.remain_seconds}秒後に再度お試しください。`;
+            break;
+          default:
+            message = 'エラーが発生しました';
         }
+        dispatch(
+          'snackbar/show',
+          { message: message, type: 'error' },
+          { root: true },
+        );
       });
   },
-  async refresh({ commit }) {
+  async refresh({ commit, dispatch }) {
     await axios
       .post('/refresh', {})
       .then(res => {
         commit('authenticated');
-        commit('setUser', res.data.user);
         localStorage.setItem('access_token', res.data.access_token);
+        dispatch('me');
       })
       .catch(() => {
+        commit('unauthenticated');
+        commit('setUser', null);
         localStorage.removeItem('access_token');
       });
+  },
+  async me({ commit }) {
+    await axios.get('/me').then(res => {
+      commit('setUser', res.data.user);
+      commit('note/setFavNotes', res.data.favNotes, { root: true });
+    });
   },
   async logout({ commit, dispatch }) {
     dispatch(

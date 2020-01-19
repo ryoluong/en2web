@@ -1,5 +1,7 @@
 import Login from '@/pages/login/index.vue';
 import Notes from '@/pages/notes/index.vue';
+import NoteView from '@/pages/notes/view.vue';
+import NoteUsers from '@/pages/notes/users.vue';
 
 const routes = [
   {
@@ -8,6 +10,7 @@ const routes = [
     meta: {
       requireAuth: false,
       title: 'Login',
+      header: 'menu',
     },
   },
   {
@@ -16,6 +19,25 @@ const routes = [
     meta: {
       requireAuth: true,
       title: 'Notes',
+      header: 'menu',
+    },
+  },
+  {
+    path: '/notes/:id(\\d+)',
+    component: NoteView,
+    meta: {
+      requireAuth: true,
+      title: 'Notes',
+      header: 'back',
+    },
+  },
+  {
+    path: '/notes/:id(\\d+)/users',
+    component: NoteUsers,
+    meta: {
+      requireAuth: true,
+      title: 'Liked Users',
+      header: 'back',
     },
   },
 ];

@@ -22,24 +22,83 @@
       </v-list-item-content>
     </v-list-item>
     <v-img
-      class="v-img white--text align-start"
+      class="v-img white--text align-start align-content-space-between"
       height="220px"
       :src="noteImagePath"
+      @click="view"
     >
-      <v-chip tile small class="white--text ma-2" color="indigo lighten-2">
-        <v-icon small left>
-          mdi-folder
-        </v-icon>
-        {{ note.category.name }}
-      </v-chip>
       <template v-slot:placeholder>
         <v-skeleton-loader class="mx-auto" tile height="220px" type="image" />
       </template>
+      <div>
+        <v-chip small class="white--text mt-2 ml-2" color="indigo lighten-1">
+          <v-icon small left>
+            mdi-folder
+          </v-icon>
+          {{ note.category.name }}
+        </v-chip>
+        <v-chip
+          v-if="note.countries.length > 0"
+          small
+          class="white--text mt-2 ml-2"
+          color="green lighten-1"
+        >
+          <v-icon small left>
+            mdi-map-marker
+          </v-icon>
+          {{ note.countries[0].name }}
+        </v-chip>
+        <v-chip
+          v-if="note.isBest"
+          tile
+          small
+          class="white--text mt-2 ml-2"
+          color="warning lighten-1"
+        >
+          <v-icon small left>
+            mdi-star
+          </v-icon>
+          Best Note
+        </v-chip>
+      </div>
+      <div
+        class="pb-2 pr-2"
+        style="position:absolute;bottom:0;right:0;opacity:0.95;"
+        @click="fav"
+      >
+        <v-btn fab :color="iconColor" :class="textColor">
+          <v-icon small>
+            mdi-heart
+          </v-icon>
+          {{ note.fav_users_count }}
+        </v-btn>
+        <!-- <v-chip color="grey lighten-4" label>
+          <v-icon left :color="iconColor">
+            mdi-heart
+          </v-icon>
+          <p
+            class="mb-0 font-weight-medium"
+            :class="textColor"
+            style="font-size:18px;"
+          >
+            {{ note.fav_users_count }}
+          </p>
+        </v-chip> -->
+      </div>
     </v-img>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="title py-1 font-weight-bold" color="indigo">
+        <v-list-item-title
+          class="title py-1 font-weight-bold"
+          color="indigo"
+          @click="view"
+        >
           {{ note.title }}
+        </v-list-item-title>
+        <v-list-item-title class="caption mt-1 blue--text">
+          <a v-for="tag in note.tags" :key="tag.id" class="d-inline-block mr-2">
+            {{ `#${tag.name}` }}
+          </a>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -53,6 +112,9 @@ export default {
       required: true,
     },
   },
+  data: () => ({
+    preventLink: false,
+  }),
   computed: {
     userImagePath() {
       return this.note.user.avater_path
@@ -64,12 +126,33 @@ export default {
         ? this.note.photos[0]['path']
         : `/img/note_cover_photo/${this.note.category_id}.jpg`;
     },
-    // display() {
-    //   const offset = window.pageYOffset;
-    //   console.log(this.$el);
-    //   const rect = this.$el.getBoundingClientRect();
-    //   return offset < rect.bottom && rect.top < offset;
-    // },
+    isFavNote() {
+      return this.$store.state.note.favNotes.indexOf(this.note.id) !== -1;
+    },
+    iconColor() {
+      return this.isFavNote ? 'red' : 'grey';
+    },
+    textColor() {
+      return this.isFavNote ? 'white--text' : 'white--text';
+    },
+  },
+  methods: {
+    fav() {
+      this.preventLink = true;
+      this.$store.dispatch('note/fav', this.note.id);
+    },
+    view() {
+      if (this.preventLink) {
+        this.preventLink = false;
+      } else {
+        this.$router.push(`/notes/${this.note.id}`);
+      }
+    },
   },
 };
 </script>
+<style lang="scss">
+.v-skeleton-loader__image {
+  height: 220px !important;
+}
+</style>
