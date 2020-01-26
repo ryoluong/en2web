@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <v-container class="px-0 py-0">
+  <v-container class="container pa-0 ma-a" background="white">
     <div v-if="!loading">
       <v-img
         class="v-img white--text align-start align-content-space-between"
@@ -85,7 +85,7 @@
         </v-list-item-content>
       </v-list-item>
       <router-link
-        class="d-block ml-4 mt-2 mb-0 font-weight-medium subtitle-2 blue-grey--text"
+        class="d-inline-block ml-4 mt-2 mb-0 font-weight-medium subtitle-2 blue-grey--text"
         style="font-size:18px;text-decoration:none;"
         :to="`/notes/${$route.params.id}/users`"
       >
@@ -104,21 +104,14 @@
           </v-icon>
         </v-btn>
       </div>
-      <v-btn
-        fab
-        dark
-        fixed
-        :color="iconColor"
-        right
-        bottom
-        style="right:2.5%;"
-        @click="fav"
-      >
-        <v-icon dark small>
-          mdi-heart
-        </v-icon>
-        {{ note.fav_users_count + ajustFavCount }}
-      </v-btn>
+      <div class="float-btn-wrapper">
+        <v-btn fab dark fixed :color="iconColor" bottom @click="fav">
+          <v-icon dark small>
+            mdi-heart
+          </v-icon>
+          {{ note.fav_users_count + ajustFavCount }}
+        </v-btn>
+      </div>
     </div>
     <div v-else>
       <v-skeleton-loader
@@ -176,6 +169,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.container {
+  max-width: 800px;
+  position: relative;
+}
 .content {
   white-space: normal;
   word-break: break-all;
@@ -183,5 +180,9 @@ export default {
   font-size: 16px;
   margin: 16px auto;
   line-height: 2;
+}
+.float-btn-wrapper {
+  float: right;
+  margin-right: calc(56 * 1.2px);
 }
 </style>

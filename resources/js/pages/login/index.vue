@@ -1,12 +1,13 @@
 <template>
-  <v-container fluid>
+  <v-container fluid background="white" class="container">
     <v-row class="ma-auto" align="center" justify="center">
-      <v-col class="pb-2 pt-8" cols="11" md="6" lg="3">
+      <v-col class="pb-2 pt-4" cols="12">
         <v-img
           class="ma-auto"
           contain
           src="/img/logo/transparent.png"
           position="center center"
+          max-width="400px"
         />
         <p
           class="subtitle-1 mt-3 text-center d-block grey--text text--darken-1"
@@ -16,7 +17,7 @@
       </v-col>
     </v-row>
     <v-row align="center" justify="center">
-      <v-col cols="11" lg="3" class="pt-0">
+      <v-col cols="11" md="8" lg="5" class="pt-0">
         <validation-observer v-slot="{ passes }" slim>
           <v-form>
             <v-col cols="12" class="pa-0">
@@ -113,3 +114,8 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.container {
+  min-height: 100%;
+}
+</style>

@@ -2,6 +2,7 @@ import Login from '@/pages/login/index.vue';
 import Notes from '@/pages/notes/index.vue';
 import NoteView from '@/pages/notes/view.vue';
 import NoteUsers from '@/pages/notes/users.vue';
+import users from '@/pages/users/index.vue';
 
 const routes = [
   {
@@ -38,6 +39,15 @@ const routes = [
       requireAuth: true,
       title: 'Liked Users',
       header: 'back',
+    },
+  },
+  {
+    path: '/users',
+    component: users,
+    meta: {
+      requireAuth: true,
+      title: 'Users',
+      header: 'menu',
     },
   },
 ];

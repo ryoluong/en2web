@@ -16,6 +16,7 @@ class NotesController extends Controller
     public function index()
     {
         $category_id = request('category_id');
+        $is_best = request('is_best');
         return Note::select('id', 'user_id', 'category_id', 'title', 'isBest', 'date')
             ->with([
                 'user:id,name,avater_path',
@@ -26,6 +27,9 @@ class NotesController extends Controller
             ])
             ->when($category_id, function ($q) use ($category_id) {
                 return $q->where('notes.category_id', $category_id);
+            })
+            ->when($is_best, function($q) {
+                return $q->where('isBest', true);
             })
             ->withCount(['favUsers'])
             ->orderBy('date', 'desc')

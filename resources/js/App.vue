@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
-    <Header />
-    <v-content>
-      <router-view id="main" style="max-width:800px;margin:auto;" />
+    <v-content id="main">
+      <Header />
+      <router-view id="router-view" />
       <Snackbar class="snackbar" />
     </v-content>
   </v-app>

@@ -64,8 +64,8 @@ export default {
           icon: 'mdi-file-document',
         },
         {
-          name: 'Members',
-          link: '/members',
+          name: 'Users',
+          link: '/users',
           icon: 'mdi-account-multiple',
         },
         {

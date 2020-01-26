@@ -22,6 +22,7 @@ Route::get('/notes', 'Api\NotesController@index');
 Route::put('/notes/{note}/fav', 'Api\NotesController@fav');
 Route::get('/notes/{note}', 'Api\NotesController@get');
 
+Route::get('/users', 'Api\UsersController@index');
 
 // Route::post('/me', 'Api\Auth\LoginController@me');
 // Route::post('/login', 'Api\Auth\LoginController@login');

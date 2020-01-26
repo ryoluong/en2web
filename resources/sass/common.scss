@@ -1,0 +1,8 @@
+.v-skeleton-loader__image {
+  height: 220px !important;
+}
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}

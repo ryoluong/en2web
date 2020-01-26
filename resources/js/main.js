@@ -10,10 +10,10 @@ import vuetify from './vuetify';
 
 import './validate';
 
-// import { VLazyImagePlugin } from 'v-lazy-image';
-// Vue.use(VLazyImagePlugin);
-
 import App from './App.vue';
+
+// import common style
+import '../sass/common.scss';
 
 export default new Vue({
   el: '#app',
@@ -21,5 +21,5 @@ export default new Vue({
   store,
   vuetify,
   components: { App },
-  template: '<App />'
+  template: '<App />',
 });

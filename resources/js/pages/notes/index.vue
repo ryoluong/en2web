@@ -1,20 +1,33 @@
 <template>
   <div v-scroll="onScroll">
+    <v-tabs v-model="category" color="indigo lighten-1" show-arrows centered>
+      <v-tab>ALL</v-tab>
+      <v-tab>Best Note</v-tab>
+      <v-tab>思考の共有</v-tab>
+      <v-tab>語学学習</v-tab>
+      <v-tab>就活・仕事</v-tab>
+      <v-tab>奨学金</v-tab>
+      <v-tab>本・記事</v-tab>
+      <v-tab>月一報告</v-tab>
+    </v-tabs>
     <v-container v-if="!loading" ref="container" :style="style" class="px-0">
       <NoteCard
         v-for="n in displayNotes"
         :key="n.id"
         :note="n"
-        class="mx-auto my-12"
+        class="mx-auto mt-8 my-12"
+        @setTab="setTab"
+        @goBestNote="goBestNote"
       />
     </v-container>
     <v-container v-if="loading || fetching" class="px-0">
       <v-skeleton-loader
         v-for="i in 2"
         :key="i"
-        class="mx-auto my-12"
+        class="mx-auto mt-6 mb-12"
         type="list-item-avatar,image,list-item-two-line"
-        max-width="500"
+        max-width="450"
+        elevation="4"
       />
     </v-container>
   </div>
@@ -36,22 +49,30 @@ export default {
       'lastPage',
       'to',
       'savedOffset',
-      'category',
     ]),
+    category: {
+      get() {
+        return this.$store.state.note.category;
+      },
+      set(value) {
+        this.updateCategory(value);
+      },
+    },
     categoryIds() {
-      return [0, 6, 2, 4, 3, 5, 1];
+      return [0, 0, 6, 2, 4, 3, 5, 1];
     },
     params() {
       return {
         page: this.currentPage + 1,
         category_id: this.categoryIds[this.category],
+        is_best: this.category === 1 ? 1 : 0,
       };
     },
     needFetch() {
       return !this.fetching && this.currentPage != this.lastPage;
     },
     headerHeight() {
-      return document.getElementById('header').clientHeight + 48 * 2; // header + containerのpadding
+      return document.getElementById('header').clientHeight + 48 + 32; // header + containerのpadding
     },
     newHeaderHeight() {
       return this.$refs.container
@@ -111,12 +132,18 @@ export default {
     },
     onScroll() {
       this.offset = window.pageYOffset;
-      if (this.needFetch && this.lastIndex >= this.to) {
+      if (this.needFetch && this.lastIndex - 2 >= this.to) {
         this.fetchNotes();
       }
     },
     scrollTop() {
       this.$vuetify.goTo(0, { duration: 0 });
+    },
+    setTab(tabId) {
+      this.category = this.categoryIds.indexOf(tabId);
+    },
+    goBestNote() {
+      this.category = 1;
     },
   },
 };

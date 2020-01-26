@@ -1,5 +1,5 @@
 <template>
-  <v-card tile max-width="450" elevation="8">
+  <v-card tile max-width="450" elevation="4">
     <v-list-item class="ma-auto py-1">
       <v-list-item-avatar size="32">
         <v-img :src="userImagePath" cover>
@@ -22,7 +22,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-img
-      class="v-img white--text align-start align-content-space-between"
+      class="v-img white--text align-start align-content-space-between clickable"
       height="220px"
       :src="noteImagePath"
       @click="view"
@@ -31,7 +31,12 @@
         <v-skeleton-loader class="mx-auto" tile height="220px" type="image" />
       </template>
       <div>
-        <v-chip small class="white--text mt-2 ml-2" color="indigo lighten-1">
+        <v-chip
+          small
+          class="white--text mt-2 ml-2"
+          color="indigo lighten-1"
+          @click="emitSetTab"
+        >
           <v-icon small left>
             mdi-folder
           </v-icon>
@@ -50,10 +55,10 @@
         </v-chip>
         <v-chip
           v-if="note.isBest"
-          tile
           small
           class="white--text mt-2 ml-2"
           color="warning lighten-1"
+          @click="emitGoBestNote"
         >
           <v-icon small left>
             mdi-star
@@ -72,33 +77,25 @@
           </v-icon>
           {{ note.fav_users_count }}
         </v-btn>
-        <!-- <v-chip color="grey lighten-4" label>
-          <v-icon left :color="iconColor">
-            mdi-heart
-          </v-icon>
-          <p
-            class="mb-0 font-weight-medium"
-            :class="textColor"
-            style="font-size:18px;"
-          >
-            {{ note.fav_users_count }}
-          </p>
-        </v-chip> -->
       </div>
     </v-img>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title
-          class="title py-1 font-weight-bold"
+          class="title py-1 font-weight-bold clickable"
           color="indigo"
           @click="view"
         >
           {{ note.title }}
         </v-list-item-title>
         <v-list-item-title class="caption mt-1 blue--text">
-          <a v-for="tag in note.tags" :key="tag.id" class="d-inline-block mr-2">
+          <p
+            v-for="tag in note.tags"
+            :key="tag.id"
+            class="d-inline-block mr-2 mb-0"
+          >
             {{ `#${tag.name}` }}
-          </a>
+          </p>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -148,11 +145,14 @@ export default {
         this.$router.push(`/notes/${this.note.id}`);
       }
     },
+    emitSetTab() {
+      this.preventLink = true;
+      this.$emit('setTab', this.note.category.id);
+    },
+    emitGoBestNote() {
+      this.preventLink = true;
+      this.$emit('goBestNote');
+    },
   },
 };
 </script>
-<style lang="scss">
-.v-skeleton-loader__image {
-  height: 220px !important;
-}
-</style>
