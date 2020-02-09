@@ -15,6 +15,15 @@ const routes = [
     },
   },
   {
+    path: '/',
+    component: Notes,
+    meta: {
+      requireAuth: true,
+      title: 'Home',
+      header: 'menu',
+    },
+  },
+  {
     path: '/notes',
     component: Notes,
     meta: {
