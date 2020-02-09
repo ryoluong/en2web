@@ -15,7 +15,8 @@ class UsersController extends Controller
     
     public function index()
     {
-        return User::select('name', 'avater_path', 'generation', 'group_id', 'isOB', 'department')
+        return User::select('name', 'avater_path', 'generation', 'group_id', 'isOB', 'department_id')
+            ->whereIn('status', ['1,3'])
             ->get();
     }
 }
