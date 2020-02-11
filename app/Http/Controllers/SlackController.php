@@ -53,7 +53,7 @@ class SlackController extends Controller
 
     private function help() {
         return response()->json(
-            ['text' => "[Command List]\niam {your email}\n- En2::Webに登録したメールアドレスを入力してください！あなたのSlackアカウントとEn2::Webのアカウントがリンクされます。（波括弧は不要です）"]
+            ['text' => "【Command List】\niam {your email}\n  - En2::Webに登録したメールアドレスを入力してください！\n    あなたのSlackアカウントとEn2::Webのアカウントがリンクされます。（波括弧は不要です）"]
         );
     }
 
