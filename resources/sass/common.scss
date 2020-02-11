@@ -1,6 +1,10 @@
 .v-skeleton-loader__image {
   height: 220px !important;
 }
+.v-expansion-panel-content__wrap {
+  padding-left: 0;
+  padding-right: 0;
+}
 .clickable {
   &:hover {
     cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="ma-auto py-1">
+  <v-list-item class="ma-auto py-1 px-6" ripple>
     <v-list-item-avatar large>
       <v-img :src="userImagePath" cover>
         <template v-slot:placeholder>
@@ -13,7 +13,6 @@
       </v-list-item-title>
     </v-list-item-content>
   </v-list-item>
-  </v-list>
 </template>
 <script>
 export default {

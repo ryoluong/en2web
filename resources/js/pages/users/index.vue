@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper mx-auto">
     <v-tabs
-      v-model="groupBy"
+      v-model="showBy"
       color="indigo lighten-1"
       grow
       centered
       class="mb-2"
     >
-      <v-tab>学部別</v-tab>
-      <v-tab>グループ別</v-tab>
-      <v-tab>入会時期別</v-tab>
+      <v-tab>現役</v-tab>
+      <v-tab>OG/OB</v-tab>
+      <v-tab>ALL</v-tab>
     </v-tabs>
     <v-radio-group
-      v-model="filter"
+      v-model="groupBy"
       class=""
       row
       background-color="white"
@@ -21,20 +21,21 @@
       <v-radio
         color="indigo lighten-1"
         class="ma-auto"
-        label="現役"
-        value="active"
+        label="学部別"
+        value="department"
       />
       <v-radio
         color="indigo lighten-1"
         class="ma-auto"
-        label="OG/OB"
-        value="ogob"
+        label="入会時期別"
+        value="generation"
       />
       <v-radio
         color="indigo lighten-1"
         class="ma-auto"
-        label="ALL"
-        value="all"
+        label="グループ別"
+        value="group"
+        :disabled="showBy === '1'"
       />
     </v-radio-group>
     <v-text-field
@@ -47,7 +48,7 @@
       prepend-inner-icon="mdi-magnify"
       color="indigo"
       height="56px"
-      class="mt-2 mx-2"
+      class="mt-2"
     />
     <div v-if="loading">
       <v-skeleton-loader class="mt-2 mx-auto" type="card-heading" />
@@ -66,7 +67,7 @@
       tile
       flat
     >
-      <template v-if="groupBy === 0">
+      <template v-if="groupBy === 'department'">
         <UserGroup
           v-for="i in maxDepartmentId"
           :key="i"
@@ -75,7 +76,7 @@
           :subheader="departments[i - 1]"
         />
       </template>
-      <template v-else-if="groupBy === 1">
+      <template v-else-if="groupBy === 'group'">
         <UserGroup
           v-for="i in maxGroupId"
           :key="i"
@@ -83,8 +84,14 @@
           :users="where(i)"
           :subheader="`Group${i}`"
         />
+        <UserGroup
+          :key="-1"
+          :index="-1"
+          :users="where(-1)"
+          :subheader="'OG/OB'"
+        />
       </template>
-      <template v-else-if="groupBy === 2">
+      <template v-else-if="groupBy === 'generation'">
         <UserGroup
           v-for="i in maxGeneration"
           :key="i"
@@ -99,14 +106,6 @@
 <script>
 import UserGroup from '@/components/users/UserGroup.vue';
 
-const ALL = 'all';
-const ACTIVE = 'active';
-const OGOB = 'ogob';
-
-const TAB_DEPARTMENT = 0;
-const TAB_GROUP = 1;
-const TAB_GENERATION = 2;
-
 export default {
   components: {
     UserGroup,
@@ -114,10 +113,10 @@ export default {
   data: () => ({
     loading: true,
     users: [],
-    panel: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    filter: ACTIVE,
+    panel: [...Array(20).keys()],
+    groupBy: 'department',
+    showBy: 0,
     search: '',
-    groupBy: TAB_DEPARTMENT,
   }),
   computed: {
     maxGeneration() {
@@ -149,16 +148,16 @@ export default {
             user.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1,
         );
       }
-      switch (this.filter) {
-        case ACTIVE:
+      switch (this.showBy) {
+        case 0:
           return users.filter(user => {
             return user.isOB === 0;
           });
-        case OGOB:
+        case 1:
           return users.filter(user => {
             return user.isOB === 1;
           });
-        case ALL:
+        case 2:
           return users;
         default:
           return null;
@@ -172,11 +171,11 @@ export default {
   methods: {
     where(i) {
       switch (this.groupBy) {
-        case TAB_DEPARTMENT:
+        case 'department':
           return this.displayUsers.filter(user => user.department_id === i);
-        case TAB_GROUP:
+        case 'group':
           return this.displayUsers.filter(user => user.group_id === i);
-        case TAB_GENERATION:
+        case 'generation':
           return this.displayUsers.filter(user => user.generation === i);
       }
     },
@@ -187,5 +186,6 @@ export default {
 .wrapper {
   background: white !important;
   max-width: 500px;
+  min-height: 100vh;
 }
 </style>
