@@ -24,11 +24,6 @@ Route::get('/notes/{note}', 'Api\NotesController@get');
 
 Route::get('/users', 'Api\UsersController@index');
 
-// Route::post('/me', 'Api\Auth\LoginController@me');
-// Route::post('/login', 'Api\Auth\LoginController@login');
-// Route::post('/logout', 'Api\Auth\LoginController@logout');
-// Route::get('/check', 'Api\Auth\LoginController@isLoggedIn');
-
-
+// Webhooks
 Route::post('/webhook/line', 'LineApiController@response');
 Route::post('/slack/command', 'SlackController@command');
