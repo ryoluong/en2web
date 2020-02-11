@@ -31,4 +31,4 @@ Route::get('/users', 'Api\UsersController@index');
 
 
 Route::post('/webhook/line', 'LineApiController@response');
-Route::post('/webhook/slack', 'SlackController@response');
+Route::post('/slack/command', 'SlackController@command');
