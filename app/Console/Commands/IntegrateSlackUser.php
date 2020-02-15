@@ -14,7 +14,7 @@ class IntegrateSlackUser extends Command
      *
      * @var string
      */
-    protected $signature = 'slack:integrate';
+    protected $signature = 'slack:linkusers';
 
     /**
      * The console command description.
