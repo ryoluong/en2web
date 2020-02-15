@@ -76,6 +76,7 @@ class IntegrateSlackUser extends Command
 ```
 万が一、上記のアカウントが自分以外のものである場合は、<@US5GTG60K> までご連絡ください！";
                     Slack::inbox($user->slack_id, $message);
+                    Slack::info($user->name .' has been linked to En2::Web!');
                     $this->info($user->name .' has been linked to En2::Web!');
                 }
             }
