@@ -25,4 +25,27 @@ class Slack extends Model
         $response = file_get_contents($url, false, stream_context_create($options));
         return $response;
     }
+
+    public function inbox($id, $message)
+    {
+        $url = 'https://slack.com/api/chat.postMessage';
+        $token = config('const.SLACK_BOT_OAUTH_TOKEN');
+        $header = implode(PHP_EOL, [
+            'Content-type: application/json; charset=UTF-8',
+            "Authorization: Bearer {$token}"
+        ]);
+        $content = json_encode([
+            'channel' => $id,
+            'text' => $message,
+        ]);
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => $header,
+                'content' => $content,
+                'protocol_version' => '1.1'
+            ],
+        ];
+        file_get_contents($url, false, stream_context_create($options));
+    }
 }
