@@ -1,3 +1,4 @@
+@import './variables';
 .v-skeleton-loader__image {
   height: 220px !important;
 }
@@ -9,4 +10,13 @@
   &:hover {
     cursor: pointer;
   }
+}
+.prof_heading {
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+  color: #559;
+  border-bottom: 1px solid #77b;
+  padding-bottom: 3px;
 }

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from '@/store';
+import store from '@/js/store';
 
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);

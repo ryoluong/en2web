@@ -1,9 +1,9 @@
-import Login from '@/pages/login/index.vue';
-import Notes from '@/pages/notes/index.vue';
-import NoteView from '@/pages/notes/view.vue';
-import NoteUsers from '@/pages/notes/users.vue';
-import Users from '@/pages/users/index.vue';
-import UserView from '@/pages/users/view.vue';
+import Login from '@/js/pages/login/index.vue';
+import Notes from '@/js/pages/notes/index.vue';
+import NoteView from '@/js/pages/notes/view.vue';
+import NoteUsers from '@/js/pages/notes/users.vue';
+import Users from '@/js/pages/users/index.vue';
+import UserView from '@/js/pages/users/view.vue';
 
 const routes = [
   {

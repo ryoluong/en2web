@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="ma-auto py-2 px-6" ripple :to="`/users/${user.id}`">
+  <v-list-item class="ma-auto py-1 px-6" :to="`/users/${user.id}`">
     <v-list-item-avatar size="48">
       <v-img :src="userImagePath" cover eager>
         <template v-slot:placeholder>

@@ -34,7 +34,7 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-import NoteCard from '@/components/NoteCard.vue';
+import NoteCard from '@/js/components/NoteCard.vue';
 export default {
   components: { NoteCard },
   data: () => ({

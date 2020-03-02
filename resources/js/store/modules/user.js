@@ -1,4 +1,4 @@
-import axios from '@/axios';
+import axios from '@/js/axios';
 
 const state = {
   users: [],
@@ -6,26 +6,28 @@ const state = {
   groupBy: 'department',
   search: '',
 };
-
 const actions = {
   async index({ commit, dispatch }, params) {
-    await axios
-      .get('/users', {
-        params: params,
-      })
-      .then(res => {
-        commit('indexSuccess', res.data);
-      })
-      .catch(() => {
-        dispatch(
-          'snackbar/show',
-          {
-            message: 'エラーが発生しました',
-            type: 'error',
-          },
-          { root: true },
-        );
-      });
+    if (state.users.length == 0) {
+      await axios
+        .get('/users', {
+          params: params,
+        })
+        .then(res => {
+          commit('indexSuccess', res.data);
+        })
+        .catch(() => {
+          dispatch(
+            'snackbar/show',
+            {
+              message: 'エラーが発生しました',
+              type: 'error',
+            },
+            { root: true },
+          );
+        });
+    }
+    return state.users;
   },
   async get({ dispatch }, id) {
     let user;

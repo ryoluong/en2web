@@ -105,7 +105,7 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-import UserGroup from '@/components/users/UserGroup.vue';
+import UserGroup from '@/js/components/users/UserGroup.vue';
 
 export default {
   components: {
@@ -138,7 +138,7 @@ export default {
         return this.$store.state.user.search;
       },
       set(v) {
-        this.updateSeach(v);
+        this.updateSearch(v);
       },
     },
     maxGeneration() {

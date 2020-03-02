@@ -1,5 +1,5 @@
-import axios from '@/axios';
-import router from '@/router';
+import axios from '@/js/axios';
+import router from '@/js/router';
 const state = {
   isAuth: false,
   user: null,

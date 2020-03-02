@@ -1,4 +1,4 @@
-import axios from '@/axios';
+import axios from '@/js/axios';
 
 const state = {
   notes: [],

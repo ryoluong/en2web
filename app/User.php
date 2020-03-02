@@ -87,7 +87,7 @@ class User extends Authenticatable implements JWTSubject
     public function getEscapedProfile()
     {
         $pattern = ['/%%.+%%/', '/%%/'];
-        $replacement = ['<span>$0</span>', ''];
+        $replacement = ['<span class="prof_heading">$0</span>', ''];
         $escapedString = nl2br(htmlspecialchars($this->profile, ENT_QUOTES, 'UTF-8'));
         $escapedString = preg_replace($pattern, $replacement, $escapedString);
         $urlPattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:[\.\/][\?%#A-Z0-9][\?&%;=#A-Z0-9_-]*)+):?(\d+)?\/?/i';

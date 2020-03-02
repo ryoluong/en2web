@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import Snackbar from '@/components/Snackbar.vue';
+import Header from '@/js/components/Header.vue';
+import Snackbar from '@/js/components/Snackbar.vue';
 export default {
   name: 'App',
   components: {
