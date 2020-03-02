@@ -13,7 +13,7 @@
     </v-tabs>
     <v-radio-group
       v-model="groupBy"
-      class=""
+      class="pt-3"
       row
       background-color="white"
       hide-details
@@ -48,14 +48,14 @@
       prepend-inner-icon="mdi-magnify"
       color="indigo"
       height="56px"
-      class="mt-2"
+      class="pt-3"
     />
     <div v-if="loading">
       <v-skeleton-loader class="mt-2 mx-auto" type="card-heading" />
       <v-skeleton-loader
         v-for="i in 6"
         :key="i"
-        class="ml-5 mt-3 mr-12"
+        class="ml-2 mt-5 mr-12"
         type="list-item-avatar"
       />
     </div>
@@ -104,6 +104,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 import UserGroup from '@/components/users/UserGroup.vue';
 
 export default {
@@ -112,13 +113,34 @@ export default {
   },
   data: () => ({
     loading: true,
-    users: [],
     panel: [...Array(20).keys()],
-    groupBy: 'department',
-    showBy: 0,
-    search: '',
   }),
   computed: {
+    ...mapState('user', ['users']),
+    showBy: {
+      get() {
+        return this.$store.state.user.showBy;
+      },
+      set(v) {
+        this.updateShowBy(v);
+      },
+    },
+    groupBy: {
+      get() {
+        return this.$store.state.user.groupBy;
+      },
+      set(v) {
+        this.updateGroupBy(v);
+      },
+    },
+    search: {
+      get() {
+        return this.$store.state.user.search;
+      },
+      set(v) {
+        this.updateSeach(v);
+      },
+    },
     maxGeneration() {
       const generation = this.users.map(user => {
         return user.generation;
@@ -165,10 +187,13 @@ export default {
     },
   },
   async created() {
-    this.users = await this.$store.dispatch('user/index');
+    if (this.users.length === 0) {
+      await this.$store.dispatch('user/index');
+    }
     this.loading = false;
   },
   methods: {
+    ...mapMutations('user', ['updateShowBy', 'updateGroupBy', 'updateSearch']),
     where(i) {
       switch (this.groupBy) {
         case 'department':

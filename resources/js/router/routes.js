@@ -2,7 +2,8 @@ import Login from '@/pages/login/index.vue';
 import Notes from '@/pages/notes/index.vue';
 import NoteView from '@/pages/notes/view.vue';
 import NoteUsers from '@/pages/notes/users.vue';
-import users from '@/pages/users/index.vue';
+import Users from '@/pages/users/index.vue';
+import UserView from '@/pages/users/view.vue';
 
 const routes = [
   {
@@ -52,11 +53,20 @@ const routes = [
   },
   {
     path: '/users',
-    component: users,
+    component: Users,
     meta: {
       requireAuth: true,
       title: 'Users',
       header: 'menu',
+    },
+  },
+  {
+    path: '/users/:id(\\d+)',
+    component: UserView,
+    meta: {
+      requireAuth: true,
+      title: 'Users',
+      header: 'back',
     },
   },
 ];

@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <v-container class="container pa-0 ma-a" background="white">
+  <v-container class="container pa-0 mx-a mb-0" background="white">
     <div v-if="!loading">
       <v-img
         class="v-img white--text align-start align-content-space-between"

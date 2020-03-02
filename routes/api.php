@@ -19,10 +19,11 @@ Route::post('/refresh', 'Api\Auth\LoginController@refresh');
 Route::get('/me', 'Api\Auth\LoginController@me');
 
 Route::get('/notes', 'Api\NotesController@index');
-Route::put('/notes/{note}/fav', 'Api\NotesController@fav');
 Route::get('/notes/{note}', 'Api\NotesController@get');
+Route::put('/notes/{note}/fav', 'Api\NotesController@fav');
 
 Route::get('/users', 'Api\UsersController@index');
+Route::get('/users/{user}', 'Api\UsersController@get');
 
 // Webhooks
 Route::post('/webhook/line', 'LineApiController@response');

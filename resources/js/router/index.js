@@ -27,6 +27,11 @@ router.beforeEach(async (to, from, next) => {
     if (token) {
       await store.dispatch('auth/refresh');
     }
+  } else {
+    const expiredAt = localStorage.getItem('expired_at');
+    if (expiredAt && expiredAt < new Date()) {
+      await store.dispatch('auth/refresh');
+    }
   }
   // Auth middleware
   if (to.meta.requireAuth && !store.state.auth.isAuth) {

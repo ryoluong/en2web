@@ -12,6 +12,10 @@ const actions = {
       .then(res => {
         commit('authenticated');
         localStorage.setItem('access_token', res.data.access_token);
+        localStorage.setItem(
+          'expired_at',
+          new Date().setSeconds(res.data.expires_in),
+        );
         router.push('/notes');
         dispatch('me');
         dispatch(
@@ -45,12 +49,16 @@ const actions = {
       .then(res => {
         commit('authenticated');
         localStorage.setItem('access_token', res.data.access_token);
+        localStorage.setItem(
+          'expired_at',
+          new Date().setSeconds(res.data.expires_in),
+        );
         dispatch('me');
       })
       .catch(() => {
         commit('unauthenticated');
         commit('setUser', null);
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('access_token', 'expired_at');
       });
   },
   async me({ commit }) {

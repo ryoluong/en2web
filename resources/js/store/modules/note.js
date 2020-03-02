@@ -1,4 +1,5 @@
 import axios from '@/axios';
+
 const state = {
   notes: [],
   currentPage: 0,

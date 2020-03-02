@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slack extends Model
 {
+    const DEBUG_SLACK_CHANNEL_ID = 'CTRPME12M';
+
     public function notice(string $str) {
         $url = config('const.SLACK_WEBHOOK_URI');
         $content = json_encode(array('text' => $str));
@@ -28,6 +30,9 @@ class Slack extends Model
 
     public function inbox($id, $message)
     {
+        if (app()->isLocal()) {
+            $id = self::DEBUG_SLACK_CHANNEL_ID;
+        }
         $url = 'https://slack.com/api/chat.postMessage';
         $token = config('const.SLACK_BOT_OAUTH_TOKEN');
         $header = implode(PHP_EOL, [
