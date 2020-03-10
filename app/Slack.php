@@ -36,14 +36,13 @@ class Slack extends Model
         $url = 'https://slack.com/api/chat.postMessage';
         $token = config('const.SLACK_BOT_OAUTH_TOKEN');
         $header = implode(PHP_EOL, [
-            'Content-type: application/x-www-form-urlencoded; charset=utf-8',
+            'Content-type: application/json; charset=UTF-8',
             "Authorization: Bearer {$token}"
         ]);
-        $content = http_build_query([
+        $content = json_encode([
             'channel' => $id,
             'text' => $message,
-        ], "", "&");
-        
+        ]);
         $options = [
             'http' => [
                 'method' => 'POST',
@@ -52,6 +51,6 @@ class Slack extends Model
                 'protocol_version' => '1.1'
             ],
         ];
-        return file_get_contents($url, false, stream_context_create($options));
+        file_get_contents($url, false, stream_context_create($options));
     }
 }
