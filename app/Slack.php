@@ -35,27 +35,19 @@ class Slack extends Model
         }
         $url = 'https://slack.com/api/chat.postMessage';
         $token = config('const.SLACK_BOT_OAUTH_TOKEN');
-        $header = implode(PHP_EOL, [
-            'Content-type: application/json; charset=UTF-8',
-            "Authorization: Bearer {$token}"
-        ]);
+        $headers = [
+            'Content-type' => 'application/json; charset=UTF-8',
+            'Authorization' => "Bearer $token",
+        ];
         $content = json_encode([
             'channel' => $id,
             'text' => $message,
         ]);
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => $header,
-                'content' => $content,
-                'ignore_errors' => true,
-                'protocol_version' => '1.1',
-            ],
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false
-            ]
-        ];
-        return file_get_contents($url, false, stream_context_create($options));
+        
+        $client = new \GuzzleHttp\Client;
+        $response = $client->request('POST', $url, [
+            "headers" => $headers, "body" => $content,
+        ]);
+        return $response->getStatusCode() . ": " . $response->getBody();
     }
 }
