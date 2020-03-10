@@ -48,7 +48,8 @@ class Slack extends Model
                 'method' => 'POST',
                 'header' => $header,
                 'content' => $content,
-                'protocol_version' => '1.1'
+                'protocol_version' => '1.1',
+                'request_fulluri' => true
             ],
         ];
         file_get_contents($url, false, stream_context_create($options));
