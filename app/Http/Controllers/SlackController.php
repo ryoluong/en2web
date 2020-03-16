@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 use App\User;
 
@@ -12,6 +13,7 @@ class SlackController extends Controller
 
     const URL_VERIFICATION = "url_verification";
     const COMMAND_IAM = "iam";
+    const COMMAND_REGISTER = "register";
 
     public function command()
     {
@@ -20,6 +22,9 @@ class SlackController extends Controller
             switch($args[0]){
                 case self::COMMAND_IAM:
                     return $this->iam($args, request('user_id'));
+                case self::COMMAND_REGISTER:
+                    Log::debug(request()->all());
+                    return $this->register(request('user_id'));
                 default:
                     return $this->help();
             }
@@ -49,6 +54,20 @@ class SlackController extends Controller
             }
         }
         return response()->json(['text' => $message]);
+    }
+
+    private function register($slack_id)
+    {
+        return response()->json(
+            ['text' => 'Successfully logged request']
+        );
+        // if (User::where('slack_id', $slack_id)->exists()) {
+        //     $message = "既にEn2::Webに登録済みです。";
+        // } else {
+        //     $user = User::create([
+        //         compact('slack_id')
+        //     ]);
+        // }
     }
 
     private function help() {
