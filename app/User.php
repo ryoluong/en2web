@@ -106,4 +106,42 @@ class User extends Authenticatable implements JWTSubject
         $temp = preg_replace('/,\s*/', "\n", $temp);
         return nl2br(htmlspecialchars($temp, ENT_QUOTES, 'UTF-8'));
     }
+
+    public function fetchSlackInfo()
+    {
+        if (!$this->slack_id) {
+            return null;
+        }
+        $token = config('const.SLACK_BOT_OAUTH_TOKEN');
+        $url = "https://slack.com/api/users.info?user={$this->slack_id}";
+        $header = implode(PHP_EOL, [
+            "Authorization: Bearer {$token}"
+        ]);
+        $options = [
+            'http' => [
+                'method' => 'GET',
+                'header' => $header,
+                'ignore_errors' => true,
+                'protocol_version' => '1.1',
+            ],
+        ];
+        return json_decode(file_get_contents($url, false, stream_context_create($options)));
+    }
+
+    public function syncUserImage()
+    {
+        if (!$this->slack_id) {
+            return false;
+        }
+        $res = $this->fetchSlackInfo();
+        $this->update([
+            'image_24'  => $res->user->profile->image_24,
+            'image_32'  => $res->user->profile->image_32,
+            'image_48'  => $res->user->profile->image_48,
+            'image_72'  => $res->user->profile->image_72,
+            'image_192' => $res->user->profile->image_192,
+            'image_512' => $res->user->profile->image_512,
+        ]);
+        return true;
+    }
 }
