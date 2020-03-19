@@ -14,12 +14,12 @@ class AddSlackImgUrlColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('image_24')->after('avater_path')->nullable();
-            $table->string('image_32')->after('image_24')->nullable();
-            $table->string('image_48')->after('image_32')->nullable();
-            $table->string('image_72')->after('image_48')->nullable();
-            $table->string('image_192')->after('image_72')->nullable();
-            $table->string('image_512')->after('image_192')->nullable();
+            $table->string('image_24')->after('avater_path')->default('/img/user_icon/48.png');
+            $table->string('image_32')->after('image_24')->default('/img/user_icon/64.png');
+            $table->string('image_48')->after('image_32')->default('/img/user_icon/96.png');
+            $table->string('image_72')->after('image_48')->default('/img/user_icon/120.png');
+            $table->string('image_192')->after('image_72')->default('/img/user_icon/240.png');
+            $table->string('image_512')->after('image_192')->default('/img/user_icon/240.png');
         });
     }
 
