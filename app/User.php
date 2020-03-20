@@ -127,21 +127,4 @@ class User extends Authenticatable implements JWTSubject
         ];
         return json_decode(file_get_contents($url, false, stream_context_create($options)));
     }
-
-    public function syncUserImage()
-    {
-        if (!$this->slack_id) {
-            return false;
-        }
-        $res = $this->fetchSlackInfo();
-        $this->update([
-            'image_24'  => $res->user->profile->image_24,
-            'image_32'  => $res->user->profile->image_32,
-            'image_48'  => $res->user->profile->image_48,
-            'image_72'  => $res->user->profile->image_72,
-            'image_192' => $res->user->profile->image_192,
-            'image_512' => $res->user->profile->image_512,
-        ]);
-        return true;
-    }
 }

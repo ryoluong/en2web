@@ -31,7 +31,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:remindupcomingevents')->dailyAt('20:00');
         $schedule->command('command:noticeattendancedeadline')->dailyAt('12:30');
         $schedule->command('slack:linkusers')->dailyAt('11:00');
-        $schedule->command('slack:syncimage')->dailyAt('9:30');
     }
 
     /**
