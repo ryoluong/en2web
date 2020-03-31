@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div v-if="loading">
     Loading
   </div>
-  <div v-else class="pb-8">
+  <div v-else>
     <div class="top" :style="`background-image:url(${coverImagePath});`">
       <v-avatar class="user-image" size="95">
         <v-img v-if="!loading" :src="userImagePath" :alt="user.name" />
@@ -12,8 +13,12 @@
       </div>
     </div>
     <v-tabs v-model="tab" color="indigo lighten-1" grow centered class="mb-2">
-      <v-tab>Profile</v-tab>
-      <v-tab>Notes</v-tab>
+      <v-tab>
+        Profile
+      </v-tab>
+      <v-tab>
+        Notes
+      </v-tab>
     </v-tabs>
     <div v-if="tab == 0">
       <v-list flat>
@@ -22,23 +27,63 @@
             <v-icon size="28" color="#559" v-text="p.icon" />
           </v-list-item-icon>
           <v-list-item-content>
-            <!-- <p v-text="p.value" /> -->{{ p.value }}
+            {{ p.value }}
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div class="profile mt-3 mx-auto" v-html="user.profile" />
+      <div
+        v-if="user.profile"
+        class="profile mt-3 mx-auto"
+        v-html="user.profile"
+      />
+      <IconMessage
+        v-else
+        icon="mdi-snowboard"
+        message="プロフィールが未記入です。"
+      />
+    </div>
+    <div v-else>
+      <NoteCard
+        v-for="n in user.notes"
+        :key="n.id"
+        :note="n"
+        class="mx-auto mt-8 my-12"
+        @fav="handleFav"
+      />
+      <IconMessage
+        v-if="user.notes_count == 0"
+        icon="mdi-snowboard"
+        message="ノートがまだありません。"
+      />
+      <Period v-else-if="0 < user.notes_count && user.notes_count < 5" />
+      <div v-else class="d-flex justify-center">
+        <v-btn
+          large
+          rounded
+          class="mx-auto px-12 mb-11 white--text"
+          color="blue-grey"
+          :to="`/notes?user_id=${user.id}`"
+        >
+          See all {{ user.notes_count }} notes
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex';
+import IconMessage from '@/js/components/IconMessage.vue';
+import Period from '@/js/components/notes/Period.vue';
+import NoteCard from '@/js/components/notes/NoteCard.vue';
 export default {
+  components: { IconMessage, Period, NoteCard },
   data: () => ({
     user: null,
     loading: true,
     tab: 0,
   }),
   computed: {
+    ...mapState('user', ['noteTabUserId']),
     profile() {
       let profile = [
         {
@@ -99,9 +144,34 @@ export default {
     this.user = await this.$store.dispatch('user/get', this.$route.params.id);
     this.loading = false;
   },
+  mounted() {
+    if (this.noteTabUserId == this.$route.params.id) {
+      this.tab = 1;
+    } else {
+      this.setNoteTabUserId(0);
+    }
+  },
+  beforeDestroy() {
+    if (this.tab == 1) {
+      this.setNoteTabUserId(this.user.id);
+    }
+  },
+  methods: {
+    ...mapActions('note', ['fav']),
+    ...mapMutations('user', ['setNoteTabUserId']),
+    handleFav(noteId) {
+      const isFavNote = this.$store.state.note.favNotes.indexOf(noteId) != -1;
+      this.user.notes.some(note => {
+        if (note.id === noteId)
+          isFavNote ? note.fav_users_count-- : note.fav_users_count++;
+      });
+      this.fav(noteId);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+@import '@/sass/_variables.scss';
 .avatar {
   border-radius: 20%;
   margin-left: 10px;
@@ -110,9 +180,6 @@ export default {
 .name {
   line-height: 46px !important;
 }
-</style>
-<style lang="scss" scoped>
-@import '@/sass/_variables.scss';
 .top {
   width: 100%;
   height: 180px;

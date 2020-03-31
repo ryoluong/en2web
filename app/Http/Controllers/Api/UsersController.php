@@ -22,6 +22,21 @@ class UsersController extends Controller
     public function get($id) {
         $user = User::select('id', 'name', 'avater_path', 'coverimg_path', 'generation', 'group_id', 'isOB', 'isHennyu', 'department', 'major', 'profile', 'year', 'job')
             ->with('countries:countries.id,countries.name,english_name')
+            ->with(['notes' => function($q) {
+                $q
+                ->select('id', 'user_id', 'category_id', 'title', 'isBest', 'date')
+                ->with([
+                    'user:id,name,avater_path',
+                    'category:id,name',
+                    'countries:countries.id,name,english_name',
+                    'tags:tags.id,name',
+                    'photos:id,note_id,path'
+                ])
+                ->withCount(['favUsers'])
+                ->limit(4)
+                ->orderBy('date', 'desc');
+            }])
+            ->withCount(['notes'])
             ->where('id', $id)
             ->first();
         $user->profile = $user->getEscapedProfile();

@@ -2,12 +2,13 @@ import axios from '@/js/axios';
 
 const state = {
   notes: [],
+  conditions: [],
   currentPage: 0,
   lastPage: 0,
   to: 0,
   savedOffset: 0,
+  savedFullPath: '',
   favNotes: [],
-  category: 0,
 };
 
 const actions = {
@@ -73,18 +74,20 @@ const mutations = {
     state.lastPage = 0;
     state.to = 0;
     state.notes = [];
-  },
-  updateCategory(state, category) {
-    state.category = category;
+    state.conditions = [];
   },
   saveOffset(state, offset) {
     state.savedOffset = offset;
+  },
+  saveFullPath(state, fullPath) {
+    state.savedFullPath = fullPath;
   },
   setFavNotes(state, favNotes) {
     state.favNotes = favNotes;
   },
   indexSuccess(state, payload) {
     state.notes = state.notes.concat(payload.data);
+    state.conditions = payload.conditions;
     state.currentPage = payload.current_page;
     state.lastPage = payload.last_page;
     state.to = payload.to;

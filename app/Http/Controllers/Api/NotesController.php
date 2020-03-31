@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Note;
+use App\User;
+use Illuminate\Support\Facades\Log;
 
 class NotesController extends Controller
 {
@@ -15,9 +17,11 @@ class NotesController extends Controller
 
     public function index()
     {
+        $user_id = request('user_id');
         $category_id = request('category_id');
         $is_best = request('is_best');
-        return Note::select('id', 'user_id', 'category_id', 'title', 'isBest', 'date')
+        $limit = request('limit', 10);
+        $notes = Note::select('id', 'user_id', 'category_id', 'title', 'isBest', 'date')
             ->with([
                 'user:id,name,avater_path',
                 'category:id,name',
@@ -25,6 +29,9 @@ class NotesController extends Controller
                 'tags:tags.id,name',
                 'photos:id,note_id,path'
             ])
+            ->when($user_id, function($q) use ($user_id) {
+                return $q->where('notes.user_id', $user_id);
+            })
             ->when($category_id, function ($q) use ($category_id) {
                 return $q->where('notes.category_id', $category_id);
             })
@@ -33,7 +40,15 @@ class NotesController extends Controller
             })
             ->withCount(['favUsers'])
             ->orderBy('date', 'desc')
-            ->paginate(10);
+            ->paginate($limit);
+        $conditions = [];
+        if ($user_id) {
+            $conditions[] = [
+                "icon"  => "mdi-account-edit",
+                "data" => User::select('id','name')->where('id', $user_id)->first()
+            ];
+        }
+        return collect(compact('conditions'))->merge($notes);
     }
 
     public function fav($noteId) {

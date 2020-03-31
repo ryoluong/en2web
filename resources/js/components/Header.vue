@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar id="header" app color="indigo lighten-1" dark hide-on-scroll>
-      <v-btn v-if="$route.meta.header === 'back'" icon @click="$router.go(-1)">
+      <v-btn v-if="$route.meta.header === 'back'" icon @click="handelGoBack()">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-app-bar-nav-icon v-else @click.stop="drawer = !drawer" />
@@ -25,6 +25,11 @@ export default {
   computed: {
     ...mapState('meta', ['title']),
     ...mapState('auth', ['isAuth']),
+  },
+  methods: {
+    handelGoBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>

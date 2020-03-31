@@ -1,14 +1,14 @@
 <template>
   <v-card tile max-width="450" elevation="4">
     <v-list-item class="ma-auto py-1">
-      <v-list-item-avatar size="32">
+      <v-list-item-avatar size="32" @click="user">
         <v-img :src="userImagePath" cover>
           <template v-slot:placeholder>
             <v-skeleton-loader class="mx-auto" type="image" />
           </template>
         </v-img>
       </v-list-item-avatar>
-      <v-list-item-content>
+      <v-list-item-content @click="user">
         <v-list-item-title class="subtitle-1 font-weight-medium">
           {{ note.user.name }}
         </v-list-item-title>
@@ -28,14 +28,14 @@
       @click="view"
     >
       <template v-slot:placeholder>
-        <v-skeleton-loader class="mx-auto" tile height="220px" type="image" />
+        <v-skeleton-loader class="mx-auto" tile type="image" />
       </template>
       <div>
         <v-chip
           small
           class="white--text mt-2 ml-2"
           color="indigo lighten-1"
-          @click="emitSetTab"
+          @click="go(`/notes?category_id=${note.category_id}`)"
         >
           <v-icon small left>
             mdi-folder
@@ -58,7 +58,7 @@
           small
           class="white--text mt-2 ml-2"
           color="warning lighten-1"
-          @click="emitGoBestNote"
+          @click="go(`/notes?is_best=1`)"
         >
           <v-icon small left>
             mdi-star
@@ -69,7 +69,7 @@
       <div
         class="pb-2 pr-2"
         style="position:absolute;bottom:0;right:0;opacity:0.95;"
-        @click="fav"
+        @click="emitFav"
       >
         <v-btn fab :color="iconColor" :class="textColor">
           <v-icon small>
@@ -134,10 +134,6 @@ export default {
     },
   },
   methods: {
-    fav() {
-      this.preventLink = true;
-      this.$store.dispatch('note/fav', this.note.id);
-    },
     view() {
       if (this.preventLink) {
         this.preventLink = false;
@@ -145,13 +141,18 @@ export default {
         this.$router.push(`/notes/${this.note.id}`);
       }
     },
-    emitSetTab() {
-      this.preventLink = true;
-      this.$emit('setTab', this.note.category.id);
+    user() {
+      this.$router.push(`/users/${this.note.user.id}`);
     },
-    emitGoBestNote() {
+    emitFav() {
       this.preventLink = true;
-      this.$emit('goBestNote');
+      this.$emit('fav', this.note.id);
+    },
+    go(to) {
+      this.preventLink = true;
+      if (this.$route.fullPath != to) {
+        this.$router.push(to);
+      }
     },
   },
 };

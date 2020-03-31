@@ -5,6 +5,7 @@ const state = {
   showBy: 0,
   groupBy: 'department',
   search: '',
+  noteTabUserId: 0,
 };
 const actions = {
   async index({ commit, dispatch }, params) {
@@ -62,6 +63,9 @@ const mutations = {
   },
   updateSearch(state, search) {
     state.search = search;
+  },
+  setNoteTabUserId(state, userId) {
+    state.noteTabUserId = userId;
   },
 };
 

@@ -63,6 +63,7 @@ const routes = [
   {
     path: '/users/:id(\\d+)',
     component: UserView,
+    name: 'userview',
     meta: {
       requireAuth: true,
       title: 'Users',

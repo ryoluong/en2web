@@ -1,14 +1,15 @@
 {
   "editor.formatOnSave": true,
-
-  "eslint.validate": ["javascript", "javascriptreact", "vue"],
-
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-
+  "editor.tokenColorCustomizations": {
+    "[Material Theme]": {
+      "semanticHighlighting": true
+    }
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
   "vetur.format.defaultFormatter.js": "prettier-eslint",
-
   "auto-rename-tag.activationOnLanguage": [
     "html",
     "xml",

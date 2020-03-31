@@ -1,24 +1,68 @@
 <template>
   <div v-scroll="onScroll">
-    <v-tabs v-model="category" color="indigo lighten-1" show-arrows centered>
-      <v-tab>ALL</v-tab>
-      <v-tab>Best Note</v-tab>
-      <v-tab>思考の共有</v-tab>
-      <v-tab>語学学習</v-tab>
-      <v-tab>就活・仕事</v-tab>
-      <v-tab>奨学金</v-tab>
-      <v-tab>本・記事</v-tab>
-      <v-tab>月一報告</v-tab>
+    <v-tabs
+      color="indigo lighten-1"
+      show-arrows
+      centered
+      :hide-slider="!doesMatchTabUrl"
+    >
+      <v-tab exact to="/notes">
+        ALL
+      </v-tab>
+      <v-tab exact to="/notes?is_best=1">
+        Best Note
+      </v-tab>
+      <v-tab exact to="/notes?category_id=6">
+        思考の共有
+      </v-tab>
+      <v-tab exact to="/notes?category_id=2">
+        語学学習
+      </v-tab>
+      <v-tab exact to="/notes?category_id=4">
+        就活・仕事
+      </v-tab>
+      <v-tab exact to="/notes?category_id=3">
+        奨学金
+      </v-tab>
+      <v-tab exact to="/notes?category_id=5">
+        本・記事
+      </v-tab>
+      <v-tab exact to="/notes?category_id=1">
+        月一報告
+      </v-tab>
     </v-tabs>
-    <v-container v-if="!loading" ref="container" :style="style" class="px-0">
+    <v-card
+      v-if="conditions.length"
+      id="conditions"
+      class="my-4 mx-2"
+      elevation="3"
+    >
+      <v-list dense>
+        <v-list-item v-for="(c, i) in conditions" :key="i">
+          <v-list-item-icon class="">
+            <v-icon size="28" color="#559" v-text="c.icon" />
+          </v-list-item-icon>
+          <v-list-item-content>
+            {{ c.data.name }}
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
+    <v-container
+      v-if="!loading"
+      id="note-container"
+      ref="container"
+      :style="style"
+      class="px-0"
+    >
       <NoteCard
         v-for="n in displayNotes"
         :key="n.id"
         :note="n"
         class="mx-auto mt-8 my-12"
-        @setTab="setTab"
-        @goBestNote="goBestNote"
+        @fav="fav"
       />
+      <Period v-if="currentPage == lastPage" />
     </v-container>
     <v-container v-if="loading || fetching" class="px-0">
       <v-skeleton-loader
@@ -33,58 +77,44 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex';
-import NoteCard from '@/js/components/NoteCard.vue';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import NoteCard from '@/js/components/notes/NoteCard.vue';
+import Period from '@/js/components/notes/Period.vue';
 export default {
-  components: { NoteCard },
+  components: { NoteCard, Period },
   data: () => ({
     loading: true,
     fetching: false,
     offset: 0,
+    offsetTop: 0,
   }),
   computed: {
     ...mapState('note', [
       'notes',
+      'conditions',
       'currentPage',
       'lastPage',
       'to',
       'savedOffset',
+      'savedFullPath',
     ]),
-    category: {
-      get() {
-        return this.$store.state.note.category;
-      },
-      set(value) {
-        this.updateCategory(value);
-      },
-    },
-    categoryIds() {
-      return [0, 0, 6, 2, 4, 3, 5, 1];
-    },
     params() {
       return {
         page: this.currentPage + 1,
-        category_id: this.categoryIds[this.category],
-        is_best: this.category === 1 ? 1 : 0,
+        category_id: this.$route.query.category_id,
+        is_best: this.$route.query.is_best,
+        user_id: this.$route.query.user_id,
       };
     },
     needFetch() {
       return !this.fetching && this.currentPage != this.lastPage;
-    },
-    headerHeight() {
-      return document.getElementById('header').clientHeight + 48 + 32; // header + containerのpadding
-    },
-    newHeaderHeight() {
-      return this.$refs.container
-        ? 0
-        : this.$refs.container.getBoundingClientRect().top;
     },
     noteHeight() {
       return 400;
     },
     firstIndex() {
       const res =
-        Math.floor((this.offset - this.headerHeight) / this.noteHeight) - 2;
+        Math.floor((this.offset - this.offsetTop) / this.noteHeight) - 2;
       return res > 0 ? res : 0;
     },
     lastIndex() {
@@ -104,27 +134,46 @@ export default {
           this.noteHeight * (this.notes.length - this.lastIndex - 1) + 'px',
       };
     },
+    doesMatchTabUrl() {
+      const tabUrls = [
+        '/notes',
+        '/notes?is_best=1',
+        '/notes?category_id=1',
+        '/notes?category_id=2',
+        '/notes?category_id=3',
+        '/notes?category_id=4',
+        '/notes?category_id=5',
+        '/notes?category_id=6',
+      ];
+      return tabUrls.indexOf(this.$route.fullPath) !== -1;
+    },
   },
   watch: {
-    category: async function() {
+    $route: async function() {
+      this.loading = true;
+      this.clearNotes();
+      this.scrollTop();
+      this.saveFullPath(this.$route.fullPath);
+      await this.fetchNotes();
+      this.loaded();
+    },
+  },
+  async mounted() {
+    if (this.$route.fullPath !== this.savedFullPath) {
       this.loading = true;
       this.clearNotes();
       this.scrollTop();
       await this.fetchNotes();
-      this.loading = false;
-    },
-  },
-  async created() {
-    if (this.currentPage === 0) {
-      await this.fetchNotes();
+      this.saveFullPath(this.$route.fullPath);
     }
-    this.loading = false;
+    this.loaded();
   },
   beforeDestroy() {
     this.saveOffset(this.offset);
   },
   methods: {
-    ...mapMutations('note', ['saveOffset', 'clearNotes', 'updateCategory']),
+    ...mapMutations('note', ['saveOffset', 'clearNotes', 'saveFullPath']),
+    ...mapActions('note', ['fav']),
     async fetchNotes() {
       this.fetching = true;
       await this.$store.dispatch('note/index', this.params);
@@ -139,11 +188,11 @@ export default {
     scrollTop() {
       this.$vuetify.goTo(0, { duration: 0 });
     },
-    setTab(tabId) {
-      this.category = this.categoryIds.indexOf(tabId);
-    },
-    goBestNote() {
-      this.category = 1;
+    async loaded() {
+      this.loading = false;
+      await this.$nextTick();
+      this.offsetTop =
+        this.$refs.container.getBoundingClientRect().top + window.pageYOffset;
     },
   },
 };
