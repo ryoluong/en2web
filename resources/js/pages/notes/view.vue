@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <v-container class="container pa-0 mx-a mb-0" background="white">
+  <v-container class="container max-width pa-0 mx-a mb-0" background="white">
     <div v-if="!loading">
       <v-img
         class="v-img white--text align-start align-content-space-between"
@@ -100,7 +100,7 @@
         v-html="note.content"
       />
 
-      <div class="d-flex mb-4 pr-10 mr-10 justify-end">
+      <div class="d-flex mb-4 pr-10 mr-12 justify-end">
         <v-btn fab dark color="indigo lighten-1" @click="scrollTop">
           <v-icon dark>
             mdi-arrow-up
@@ -173,7 +173,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 800px;
   position: relative;
 }
 .content {

@@ -31,35 +31,44 @@
         月一報告
       </v-tab>
     </v-tabs>
-    <v-card v-if="conditions.length" id="conditions" class="my-4 mx-2" outlined>
-      <v-list dense subheader nav>
-        <v-subheader class="subtitle-2 pr-1 d-flex justify-space-between">
-          <div class="d-flex">
-            <v-icon small class="mr-1">
-              mdi-filter
+    <div class="d-flex justify-center">
+      <v-card
+        v-if="conditions.length"
+        id="conditions"
+        class="mt-4 mb-1 mx-2 d-flex"
+        outlined
+        width="100%"
+        max-width="450px"
+      >
+        <v-list dense subheader nav width="100%">
+          <v-subheader class="subtitle-2 pr-1 d-flex justify-space-between">
+            <div class="d-flex">
+              <v-icon small class="mr-1">
+                mdi-filter
+              </v-icon>
+              <p class="mb-0" style="margin-top:2px;">
+                Filter
+              </p>
+            </div>
+            <v-icon
+              color="grey darken-1"
+              size="20"
+              @click="$router.push('/notes')"
+            >
+              mdi-close
             </v-icon>
-            <p class="mb-0" style="margin-top:2px;">
-              Filter
-            </p>
-          </div>
-          <v-icon
-            color="grey darken-1"
-            size="20"
-            @click="$router.push('/notes')"
-          >
-            mdi-close
-          </v-icon>
-        </v-subheader>
-        <v-list-item v-for="(c, i) in conditions" :key="i">
-          <v-list-item-icon class="mr-4">
-            <v-icon size="28" color="#559" v-text="c.icon" />
-          </v-list-item-icon>
-          <v-list-item-content>
-            {{ c.data.name }}
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-card>
+          </v-subheader>
+          <v-list-item v-for="(c, i) in conditions" :key="i">
+            <v-list-item-icon class="mr-4">
+              <v-icon size="28" color="#559" v-text="c.icon" />
+            </v-list-item-icon>
+            <v-list-item-content>
+              {{ c.data.name }}
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </div>
     <v-container
       v-if="!loading"
       id="note-container"

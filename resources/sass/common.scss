@@ -1,4 +1,8 @@
 @import './variables';
+.max-width {
+  max-width: 600px;
+  margin: auto;
+}
 .v-skeleton-loader__image {
   height: 220px !important;
 }
@@ -23,6 +27,6 @@
   padding-bottom: 3px;
   margin-bottom: 0;
   &:not(:first-child) {
-    margin-top: 15px;
+    margin-top: 25px;
   }
 }

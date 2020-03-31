@@ -1,17 +1,15 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div v-if="loading">
-    Loading
-  </div>
-  <div v-else>
-    <div class="top" :style="`background-image:url(${coverImagePath});`">
+  <div class="max-width">
+    <div v-if="!loading" class="top" :style="topStyle">
       <v-avatar class="user-image" size="95">
-        <v-img v-if="!loading" :src="userImagePath" :alt="user.name" />
+        <v-img :src="userImagePath" :alt="user.name" />
       </v-avatar>
       <div class="user-name headline white--text mt-4">
         {{ user.name }}
       </div>
     </div>
+    <v-skeleton-loader v-else max-height="180px" type="image" />
     <v-tabs v-model="tab" color="indigo lighten-1" grow centered class="mb-2">
       <v-tab>
         Profile
@@ -20,53 +18,60 @@
         Notes
       </v-tab>
     </v-tabs>
-    <div v-if="tab == 0">
-      <v-list flat>
-        <v-list-item v-for="(p, i) in profile" :key="i" class="px-3">
-          <v-list-item-icon>
-            <v-icon size="28" color="#559" v-text="p.icon" />
-          </v-list-item-icon>
-          <v-list-item-content>
-            {{ p.value }}
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      <div
-        v-if="user.profile"
-        class="profile mt-3 mx-auto"
-        v-html="user.profile"
-      />
-      <IconMessage
-        v-else
-        icon="mdi-snowboard"
-        message="プロフィールが未記入です。"
-      />
-    </div>
-    <div v-else>
-      <NoteCard
-        v-for="n in user.notes"
-        :key="n.id"
-        :note="n"
-        class="mx-auto mt-8 my-12"
-        @fav="handleFav"
-      />
-      <IconMessage
-        v-if="user.notes_count == 0"
-        icon="mdi-snowboard"
-        message="ノートがまだありません。"
-      />
-      <Period v-else-if="0 < user.notes_count && user.notes_count < 5" />
-      <div v-else class="d-flex justify-center">
-        <v-btn
-          large
-          rounded
-          class="mx-auto px-12 mb-11 white--text"
-          color="blue-grey"
-          :to="`/notes?user_id=${user.id}`"
-        >
-          See all {{ user.notes_count }} notes
-        </v-btn>
+    <div v-if="!loading">
+      <div v-if="tab == 0" class="pb-10">
+        <v-list flat>
+          <v-list-item v-for="(p, i) in profile" :key="i" class="px-3">
+            <v-list-item-icon>
+              <v-icon size="28" color="#559" v-text="p.icon" />
+            </v-list-item-icon>
+            <v-list-item-content>
+              {{ p.value }}
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <div
+          v-if="user.profile"
+          class="profile mt-3 mx-auto"
+          v-html="user.profile"
+        />
+        <IconMessage
+          v-else
+          icon="mdi-snowboard"
+          message="プロフィールが未記入です。"
+        />
       </div>
+      <div v-else>
+        <NoteCard
+          v-for="n in user.notes"
+          :key="n.id"
+          :note="n"
+          class="mx-auto mt-8 my-12"
+          @fav="handleFav"
+        />
+        <IconMessage
+          v-if="user.notes_count == 0"
+          icon="mdi-snowboard"
+          message="ノートがまだありません。"
+        />
+        <Period v-else-if="0 < user.notes_count && user.notes_count < 5" />
+        <div v-else class="d-flex justify-center">
+          <v-btn
+            large
+            rounded
+            class="mx-auto px-12 mb-11 white--text"
+            color="blue-grey"
+            :to="`/notes?user_id=${user.id}`"
+          >
+            See all {{ user.notes_count }} notes
+          </v-btn>
+        </div>
+      </div>
+    </div>
+    <div v-else class="mt-5">
+      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
+      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
+      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
     </div>
   </div>
 </template>
@@ -138,6 +143,13 @@ export default {
       return this.user.coverimg_path
         ? this.user.coverimg_path
         : '/img/cover_photo.jpg';
+    },
+    topStyle() {
+      return this.loading
+        ? {}
+        : {
+            backgroundImage: `url(${this.coverImagePath})`,
+          };
     },
   },
   async created() {

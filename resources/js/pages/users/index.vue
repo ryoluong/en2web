@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper mx-auto">
+  <div class="wrapper max-width">
     <v-tabs
       v-model="showBy"
       color="indigo lighten-1"
@@ -210,7 +210,6 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   background: white !important;
-  max-width: 500px;
   min-height: 100vh;
 }
 </style>
