@@ -31,15 +31,27 @@
         月一報告
       </v-tab>
     </v-tabs>
-    <v-card
-      v-if="conditions.length"
-      id="conditions"
-      class="my-4 mx-2"
-      elevation="3"
-    >
-      <v-list dense>
+    <v-card v-if="conditions.length" id="conditions" class="my-4 mx-2" outlined>
+      <v-list dense subheader nav>
+        <v-subheader class="subtitle-2 pr-1 d-flex justify-space-between">
+          <div class="d-flex">
+            <v-icon small class="mr-1">
+              mdi-filter
+            </v-icon>
+            <p class="mb-0" style="margin-top:2px;">
+              Filter
+            </p>
+          </div>
+          <v-icon
+            color="grey darken-1"
+            size="20"
+            @click="$router.push('/notes')"
+          >
+            mdi-close
+          </v-icon>
+        </v-subheader>
         <v-list-item v-for="(c, i) in conditions" :key="i">
-          <v-list-item-icon class="">
+          <v-list-item-icon class="mr-4">
             <v-icon size="28" color="#559" v-text="c.icon" />
           </v-list-item-icon>
           <v-list-item-content>
@@ -110,7 +122,7 @@ export default {
       return !this.fetching && this.currentPage != this.lastPage;
     },
     noteHeight() {
-      return 400;
+      return 418;
     },
     firstIndex() {
       const res =

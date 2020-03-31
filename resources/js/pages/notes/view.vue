@@ -64,14 +64,17 @@
       </v-list-item>
 
       <v-list-item class="pl-3 py-1">
-        <v-list-item-avatar size="32">
+        <v-list-item-avatar
+          size="32"
+          @click="$router.push(`/users/${note.user.id}`)"
+        >
           <v-img :src="userImagePath" cover>
             <template v-slot:placeholder>
               <v-skeleton-loader class="mx-auto" type="image" />
             </template>
           </v-img>
         </v-list-item-avatar>
-        <v-list-item-content>
+        <v-list-item-content @click="$router.push(`/users/${note.user.id}`)">
           <v-list-item-title class="subtitle-1 font-weight-medium">
             {{ note.user.name }}
           </v-list-item-title>
