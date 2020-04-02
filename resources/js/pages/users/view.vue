@@ -152,6 +152,18 @@ export default {
           };
     },
   },
+  watch: {
+    $route: async function() {
+      this.loading = true;
+      const id =
+        this.$route.path === '/mypage'
+          ? this.$store.state.auth.user.id
+          : this.$route.params.id;
+      this.user = await this.$store.dispatch('user/get', id);
+      this.tab = 0;
+      this.loading = false;
+    },
+  },
   async created() {
     const id =
       this.$route.path === '/mypage'
