@@ -69,9 +69,9 @@
       </div>
     </div>
     <div v-else class="mt-5">
-      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
-      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
-      <v-skeleton-loader class="mt-3 px-3" type="list-item" />
+      <v-skeleton-loader class="px-3" type="list-item" />
+      <v-skeleton-loader class="px-3" type="list-item" />
+      <v-skeleton-loader class="px-3" type="list-item" />
     </div>
   </div>
 </template>
@@ -158,14 +158,12 @@ export default {
         ? this.$store.state.auth.user.id
         : this.$route.params.id;
     this.user = await this.$store.dispatch('user/get', id);
-    this.loading = false;
-  },
-  mounted() {
-    if (this.noteTabUserId == this.$route.params.id) {
+    if (this.noteTabUserId === this.user.id) {
       this.tab = 1;
     } else {
       this.setNoteTabUserId(0);
     }
+    this.loading = false;
   },
   beforeDestroy() {
     if (this.tab === 1) {

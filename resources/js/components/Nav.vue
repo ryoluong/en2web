@@ -3,7 +3,13 @@
     <v-list-item>
       <img class="ma-auto" width="80%" src="/img/logo/transparent.png" alt="" />
     </v-list-item>
-    <v-list-item v-if="$store.state.auth.user" two-line class="mx-auto clickable" @click="goMypage" :ripple="false">
+    <v-list-item
+      v-if="$store.state.auth.user"
+      two-line
+      class="mx-auto mt-2 clickable"
+      :ripple="false"
+      @click="goMypage"
+    >
       <v-list-item-avatar size="45">
         <img :src="`${$store.state.auth.user.avater_path}`" />
       </v-list-item-avatar>
@@ -91,9 +97,9 @@ export default {
     },
     goMypage() {
       if (this.$route.path !== '/mypage') {
-        this.$router.push('/mypage')
+        this.$router.push('/mypage');
       }
-    }
+    },
   },
 };
 </script>
