@@ -46,6 +46,7 @@ router.beforeEach(async (to, from, next) => {
 
 router.afterEach(to => {
   store.dispatch('meta/setTitle', to.meta.title);
+  store.dispatch('meta/setActions', to.meta.actions);
 });
 
 export default router;

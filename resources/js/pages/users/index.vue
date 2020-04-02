@@ -130,6 +130,7 @@ export default {
         return this.$store.state.user.groupBy;
       },
       set(v) {
+        this.panel = [...Array(20).keys()];
         this.updateGroupBy(v);
       },
     },

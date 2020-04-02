@@ -3,7 +3,7 @@
     <v-list-item>
       <img class="ma-auto" width="80%" src="/img/logo/transparent.png" alt="" />
     </v-list-item>
-    <v-list-item v-if="$store.state.auth.user" two-line class="ma-auto">
+    <v-list-item v-if="$store.state.auth.user" two-line class="mx-auto clickable" @click="goMypage" :ripple="false">
       <v-list-item-avatar size="45">
         <img :src="`${$store.state.auth.user.avater_path}`" />
       </v-list-item-avatar>
@@ -53,11 +53,11 @@ export default {
   computed: {
     items() {
       return [
-        {
-          name: 'Home',
-          link: '/',
-          icon: 'mdi-home',
-        },
+        // {
+        //   name: 'Home',
+        //   link: '/',
+        //   icon: 'mdi-home',
+        // },
         {
           name: 'Notes',
           link: '/notes',
@@ -74,9 +74,9 @@ export default {
           icon: 'mdi-clipboard-check-outline',
         },
         {
-          name: 'Schedules',
-          link: '/schedules',
-          icon: 'mdi-calendar',
+          name: 'Countries',
+          link: '/countries',
+          icon: 'mdi-earth',
         },
       ];
     },
@@ -89,6 +89,11 @@ export default {
         this.loading = false;
       }
     },
+    goMypage() {
+      if (this.$route.path !== '/mypage') {
+        this.$router.push('/mypage')
+      }
+    }
   },
 };
 </script>

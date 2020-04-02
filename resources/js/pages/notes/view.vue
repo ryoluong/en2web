@@ -154,6 +154,21 @@ export default {
   },
   async created() {
     this.note = await this.$store.dispatch('note/get', this.$route.params.id);
+    if (
+      this.$store.state.auth.user.isAdmin ||
+      this.$store.state.auth.user.id == this.note.user_id
+    ) {
+      this.$store.dispatch('meta/setActions', [
+        {
+          icon: 'mdi-pencil',
+          to: `/notes/${this.note.id}/edit`,
+        },
+        {
+          icon: 'mdi-delete',
+          to: `/notes/${this.note.id}/delete`,
+        },
+      ]);
+    }
     this.loading = false;
   },
   methods: {

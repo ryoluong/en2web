@@ -23,8 +23,8 @@
             <v-col cols="12" class="pa-0">
               <validation-provider
                 v-slot="{ errors }"
-                name="email"
-                rules="required|email"
+                name="Email"
+                rules="required"
               >
                 <v-text-field
                   v-model="email"
@@ -38,7 +38,7 @@
               </validation-provider>
               <validation-provider
                 v-slot="{ errors }"
-                name="password"
+                name="Password"
                 rules="required"
               >
                 <v-text-field
@@ -62,12 +62,6 @@
                 >
                   Sign in
                 </v-btn>
-                <v-checkbox
-                  v-model="remember"
-                  class="ma-0 pt-3"
-                  label="Remember me"
-                  color="indigo lighten-1"
-                />
               </v-col>
             </v-col>
           </v-form>

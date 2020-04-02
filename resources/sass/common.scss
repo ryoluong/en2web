@@ -1,4 +1,5 @@
 @import './variables';
+
 .max-width {
   max-width: 600px;
   margin: auto;
@@ -14,6 +15,12 @@
   &:hover {
     cursor: pointer;
   }
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+.scroll-y {
+  overflow-y: scroll;
 }
 .prof_heading {
   width: 100%;

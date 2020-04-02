@@ -9,15 +9,15 @@ const actions = {
   async login({ commit, dispatch }, payload) {
     await axios
       .post('/login', payload)
-      .then(res => {
-        commit('authenticated');
+      .then(async res => {
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem(
           'expired_at',
           new Date().setSeconds(res.data.expires_in),
         );
+        await dispatch('me');
+        commit('authenticated');
         router.push('/notes');
-        dispatch('me');
         dispatch(
           'snackbar/show',
           { message: 'ログインしました' },
@@ -46,14 +46,14 @@ const actions = {
   async refresh({ commit, dispatch }) {
     await axios
       .post('/refresh', {})
-      .then(res => {
-        commit('authenticated');
+      .then(async res => {
         localStorage.setItem('access_token', res.data.access_token);
         localStorage.setItem(
           'expired_at',
           new Date().setSeconds(res.data.expires_in),
         );
-        dispatch('me');
+        await dispatch('me');
+        commit('authenticated');
       })
       .catch(() => {
         commit('unauthenticated');

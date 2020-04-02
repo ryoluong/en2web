@@ -4,7 +4,7 @@
       <v-list-item-avatar size="32" @click="user">
         <v-img :src="userImagePath" cover>
           <template v-slot:placeholder>
-            <v-skeleton-loader class="mx-auto" type="image" />
+            <v-skeleton-loader min-height="220" class="mx-auto" type="image" />
           </template>
         </v-img>
       </v-list-item-avatar>
@@ -67,6 +67,7 @@
         </v-chip>
       </div>
       <div
+        v-if="!hideFav"
         class="pb-2 pr-2"
         style="position:absolute;bottom:0;right:0;opacity:0.95;"
         @click="emitFav"
@@ -107,6 +108,11 @@ export default {
     note: {
       type: Object,
       required: true,
+    },
+    hideFav: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data: () => ({

@@ -9,8 +9,7 @@ const opts = {
   theme: {
     themes: {
       light: {
-        error: colors.pink.accent1,
-        background: colors.shades.white,
+        error: colors.red.accent2,
       },
     },
   },

@@ -19,7 +19,7 @@
       </v-tab>
     </v-tabs>
     <div v-if="!loading">
-      <div v-if="tab == 0" class="pb-10">
+      <div v-if="tab === 0" class="pb-10">
         <v-list flat>
           <v-list-item v-for="(p, i) in profile" :key="i" class="px-3">
             <v-list-item-icon>
@@ -50,7 +50,7 @@
           @fav="handleFav"
         />
         <IconMessage
-          v-if="user.notes_count == 0"
+          v-if="user.notes_count === 0"
           icon="mdi-snowboard"
           message="ノートがまだありません。"
         />
@@ -153,18 +153,19 @@ export default {
     },
   },
   async created() {
-    this.user = await this.$store.dispatch('user/get', this.$route.params.id);
+    const id = this.$route.path === '/mypage' ? this.$store.state.auth.user.id : this.$route.params.id
+    this.user = await this.$store.dispatch('user/get', id);
     this.loading = false;
   },
   mounted() {
-    if (this.noteTabUserId == this.$route.params.id) {
+    if (this.noteTabUserId === parseInt(this.$route.params.id)) {
       this.tab = 1;
     } else {
       this.setNoteTabUserId(0);
     }
   },
   beforeDestroy() {
-    if (this.tab == 1) {
+    if (this.tab === 1) {
       this.setNoteTabUserId(this.user.id);
     }
   },
@@ -172,7 +173,7 @@ export default {
     ...mapActions('note', ['fav']),
     ...mapMutations('user', ['setNoteTabUserId']),
     handleFav(noteId) {
-      const isFavNote = this.$store.state.note.favNotes.indexOf(noteId) != -1;
+      const isFavNote = this.$store.state.note.favNotes.indexOf(noteId) !== -1;
       this.user.notes.some(note => {
         if (note.id === noteId)
           isFavNote ? note.fav_users_count-- : note.fav_users_count++;

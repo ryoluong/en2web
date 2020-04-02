@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Note;
 use App\User;
+use App\Country;
+use App\Category;
+use App\Tag;
+use App\Photo;
 use Illuminate\Support\Facades\Log;
 
 class NotesController extends Controller
@@ -39,6 +43,7 @@ class NotesController extends Controller
                 return $q->where('isBest', true);
             })
             ->withCount(['favUsers'])
+            ->orderBy('id', 'desc')
             ->orderBy('date', 'desc')
             ->paginate($limit);
         $conditions = [];
@@ -55,7 +60,8 @@ class NotesController extends Controller
         return auth()->user()->favNotes()->toggle([$noteId]);
     }
 
-    public function get($noteId) {
+    public function get($noteId)
+    {
         $note = Note::where('id', $noteId)
             ->select('id', 'user_id', 'category_id', 'title', 'isBest', 'date', 'content')
             ->with([
@@ -67,11 +73,127 @@ class NotesController extends Controller
             ])
             ->withCount(['favUsers'])
             ->firstOrFail();
-        $escapedString = nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8'));
-        $escapedString = str_replace('&amp;nbsp;', ' ', $escapedString);
-        $pattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:[\.\/][\?%#A-Z0-9][\?&%;=#A-Z0-9_-]*)+):?(\d+)?\/?/i';
-        $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
-        $note->content = preg_replace($pattern, $replacement, $escapedString);
+        if (!request('for_edit', false)) {
+            $escapedString = nl2br(htmlspecialchars($note->content, ENT_QUOTES, 'UTF-8'));
+            $escapedString = str_replace('&amp;nbsp;', ' ', $escapedString);
+            $pattern = '/(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:[\.\/][\?%#A-Z0-9][\?&%;=#A-Z0-9_-]*)+):?(\d+)?\/?/i';
+            $replacement = '<a class="escaped_link" href="$0" target="_blank">$0</a>';
+            $note->content = preg_replace($pattern, $replacement, $escapedString);
+        }
         return $note;
+    }
+
+    public function create()
+    {
+        $note = Note::create(
+            request(['title', 'user_id', 'date', 'category_id', 'isBest', 'content'])
+        );
+
+        $countryIds = [];
+        foreach (request('countries', []) as $countryName) {
+            $country = Country::firstOrCreate([
+                'name' => $countryName
+            ]);
+            $countryIds[] = $country->id;
+        }
+        $note->countries()->sync($countryIds);
+
+        $tagIds = [];
+        foreach (request('tags', []) as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $note->tags()->sync($tagIds);
+
+        if (request()->file('files') !== null) {
+            foreach (request()->file('files') as $i => $file) {
+                $photo = \Image::make($file)->orientate();
+                $photo = $this->resize($photo);
+                $uniqid = uniqid();
+                $ext = $file->guessExtension();
+                $filename = "photo_{$note->id}_{$i}_{$uniqid}.{$ext}";
+                $path = public_path('storage/img/note/') . $filename;
+                $photo->save($path);
+                $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+            }
+        }
+
+        return $note;
+    }
+
+    public function update()
+    {
+        $note = Note::updateOrCreate(
+            request(['id']),
+            request(['title', 'user_id', 'date', 'category_id', 'isBest', 'content'])
+        );
+
+        $countryIds = [];
+        foreach (request('countries', []) as $countryName) {
+            $country = Country::firstOrCreate([
+                'name' => $countryName
+            ]);
+            $countryIds[] = $country->id;
+        }
+        $note->countries()->sync($countryIds);
+
+        $tagIds = [];
+        foreach (request('tags', []) as $tagName) {
+            $tag = Tag::firstOrCreate([
+                'name' => $tagName
+            ]);
+            $tagIds[] = $tag->id;
+        }
+        $note->tags()->sync($tagIds);
+
+        if (request()->file('files') !== null) {
+            foreach (request()->file('files') as $i => $file) {
+                $photo = \Image::make($file)->orientate();
+                $photo = $this->resize($photo);
+                $uniqid = uniqid();
+                $ext = $file->guessExtension();
+                $filename = "photo_{$note->id}_{$i}_{$uniqid}.{$ext}";
+                $path = public_path('storage/img/note/') . $filename;
+                $photo->save($path);
+                $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
+            }
+        }
+        foreach (request('delete_photo_ids', []) as $photoId) {
+            Photo::find($photoId)->delete();
+        }
+
+        return $this->get($note->id);
+    }
+
+    public function delete(Note $note)
+    {
+        foreach ($note->photos as $photo) {
+            unlink(public_path($photo->path));
+        }
+        return response()->json(["ok" => $note->delete()]);
+    }
+
+    private function resize($photo)
+    {
+        $w = $photo->width();
+        $h = $photo->height();
+        if ($h > 800 && $h > $w) {
+            $photo->resize(null, 800, function($constraint) { $constraint->aspectRatio(); });
+        } elseif ($w > 800 && $w > $h) {
+            $photo->resize(800, null, function($constraint) { $constraint->aspectRatio(); });
+        }
+        return $photo;
+    }
+
+    public function categories()
+    {
+        return Category::select('id', 'name')->get();
+    }
+
+    public function tags()
+    {
+        return Tag::select('id', 'name')->get();
     }
 }

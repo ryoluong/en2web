@@ -6,6 +6,12 @@
       </v-btn>
       <v-app-bar-nav-icon v-else @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-spacer />
+      <v-btn v-for="action in actions" :key="action.icon" :to="action.to" icon>
+        <v-icon>
+          {{ action.icon }}
+        </v-icon>
+      </v-btn>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app>
       <Nav v-if="isAuth" />
@@ -23,7 +29,7 @@ export default {
     drawer: false,
   }),
   computed: {
-    ...mapState('meta', ['title']),
+    ...mapState('meta', ['title', 'actions']),
     ...mapState('auth', ['isAuth']),
   },
   methods: {

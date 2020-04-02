@@ -131,7 +131,7 @@ export default {
       return !this.fetching && this.currentPage != this.lastPage;
     },
     noteHeight() {
-      return 418;
+      return 350 + 48;
     },
     firstIndex() {
       const res =
