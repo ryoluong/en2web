@@ -153,12 +153,15 @@ export default {
     },
   },
   async created() {
-    const id = this.$route.path === '/mypage' ? this.$store.state.auth.user.id : this.$route.params.id
+    const id =
+      this.$route.path === '/mypage'
+        ? this.$store.state.auth.user.id
+        : this.$route.params.id;
     this.user = await this.$store.dispatch('user/get', id);
     this.loading = false;
   },
   mounted() {
-    if (this.noteTabUserId === parseInt(this.$route.params.id)) {
+    if (this.noteTabUserId == this.$route.params.id) {
       this.tab = 1;
     } else {
       this.setNoteTabUserId(0);
