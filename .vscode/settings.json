@@ -16,5 +16,6 @@
     "php",
     "javascript",
     "vue"
-  ]
+  ],
+  "vetur.format.enable": false
 }

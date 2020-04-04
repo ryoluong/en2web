@@ -16,7 +16,6 @@
         }
       }
     ],
-
     "vue/html-self-closing": [
       "error",
       {
