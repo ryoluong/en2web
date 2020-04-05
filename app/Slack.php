@@ -42,14 +42,6 @@ class Slack extends Model
         return file_get_contents($url, false, stream_context_create($options));
     }
 
-    public function getChannelList()
-    {
-        $url = 'https://slack.com/api/channels.list';
-        $res = $this->client->request('GET', $url);
-        $body = $res->getBody();
-        return $body;
-    }
-
     public function inbox($channel, $message)
     {
         if (app()->isLocal()) {

@@ -10,6 +10,9 @@ import country from './modules/country';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  state: {
+    referrer: null,
+  },
   modules: {
     auth,
     meta,

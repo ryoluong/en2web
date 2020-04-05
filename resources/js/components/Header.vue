@@ -1,7 +1,11 @@
 <template>
   <div>
     <v-app-bar id="header" app color="indigo lighten-1" dark hide-on-scroll>
-      <v-btn v-if="$route.meta.header === 'back'" icon @click="handelGoBack()">
+      <v-btn
+        v-if="$store.state.referrer && $route.meta.header === 'back'"
+        icon
+        @click="handelGoBack()"
+      >
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-app-bar-nav-icon v-else @click.stop="drawer = !drawer" />

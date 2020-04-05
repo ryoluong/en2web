@@ -17,6 +17,7 @@ const routes = [
   {
     path: '/login',
     component: Login,
+    name: 'login',
     meta: {
       requireAuth: false,
       title: 'Login',
@@ -27,6 +28,7 @@ const routes = [
   {
     path: '/',
     component: Notes,
+    name: 'home',
     meta: {
       requireAuth: true,
       title: 'Home',
@@ -48,6 +50,7 @@ const routes = [
   {
     path: '/notes',
     component: Notes,
+    name: 'note.index',
     meta: {
       requireAuth: true,
       title: 'Notes',
@@ -58,7 +61,7 @@ const routes = [
   {
     path: '/notes/create',
     component: NoteForm,
-    name: 'NoteCreate',
+    name: 'note.create',
     meta: {
       requireAuth: true,
       title: 'Note',
@@ -69,6 +72,7 @@ const routes = [
   {
     path: '/notes/:id(\\d+)',
     component: NoteView,
+    name: 'note.view',
     meta: {
       requireAuth: true,
       title: 'Notes',
@@ -79,7 +83,7 @@ const routes = [
   {
     path: '/notes/:id(\\d+)/edit',
     component: NoteForm,
-    name: 'NoteEdit',
+    name: 'note.edit',
     meta: {
       requireAuth: true,
       title: 'Note',
@@ -90,6 +94,7 @@ const routes = [
   {
     path: '/notes/:id(\\d+)/delete',
     component: NoteDelete,
+    name: 'note.delete',
     meta: {
       requireAuth: true,
       title: 'Note',
@@ -100,6 +105,7 @@ const routes = [
   {
     path: '/notes/:id(\\d+)/users',
     component: NoteUsers,
+    name: 'note.user',
     meta: {
       requireAuth: true,
       title: 'Liked Users',
@@ -110,6 +116,7 @@ const routes = [
   {
     path: '/users',
     component: Users,
+    name: 'user.index',
     meta: {
       requireAuth: true,
       title: 'Users',
@@ -120,7 +127,7 @@ const routes = [
   {
     path: '/users/:id(\\d+)',
     component: UserView,
-    name: 'userview',
+    name: 'user.view',
     meta: {
       requireAuth: true,
       title: 'Users',
@@ -153,7 +160,7 @@ const routes = [
   {
     path: '/notes/search',
     component: ComingSoon,
-    name: 'searchnotes',
+    name: 'note.search',
     meta: {
       requireAuth: true,
       title: 'Notes',

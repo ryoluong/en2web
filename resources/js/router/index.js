@@ -33,6 +33,7 @@ router.beforeEach(async (to, from, next) => {
       await store.dispatch('auth/refresh');
     }
   }
+  store.state.referrer = from.name;
   // Auth middleware
   if (to.meta.requireAuth && !store.state.auth.isAuth) {
     next('/login');
