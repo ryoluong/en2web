@@ -19,13 +19,14 @@ Route::post('/refresh', 'Api\Auth\LoginController@refresh');
 Route::get('/me', 'Api\Auth\LoginController@me');
 
 Route::get('/notes', 'Api\NotesController@index');
+Route::get('/notes/{note}', 'Api\NotesController@get')->where('note', '[0-9]+');
+Route::post('/notes', 'Api\NotesController@store');
+Route::put('/notes/{note}', 'Api\NotesController@update')->where('note', '[0-9]+');
+Route::delete('/notes/{note}', 'Api\NotesController@destroy')->where('note', '[0-9]+');
+Route::put('/notes/{note}/fav', 'Api\NotesController@fav')->where('note', '[0-9]+');
+
 Route::get('/notes/categories', 'Api\NotesController@categories');
 Route::get('/notes/tags', 'Api\NotesController@tags');
-Route::get('/notes/{note}', 'Api\NotesController@get');
-Route::post('/notes/{note}', 'Api\NotesController@update');
-Route::delete('/notes/{note}', 'Api\NotesController@delete');
-Route::post('/notes/create', 'Api\NotesController@create');
-Route::put('/notes/{note}/fav', 'Api\NotesController@fav');
 
 Route::get('/users', 'Api\UsersController@index');
 Route::get('/users/{user}', 'Api\UsersController@get');

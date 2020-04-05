@@ -10,7 +10,7 @@ use App\Country;
 use App\Category;
 use App\Tag;
 use App\Photo;
-use Illuminate\Support\Facades\Log;
+use App\Facades\Slack;
 
 class NotesController extends Controller
 {
@@ -43,8 +43,8 @@ class NotesController extends Controller
                 return $q->where('isBest', true);
             })
             ->withCount(['favUsers'])
-            ->orderBy('id', 'desc')
             ->orderBy('date', 'desc')
+            ->orderBy('id', 'desc')
             ->paginate($limit);
         $conditions = [];
         if ($user_id) {
@@ -83,7 +83,7 @@ class NotesController extends Controller
         return $note;
     }
 
-    public function create()
+    public function store()
     {
         $note = Note::create(
             request(['title', 'user_id', 'date', 'category_id', 'isBest', 'content'])
@@ -120,16 +120,16 @@ class NotesController extends Controller
             }
         }
 
+        if (request('should_post_slack') && $note->user_id == auth()->user()->id) {
+            Slack::postNote($note);
+        }
+
         return $note;
     }
 
-    public function update()
+    public function update(Note $note)
     {
-        $note = Note::updateOrCreate(
-            request(['id']),
-            request(['title', 'user_id', 'date', 'category_id', 'isBest', 'content'])
-        );
-
+        $note->update(request(['title', 'user_id', 'date', 'category_id', 'isBest', 'content']));
         $countryIds = [];
         foreach (request('countries', []) as $countryName) {
             $country = Country::firstOrCreate([
@@ -138,7 +138,6 @@ class NotesController extends Controller
             $countryIds[] = $country->id;
         }
         $note->countries()->sync($countryIds);
-
         $tagIds = [];
         foreach (request('tags', []) as $tagName) {
             $tag = Tag::firstOrCreate([
@@ -160,6 +159,7 @@ class NotesController extends Controller
                 $note->photos()->create(['path' => '/storage/img/note/'.$filename]);
             }
         }
+
         foreach (request('delete_photo_ids', []) as $photoId) {
             Photo::find($photoId)->delete();
         }
@@ -167,7 +167,7 @@ class NotesController extends Controller
         return $this->get($note->id);
     }
 
-    public function delete(Note $note)
+    public function destroy(Note $note)
     {
         foreach ($note->photos as $photo) {
             unlink(public_path($photo->path));

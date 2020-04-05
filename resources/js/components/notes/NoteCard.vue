@@ -69,7 +69,7 @@
       <div
         v-if="!hideFav"
         class="pb-2 pr-2"
-        style="position:absolute;bottom:0;right:0;opacity:0.95;"
+        style="position: absolute; bottom: 0; right: 0; opacity: 0.95;"
         @click="emitFav"
       >
         <v-btn fab :color="iconColor" :class="textColor">
@@ -148,7 +148,14 @@ export default {
       }
     },
     user() {
-      this.$router.push(`/users/${this.note.user.id}`);
+      if (this.note.user.id) {
+        this.$router.push(`/users/${this.note.user.id}`);
+      } else {
+        this.$store.dispatch('snackbar/show', {
+          message: '既に退会したユーザーです。',
+          type: 'accent',
+        });
+      }
     },
     emitFav() {
       this.preventLink = true;

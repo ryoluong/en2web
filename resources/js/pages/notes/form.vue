@@ -2,10 +2,10 @@
   <form>
     <v-card
       class="mx-2 mx-lg-auto mt-3 mt-lg-6 mb-6"
-      style="max-width:1100px;margin:auto;"
+      style="max-width: 1100px; margin: auto;"
     >
       <v-card-subtitle class="blue-grey subtitle-1 white--text">
-        Create a New Note
+        {{ isEdit ? 'Edit' : 'Create a New Note' }}
       </v-card-subtitle>
       <v-progress-linear
         v-if="loading || submitting"
@@ -15,14 +15,14 @@
       <ValidationObserver v-if="!loading" ref="observer" v-slot="{ passes }">
         <div class="pt-2 pt-lg-3 pb-6">
           <div class="d-flex flex-wrap justify-space-between">
-            <div class="px-2 px-sm-4" style="width:100%;max-width:400px;">
+            <div class="px-2 px-sm-4" style="width: 100%; max-width: 400px;">
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Title"
                 rules="required"
               >
                 <v-text-field
-                  v-model="title"
+                  v-model="note.title"
                   class="mb-2"
                   :error="errors.length !== 0"
                   :disabled="submitting"
@@ -36,7 +36,7 @@
                 rules="required"
               >
                 <v-autocomplete
-                  v-model="userId"
+                  v-model="note.user_id"
                   :items="users"
                   :error="errors.length !== 0"
                   :disabled="submitting"
@@ -56,14 +56,14 @@
                   ref="menu"
                   v-model="menu"
                   :close-on-content-click="false"
-                  :return-value.sync="date"
+                  :return-value.sync="note.date"
                   transition="scale-transition"
                   offset-y
                   min-width="290px"
                 >
                   <template v-slot:activator="{ on }">
                     <v-text-field
-                      v-model="date"
+                      v-model="note.date"
                       :disabled="submitting"
                       :error="errors.length !== 0"
                       label="Date"
@@ -72,12 +72,16 @@
                       v-on="on"
                     />
                   </template>
-                  <v-date-picker v-model="date" no-title scrollable>
+                  <v-date-picker v-model="note.date" no-title scrollable>
                     <v-spacer />
                     <v-btn text color="primary" @click="menu = false">
                       Cancel
                     </v-btn>
-                    <v-btn text color="primary" @click="$refs.menu.save(date)">
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="$refs.menu.save(note.date)"
+                    >
                       OK
                     </v-btn>
                   </v-date-picker>
@@ -89,7 +93,7 @@
                 rules="required"
               >
                 <v-select
-                  v-model="categoryId"
+                  v-model="note.category_id"
                   :items="categories"
                   label="Category"
                   item-value="id"
@@ -99,7 +103,7 @@
                 />
               </ValidationProvider>
               <v-combobox
-                v-model="selectedCountries"
+                v-model="note.countries"
                 class="mb-4"
                 :items="countryNames"
                 label="Countries"
@@ -116,17 +120,27 @@
                     :disabled="data.disabled"
                     @click:close="data.parent.selectItem(data.item)"
                   >
-                    <v-avatar class="accent white--text" left>
-                      <img
-                        :src="`/img/flags/${getEnglishName(data.item)}.png`"
+                    <template v-if="getEnglishName(data.item)">
+                      <v-avatar class="accent white--text" left>
+                        <img
+                          :src="`/img/flags/${getEnglishName(data.item)}.png`"
+                        />
+                      </v-avatar>
+                    </template>
+                    <template v-else>
+                      <v-avatar
+                        class="accent white--text"
+                        left
+                        v-text="data.item.slice(0, 1).toUpperCase()"
                       />
-                    </v-avatar>
+                    </template>
+
                     {{ data.item }}
                   </v-chip>
                 </template>
               </v-combobox>
               <v-combobox
-                v-model="selectedTags"
+                v-model="note.tags"
                 class="mb-4"
                 :items="tagNames"
                 :disabled="submitting"
@@ -155,7 +169,7 @@
                 rules="required"
               >
                 <v-textarea
-                  v-model="content"
+                  v-model="note.content"
                   class="mt-3 mt-lg-5"
                   height="500px"
                   :disabled="submitting"
@@ -166,14 +180,42 @@
               </ValidationProvider>
             </div>
           </div>
-          <div class="mt-2 mb-8" style="width:100%;" v-if="files.length > 0">
+          <div
+            v-if="previews.length > 0"
+            class="mt-2 mb-8"
+            style="width: 100%;"
+          >
             <p class="body-2 mx-2 mb-3 mx-sm-4 grey--text text--darken-1">
               プレビュー（プレビューでは画像の向きが正しく表示されないことがあります。）
             </p>
-            <div class="d-flex mx-2 mx-sm-4" style="overflow-x:scroll;">
-              <div v-for="(file, i) in files" :key="i">
+            <div class="d-flex mx-2 mx-sm-4" style="overflow-x: scroll;">
+              <div v-for="(preview, i) in previews" :key="i">
                 <v-img
-                  :src="generateFileUrl(file)"
+                  :src="preview"
+                  width="200"
+                  height="113"
+                  class="d-block mr-4 flex-grow-0"
+                  cover
+                />
+              </div>
+            </div>
+          </div>
+          <div v-if="note.photos.length > 0" class="mb-6" style="width: 100%;">
+            <p
+              class="body-2 mx-2 mt-0 mt-sm-4 mb-1 mx-sm-4 grey--text text--darken-1"
+            >
+              写真の削除
+            </p>
+            <div class="d-flex mx-2 mx-sm-4" style="overflow-x: scroll;">
+              <div v-for="photo in note.photos" :key="photo.id">
+                <v-checkbox
+                  v-model="delete_photo_ids"
+                  :value="photo.id"
+                  hide-details
+                  class="mt-0 mb-2"
+                />
+                <v-img
+                  :src="photo.path"
                   width="200"
                   height="113"
                   class="d-block mr-4 flex-grow-0"
@@ -183,14 +225,24 @@
             </div>
           </div>
           <v-switch
-            v-model="isBest"
+            v-if="!isEdit"
+            v-model="shouldPostSlack"
+            :disabled="submitting || postOthersNote"
+            class="ml-4 mt-1 d-inline-block"
+            label="Slackに通知する（推奨）"
+            type="checkbox"
+            hint="自分以外のメンバーのノートを投稿する場合は、通知がされません。"
+            :persistent-hint="postOthersNote"
+          />
+          <v-switch
+            v-model="note.isBest"
             :disabled="submitting"
-            class="ml-4 mt-1 mt-sm-6"
+            class="ml-4 mt-1 d-inline-block"
             label="ベストノートに指定する"
             type="checkbox"
           />
           <v-btn
-            class="white--text ml-4 mt-2 mt-sm-4"
+            class="white--text ml-4 mt-2 mt-sm-4 d-block"
             min-width="100px"
             :loading="submitting"
             color="blue-grey"
@@ -213,49 +265,67 @@ export default {
     ValidationObserver,
   },
   data: () => ({
-    title: '',
-    userId: null,
+    note: {
+      title: '',
+      user_id: null,
+      date: new Date().toISOString().substr(0, 10),
+      countries: [],
+      tags: [],
+      category_id: null,
+      isBest: false,
+      content: '',
+      photos: [],
+    },
+    files: [],
+    delete_photo_ids: [],
     menu: false,
-    date: new Date().toISOString().substr(0, 10),
-    selectedCountries: [],
     countries: [],
-    selectedTags: [],
     tags: [],
-    categoryId: null,
     categories: [],
-    isBest: false,
     users: [],
     loading: true,
     submitting: false,
-    content: '',
-    files: [],
     previews: [],
+    shouldPostSlack: true,
   }),
   computed: {
+    isEdit() {
+      return this.$route.name === 'NoteEdit';
+    },
     countryNames() {
-      return this.countries.map(c => c.name);
+      return this.countries.map((c) => c.name);
     },
     tagNames() {
-      return this.tags.map(t => t.name);
+      return this.tags.map((t) => t.name);
+    },
+    postOthersNote() {
+      return this.$store.state.auth.user.id !== this.note.user_id;
     },
     params() {
       return {
-        title: this.title,
-        user_id: this.userId,
-        date: this.date,
-        category_id: this.categoryId,
-        countries: this.selectedCountries,
-        tags: this.selectedTags,
-        isBest: this.isBest ? 1 : 0,
-        content: this.content,
+        note_id: this.note.id ? this.note.id : 0,
+        title: this.note.title,
+        user_id: this.note.user_id,
+        date: this.note.date,
+        category_id: this.note.category_id,
+        countries: this.note.countries,
+        tags: this.note.tags,
+        isBest: this.note.isBest ? 1 : 0,
+        content: this.note.content,
         files: this.files,
+        delete_photo_ids: this.delete_photo_ids,
+        should_post_slack: this.shouldPostSlack ? 1 : 0,
       };
     },
   },
+  watch: {
+    'note.user_id': function (newUserId) {
+      this.shouldPostSlack = newUserId === this.$store.state.auth.user.id;
+    },
+  },
   async created() {
-    if (this.$store.state.auth.user) {
-      this.userId = this.$store.state.auth.user.id;
-    }
+    await this.initNote();
+    this.shouldPostSlack = !this.isEdit;
     this.users = await this.getUsers();
     this.categories = await this.getCategories();
     this.tags = await this.getTags();
@@ -267,15 +337,42 @@ export default {
     ...mapActions('country', { getCountries: 'index' }),
     ...mapActions('note', {
       createNote: 'create',
+      updateNote: 'update',
+      getNote: 'getForEdit',
       getCategories: 'categories',
       getTags: 'tags',
     }),
+    async initNote() {
+      if (this.isEdit) {
+        const note = await this.getNote(this.$route.params.id);
+        if (
+          note.user_id !== this.$store.state.auth.user.id &&
+          !this.$store.state.auth.user.isAdmin
+        ) {
+          this.$store.dispatch('snackbar/show', {
+            message: '権限がありません。',
+            type: 'error',
+          });
+          this.$router.push('/notes');
+        }
+        this.note = note;
+        this.note.countries = this.note.countries.map((c) => c.name);
+        this.note.tags = this.note.tags.map((t) => t.name);
+      } else {
+        this.note.user_id = this.$store.state.auth.user.id;
+      }
+    },
     async submit() {
       this.submitting = true;
       this.$refs.observer.validate();
-      const note = await this.createNote(this.params);
-      if (note) {
-        this.$router.push(`/notes/${note.id}`);
+      let returnedNote;
+      if (this.isEdit) {
+        returnedNote = await this.updateNote(this.params);
+      } else {
+        returnedNote = await this.createNote(this.params);
+      }
+      if (returnedNote) {
+        this.$router.push(`/notes/${returnedNote.id}`);
       }
       this.submitting = false;
     },
@@ -286,7 +383,7 @@ export default {
       return text.indexOf(searchText) > -1;
     },
     getEnglishName(jpName) {
-      let res = 'no_name';
+      let res;
       for (let i = 0; i < this.countries.length; i++) {
         if (this.countries[i].name === jpName) {
           res = this.countries[i].english_name;
@@ -300,6 +397,11 @@ export default {
     },
     handleFilesUpload(e) {
       this.files = e;
+      let previews = [];
+      e.forEach((file) => {
+        previews.push(window.URL.createObjectURL(file));
+      });
+      this.previews = previews;
     },
   },
 };

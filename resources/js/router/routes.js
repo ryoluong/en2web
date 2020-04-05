@@ -1,8 +1,7 @@
 import Login from '@/js/pages/login/index.vue';
 import Notes from '@/js/pages/notes/index.vue';
 import NoteView from '@/js/pages/notes/view.vue';
-import NoteCreate from '@/js/pages/notes/create.vue';
-import NoteEdit from '@/js/pages/notes/edit.vue';
+import NoteForm from '@/js/pages/notes/form.vue';
 import NoteDelete from '@/js/pages/notes/delete.vue';
 import NoteUsers from '@/js/pages/notes/users.vue';
 import Users from '@/js/pages/users/index.vue';
@@ -58,7 +57,8 @@ const routes = [
   },
   {
     path: '/notes/create',
-    component: NoteCreate,
+    component: NoteForm,
+    name: 'NoteCreate',
     meta: {
       requireAuth: true,
       title: 'Note',
@@ -78,7 +78,8 @@ const routes = [
   },
   {
     path: '/notes/:id(\\d+)/edit',
-    component: NoteEdit,
+    component: NoteForm,
+    name: 'NoteEdit',
     meta: {
       requireAuth: true,
       title: 'Note',

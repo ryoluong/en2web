@@ -39,6 +39,9 @@ class UsersController extends Controller
             ->withCount(['notes'])
             ->where('id', $id)
             ->first();
+        if (!$user) {
+            abort(404, 'not found');
+        }
         $user->profile = $user->getEscapedProfile();
         return $user;
     }

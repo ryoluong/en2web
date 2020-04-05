@@ -13,7 +13,7 @@
       </v-img>
       <div
         class="chip-group mt-3 pr-2 pb-4"
-        style="overflow:scroll;white-space:nowrap;"
+        style="overflow: scroll; white-space: nowrap;"
       >
         <v-chip small class="white--text ml-2" color="indigo lighten-1">
           <v-icon small left>
@@ -64,17 +64,14 @@
       </v-list-item>
 
       <v-list-item class="pl-3 py-1">
-        <v-list-item-avatar
-          size="32"
-          @click="$router.push(`/users/${note.user.id}`)"
-        >
+        <v-list-item-avatar size="32" @click="goToUserPage()">
           <v-img :src="userImagePath" cover>
             <template v-slot:placeholder>
               <v-skeleton-loader class="mx-auto" type="image" />
             </template>
           </v-img>
         </v-list-item-avatar>
-        <v-list-item-content @click="$router.push(`/users/${note.user.id}`)">
+        <v-list-item-content @click="goToUserPage()">
           <v-list-item-title class="subtitle-1 font-weight-medium">
             {{ note.user.name }}
           </v-list-item-title>
@@ -89,7 +86,7 @@
       </v-list-item>
       <router-link
         class="d-inline-block ml-4 mt-2 mb-0 font-weight-medium subtitle-2 blue-grey--text"
-        style="font-size:18px;text-decoration:none;"
+        style="font-size: 18px; text-decoration: none;"
         :to="`/notes/${$route.params.id}/users`"
       >
         {{ note.fav_users_count + ajustFavCount }} liked users
@@ -167,6 +164,10 @@ export default {
           icon: 'mdi-delete',
           to: `/notes/${this.note.id}/delete`,
         },
+        {
+          icon: 'mdi-plus',
+          to: '/notes/create',
+        },
       ]);
     }
     this.loading = false;
@@ -182,6 +183,16 @@ export default {
     },
     scrollTop() {
       this.$vuetify.goTo(0, { duration: 300 });
+    },
+    goToUserPage() {
+      if (this.note.user.id) {
+        this.$router.push(`/users/${this.note.user.id}`);
+      } else {
+        this.$store.dispatch('snackbar/show', {
+          message: '既に退会したユーザーです。',
+          type: 'accent',
+        });
+      }
     },
   },
 };

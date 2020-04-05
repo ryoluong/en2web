@@ -19,7 +19,7 @@ const actions = {
       .get('/notes', {
         params: params,
       })
-      .then(res => {
+      .then((res) => {
         commit('indexSuccess', res.data);
       })
       .catch(() => {
@@ -47,7 +47,7 @@ const actions = {
     let note;
     await axios
       .get(`/notes/${id}`)
-      .then(res => {
+      .then((res) => {
         note = res.data;
       })
       .catch(() => {
@@ -63,7 +63,7 @@ const actions = {
     let note;
     await axios
       .get(`/notes/${id}?for_edit=1`)
-      .then(res => {
+      .then((res) => {
         note = res.data;
       })
       .catch(() => {
@@ -78,47 +78,7 @@ const actions = {
   async create({ dispatch }, payload) {
     let note = null;
     const formData = new FormData();
-    Object.keys(payload).forEach(key => {
-      if (key === 'files' || key === 'tags' || key === 'countries') {
-        if (payload[key].length > 0) {
-          payload[key].forEach((f, i) => {
-            formData.append(`${key}[${i}]`, f);
-          });
-        }
-      } else {
-        formData.append(key, payload[key]);
-      }
-    });
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    await axios
-      .post(`/notes/create`, formData, config)
-      .then(res => {
-        note = res.data;
-        dispatch(
-          'snackbar/show',
-          {
-            message: 'ノートが作成されました！',
-          },
-          { root: true },
-        );
-      })
-      .catch(() => {
-        dispatch(
-          'snackbar/show',
-          { message: 'エラーが発生しました', type: 'error' },
-          { root: true },
-        );
-      });
-    return note;
-  },
-  async update({ commit, dispatch }, payload) {
-    let note = null;
-    const formData = new FormData();
-    Object.keys(payload).forEach(key => {
+    Object.keys(payload).forEach((key) => {
       if (
         key === 'files' ||
         key === 'tags' ||
@@ -140,8 +100,54 @@ const actions = {
       },
     };
     await axios
-      .post(`/notes/${payload.id}`, formData, config)
-      .then(res => {
+      .post(`/notes`, formData, config)
+      .then((res) => {
+        note = res.data;
+        dispatch(
+          'snackbar/show',
+          {
+            message: 'ノートが作成されました！',
+          },
+          { root: true },
+        );
+      })
+      .catch(() => {
+        dispatch(
+          'snackbar/show',
+          { message: 'エラーが発生しました', type: 'error' },
+          { root: true },
+        );
+      });
+    return note;
+  },
+  async update({ commit, dispatch }, payload) {
+    let note = null;
+    const formData = new FormData();
+    formData.append('_method', 'PUT');
+    Object.keys(payload).forEach((key) => {
+      if (
+        key === 'files' ||
+        key === 'tags' ||
+        key === 'countries' ||
+        key === 'delete_photo_ids'
+      ) {
+        if (payload[key].length > 0) {
+          payload[key].forEach((f, i) => {
+            formData.append(`${key}[${i}]`, f);
+          });
+        }
+      } else {
+        formData.append(key, payload[key]);
+      }
+    });
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    await axios
+      .post(`/notes/${payload.note_id}`, formData, config)
+      .then((res) => {
         note = res.data;
         commit('updateSuccess', note);
         dispatch(
@@ -163,7 +169,7 @@ const actions = {
     let ok = false;
     await axios
       .delete(`/notes/${id}`)
-      .then(res => {
+      .then((res) => {
         ok = res.data.ok;
         commit('deleteSuccess', id);
         dispatch(
@@ -190,7 +196,7 @@ const actions = {
     if (state.categories.length === 0) {
       await axios
         .get('/notes/categories')
-        .then(res => {
+        .then((res) => {
           commit('setCategories', res.data);
         })
         .catch(() => [
@@ -207,7 +213,7 @@ const actions = {
     if (state.tags.length === 0) {
       await axios
         .get('/notes/tags')
-        .then(res => {
+        .then((res) => {
           commit('setTags', res.data);
         })
         .catch(() => [
@@ -257,7 +263,7 @@ const mutations = {
       if (n.id == note.id) {
         state.notes[i] = note;
       }
-    })
+    });
   },
   deleteSuccess(state, id) {
     state.notes.some((note, i) => {
@@ -269,14 +275,14 @@ const mutations = {
   fav(state, noteId) {
     if (state.favNotes.indexOf(noteId) === -1) {
       state.favNotes.push(noteId);
-      state.notes.some(note => {
+      state.notes.some((note) => {
         if (note.id === noteId) note.fav_users_count++;
       });
     } else {
       state.favNotes.some((v, i) => {
         if (v === noteId) state.favNotes.splice(i, 1);
       });
-      state.notes.some(note => {
+      state.notes.some((note) => {
         if (note.id === noteId) note.fav_users_count--;
       });
     }
