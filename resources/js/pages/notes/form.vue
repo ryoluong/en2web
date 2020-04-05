@@ -290,13 +290,13 @@ export default {
   }),
   computed: {
     isEdit() {
-      return this.$route.name === 'NoteEdit';
+      return this.$route.name === 'note.edit';
     },
     countryNames() {
-      return this.countries.map((c) => c.name);
+      return this.countries.map(c => c.name);
     },
     tagNames() {
-      return this.tags.map((t) => t.name);
+      return this.tags.map(t => t.name);
     },
     postOthersNote() {
       return this.$store.state.auth.user.id !== this.note.user_id;
@@ -356,8 +356,8 @@ export default {
           this.$router.push('/notes');
         }
         this.note = note;
-        this.note.countries = this.note.countries.map((c) => c.name);
-        this.note.tags = this.note.tags.map((t) => t.name);
+        this.note.countries = this.note.countries.map(c => c.name);
+        this.note.tags = this.note.tags.map(t => t.name);
       } else {
         this.note.user_id = this.$store.state.auth.user.id;
       }
@@ -398,7 +398,7 @@ export default {
     handleFilesUpload(e) {
       this.files = e;
       let previews = [];
-      e.forEach((file) => {
+      e.forEach(file => {
         previews.push(window.URL.createObjectURL(file));
       });
       this.previews = previews;
