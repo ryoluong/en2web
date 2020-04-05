@@ -42,6 +42,14 @@ class Slack extends Model
         return file_get_contents($url, false, stream_context_create($options));
     }
 
+    public function getChannelList()
+    {
+        $url = 'https://slack.com/api/channels.list';
+        $res = $this->client->request('GET', $url);
+        $body = $res->getBody();
+        return $body;
+    }
+
     public function inbox($channel, $message)
     {
         if (app()->isLocal()) {
@@ -82,7 +90,7 @@ class Slack extends Model
             $userName = auth()->user()->name;
         }
         $comment = "投稿者：{$userName}\n" . url("notes/{$note->id}");
-        $this->postUpload($channelId, $note->title, $note->content, $comment);
+        $this->postUpload($channelId, $note->title, str_replace("\n", "\n\r", $note->content), $comment);
     }
 
     public function postUpload($channels, $title, $content, $comment)
