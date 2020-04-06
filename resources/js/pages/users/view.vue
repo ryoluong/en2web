@@ -31,9 +31,9 @@
           </v-list-item>
         </v-list>
         <div
-          v-if="user.profile"
+          v-if="user.escaped_profile"
           class="profile mt-3 mx-auto"
-          v-html="user.profile"
+          v-html="user.escaped_profile"
         />
         <IconMessage
           v-else
@@ -103,6 +103,9 @@ export default {
       if (this.countries != null) {
         profile.push(this.countries);
       }
+      if (this.university != null) {
+        profile.push(this.university);
+      }
       if (this.job != null) {
         profile.push(this.job);
       }
@@ -134,6 +137,16 @@ export default {
         return null;
       }
     },
+    university() {
+      if (this.user.university) {
+        return {
+          icon: 'mdi-map-marker',
+          value: this.user.university,
+        };
+      } else {
+        return null;
+      }
+    },
     userImagePath() {
       return this.user.avater_path
         ? this.user.avater_path
@@ -153,7 +166,7 @@ export default {
     },
   },
   watch: {
-    $route: async function() {
+    $route: async function () {
       this.loading = true;
       const id =
         this.$route.path === '/mypage'

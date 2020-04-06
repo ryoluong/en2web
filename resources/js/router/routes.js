@@ -6,6 +6,7 @@ import NoteDelete from '@/js/pages/notes/delete.vue';
 import NoteUsers from '@/js/pages/notes/users.vue';
 import Users from '@/js/pages/users/index.vue';
 import UserView from '@/js/pages/users/view.vue';
+import UserEdit from '@/js/pages/users/edit.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
 
 const noteActions = [
@@ -44,6 +45,17 @@ const routes = [
       requireAuth: true,
       title: 'Mypage',
       header: 'menu',
+      actions: [{ icon: 'mdi-pencil', to: '/mypage/edit' }],
+    },
+  },
+  {
+    path: '/mypage/edit',
+    component: UserEdit,
+    name: 'mypage.edit',
+    meta: {
+      requireAuth: true,
+      title: 'Mypage',
+      header: 'back',
       actions: [],
     },
   },

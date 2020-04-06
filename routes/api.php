@@ -30,6 +30,7 @@ Route::get('/notes/tags', 'Api\NotesController@tags');
 
 Route::get('/users', 'Api\UsersController@index');
 Route::get('/users/{user}', 'Api\UsersController@get');
+Route::patch('/users/update', 'APi\UsersCOntroller@update');
 
 Route::get('/countries', 'Api\CountriesController@index');
 

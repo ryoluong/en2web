@@ -25,7 +25,7 @@
         </v-btn>
       </div>
     </v-card>
-    <NoteCard class="mx-auto" v-if="!loading" :note="note" :hide-fav="true" />
+    <NoteCard v-if="!loading" class="mx-auto" :note="note" :hide-fav="true" />
   </div>
 </template>
 <script>
@@ -58,7 +58,7 @@ export default {
       this.submitting = true;
       const ok = await this.delete(this.$route.params.id);
       if (ok) {
-        this.$router.push('/notes');
+        this.$router.go(-2);
       }
       this.submitting = false;
     },

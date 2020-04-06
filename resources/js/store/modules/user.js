@@ -49,6 +49,32 @@ const actions = {
       });
     return user;
   },
+  async update({ dispatch }, payload) {
+    let user;
+    await axios
+      .patch(`/users/update`, payload)
+      .then(res => {
+        user = res.data;
+        dispatch(
+          'snackbar/show',
+          {
+            message: 'プロフィールが更新されました！',
+          },
+          { root: true },
+        );
+      })
+      .catch(() => {
+        dispatch(
+          'snackbar/show',
+          {
+            message: 'エラーが発生しました',
+            type: 'error',
+          },
+          { root: true },
+        );
+      });
+    return user;
+  },
 };
 
 const mutations = {
