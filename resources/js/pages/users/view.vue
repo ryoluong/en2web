@@ -5,8 +5,30 @@
       <v-avatar class="user-image" size="95">
         <v-img :src="userImagePath" :alt="user.name" />
       </v-avatar>
-      <div class="user-name headline white--text mt-4">
-        {{ user.name }}
+      <div
+        class="user-name headline white--text mt-4 d-flex justify-center align-center"
+      >
+        <p class="mb-0">
+          {{ user.name }}
+        </p>
+        <v-chip
+          v-if="user.isOB"
+          class="my-0 mx-3 px-1"
+          color="cyan darken-2 white--text"
+          small
+          label
+        >
+          OG･OB
+        </v-chip>
+        <v-chip
+          v-if="user.isOverseas"
+          class="my-0 mx-3 px-1"
+          color="deep-orange white--text"
+          small
+          label
+        >
+          留学中
+        </v-chip>
       </div>
     </div>
     <v-skeleton-loader v-else max-height="180px" type="image" />
