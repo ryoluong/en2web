@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => 'open'], function () {
+    Route::get('/twitter/{id}', 'UrlSchemeController@twitter');
+    Route::get('/instagram/{id}', 'UrlSchemeController@instagram');
+});
 
 Route::get('/{any}', function() {
     return view('app');

@@ -27,17 +27,6 @@ const routes = [
     },
   },
   {
-    path: '/',
-    component: Notes,
-    name: 'home',
-    meta: {
-      requireAuth: true,
-      title: 'Home',
-      header: 'menu',
-      actions: noteActions,
-    },
-  },
-  {
     path: '/mypage',
     component: UserView,
     name: 'mypage',

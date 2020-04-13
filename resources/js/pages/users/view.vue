@@ -51,6 +51,35 @@
               {{ p.value }}
             </v-list-item-content>
           </v-list-item>
+          <v-list-item v-if="user.instagram_id || user.twitter_id" class="px-3">
+            <v-list-item-icon>
+              <v-icon size="28" color="#559">
+                mdi-share-variant
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <div>
+                <v-avatar
+                  v-if="user.instagram_id"
+                  size="28"
+                  tile
+                  class="mr-4 justify-start"
+                  @click="openInstagram"
+                >
+                  <img src="/img/sns/instagram.png" alt="instagram" />
+                </v-avatar>
+                <v-avatar
+                  v-if="user.twitter_id"
+                  size="28"
+                  tile
+                  class="mr-4 justify-start"
+                  @click="openTwitter"
+                >
+                  <img src="/img/sns/twitter.png" alt="twitter" />
+                </v-avatar>
+              </div>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <div
           v-if="user.escaped_profile"
@@ -215,6 +244,8 @@ export default {
   beforeDestroy() {
     if (this.tab === 1) {
       this.setNoteTabUserId(this.user.id);
+    } else {
+      this.setNoteTabUserId(0);
     }
   },
   methods: {
@@ -227,6 +258,12 @@ export default {
           isFavNote ? note.fav_users_count-- : note.fav_users_count++;
       });
       this.fav(noteId);
+    },
+    openInstagram() {
+      window.open(`/open/instagram/${this.user.instagram_id}`);
+    },
+    openTwitter() {
+      window.open(`/open/twitter/${this.user.twitter_id}`);
     },
   },
 };

@@ -6,9 +6,8 @@
     <v-list-item
       v-if="$store.state.auth.user"
       two-line
-      class="mx-auto mt-2 clickable"
+      class="mx-auto"
       :ripple="false"
-      @click="goMypage"
     >
       <v-list-item-avatar size="45">
         <img :src="`${$store.state.auth.user.avater_path}`" />
@@ -59,11 +58,11 @@ export default {
   computed: {
     items() {
       return [
-        // {
-        //   name: 'Home',
-        //   link: '/',
-        //   icon: 'mdi-home',
-        // },
+        {
+          name: 'Mypage',
+          link: '/mypage',
+          icon: 'mdi-home',
+        },
         {
           name: 'Notes',
           link: '/notes',
