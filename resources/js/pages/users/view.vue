@@ -61,18 +61,18 @@
               <div>
                 <v-avatar
                   v-if="user.instagram_id"
-                  size="28"
+                  size="32"
                   tile
-                  class="mr-4 justify-start"
+                  class="mr-5 justify-start clickable"
                   @click="openInstagram"
                 >
                   <img src="/img/sns/instagram.png" alt="instagram" />
                 </v-avatar>
                 <v-avatar
                   v-if="user.twitter_id"
-                  size="28"
+                  size="32"
                   tile
-                  class="mr-4 justify-start"
+                  class="mr-5 justify-start clickable"
                   @click="openTwitter"
                 >
                   <img src="/img/sns/twitter.png" alt="twitter" />
