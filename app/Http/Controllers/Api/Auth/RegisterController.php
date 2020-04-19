@@ -35,7 +35,7 @@ class RegisterController extends Controller
                 ];
                 Slack::inbox($slack_id, implode("\n", $messages));
                 Slack::notice("Pre-Registered: `" . $res->profile->real_name . "`");
-                return "En2::Web Agent からあなた宛てに登録用URLが送信されました。ダイレクトメッセージをご確認ください。";
+                return "登録用URLが送信されました。ダイレクトメッセージをご確認ください。";
             }
             return 'ユーザーの作成に失敗しました。時間をおいて再度お試しください。';
         });
