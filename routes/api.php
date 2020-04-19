@@ -18,6 +18,9 @@ Route::post('/logout', 'Api\Auth\LoginController@logout');
 Route::post('/refresh', 'Api\Auth\LoginController@refresh');
 Route::get('/me', 'Api\Auth\LoginController@me');
 
+Route::post('/register', 'Api\Auth\RegisterController@register');
+Route::post('/register/verify', 'Api\Auth\RegisterController@verify');
+
 Route::get('/notes', 'Api\NotesController@index');
 Route::get('/notes/{note}', 'Api\NotesController@get')->where('note', '[0-9]+');
 Route::post('/notes', 'Api\NotesController@store');

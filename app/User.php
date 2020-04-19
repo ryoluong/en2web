@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\PasswordResetNotification;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Facades\Slack;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -30,6 +31,11 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function __construct($attributes = []) 
+    {
+        parent::__construct($attributes);
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -129,5 +135,14 @@ class User extends Authenticatable implements JWTSubject
             ],
         ];
         return json_decode(file_get_contents($url, false, stream_context_create($options)));
+    }
+
+    public function fetchSlackProfile()
+    {
+        if(!$this->slack_id) {
+            return null;
+        }
+        $res = Slack::fetchUserProfile($this->slack_id);
+        return json_decode($res->getBody()->getContents());
     }
 }

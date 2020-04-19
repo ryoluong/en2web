@@ -21,7 +21,7 @@ class SlackController extends Controller
             $args = preg_split('/[[:blank:]]/', request('text'));
             switch($args[0]){
                 case self::COMMAND_IAM:
-                    return $this->iam($args, request('user_id'));
+                    return $this->iam(request('user_id'));
                 case self::COMMAND_REGISTER:
                     Log::debug(request()->all());
                     return $this->register(request('user_id'));
@@ -36,43 +36,39 @@ class SlackController extends Controller
         }
     }
 
-    private function iam($args, $slack_id)
+    private function iam($slack_id)
     {
         $user = User::where('slack_id', $slack_id)->first();
         if ($user) {
             $message = "Hi, {$user->name}! あなたのEn2::Webアカウントは既にSlackと連携済です。";
-        } else if (count($args) === 1) {
-            $message = 'メールアドレスを入力してください。';
         } else {
-            $user = User::where('email', $args[1])->first();
-            if (!$user) {
-                $message = 'そのメールアドレスで登録されているユーザーはいません。打ち間違えや、別のメールアドレスを利用していないか確認してください。';
-            } else {
-                $user->slack_id = $slack_id;
-                $user->save();
-                $message = "Hi, {$user->department}の {$user->name} さん！あなたのEn2::WebアカウントがSlackと連携されました！";
-            }
+            $message = "En2::Webに未登録、もしくはSlackアカウントとEn2::Webの連携が未完了です。";
         }
         return response()->json(['text' => $message]);
     }
 
     private function register($slack_id)
     {
-        return response()->json(
-            ['text' => 'Successfully logged request']
-        );
-        // if (User::where('slack_id', $slack_id)->exists()) {
-        //     $message = "既にEn2::Webに登録済みです。";
-        // } else {
-        //     $user = User::create([
-        //         compact('slack_id')
-        //     ]);
-        // }
+
+        if (User::where('slack_id', $slack_id)->exists()) {
+            $message = "既にEn2::Webに登録済みです。";
+        } else {
+            $registerController = app()->make('App\Http\Controllers\Api\Auth\RegisterController');
+            $message = $registerController->preRegister($slack_id);
+        }
+        return response()->json(['text' => $message]);
     }
 
     private function help() {
+        $texts = [
+            "[Command List]",
+            "iam",
+            "  - Check your slack account is synced to En2::Web or not.",
+            "register",
+            "  - Sign up for En2::Web. You cannot use this command if you already registered."
+        ];
         return response()->json(
-            ['text' => "【Command List】\niam {your email}\n  - En2::Webに登録したメールアドレスを入力してください！\n    あなたのSlackアカウントとEn2::Webのアカウントがリンクされます。（波括弧は不要です）"]
+            ['text' => implode("\n", $texts)]
         );
     }
 

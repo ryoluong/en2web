@@ -127,4 +127,12 @@ class Slack extends Model
             'multipart' => $content
         ]);
     }
+
+    public function fetchUserProfile($slack_id)
+    {
+        $url = "https://slack.com/api/users.profile.get";
+        return $this->client->request('GET', $url, [
+            'query' => ['user' => $slack_id]
+        ]);
+    }
 }

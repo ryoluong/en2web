@@ -10,7 +10,13 @@
       :ripple="false"
     >
       <v-list-item-avatar size="45">
-        <img :src="`${$store.state.auth.user.avater_path}`" />
+        <img
+          :src="
+            $store.state.auth.user.avater_path
+              ? $store.state.auth.user.avater_path
+              : '/img/categories/user.png'
+          "
+        />
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="subtitle-1 font-weight-medium">

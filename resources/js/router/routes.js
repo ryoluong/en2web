@@ -8,6 +8,7 @@ import Users from '@/js/pages/users/index.vue';
 import UserView from '@/js/pages/users/view.vue';
 import UserEdit from '@/js/pages/users/edit.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
+import RegisterVefiry from '@/js/pages/register/verify.vue';
 
 const noteActions = [
   { icon: 'mdi-magnify', to: '/notes/search' },
@@ -15,6 +16,17 @@ const noteActions = [
 ];
 
 const routes = [
+  {
+    path: '/register/verify/:token',
+    component: RegisterVefiry,
+    name: 'register.verify',
+    meta: {
+      requireAuth: false,
+      title: 'En2::Web',
+      header: 'menu',
+      actions: [],
+    },
+  },
   {
     path: '/login',
     component: Login,

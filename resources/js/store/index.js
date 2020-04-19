@@ -6,6 +6,7 @@ import snackbar from './modules/snackbar';
 import note from './modules/note';
 import user from './modules/user';
 import country from './modules/country';
+import register from './modules/register';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
   },
   modules: {
     auth,
+    register,
     meta,
     snackbar,
     note,
