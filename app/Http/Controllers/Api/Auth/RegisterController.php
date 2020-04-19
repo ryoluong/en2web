@@ -28,9 +28,9 @@ class RegisterController extends Controller
             $user->email_verify_token = base64_encode($email);
             if ($user->save()) {
                 $messages = [
-                    '[En2::Web 登録用URL]',
+                    '【En2::Web 登録用URL】',
                     '下記URLにアクセスして、登録を続けてください。',
-                    url("register/verify/$token"),
+                    url("register/verify/$user->email_verify_token"),
                     "*このURLはあなた専用です。他の人に教えないでください。"
                 ];
                 Slack::inbox($slack_id, implode("\n", $messages));
