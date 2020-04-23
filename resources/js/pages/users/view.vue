@@ -245,7 +245,6 @@ export default {
     },
     prevUserId() {
       const index = this.displayUserIds.indexOf(this.user.id);
-      console.log(index);
       if (index === -1 || index == 0) {
         return 0;
       } else {
