@@ -2,9 +2,33 @@
 <template>
   <div class="max-width">
     <div v-if="!loading" class="top" :style="topStyle">
-      <v-avatar class="user-image" size="95">
-        <v-img :src="userImagePath" :alt="user.name" />
-      </v-avatar>
+      <div class="top-upper d-flex justify-space-between align-center mx-auto">
+        <div class="nav">
+          <v-icon
+            v-if="prevUserId !== 0"
+            large
+            color="white"
+            class="mt-3"
+            @click="$router.push(`/users/${prevUserId}`)"
+          >
+            mdi-chevron-left
+          </v-icon>
+        </div>
+        <v-avatar class="user-image" size="95">
+          <v-img :src="userImagePath" :alt="user.name" />
+        </v-avatar>
+        <div class="nav">
+          <v-icon
+            v-if="nextUserId !== 0"
+            large
+            color="white"
+            class="mt-3"
+            @click="$router.push(`/users/${nextUserId}`)"
+          >
+            mdi-chevron-right
+          </v-icon>
+        </div>
+      </div>
       <div
         class="user-name headline white--text mt-4 d-flex justify-center align-center"
       >
@@ -139,7 +163,7 @@ export default {
     tab: 0,
   }),
   computed: {
-    ...mapState('user', ['noteTabUserId']),
+    ...mapState('user', ['noteTabUserId', 'displayUserIds']),
     profile() {
       let profile = [
         {
@@ -214,6 +238,23 @@ export default {
         : {
             backgroundImage: `url(${this.coverImagePath})`,
           };
+    },
+    prevUserId() {
+      const index = this.displayUserIds.indexOf(this.user.id);
+      console.log(index);
+      if (index === -1 || index == 0) {
+        return 0;
+      } else {
+        return this.displayUserIds[index - 1];
+      }
+    },
+    nextUserId() {
+      const index = this.displayUserIds.indexOf(this.user.id);
+      if (index === -1 || index === this.displayUserIds.length - 1) {
+        return 0;
+      } else {
+        return this.displayUserIds[index + 1];
+      }
     },
   },
   watch: {
@@ -290,6 +331,12 @@ export default {
   background-size: cover;
   background-position: center;
   z-index: 1;
+  .top-upper {
+    width: 90%;
+    .nav {
+      width: 36px;
+    }
+  }
   .user-name {
     width: 100%;
     text-align: center;

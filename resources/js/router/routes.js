@@ -144,7 +144,7 @@ const routes = [
     meta: {
       requireAuth: true,
       title: 'Users',
-      header: 'back',
+      header: 'menu',
       actions: [],
     },
   },

@@ -193,8 +193,16 @@ export default {
     }
     this.loading = false;
   },
+  beforeDestroy() {
+    this.setDisplayUserIds(this.displayUsers.map(u => u.id));
+  },
   methods: {
-    ...mapMutations('user', ['updateShowBy', 'updateGroupBy', 'updateSearch']),
+    ...mapMutations('user', [
+      'updateShowBy',
+      'updateGroupBy',
+      'updateSearch',
+      'setDisplayUserIds',
+    ]),
     where(i) {
       switch (this.groupBy) {
         case 'department':

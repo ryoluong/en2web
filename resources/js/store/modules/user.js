@@ -2,6 +2,7 @@ import axios from '@/js/axios';
 
 const state = {
   users: [],
+  displayUserIds: [],
   showBy: 0,
   groupBy: 'department',
   search: '',
@@ -92,6 +93,9 @@ const mutations = {
   },
   setNoteTabUserId(state, userId) {
     state.noteTabUserId = userId;
+  },
+  setDisplayUserIds(state, userIds) {
+    state.displayUserIds = userIds;
   },
 };
 

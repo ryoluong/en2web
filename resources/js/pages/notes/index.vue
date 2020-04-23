@@ -46,7 +46,7 @@
               <v-icon small class="mr-1">
                 mdi-filter
               </v-icon>
-              <p class="mb-0" style="margin-top:2px;">
+              <p class="mb-0" style="margin-top: 2px;">
                 Filter
               </p>
             </div>
@@ -170,7 +170,7 @@ export default {
     },
   },
   watch: {
-    $route: async function() {
+    $route: async function () {
       this.loading = true;
       this.clearNotes();
       this.scrollTop();
