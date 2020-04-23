@@ -67,39 +67,13 @@
       tile
       flat
     >
-      <template v-if="groupBy === 'department'">
-        <UserGroup
-          v-for="i in maxDepartmentId"
-          :key="i"
-          :index="i"
-          :users="where(i)"
-          :subheader="departments[i - 1]"
-        />
-      </template>
-      <template v-else-if="groupBy === 'group'">
-        <UserGroup
-          v-for="i in maxGroupId"
-          :key="i"
-          :index="i"
-          :users="where(i)"
-          :subheader="`Group${i}`"
-        />
-        <UserGroup
-          :key="-1"
-          :index="-1"
-          :users="where(-1)"
-          :subheader="'OG/OB'"
-        />
-      </template>
-      <template v-else-if="groupBy === 'generation'">
-        <UserGroup
-          v-for="i in maxGeneration"
-          :key="i"
-          :index="i"
-          :users="where(i)"
-          :subheader="`${i}期生`"
-        />
-      </template>
+      <UserGroup
+        v-for="(chunk, i) in usersChunk"
+        :key="`chunk${i}`"
+        :index="i"
+        :users="chunk.users"
+        :subheader="chunk.header"
+      />
     </v-expansion-panels>
   </div>
 </template>
@@ -148,13 +122,7 @@ export default {
       });
       return Math.max.apply(null, generation);
     },
-    maxDepartmentId() {
-      const departmentIds = this.users.map(function (user) {
-        return user.department_id;
-      });
-      return Math.max.apply(null, departmentIds);
-    },
-    maxGroupId: function () {
+    maxGroupId() {
       const groupIds = this.users.map(function (user) {
         return user.group_id;
       });
@@ -186,6 +154,44 @@ export default {
           return null;
       }
     },
+    usersChunk() {
+      const chunk = [];
+      switch (this.groupBy) {
+        case 'department':
+          this.departments.forEach((d, i) => {
+            chunk.push({
+              header: d,
+              users: this.displayUsers.filter(
+                user => user.department_id == i + 1,
+              ),
+            });
+          });
+          break;
+        case 'generation':
+          [...Array(this.maxGeneration).keys()].forEach(i => {
+            chunk.push({
+              header: `${i + 1}期生`,
+              users: this.displayUsers.filter(
+                user => user.generation === i + 1,
+              ),
+            });
+          });
+          break;
+        case 'group':
+          [...Array(this.maxGroupId).keys()].forEach(i => {
+            chunk.push({
+              header: `Group${i + 1}`,
+              users: this.displayUsers.filter(user => user.group_id === i + 1),
+            });
+          });
+          chunk.push({
+            header: 'OG/OB',
+            users: this.displayUsers.filter(user => user.group_id === -1),
+          });
+          break;
+      }
+      return chunk;
+    },
   },
   async created() {
     if (this.users.length === 0) {
@@ -194,7 +200,11 @@ export default {
     this.loading = false;
   },
   beforeDestroy() {
-    this.setDisplayUserIds(this.displayUsers.map(u => u.id));
+    let userIds = [];
+    this.usersChunk.forEach(chunk => {
+      userIds = userIds.concat(chunk.users.map(u => u.id));
+    });
+    this.setDisplayUserIds(userIds);
   },
   methods: {
     ...mapMutations('user', [
@@ -203,16 +213,6 @@ export default {
       'updateSearch',
       'setDisplayUserIds',
     ]),
-    where(i) {
-      switch (this.groupBy) {
-        case 'department':
-          return this.displayUsers.filter(user => user.department_id === i);
-        case 'group':
-          return this.displayUsers.filter(user => user.group_id === i);
-        case 'generation':
-          return this.displayUsers.filter(user => user.generation === i);
-      }
-    },
   },
 };
 </script>

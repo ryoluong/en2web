@@ -39,7 +39,8 @@ class UsersController extends Controller
             'job',
             'twitter_id',
             'instagram_id',
-            'university'
+            'university',
+            'status'
         )
             ->with('countries:countries.id,countries.name,english_name')
             ->with(['notes' => function($q) {

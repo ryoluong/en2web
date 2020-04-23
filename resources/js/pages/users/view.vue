@@ -66,7 +66,7 @@
     </v-tabs>
     <div v-if="!loading">
       <div v-if="tab === 0" class="pb-10">
-        <v-list flat>
+        <v-list v-if="user.status !== 3" flat>
           <v-list-item v-for="(p, i) in profile" :key="i" class="px-3">
             <v-list-item-icon>
               <v-icon size="28" color="#559" v-text="p.icon" />
@@ -113,7 +113,11 @@
         <IconMessage
           v-else
           icon="mdi-snowboard"
-          message="プロフィールが未記入です。"
+          :message="
+            user.status == 3
+              ? '未登録のユーザーです。'
+              : 'プロフィールが未記入です。'
+          "
         />
       </div>
       <div v-else>
