@@ -8,6 +8,7 @@ import {
   regex,
   alpha,
   alpha_dash,
+  image,
 } from 'vee-validate/dist/rules';
 const config = {
   // mode: 'lazy',
@@ -41,3 +42,4 @@ extend('regex', {
 });
 extend('alpha_dash', alpha_dash);
 extend('alpha', alpha);
+extend('image', image);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Country;
 
@@ -66,6 +67,7 @@ class UsersController extends Controller
         $user->escaped_profile = $user->getEscapedProfile();
         return $user;
     }
+
     public function update()
     {
         $user = auth()->user();
@@ -83,5 +85,46 @@ class UsersController extends Controller
         $user->countries()->sync($countryIds);
 
         return response()->json($user);
+    }
+
+    public function upload()
+    {
+        $type = request('type');
+        $file = request()->file('file');
+        $image = \Image::make($file)->orientate();
+        $image = $this->resize($image);
+        $filename = uniqid('image_') . '.' . $file->guessExtension();
+        $path = public_path('storage/img/tmp/') . $filename;
+        $image->save($path);
+
+        return response()->json([
+            'path' => '/storage/img/tmp/' . $filename
+        ]);
+    }
+
+    public function saveIcon()
+    {
+        $user = auth()->user();
+        $tempPath = request('path');
+        $filename = uniqid("avatar_{$user->id}_") . '.' . pathinfo($tempPath, PATHINFO_EXTENSION);
+        Storage::disk('public')->move($tempPath, "/storage/img/user/{$filename}");
+        if ($user->avater_path !== null) {
+            unlink(public_path($user->avater_path));
+        }
+        $user->update(['avater_path' => "/storage/img/user/{$filename}"]);
+
+        return $user;
+    }
+
+    private function resize($image)
+    {
+        $w = $image->width();
+        $h = $image->height();
+        if ($h > 250 && $h > $w) {
+            $image->resize(null, 250, function($constraint) { $constraint->aspectRatio(); });
+        } elseif ($w > 250 && $w > $h) {
+            $image->resize(250, null, function($constraint) { $constraint->aspectRatio(); });
+        }
+        return $image;
     }
 }

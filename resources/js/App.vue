@@ -1,9 +1,9 @@
 <template>
-  <v-app id="inspire">
-    <v-content id="main">
+  <v-app>
+    <v-content>
       <Header />
-      <router-view id="router-view" />
-      <Snackbar class="snackbar" />
+      <router-view />
+      <Snackbar />
     </v-content>
   </v-app>
 </template>

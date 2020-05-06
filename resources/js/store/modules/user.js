@@ -67,10 +67,54 @@ const actions = {
       .catch(() => {
         dispatch(
           'snackbar/show',
+          { message: 'エラーが発生しました', type: 'error' },
+          { root: true },
+        );
+      });
+    return user;
+  },
+
+  async upload({ dispatch }, payload) {
+    let imagePath;
+    const formData = new FormData();
+    formData.append('file', payload['file']);
+    formData.append('type', payload['type']);
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    };
+    await axios
+      .post(`/users/upload`, formData, config)
+      .then(res => {
+        imagePath = res.data.path;
+      })
+      .catch(() => {
+        dispatch(
+          'snackbar/show',
+          { message: 'エラーが発生しました', type: 'error' },
+          { root: true },
+        );
+      });
+    return imagePath;
+  },
+
+  async saveIcon({ dispatch }, payload) {
+    let user;
+    await axios
+      .post(`/users/icon`, payload)
+      .then(res => {
+        user = res.data;
+        dispatch(
+          'snackbar/show',
           {
-            message: 'エラーが発生しました',
-            type: 'error',
+            message: 'アイコンが更新されました！',
           },
+          { root: true },
+        );
+      })
+      .catch(() => {
+        dispatch(
+          'snackbar/show',
+          { message: 'エラーが発生しました', type: 'error' },
           { root: true },
         );
       });

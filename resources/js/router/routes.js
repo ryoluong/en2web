@@ -6,7 +6,9 @@ import NoteDelete from '@/js/pages/notes/delete.vue';
 import NoteUsers from '@/js/pages/notes/users.vue';
 import Users from '@/js/pages/users/index.vue';
 import UserView from '@/js/pages/users/view.vue';
-import UserEdit from '@/js/pages/users/edit.vue';
+import Settings from '@/js/pages/settings/index.vue';
+import SettingProfile from '@/js/pages/settings/profile.vue';
+import SettingIcon from '@/js/pages/settings/icon.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
 import RegisterVefiry from '@/js/pages/register/verify.vue';
 
@@ -38,6 +40,18 @@ const routes = [
       actions: [],
     },
   },
+  // redirect only
+  {
+    path: '/',
+    component: Login,
+    name: 'home',
+    meta: {
+      requireAuth: true,
+      title: 'Login',
+      header: 'menu',
+      actions: [],
+    },
+  },
   {
     path: '/mypage',
     component: UserView,
@@ -46,16 +60,43 @@ const routes = [
       requireAuth: true,
       title: 'Mypage',
       header: 'menu',
-      actions: [{ icon: 'mdi-pencil', to: '/mypage/edit' }],
+      actions: [
+        {
+          icon: 'mdi-settings',
+          to: '/settings',
+        },
+      ],
     },
   },
   {
-    path: '/mypage/edit',
-    component: UserEdit,
-    name: 'mypage.edit',
+    path: '/settings',
+    component: Settings,
+    name: 'setting',
     meta: {
       requireAuth: true,
-      title: 'Mypage',
+      title: 'Setting',
+      header: 'back',
+      actions: [],
+    },
+  },
+  {
+    path: '/settings/profile',
+    component: SettingProfile,
+    name: 'setting.profile',
+    meta: {
+      requireAuth: true,
+      title: 'Setting',
+      header: 'back',
+      actions: [],
+    },
+  },
+  {
+    path: '/settings/icon',
+    component: SettingIcon,
+    name: 'setting.icon',
+    meta: {
+      requireAuth: true,
+      title: 'Setting',
       header: 'back',
       actions: [],
     },

@@ -34,6 +34,8 @@ Route::get('/notes/tags', 'Api\NotesController@tags');
 Route::get('/users', 'Api\UsersController@index');
 Route::get('/users/{user}', 'Api\UsersController@get');
 Route::patch('/users/update', 'Api\UsersController@update');
+Route::post('/users/upload', 'Api\UsersController@upload');
+Route::post('/users/icon', 'Api\UsersController@saveIcon');
 
 Route::get('/countries', 'Api\CountriesController@index');
 
