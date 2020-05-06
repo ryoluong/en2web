@@ -97,17 +97,16 @@ const actions = {
     return imagePath;
   },
 
-  async saveIcon({ dispatch }, payload) {
+  async saveIcon({ dispatch, commit }, payload) {
     let user;
     await axios
       .post(`/users/icon`, payload)
       .then(res => {
         user = res.data;
+        commit('auth/setUser', user, { root: true });
         dispatch(
           'snackbar/show',
-          {
-            message: 'アイコンが更新されました！',
-          },
+          { message: 'アイコンが更新されました！' },
           { root: true },
         );
       })
