@@ -92,7 +92,11 @@ class UsersController extends Controller
         $type = request('type');
         $file = request()->file('file');
         $image = \Image::make($file)->orientate();
-        $image = $this->resize($image);
+        if ($type === 'icon') {
+            $image = $this->resizeIcon($image);
+        } else {
+            $image = $this->resizeCover($image);
+        }
         $filename = uniqid('image_') . '.' . $file->guessExtension();
         $path = public_path('storage/img/tmp/') . $filename;
         $image->save($path);
@@ -116,7 +120,21 @@ class UsersController extends Controller
         return $user;
     }
 
-    private function resize($image)
+    public function saveCover()
+    {
+        $user = auth()->user();
+        $tempPath = request('path');
+        $filename = uniqid("cover_{$user->id}_") . '.' . pathinfo($tempPath, PATHINFO_EXTENSION);
+        Storage::disk('public')->move($tempPath, "/storage/img/user/{$filename}");
+        if ($user->coverimg_path !== null) {
+            unlink(public_path($user->coverimg_path));
+        }
+        $user->update(['coverimg_path' => "/storage/img/user/{$filename}"]);
+
+        return $user;
+    }
+
+    private function resizeIcon($image)
     {
         $w = $image->width();
         $h = $image->height();
@@ -124,6 +142,16 @@ class UsersController extends Controller
             $image->resize(null, 250, function($constraint) { $constraint->aspectRatio(); });
         } elseif ($w > 250 && $w > $h) {
             $image->resize(250, null, function($constraint) { $constraint->aspectRatio(); });
+        }
+        return $image;
+    }
+
+    private function resizeCover($image)
+    {
+        $w = $image->width();
+        $h = $image->height();
+        if ($h > 500) {
+            $image->resize(null, 500, function($constraint) { $constraint->aspectRatio(); });
         }
         return $image;
     }

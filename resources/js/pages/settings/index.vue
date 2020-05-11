@@ -34,11 +34,11 @@ export default {
         text: 'ユーザーアイコンの変更',
         to: '/settings/icon',
       },
-      // {
-      //   icon: 'mdi-image',
-      //   text: 'カバーイメージの変更',
-      //   to: '/settings/image',
-      // },
+      {
+        icon: 'mdi-image',
+        text: 'カバーイメージの変更',
+        to: '/settings/header',
+      },
     ],
   }),
 };

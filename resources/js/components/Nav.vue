@@ -10,7 +10,8 @@
       :ripple="false"
     >
       <v-list-item-avatar size="45">
-        <img
+        <v-img
+          cover
           :src="
             $store.state.auth.user.avater_path
               ? $store.state.auth.user.avater_path

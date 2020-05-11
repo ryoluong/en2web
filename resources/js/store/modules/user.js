@@ -119,6 +119,29 @@ const actions = {
       });
     return user;
   },
+
+  async saveCover({ dispatch, commit }, payload) {
+    let user;
+    await axios
+      .post(`/users/cover`, payload)
+      .then(res => {
+        user = res.data;
+        commit('auth/setUser', user, { root: true });
+        dispatch(
+          'snackbar/show',
+          { message: 'カバーイメージが更新されました！' },
+          { root: true },
+        );
+      })
+      .catch(() => {
+        dispatch(
+          'snackbar/show',
+          { message: 'エラーが発生しました', type: 'error' },
+          { root: true },
+        );
+      });
+    return user;
+  },
 };
 
 const mutations = {

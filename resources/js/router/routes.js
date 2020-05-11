@@ -9,6 +9,7 @@ import UserView from '@/js/pages/users/view.vue';
 import Settings from '@/js/pages/settings/index.vue';
 import SettingProfile from '@/js/pages/settings/profile.vue';
 import SettingIcon from '@/js/pages/settings/icon.vue';
+import SettingHeader from '@/js/pages/settings/header.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
 import RegisterVefiry from '@/js/pages/register/verify.vue';
 
@@ -94,6 +95,16 @@ const routes = [
     path: '/settings/icon',
     component: SettingIcon,
     name: 'setting.icon',
+    meta: {
+      requireAuth: true,
+      title: 'Setting',
+      header: 'back',
+      actions: [],
+    },
+  },
+  {
+    path: '/settings/header',
+    component: SettingHeader,
     meta: {
       requireAuth: true,
       title: 'Setting',

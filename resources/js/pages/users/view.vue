@@ -350,8 +350,8 @@ export default {
     height: 100%;
     position: absolute;
     background: linear-gradient(
-      rgba($color: $indigo-darken3, $alpha: 0.3),
-      rgba($color: $indigo-darken3, $alpha: 0.95)
+      rgba($color: $indigo-darken3, $alpha: 0.1),
+      rgba($color: $indigo-darken3, $alpha: 0.85)
     );
     content: '';
     z-index: -1;

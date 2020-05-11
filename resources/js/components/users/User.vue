@@ -1,5 +1,9 @@
 <template>
-  <v-list-item class="ma-auto py-1 px-6" :to="`/users/${user.id}`">
+  <v-list-item
+    class="ma-auto py-1 px-6"
+    :to="`/users/${user.id}`"
+    :ripple="false"
+  >
     <v-list-item-avatar size="48">
       <v-img :src="userImagePath" cover eager>
         <template v-slot:placeholder>

@@ -1,6 +1,6 @@
 <template>
   <FormCard
-    title="Upload Icon"
+    title="Upload Header Image"
     :show-progress="loading"
     :show-content="!loading"
     class="max-width"
@@ -19,16 +19,30 @@
             @change="handleFileUpload"
           />
         </ValidationProvider>
-        <div class="preview-container">
+        <div
+          class="preview-container"
+          :style="previewPath && !uploading ? 'border:none;' : ''"
+        >
           <p v-if="uploading" class="pa-0 ma-auto text-center">
             ファイルをアップロード中です...
           </p>
           <p v-else-if="!previewPath" class="pa-0 ma-auto text-center">
             ここにプレビューが表示されます。
           </p>
-          <v-avatar v-else class="ma-auto" size="120">
-            <v-img :src="previewPath" />
-          </v-avatar>
+          <div
+            v-else
+            class="preview"
+            :style="`background-image:url(${previewPath})`"
+          >
+            <v-avatar class="user-image" size="80">
+              <v-img :src="userImagePath" />
+            </v-avatar>
+            <p
+              class="user-name text-center title font-weight-regular mt-2 white--text mb-0"
+            >
+              {{ $store.state.auth.user.name }}
+            </p>
+          </div>
         </div>
       </div>
       <v-btn
@@ -66,13 +80,18 @@ export default {
   computed: {
     params() {
       return {
-        type: 'icon',
+        type: 'cover',
         file: this.file,
       };
     },
+    userImagePath() {
+      return this.$store.state.auth.user.avater_path
+        ? this.$store.state.auth.user.avater_path
+        : '/img/categories/user.png';
+    },
   },
   methods: {
-    ...mapActions('user', ['upload', 'saveIcon']),
+    ...mapActions('user', ['upload', 'saveCover']),
     async handleFileUpload(e) {
       if (e && e['type'].split('/')[0] === 'image') {
         this.uploading = true;
@@ -85,7 +104,7 @@ export default {
     },
     async submit() {
       this.submitting = true;
-      const user = await this.saveIcon({ path: this.previewPath });
+      const user = await this.saveCover({ path: this.previewPath });
       if (user) {
         this.$router.push('/mypage');
       }
@@ -95,12 +114,45 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '@/sass/_variables.scss';
 .preview-container {
+  max-width: 375px;
+  margin: auto;
   height: 150px;
   display: flex;
   align-items: center;
   justify-items: center;
   border: 1px dashed #aaa;
   color: #888;
+
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background-size: cover;
+    background-position: center center;
+
+    &::after {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: linear-gradient(
+        rgba($color: $indigo-darken3, $alpha: 0.1),
+        rgba($color: $indigo-darken3, $alpha: 0.85)
+      );
+      content: '';
+      z-index: -1;
+    }
+    .user-name {
+      width: 100%;
+    }
+  }
 }
 </style>
