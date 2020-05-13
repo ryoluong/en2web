@@ -37,7 +37,7 @@ export default {
       {
         icon: 'mdi-image',
         text: 'カバーイメージの変更',
-        to: '/settings/header',
+        to: '/settings/cover',
       },
     ],
   }),

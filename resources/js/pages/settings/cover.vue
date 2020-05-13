@@ -1,6 +1,6 @@
 <template>
   <FormCard
-    title="Upload Header Image"
+    title="Upload Cover Image"
     :show-progress="loading"
     :show-content="!loading"
     class="max-width"

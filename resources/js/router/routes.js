@@ -6,10 +6,11 @@ import NoteDelete from '@/js/pages/notes/delete.vue';
 import NoteUsers from '@/js/pages/notes/users.vue';
 import Users from '@/js/pages/users/index.vue';
 import UserView from '@/js/pages/users/view.vue';
+import Attendances from '@/js/pages/attendances/index.vue';
 import Settings from '@/js/pages/settings/index.vue';
 import SettingProfile from '@/js/pages/settings/profile.vue';
 import SettingIcon from '@/js/pages/settings/icon.vue';
-import SettingHeader from '@/js/pages/settings/header.vue';
+import SettingCover from '@/js/pages/settings/cover.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
 import RegisterVefiry from '@/js/pages/register/verify.vue';
 
@@ -103,8 +104,8 @@ const routes = [
     },
   },
   {
-    path: '/settings/header',
-    component: SettingHeader,
+    path: '/settings/cover',
+    component: SettingCover,
     meta: {
       requireAuth: true,
       title: 'Setting',
@@ -201,9 +202,9 @@ const routes = [
     },
   },
   {
-    path: '/attendance',
-    component: ComingSoon,
-    name: 'attendance',
+    path: '/attendances',
+    component: Attendances,
+    name: 'attendances',
     meta: {
       requireAuth: true,
       title: 'Attendance',

@@ -49,11 +49,15 @@ class SlackController extends Controller
 
     private function register($slack_id)
     {
-
-        if (User::where('slack_id', $slack_id)->exists()) {
-            $message = "既にEn2::Webに登録済みです。";
+        $user = User::where('slack_id', $slack_id)->first();
+        $registerController = app()->make('App\Http\Controllers\Api\Auth\RegisterController');
+        if ($user) {
+            if ($user->status == 1) {
+                $message = "既にEn2::Webに登録済みです。";
+            } else {
+                $message = $registerController->inboxRegisterUrl($user);
+            }
         } else {
-            $registerController = app()->make('App\Http\Controllers\Api\Auth\RegisterController');
             $message = $registerController->preRegister($slack_id);
         }
         return response()->json(['text' => $message]);

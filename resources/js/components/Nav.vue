@@ -82,14 +82,14 @@ export default {
         },
         {
           name: 'Attendance',
-          link: '/attendance',
+          link: '/attendances',
           icon: 'mdi-clipboard-check-outline',
         },
-        {
-          name: 'Countries',
-          link: '/countries',
-          icon: 'mdi-earth',
-        },
+        // {
+        //   name: 'Countries',
+        //   link: '/countries',
+        //   icon: 'mdi-earth',
+        // },
       ];
     },
   },
