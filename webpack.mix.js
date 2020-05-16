@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const mix = require('laravel-mix');
+const webpack = require('./webpack.config');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,13 +13,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'resources/js')
-    }
-  }
+mix.options({
+  hmrOptions: {
+    host: '192.168.0.53',
+    port: '8080',
+  },
+  postCss: [require('autoprefixer')],
 });
+
+mix.webpackConfig(Object.assign(webpack));
 
 mix
   // .js("resources/js/v1/app.js", "public/js")
