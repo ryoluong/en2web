@@ -34,7 +34,7 @@
         <v-chip
           small
           class="white--text mt-2 ml-2"
-          color="indigo lighten-1"
+          color="blue"
           @click="go(`/notes?category_id=${note.category_id}`)"
         >
           <v-icon small left>
@@ -47,9 +47,10 @@
           small
           class="white--text mt-2 ml-2"
           color="green lighten-1"
+          @click="go(`/notes?country_id=${note.countries[0].id}`)"
         >
           <v-icon small left>
-            mdi-map-marker
+            mdi-earth
           </v-icon>
           {{ note.countries[0].name }}
         </v-chip>

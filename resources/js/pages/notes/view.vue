@@ -93,7 +93,7 @@
       </router-link>
 
       <div
-        class="content blue-grey--text text--darken-4 mt-5 mb-5"
+        class="content blue-grey--text text--darken-4 mt-5 mb-8"
         v-html="note.content"
       />
 

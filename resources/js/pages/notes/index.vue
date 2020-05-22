@@ -35,7 +35,7 @@
       <v-card
         v-if="conditions.length"
         id="conditions"
-        class="mt-4 mb-1 mx-2 d-flex"
+        class="mt-7 mb-1 mx-2 d-flex"
         outlined
         width="100%"
         max-width="450px"
@@ -93,7 +93,7 @@
         v-for="n in displayNotes"
         :key="n.id"
         :note="n"
-        class="mx-auto mt-8 my-12"
+        class="mx-auto mt-8 mb-12"
         @fav="fav"
       />
       <Period v-if="currentPage == lastPage" />

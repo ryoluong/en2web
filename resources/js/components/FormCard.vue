@@ -1,7 +1,7 @@
 <template>
   <form>
     <v-card
-      class="mx-2 mx-lg-auto mt-3 mt-lg-6 mb-6"
+      class="mx-2 mx-lg-auto mt-6 mt-lg-6 mb-6"
       style="max-width: 1100px; margin: auto;"
     >
       <v-card-subtitle class="blue-grey subtitle-1 white--text">
