@@ -233,9 +233,7 @@ export default {
     },
     async loaded() {
       this.loading = false;
-      const params = this.params;
-      delete params['page'];
-      this.setParams(params);
+      this.setParams(this.params);
       await this.$nextTick();
       this.offsetTop =
         this.$refs.container.getBoundingClientRect().top + window.pageYOffset;
