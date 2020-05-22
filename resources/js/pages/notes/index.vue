@@ -49,21 +49,34 @@
               <p class="mb-0" style="margin-top: 2px;">
                 Filter
               </p>
+              <p class="mb-0 ml-3" style="margin-top: 2px;">
+                {{ total }} notes
+              </p>
             </div>
-            <v-icon
-              color="grey darken-1"
-              size="20"
-              @click="$router.push('/notes')"
-            >
-              mdi-close
-            </v-icon>
+            <div>
+              <v-icon
+                color="grey darken-1"
+                size="20"
+                @click="$router.push('/notes/search')"
+              >
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                class="ml-2"
+                color="grey darken-1"
+                size="20"
+                @click="$router.push('/notes')"
+              >
+                mdi-close
+              </v-icon>
+            </div>
           </v-subheader>
           <v-list-item v-for="(c, i) in conditions" :key="i">
             <v-list-item-icon class="mr-4">
               <v-icon size="28" color="#559" v-text="c.icon" />
             </v-list-item-icon>
             <v-list-item-content>
-              {{ c.data.name }}
+              {{ c.text }}
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -116,6 +129,7 @@ export default {
       'currentPage',
       'lastPage',
       'to',
+      'total',
       'savedOffset',
       'savedFullPath',
     ]),
@@ -125,6 +139,9 @@ export default {
         category_id: this.$route.query.category_id,
         is_best: this.$route.query.is_best,
         user_id: this.$route.query.user_id,
+        keyword: this.$route.query.keyword,
+        country_id: this.$route.query.country_id,
+        tag_id: this.$route.query.tag_id,
       };
     },
     needFetch() {
@@ -187,13 +204,26 @@ export default {
       await this.fetchNotes();
       this.saveFullPath(this.$route.fullPath);
     }
+    this.setParams({
+      category_id: parseInt(this.$route.query.category_id),
+      is_best: parseInt(this.$route.query.is_best),
+      user_id: parseInt(this.$route.query.user_id),
+      keyword: this.$route.query.keyword,
+      country_id: parseInt(this.$route.query.country_id),
+      tag_id: parseInt(this.$route.query.tag_id),
+    });
     this.loaded();
   },
   beforeDestroy() {
     this.saveOffset(this.offset);
   },
   methods: {
-    ...mapMutations('note', ['saveOffset', 'clearNotes', 'saveFullPath']),
+    ...mapMutations('note', [
+      'saveOffset',
+      'clearNotes',
+      'saveFullPath',
+      'setParams',
+    ]),
     ...mapActions('note', ['fav']),
     async fetchNotes() {
       this.fetching = true;

@@ -31,6 +31,7 @@
               item-text="name"
               :filter="customFilter"
               label="Author"
+              :menu-props="{ maxHeight: 180 }"
               required
             />
           </ValidationProvider>
@@ -89,6 +90,7 @@
             hint="*任意 リストにない国は直接入力してください。"
             :disabled="submitting"
             multiple
+            :menu-props="{ maxHeight: 180 }"
             persistent-hint
           >
             <template v-slot:selection="data">
@@ -125,6 +127,7 @@
             multiple
             chips
             hint="*任意 リストにないタグも自由に入力できます。"
+            :menu-props="{ maxHeight: 180 }"
             persistent-hint
           />
           <v-file-input

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper pb-10">
+  <div class="wrapper mt-8 pb-10">
     <div class="period" />
   </div>
 </template>

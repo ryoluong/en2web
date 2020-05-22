@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use \DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Note;
@@ -23,7 +24,10 @@ class NotesController extends Controller
     {
         $user_id = request('user_id');
         $category_id = request('category_id');
+        $tag_id = request('tag_id');
+        $country_id = request('country_id');
         $is_best = request('is_best');
+        $keyword = request('keyword');
         $limit = request('limit', 10);
         $notes = Note::select('id', 'user_id', 'category_id', 'title', 'isBest', 'date')
             ->with([
@@ -40,19 +44,79 @@ class NotesController extends Controller
                 return $q->where('notes.category_id', $category_id);
             })
             ->when($is_best, function($q) {
-                return $q->where('isBest', true);
+                return $q->where('notes.isBest', true);
+            })
+            ->when($country_id, function($q) use ($country_id) {
+                $note_ids = DB::table('country_note')->select('note_id')->where('country_id', $country_id)->pluck('note_id');
+                return $q->whereIn('notes.id', $note_ids);
+            })
+            ->when($tag_id, function($q) use ($tag_id) {
+                $note_ids = DB::table('note_tag')->select('note_id')->where('tag_id', $tag_id)->pluck('note_id');
+                return $q->whereIn('notes.id', $note_ids);
+            })
+            ->when($keyword, function($q) use ($keyword) {
+                $keyword = mb_convert_kana($keyword, 'as');
+                $keyword_list = preg_split('/[\s,]+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
+                foreach($keyword_list as $key) {
+                    $q->where(function($q) use ($key) {
+                        if(Country::where('name', $key)->exists()) {
+                            $country_id = Country::where('name', $key)->first()->id;
+                            $note_ids = DB::table('country_note')->select('note_id')->where('country_id', $country_id)->pluck('note_id');
+                            $q->whereIn('notes.id', $note_ids);
+                        }
+                        if(User::where('name', 'LIKE', "$key %")->orWhere('name', 'LIKE', "% $key")->exists()) {
+                            $user_ids = DB::table('users')->select('id')->where('name', 'LIKE', "$key %")->orWhere('name', 'LIKE', "% $key")->pluck('id');
+                            $q->whereIn('notes.user_id', $user_ids);
+                        }
+                        $q->orWhere('notes.content', 'LIKE', "%$key%");
+                        $q->orWhere('notes.title', 'LIKE', "%$key%");
+                        return $q;
+                    });
+                }
             })
             ->withCount(['favUsers'])
             ->orderBy('date', 'desc')
             ->orderBy('id', 'desc')
             ->paginate($limit);
+
         $conditions = [];
-        if ($user_id) {
+        if ($keyword) {
             $conditions[] = [
-                "icon"  => "mdi-account-edit",
-                "data" => User::select('id','name')->where('id', $user_id)->first()
+                "icon" => "mdi-text-search",
+                "text" => $keyword,
             ];
         }
+        if ($user_id) {
+            $conditions[] = [
+                "icon" => "mdi-account-edit",
+                "text" => User::select('id','name')->where('id', $user_id)->first()->name
+            ];
+        }
+        if ($country_id) {
+            $conditions[] = [
+                "icon" => "mdi-earth",
+                "text" => Country::where('id', $country_id)->first()->name
+            ];
+        }
+        if ($is_best) {
+            $conditions[] = [
+                "icon" => "mdi-star",
+                "text" => "Best Note"
+            ];
+        }
+        if ($category_id) {
+            $conditions[] = [
+                "icon" => "mdi-folder-outline",
+                "text" => Category::where('id', $category_id)->first()->name
+            ];
+        }
+        if ($tag_id) {
+            $conditions[] = [
+                "icon" => "mdi-tag",
+                "text" => Tag::where('id', $tag_id)->first()->name
+            ];
+        }
+
         return collect(compact('conditions'))->merge($notes);
     }
 

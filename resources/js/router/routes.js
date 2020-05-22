@@ -4,6 +4,7 @@ import NoteView from '@/js/pages/notes/view.vue';
 import NoteForm from '@/js/pages/notes/form.vue';
 import NoteDelete from '@/js/pages/notes/delete.vue';
 import NoteUsers from '@/js/pages/notes/users.vue';
+import NoteSearch from '@/js/pages/notes/search.vue';
 import Users from '@/js/pages/users/index.vue';
 import UserView from '@/js/pages/users/view.vue';
 import Attendances from '@/js/pages/attendances/index.vue';
@@ -180,6 +181,17 @@ const routes = [
     },
   },
   {
+    path: '/notes/search',
+    component: NoteSearch,
+    name: 'note.search',
+    meta: {
+      requireAuth: true,
+      title: 'Notes',
+      header: 'back',
+      actions: [],
+    },
+  },
+  {
     path: '/users',
     component: Users,
     name: 'user.index',
@@ -220,17 +232,6 @@ const routes = [
       requireAuth: true,
       title: 'Attendance',
       header: 'menu',
-      actions: [],
-    },
-  },
-  {
-    path: '/notes/search',
-    component: ComingSoon,
-    name: 'note.search',
-    meta: {
-      requireAuth: true,
-      title: 'Notes',
-      header: 'back',
       actions: [],
     },
   },

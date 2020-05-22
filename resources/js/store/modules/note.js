@@ -2,10 +2,12 @@ import axios from '@/js/axios';
 
 const state = {
   notes: [],
+  params: {},
   conditions: [],
   currentPage: 0,
   lastPage: 0,
   to: 0,
+  total: 0,
   savedOffset: 0,
   savedFullPath: '',
   favNotes: [],
@@ -251,12 +253,16 @@ const mutations = {
   setTags(state, tags) {
     state.tags = tags;
   },
+  setParams(state, params) {
+    state.params = params;
+  },
   indexSuccess(state, payload) {
     state.notes = state.notes.concat(payload.data);
     state.conditions = payload.conditions;
     state.currentPage = payload.current_page;
     state.lastPage = payload.last_page;
     state.to = payload.to;
+    state.total = payload.total;
   },
   updateSuccess(state, note) {
     state.notes.some((n, i) => {

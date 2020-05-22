@@ -64,8 +64,8 @@
         Notes
       </v-tab>
     </v-tabs>
-    <div v-if="!loading">
-      <div v-if="tab === 0" class="pb-10">
+    <div v-if="!loading" v-touch:swipe="handleSwipe" :style="tabContentStyle">
+      <div v-if="tab === 0">
         <v-list v-if="user.status !== 3" flat>
           <v-list-item v-for="(p, i) in profile" :key="i" class="px-3">
             <v-list-item-icon>
@@ -243,6 +243,11 @@ export default {
             backgroundImage: `url(${this.coverImagePath})`,
           };
     },
+    tabContentStyle() {
+      return {
+        minHeight: `${window.parent.screen.height - 300}px`,
+      };
+    },
     prevUserId() {
       const index = this.displayUserIds.indexOf(this.user.id);
       if (index === -1 || index == 0) {
@@ -295,6 +300,13 @@ export default {
   methods: {
     ...mapActions('note', ['fav']),
     ...mapMutations('user', ['setNoteTabUserId']),
+    handleSwipe(direction) {
+      if (this.tab == 0 && direction == 'left') {
+        this.tab = 1;
+      } else if (this.tab == 1 && direction == 'right') {
+        this.tab = 0;
+      }
+    },
     handleFav(noteId) {
       const isFavNote = this.$store.state.note.favNotes.indexOf(noteId) !== -1;
       this.user.notes.some(note => {
