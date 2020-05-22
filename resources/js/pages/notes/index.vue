@@ -136,12 +136,12 @@ export default {
     params() {
       return {
         page: this.currentPage + 1,
-        category_id: this.$route.query.category_id,
-        is_best: this.$route.query.is_best,
-        user_id: this.$route.query.user_id,
-        keyword: this.$route.query.keyword,
-        country_id: this.$route.query.country_id,
-        tag_id: this.$route.query.tag_id,
+        category_id: parseInt(this.$route.query.category_id) || 0,
+        user_id: parseInt(this.$route.query.user_id) || 0,
+        keyword: this.$route.query.keyword || '',
+        country_id: parseInt(this.$route.query.country_id) || 0,
+        tag_id: parseInt(this.$route.query.tag_id) || 0,
+        is_best: parseInt(this.$route.query.is_best) || 0,
       };
     },
     needFetch() {
@@ -204,14 +204,6 @@ export default {
       await this.fetchNotes();
       this.saveFullPath(this.$route.fullPath);
     }
-    this.setParams({
-      category_id: parseInt(this.$route.query.category_id),
-      is_best: parseInt(this.$route.query.is_best),
-      user_id: parseInt(this.$route.query.user_id),
-      keyword: this.$route.query.keyword,
-      country_id: parseInt(this.$route.query.country_id),
-      tag_id: parseInt(this.$route.query.tag_id),
-    });
     this.loaded();
   },
   beforeDestroy() {
@@ -241,6 +233,9 @@ export default {
     },
     async loaded() {
       this.loading = false;
+      const params = this.params;
+      delete params['page'];
+      this.setParams(params);
       await this.$nextTick();
       this.offsetTop =
         this.$refs.container.getBoundingClientRect().top + window.pageYOffset;

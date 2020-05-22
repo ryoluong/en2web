@@ -78,7 +78,7 @@
   </FormCard>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import FormCard from '@/js/components/FormCard.vue';
 export default {
   components: {
@@ -115,16 +115,13 @@ export default {
       getCategories: 'categories',
       getTags: 'tags',
     }),
-    ...mapMutations('note', ['setParams']),
     customFilter(item, queryText) {
       const text = item.name.toLowerCase();
       const searchText = queryText.toLowerCase();
-
       return text.indexOf(searchText) > -1;
     },
     search() {
       const params = this.params;
-      this.setParams(params);
       Object.keys(this.params).forEach(v => {
         if (!params[v]) {
           delete params[v];
