@@ -65,7 +65,7 @@ const routes = [
       header: 'menu',
       actions: [
         {
-          icon: 'mdi-settings',
+          icon: 'mdi-account-cog',
           to: '/settings',
         },
       ],
