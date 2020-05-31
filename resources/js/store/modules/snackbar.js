@@ -12,7 +12,7 @@ const actions = {
     commit('display', payload);
     setTimeout(() => {
       commit('hide', key);
-    }, 2000);
+    }, 2500);
   },
 };
 

@@ -17,8 +17,8 @@ export default {
     ...mapState('snackbar', {
       isActive: state => state.isActive,
       message: state => state.message,
-      type: state => state.type
-    })
-  }
+      type: state => state.type,
+    }),
+  },
 };
 </script>

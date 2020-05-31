@@ -6,7 +6,6 @@
       link
       :to="i.to"
       color="indigo"
-      @click="notice(i.to)"
     >
       <v-list-item-action>
         <v-icon>{{ i.icon }}</v-icon>
@@ -18,7 +17,6 @@
   </v-list>
 </template>
 <script>
-import { mapActions } from 'vuex';
 export default {
   data: () => ({
     items: [
@@ -28,38 +26,11 @@ export default {
         name: 'Login',
       },
       {
-        to: null,
-        icon: 'mdi-account-plus',
-        name: 'Register',
-      },
-      {
-        to: null,
+        to: '/password/reset',
         icon: 'mdi-account-question',
         name: 'Reset Password',
       },
     ],
   }),
-  methods: {
-    ...mapActions('snackbar', ['show']),
-    ...mapActions('auth', ['postLogoutRequest']),
-    notice(to) {
-      if (!to) {
-        this.show({ message: '現在準備中です', type: 'accent' });
-      }
-    },
-    async logout() {
-      if (!this.loading) {
-        this.loading = true;
-        const status = await this.postLogoutRequest();
-        if (status == 200) {
-          this.$router.push('/login');
-          this.show({ message: 'ログアウトしました', type: 'accent' });
-        } else {
-          this.show({ message: 'エラーが発生しました', type: 'error' });
-        }
-        this.loading = false;
-      }
-    },
-  },
 };
 </script>

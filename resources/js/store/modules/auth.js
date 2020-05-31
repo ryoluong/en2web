@@ -85,6 +85,31 @@ const actions = {
       );
     });
   },
+  async remind({ dispatch }, payload) {
+    let ok = true;
+    await axios.post('/reset', payload).catch(() => {
+      ok = false;
+      dispatch(
+        'snackbar/show',
+        { message: 'エラーが発生しました', type: 'error' },
+        { root: true },
+      );
+    });
+    return ok;
+  },
+  async reset({ dispatch }, payload) {
+    let ok = true;
+    await axios.post('/reset/password', payload).catch(err => {
+      ok = false;
+      const msg = err.response.data.message || 'エラーが発生しました';
+      dispatch(
+        'snackbar/show',
+        { message: msg, type: 'error' },
+        { root: true },
+      );
+    });
+    return ok;
+  },
 };
 
 const mutations = {

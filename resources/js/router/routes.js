@@ -14,6 +14,8 @@ import SettingIcon from '@/js/pages/settings/icon.vue';
 import SettingCover from '@/js/pages/settings/cover.vue';
 import ComingSoon from '@/js/pages/comingsoon.vue';
 import RegisterVefiry from '@/js/pages/register/verify.vue';
+import PasswordRemind from '@/js/pages/password/reset/index.vue';
+import PasswordReset from '@/js/pages/password/reset/form.vue';
 
 const noteActions = [
   { icon: 'mdi-magnify', to: '/notes/search' },
@@ -39,6 +41,28 @@ const routes = [
     meta: {
       requireAuth: false,
       title: 'Login',
+      header: 'menu',
+      actions: [],
+    },
+  },
+  {
+    path: '/password/reset',
+    component: PasswordRemind,
+    name: 'password.remind',
+    meta: {
+      requireAuth: false,
+      title: 'Password Reset',
+      header: 'menu',
+      actions: [],
+    },
+  },
+  {
+    path: '/password/reset/:token',
+    component: PasswordReset,
+    name: 'password.remind',
+    meta: {
+      requireAuth: false,
+      title: 'Password Reset',
       header: 'menu',
       actions: [],
     },
