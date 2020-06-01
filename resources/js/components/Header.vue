@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-app-bar id="header" app color="indigo lighten-1" dark hide-on-scroll>
+    <v-app-bar
+      id="header"
+      app
+      color="indigo lighten-1"
+      dark
+      hide-on-scroll
+      scroll-threshold="1"
+    >
       <v-btn
         v-if="$store.state.referrer && $route.meta.header === 'back'"
         icon
