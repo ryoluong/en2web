@@ -1,0 +1,39 @@
+@import './variables';
+
+.max-width {
+  max-width: 600px;
+  margin: auto;
+}
+.v-skeleton-loader__image {
+  height: 220px !important;
+}
+.v-expansion-panel-content__wrap {
+  padding-left: 0;
+  padding-right: 0;
+}
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+.scroll-y {
+  overflow-y: scroll;
+}
+.prof_heading {
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+  color: $indigo-lighten1;
+  border-left: 5px solid $indigo-lighten1;
+  padding-left: 10px;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  margin-bottom: 0;
+  &:not(:first-child) {
+    margin-top: 25px;
+  }
+}

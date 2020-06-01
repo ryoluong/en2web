@@ -1,0 +1,32 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": 8,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ],
+    "vue/html-self-closing": [
+      "error",
+      {
+        "html": {
+          "void": "always"
+        }
+      }
+    ]
+  }
+}

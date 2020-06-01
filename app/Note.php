@@ -12,9 +12,12 @@ class Note extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'id' => 0,
+            'name' => '退会したユーザー',
+        ]);
     }
-
+    
     public function category()
     {
         return $this->belongsTo(Category::class);
