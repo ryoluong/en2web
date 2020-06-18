@@ -19,7 +19,7 @@ jobs:
       SSH_USER: ${{ secrets.SSH_USER }}
       SSH_ADDR: ${{ secrets.SSH_ADDR }}
       SSH_COMMAND: ${{ secrets.SSH_COMMAND }}
-      SSH_KNOWN_HOSTS: ${{ secreets.SSH_KNOWN_HOSTS }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
    
     steps:
       - uses: actions/checkout@v2
