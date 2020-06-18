@@ -1,14 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Automatic Deploy
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
     
@@ -24,10 +19,10 @@ jobs:
       
       - name: SSH Deploy
         run: |
-          echo "$SSH_SECRET" > secret_key
+          echo ${SSH_SECRET} > secret_key
           ssh-keyscan -H ${SSH_ADDR} > known_hosts
           chmod 600 secret_key
-          ssh ${SSH_USER}@${SSH_ADDR} -o UserKnownHostsFile=./known_hosts -i ./secret_key \
+          ssh ${SSH_USER}@${SSH_ADDR} -o UserKnownHostsFile=known_hosts -i secret_key \
               "cd ~/www/en2web && \
                git checkout . && \
                git pull && \
