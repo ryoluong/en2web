@@ -98,7 +98,7 @@
       />
       <Period v-if="currentPage == lastPage" />
     </v-container>
-    <v-container v-if="loading" class="px-0">
+    <v-container v-if="loading || fetching" class="px-0">
       <v-skeleton-loader
         v-for="i in 2"
         :key="i"
@@ -148,7 +148,7 @@ export default {
       return !this.fetching && this.currentPage != this.lastPage;
     },
     noteHeight() {
-      return 370 + 48;
+      return 352 + 48;
     },
     firstIndex() {
       const res =
