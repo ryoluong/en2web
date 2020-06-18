@@ -98,7 +98,7 @@
       />
       <Period v-if="currentPage == lastPage" />
     </v-container>
-    <v-container v-if="loading || fetching" class="px-0">
+    <v-container v-if="loading" class="px-0">
       <v-skeleton-loader
         v-for="i in 2"
         :key="i"
