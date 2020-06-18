@@ -15,18 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      SSH_SECRET: ${{ secrets.SSH_SECRET }}
       SSH_USER: ${{ secrets.SSH_USER }}
       SSH_ADDR: ${{ secrets.SSH_ADDR }}
-      SSH_COMMAND: ${{ secrets.SSH_COMMAND }}
-      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
    
     steps:
       - uses: actions/checkout@v2
       
       - name: SSH Deploy
         run: |
-          echo "$SECRET_KEY" > secret_key
+          echo "$SSH_SECRET" > secret_key
+          ssh-keygen -H ${SSH_ADDR} >> /.ssh/known_hosts
           chmod 600 secret_key
           ssh ${SSH_USER}@${SSH_ADDR} -i secret_key \
               "cd ~/www/en2web && \
