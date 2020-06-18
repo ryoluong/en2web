@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Automatic Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    
+    runs-on: ubuntu-latest
+    
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_ADDR: ${{ secrets.SSH_ADDR }}
+      SSH_COMMAND: ${{ secrets.SSH_COMMAND }}
+      SSH_KNOWN_HOSTS: ${{ secreets.SSH_KNOWN_HOSTS }}
+   
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: SSH Deploy
+        run: |
+          echo "$SECRET_KEY" > secret_key
+          chmod 600 secret_key
+          ssh ${SSH_USER}@${SSH_ADDR} -i secret_key \
+              "cd ~/www/en2web && \
+               git checkout . && \
+               git pull && \
+               composer install && \
+               php artisan config:cache && \
+               php artisan migrate --force && \
+               npm install && \
+               npm run prod"
