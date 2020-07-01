@@ -151,11 +151,11 @@
             <v-textarea
               v-model="note.content"
               class="mt-3 mt-lg-5"
-              height="500px"
               :disabled="submitting"
               outlined
               :error="errors.length !== 0"
               label="Content"
+              rows="18"
             />
           </ValidationProvider>
         </div>
