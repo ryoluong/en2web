@@ -82,7 +82,7 @@ class Slack extends Model
             $userName = auth()->user()->name;
         }
         $comment = "投稿者：{$userName}\n" . url("notes/{$note->id}");
-        $this->postUpload($channelId, $note->title, str_replace("\n", "\n\r", $note->content), $comment);
+        $this->postUpload($channelId, $note->title, preg_replace("/\n\n/", "\n\r", $note->content), $comment);
     }
 
     public function postUpload($channels, $title, $content, $comment)
