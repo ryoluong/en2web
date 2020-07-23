@@ -15,7 +15,7 @@ const webpack = require('./webpack.config');
 
 mix.options({
   hmrOptions: {
-    host: '192.168.0.53',
+    host: '192.168.150.104',
     port: '8080',
   },
   postCss: [require('autoprefixer')],
