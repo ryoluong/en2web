@@ -30,6 +30,7 @@
     "v-lazy-image": "^1.4.0",
     "vee-validate": "^3.3.0",
     "vue": "^2.6.11",
+    "vue-analytics": "^5.22.1",
     "vue-router": "^3.2.0",
     "vue-template-compiler": "^2.6.11",
     "vue2-touch-events": "^2.2.1",
