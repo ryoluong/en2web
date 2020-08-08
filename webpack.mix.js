@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const mix = require('laravel-mix');
-const webpack = require('./webpack.config');
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -21,13 +21,16 @@ mix.options({
   postCss: [require('autoprefixer')],
 });
 
-mix.webpackConfig(Object.assign(webpack));
+const webpackConfigVuetify = class {
+  webpackConfig(config) {
+    config.plugins.push(new VuetifyLoaderPlugin());
+    config.resolve.alias['@'] = path.resolve(__dirname, 'resources');
+  }
+};
+mix.extend('vuetify', new webpackConfigVuetify());
+mix.vuetify();
 
-mix
-  // .js("resources/js/v1/app.js", "public/js")
-  // .sass("resources/sass/en2hpstyle.scss", "public/css")
-  // .sass("resources/sass/en2webstyle.scss", "public/css")
-  .js('resources/js/main.js', 'public/js');
+mix.js('resources/js/main.js', 'public/js');
 
 if (mix.inProduction()) {
   mix.version();
