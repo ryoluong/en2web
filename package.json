@@ -12,7 +12,7 @@
   "devDependencies": {
     "@mdi/font": "^5.4.55",
     "autoprefixer": "^9.8.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-sass": "^3.4.1",
     "cross-env": "^6.0.3",
     "deepmerge": "^4.2.2",
