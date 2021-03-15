@@ -29,5 +29,6 @@ jobs:
                composer install && \
                php artisan config:cache && \
                php artisan migrate --force && \
+               export NODE_OPTIONS="--max-old-space-size=512" && \
                npm install && \
                npm run prod"
